@@ -1,0 +1,55 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#loginbtn').click(function(){
+		if($('#custid').val() == '' || $('#custpwd').val( )== ''){
+			alert("아이디 또는 비밀번호를 입력해주세요.");
+			return;
+		}
+		$('#loginform').attr({
+			method:'post',
+			action:'[[@{/loginimpl}]]'});
+		$('#loginform').submit();
+	});
+	
+	$('#registerbtn').click(function(){
+		location.href="/register";
+	});
+});
+</script>
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/LoginBackground.jpeg');">
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Login</span></p>
+       <h1 class="mb-0 bread">Login</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-3 order-md-last d-flex">
+        <form id="loginform" class="p-5 contact-form justify-content-center">
+          <div class="form-group">
+            <input id="custid" type="text" class="form-control" placeholder="ID" name="id">
+          </div>
+          <div class="form-group">
+            <input id="custpwd" type="password" class="form-control" placeholder="Password" name="pwd">
+          </div>
+          <div class="form-group">
+            <input id="loginbtn" value="Login" class="btn btn-primary">
+          </div>
+          <div class="form-group">
+            <input id="registerbtn" value="Register" class="btn btn-primary">
+          </div>
+          <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+			<li class="ftco-animate"><a href="#"><span class="fa fa-google"></span></a></li>
+			<li class="ftco-animate"><a href="#"><span class="fa fa-kakao"></span></a></li>
+			<li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
+		  </ul>
+        </form>
+        
+      </div>
+   </div>
+ </div>
