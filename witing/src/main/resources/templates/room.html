@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<body>
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg');">
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/hotel">Hotel <i class="fa fa-chevron-right"></i></a></span> <span><a href="#">Room Details <i class="fa fa-chevron-right"></i></a></span></p>
+       <h1 class="mb-0 bread">Room Details</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+  <div class="container">
+    <div class="row">
+     <h2></h2>
+      <div class="col-lg-8 ftco-animate py-md-5 mt-md-5">
+        <h4 class="mb-3">It is a long established fact a reader be distracted</h4>
+        <p>
+        
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" th:each="li:${list}">
+		  <ol class="carousel-indicators">
+		    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+		    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+		    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+		  </ol>
+		  <div class="carousel-inner">
+		    <div class="carousel-item active">
+		      <img class="d-block w-100" th:src="'images/hotel/'+${li.roomimg1}" alt="First slide">
+		      <div class="carousel-caption d-none d-md-block">
+				<h5 th:text=${li.roomtype}></h5>
+				<p th:text=${li.bedtype}></p>
+			  </div>
+		    </div>
+		  </div>
+		  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+		</div>
+		
+          <!-- <img th:src="'images/hotel/'+${li.roomimg1}" alt="" class="img-fluid">
+          <img th:src="'images/hotel/'+${li.roomimg2}" alt="" class="img-fluid"> -->
+        </p>
+        <p>세면도구, 샤워 시설, 목욕 가운, 비데, 화장실, 타월, 타일/대리석 바닥, TV, 슬리퍼, 냉장고, 전화기, 위성 채널, 난방 시설, 헤어드라이어, 전기 주전자, 모닝콜 서비스, 옷장, 지상층 전체 유닛, 엘리베이터로 위층 이동, 옷걸이, 화장지</p>
+        
+        <table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">침대</th>
+		      <th scope="col">기준 인원(최대 인원)</th>
+		      <th scope="col">가격(인당 추가가격)</th>
+		      <th scope="col"></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="li:${list}">
+		      <th scope="row" th:text="${li.bedtype}"></th>
+		      <td th:text="${li.standard}+'('+${li.max}+')'">Mark</td>
+		      <td th:text="${li.price}+'('+${li.addprice}+')'"></td>
+		      <td><button type="button" class="btn btn-dark">예약하기</button></td>
+		    </tr>
+		  </tbody>
+		</table>
+      </div> <!-- .col-md-8 -->
+      
+      
+      <!-- <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
+        <div class="sidebar-box ftco-animate">
+          <h3>Recent Blog</h3>
+          <div class="block-21 mb-4 d-flex">
+            <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
+            <div class="text">
+              <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
+                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
+                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sidebar-box ftco-animate">
+          <h3>Tag Cloud</h3>
+          <div class="tagcloud">
+            <a href="#" class="tag-cloud-link">dish</a>
+            <a href="#" class="tag-cloud-link">menu</a>
+            <a href="#" class="tag-cloud-link">food</a>
+            <a href="#" class="tag-cloud-link">sweet</a>
+            <a href="#" class="tag-cloud-link">tasty</a>
+            <a href="#" class="tag-cloud-link">delicious</a>
+            <a href="#" class="tag-cloud-link">desserts</a>
+            <a href="#" class="tag-cloud-link">drinks</a>
+          </div>
+        </div>
+        
+      </div> -->
+
+    </div>
+  </div>
+</section> <!-- .section -->
+
+
+
+</body>
+</html>
