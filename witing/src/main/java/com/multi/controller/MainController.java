@@ -54,6 +54,40 @@ public class MainController {
 		return "redirect:/mypage";
 	}
 	
+	@RequestMapping("/login")
+	public String login(Model model) {
+		model.addAttribute("center","login");
+		return "index";
+	}
+	
+	@RequestMapping("/loginimpl")
+	public String loginimpl(Model model, String id, String pwd) {
+		try {
+			CustDTO check = custservice.get(id);
+			if(!pwd.equals(check.getCustpwd())) {
+				model.addAttribute("center","loginfail");
+			}else {
+				model.addAttribute("center","maincenter");
+			}
+		} catch (Exception e) {
+			model.addAttribute("center","loginfail");
+		}
+		
+		return "index";
+	}
+	
+	@RequestMapping("/loginfail")
+	public String loginfail(Model model) {
+		model.addAttribute("center","loginfail");
+		return "index";
+	}
+	
+	@RequestMapping("/register")
+	public String register(Model model) {
+		model.addAttribute("center","register");
+		return "index";
+	}
+	
 	
 	
 }

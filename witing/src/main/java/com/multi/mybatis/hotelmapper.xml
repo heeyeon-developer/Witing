@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.HotelMapper">
+	
+	<select id="select" parameterType="Integer" resultType="HotelDTO">
+		SELECT * FROM hotel WHERE hotelid=#{hotelid}
+	</select>
+	<select id="selectall" resultType="HotelDTO">
+		SELECT * FROM hotel
+	</select>
+	<insert id="insert" parameterType="HotelDTO">
+		INSERT INTO hotel VALUES (NULL,#{cityid},#{cateid},#{hotelname},
+								#{detail},#{hotelimg1},#{hotelimg2},#{feature})
+	</insert>
+	<update id="update" parameterType="HotelDTO">
+		UPDATE hotel SET cityid=#{cityid},cateid=#{cateid},hotelname=#{hotelname},detail=#{detail},
+		hotelimg1=#{hotelimg1}, hotelimg2=#{hotelimg2}, feature=#{feature} WHERE hotelid=#{hotelid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM hotel WHERE hotelid=#{hotelid}
+	</delete>
+	<select id="cityname" parameterType="Integer" resultType="HotelDTO">
+		SELECT * FROM hotel ho
+		INNER JOIN city ci ON ho.cityid = ci.cityid
+		WHERE ci.cityid = #{cityid};
+	</select>
+	 
+</mapper>

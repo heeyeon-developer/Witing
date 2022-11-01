@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.RoomMapper">
+	
+	<select id="select" parameterType="Integer" resultType="RoomDTO">
+		SELECT * FROM room WHERE roomid=#{roomid}
+	</select>
+	<select id="selectall" resultType="RoomDTO">
+		SELECT * FROM room
+	</select>
+	<insert id="insert" parameterType="RoomDTO">
+		INSERT INTO room VALUES (NULL,#{hotelid},#{roomtype},#{bedtype},#{price},
+		#{roomimg1},#{roomimg2},#{max},#{standard},#{addprice})
+	</insert>
+	<update id="update" parameterType="RoomDTO">
+		UPDATE room SET hotelid=#{hotelid},roomtype=#{roomtype},bedtype=#{bedtype},price=#{price},
+		roomimg1=#{roomimg1},roomimg2=#{roomimg2},max=#{max},standard=#{standard},addprice=#{addprice}
+		WHERE roomid=#{roomid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM room WHERE roomid=#{roomid}
+	</delete>
+	<select id="roomall" parameterType="Integer" resultType="RoomDTO">
+		SELECT * FROM room WHERE hotelid=#{hotelid};
+	</select>
+	<select id="getroom" parameterType="Integer" resultType="RoomDTO">
+		SELECT * FROM room WHERE roomid=#{roomid};
+	</select>
+	
+	 
+</mapper>
