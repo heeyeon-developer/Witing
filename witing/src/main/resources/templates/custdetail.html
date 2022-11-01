@@ -1,0 +1,217 @@
+<meta charset="utf-8">
+
+<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+<script>
+$(document).ready(function(){
+	$('#custupdate_btn').click(function(){
+		var c = confirm('수정하시겠습니까?');
+		if(c == true){
+			$('#custupdate_form').attr({
+				'method':'post',
+				'action':'/custupdateimpl'
+			});
+			$('#custupdate_form').submit();
+		}
+	});
+});
+
+function sample6_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                // 조합된 참고항목을 해당 필드에 넣는다.
+                document.getElementById("sample6_extraAddress").value = extraAddr;
+            
+            } else {
+                document.getElementById("sample6_extraAddress").value = '';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById("sample6_postcode").value = data.zonecode;
+            document.getElementById("sample6_address").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("sample6_detailAddress").focus();
+        }
+    }).open();
+}
+
+</script>
+<style>
+	#custupdate_form > div > input{
+		width: 80%;
+	}
+</style>
+
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="/mypage">My Page<i class="fa fa-chevron-right"></i></a></span><span>Information<i class="fa fa-chevron-right"></i></span></p>
+       <h1 class="mb-0 bread">Information</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+
+
+<section class="ftco-section ftco-no-pb contact-section mb-4">
+  <div class="container">
+    <div class="row d-flex contact-info">
+      <div class="col-md-2 d-flex" OnClick="location.href ='/main'" style="cursor:pointer;">
+       <div class="align-self-stretch box p-4 text-center">
+        <div class="icon d-flex align-items-center justify-content-center">
+         <span class="fa fa-map-marker"></span>
+       </div>
+       <h3 class="mb-2">Information</h3>
+     </div>
+   </div>
+   <div class="col-md-2 d-flex" OnClick="location.href ='/mypage'" style="cursor:pointer;">
+     <div class="align-self-stretch box p-4 text-center">
+      <div class="icon d-flex align-items-center justify-content-center">
+       <span class="fa fa-phone"></span>
+     </div>
+     <h3 class="mb-2">Coupon</h3>
+   </div>
+ </div>
+ <div class="col-md-2 d-flex" OnClick="location.href ='/main'" style="cursor:pointer;">
+   <div class="align-self-stretch box p-4 text-center">
+    <div class="icon d-flex align-items-center justify-content-center">
+     <span class="fa fa-paper-plane"></span>
+   </div>
+   <h3 class="mb-2">Wishlist </h3>
+ </div>
+</div>
+<div class="col-md-2 d-flex" OnClick="location.href ='/mypage'" style="cursor:pointer;">
+ <div class="align-self-stretch box p-4 text-center">
+  <div class="icon d-flex align-items-center justify-content-center">
+   <span class="fa fa-globe"></span>
+ </div>
+ <h3 class="mb-2">Reservation</h3>
+</div>
+</div>
+<div class="col-md-2 d-flex" OnClick="location.href ='/main'" style="cursor:pointer;">
+ <div class="align-self-stretch box p-4 text-center">
+  <div class="icon d-flex align-items-center justify-content-center">
+   <span class="fa fa-globe"></span>
+ </div>
+ <h3 class="mb-2">Review</h3>
+</div>
+</div>
+<div class="col-md-2 d-flex" OnClick="location.href ='/mypage'" style="cursor:pointer;">
+ <div class="align-self-stretch box p-4 text-center">
+  <div class="icon d-flex align-items-center justify-content-center">
+   <span class="fa fa-globe"></span>
+ </div>
+ <h3 class="mb-2">Q&A</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="ftco-section contact-section ftco-no-pt">
+  <div class="container">
+    <div class="row block-9">
+      <div class="col-md-12 order-md-last d-flex">
+        <form id="custupdate_form" class="bg-light p-5 contact-form">
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >NAME</label>
+            <input type="text" class="form-control" id="custname" th:value=${custdetail.custname} >
+          </div>
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >ID</label>
+            <input type="text" class="form-control" id="custid", th:value=${custdetail.custid} readonly="readonly">
+          </div>
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >Gender</label>
+            <input type="text" class="form-control" id="gender", th:value=${custdetail.gender} readonly="readonly">
+          </div>
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >Nationality</label>
+            <input type="text" class="form-control" id="country", th:value=${custdetail.country}>
+          </div>
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >Birth</label>
+            <input type="date" class="form-control" id="birth", th:value=${custdetail.birth} readonly="readonly">
+          </div>
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >Phone Number</label>
+			  <!-- <input type="tel" id="phone" name="phone" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required><br><br> -->
+			 <!--  <small>Format: 123-45-678</small><br><br> -->
+            <input type="tel" class="form-control" id="phone", th:value=${custdetail.phone}>
+          </div>
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >Email</label>
+            <input type="email" class="form-control" id="email", th:value=${custdetail.email}>
+          </div>
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >Address</label><br>
+          	<input type="number" id="sample6_postcode" class="form-control" th:value=${custdetail.zipcode} name="zipcode" style="width: 20%; display: inline-block">
+			<input type="button" class="form-control" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 15%; display: inline-block; background-color: gray">
+			<input type="text" id="sample6_address" class="form-control" th:value=${custdetail.addr} name="addr">
+			<input type="text" id="sample6_detailAddress" class="form-control" th:value=${custdetail.addrdetail} name="addrdetail" style="width: 40%; display: inline-block">
+			<input type="text" id="sample6_extraAddress" class="form-control"placeholder="참고항목" style="width: 40%; display: inline-block">
+          </div>
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >Point</label>
+            <input type="number" class="form-control" id="addrdetail", th:value=${custdetail.point} readonly="readonly">
+          </div>
+          <div class="form-group">
+          	<label class="control-label col-sm-2" for="custname" >Register Date</label>
+            <input type="date" class="form-control" id="addrdetail", th:value=${custdetail.rdate} readonly="readonly">
+          </div>
+          <!-- <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary py-3 px-5">
+          </div> -->
+        </form>
+      </div>
+   </div>
+  <a href="#"><button id="custupdate_btn" class="btn btn-primary py-3 px-5" style="margin-left: 48px;">UPDATE</button></a>
+ </div>
+</section>
+
+<section class="ftco-intro ftco-section ftco-no-pt">
+ <div class="container">
+  <div class="row justify-content-center">
+   <div class="col-md-12 text-center">
+    <div class="img"  style="background-image: url(images/bg_2.jpg);">
+     <div class="overlay"></div>
+     <h2>We Are Pacific A Travel Agency</h2>
+     <p>We can manage your dream building A small river named Duden flows by their place</p>
+     <p class="mb-0"><a href="#" class="btn btn-primary px-4 py-3">Ask For A Quote</a></p>
+   </div>
+ </div>
+</div>
+</div>
+</section>
