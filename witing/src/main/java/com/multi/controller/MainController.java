@@ -44,6 +44,15 @@ public class MainController {
 		}
 		return "index";
 	}
+	@RequestMapping("/custupdateimpl")
+	public String custupdateimpl(Model model, CustDTO cust) {
+		try {
+			custservice.modify(cust);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/mypage";
+	}
 	
 	
 	
