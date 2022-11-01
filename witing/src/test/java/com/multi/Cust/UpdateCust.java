@@ -17,9 +17,9 @@ class UpdateCust {
 	
 	@Test
 	void contextLoads() {
-		
+		CustDTO cust = new CustDTO("kmj", "kmj123", null, null, "010-1234-1234", "rudals0627@gmail.com", "경기도 광명시", "1층", 12345, null, "man", 0, "Korea");
 		try {
-			
+			service.modify(cust);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
