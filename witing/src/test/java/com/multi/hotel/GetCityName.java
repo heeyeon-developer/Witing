@@ -19,7 +19,7 @@ class GetCityName {
 	void contextLoads() {
 		List<HotelDTO> list = null;
 		try {
-			list = service.cityname(1);
+			list = service.hotelcity();
 		} catch (Exception e) {
 			
 			e.printStackTrace();

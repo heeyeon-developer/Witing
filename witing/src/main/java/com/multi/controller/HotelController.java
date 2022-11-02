@@ -32,14 +32,11 @@ public class HotelController {
 	
 	
 	@RequestMapping("/hotel")
-	public String main(Model model, String cityname) {
+	public String main(Model model) {
 		List<HotelDTO> list = null;
-		List<CityDTO> city = null;
 		try {
-			list = service.getall();
-			city = city_service.getall();
+			list = service.hotelcity();
 			model.addAttribute("list", list);
-			model.addAttribute("city", city);
 			model.addAttribute("center", "hotel");
 		} catch (Exception e) {
 			e.printStackTrace();

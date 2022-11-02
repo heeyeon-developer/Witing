@@ -40,8 +40,8 @@ public class HotelService implements MyService<Integer, HotelDTO>{
 		return mapper.selectall();
 	}
 	
-	public List<HotelDTO> cityname(int cityid) throws Exception {
-		return mapper.cityname(cityid);
+	public List<HotelDTO> hotelcity() throws Exception {
+		return mapper.hotelcity();
 	}
 	
 }
