@@ -1,5 +1,7 @@
 package com.multi.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,12 +63,13 @@ public class MainController {
 	}
 	
 	@RequestMapping("/loginimpl")
-	public String loginimpl(Model model, String id, String pwd) {
+	public String loginimpl(Model model, String id, String pwd, HttpSession session) {
 		try {
-			CustDTO check = custservice.get(id);
-			if(!pwd.equals(check.getCustpwd())) {
+			CustDTO cust = custservice.get(id);
+			if(!pwd.equals(cust.getCustpwd())) {
 				model.addAttribute("center","loginfail");
 			}else {
+				session.setAttribute("logincust", cust);
 				model.addAttribute("center","maincenter");
 			}
 		} catch (Exception e) {
@@ -88,6 +91,11 @@ public class MainController {
 		return "index";
 	}
 	
-	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		if(session != null)
+			session.invalidate();
+		return "index";
+	}
 	
 }
