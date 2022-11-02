@@ -12,4 +12,5 @@ import com.multi.frame.MyMapper;
 @Mapper
 public interface HotelMapper extends MyMapper<Integer, HotelDTO> {
 	public List<HotelDTO> cityname(int cityid);
+	public List<HotelDTO> searchhotel(int hotelid) throws Exception;
 }

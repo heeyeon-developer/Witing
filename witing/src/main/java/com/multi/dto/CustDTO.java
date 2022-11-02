@@ -20,10 +20,8 @@ public class CustDTO {
 	private String custid;
 	private String custpwd;
 	private String custname;
-	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birth;
-	
 	private String phone;
 	private String email;
 	private String addr;

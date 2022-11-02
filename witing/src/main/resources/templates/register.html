@@ -1,3 +1,64 @@
+<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+<script>
+function sample6_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+            } 
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById("sample6_postcode").value = data.zonecode;
+            document.getElementById("sample6_address").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("sample6_detailAddress").focus();
+        }
+    }).open();
+}
+
+$(document).ready(function(){
+	$('#registerbtn').click(function(){
+		if($('#password').val() != $('#confirm').val()){
+			alert("비밀번호 확인이 일치하지 않습니다. 다시 입력해 주세요.");
+			return;
+		}
+		$('#registerform').attr({
+			method:'post',
+			action:'/registerimpl'
+		});
+		$('#registerform').submit();
+	});
+});
+
+</script> 
+ 
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/RegisterBackground.jpg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -15,45 +76,53 @@
     <div class="row block-9 justify-content-center">
     	<h2><br>가입을 위해 아래 항목들을 입력해주세요 :)</h2>
       <div class="col-md-7 order-md-last d-flex">
-        <form action="#" class="p-5 contact-form">
+        <form id="registerform" class="p-5 contact-form">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="이름" name="name">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="아이디" name="id">
+            <input type="text" class="form-control" placeholder="아이디" name="id" style="width: 60%; display: inline-block">
+            <input class="btn" value="아이디 확인" style="margin-left:3%; width: 20%; display: inline-block; background-color: lightgray">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="비밀번호" name="password">
+            <input id="password" type="text" class="form-control" placeholder="비밀번호" name="password" style="margin-left: 0;width: 50%; display: inline-block">
+            <input id="conrifm" type="text" class="form-control" placeholder="비밀번호 확인" name="confirm" style="margin-left: 0;width: 49%; display: inline-block">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="비밀번호 확인" name="confirm">
+            <div class="form-field">
+				<input type="text" class="form-control checkin_date col-md-6" placeholder="생년월일" name="birth" style="display:inline-block">
+				<div class="custom-control custom-radio" style="margin-left:5%; width:10%; display: inline-block">
+					<input type="radio" name="jb-radio" id="jb-radio-1" class="custom-control-input">
+					<label class="custom-control-label" for="jb-radio-1">남</label>
+				</div>
+				<div class="custom-control custom-radio" style="width:10%; display: inline-block">
+					<input type="radio" name="jb-radio" id="jb-radio-2" class="custom-control-input">
+					<label class="custom-control-label" for="jb-radio-2">여</label>
+				</div>
+		  	</div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="생년월일" name="birth">
+            <input type="text" class="form-control" placeholder="전화번호" name="phone" style="width:50%; display:inline-block;">
+            <input type="text" class="form-control" placeholder="이메일" name="email" style="width:49%; display:inline-block;">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="전화번호" name="phone">
-          </div>
+          	<input type="number" id="sample6_postcode" placeholder="우편번호" class="form-control" name="zipcode" style="width: 30%; display: inline-block">
+			<input class="btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="margin-left:3%; width: 25%; display: inline-block; background-color: lightgray">
+			<input type="text" id="sample6_address" placeholder="주소" class="form-control" name="addr">
+			<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="form-control" name="addrdetail">
+          </div>  
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="이메일" name="email">
+            <div class="form-field">
+				<div class="select-wrap">
+					<select name="country" id="country" class="form-control">
+						<option value="Korea">Korea</option>
+						<option value="USA">USA</option>
+					</select>
+				</div>
+			</div>
           </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="주소" name="address">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="상세주소" name="addrdetail">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="우편번호" name="zipcode">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="성별" name="gender">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="나라" name="country">
-          </div>
-          <div class="form-group">
-            <input id="registerbtn" value="Register" class="btn btn-primary">
+          <div class="form-group justify-content-center">
+            <input id="registerbtn" value="Register" class="btn btn-primary justify-content-center" style="display:inline-block; float:right;">
           </div>
         </form>
         

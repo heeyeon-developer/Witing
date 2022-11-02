@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.dto.CityDTO;
 import com.multi.dto.HotelDTO;
 import com.multi.dto.RoomDTO;
+import com.multi.mapper.HotelMapper;
 import com.multi.service.CityService;
 import com.multi.service.HotelService;
 import com.multi.service.RoomService;
@@ -25,6 +26,9 @@ public class HotelController {
 	
 	@Autowired
 	CityService city_service;
+	
+	@Autowired
+	HotelMapper mapper;
 	
 	
 	@RequestMapping("/hotel")
@@ -43,13 +47,27 @@ public class HotelController {
 		
 		return "index";
 	}
+	
+	@RequestMapping("/searchimpl")
+	public String searchimpl(Model model, int hotelid) {
+		List<HotelDTO> list = null;
+		try {
+			list = mapper.searchhotel(hotelid);
+			model.addAttribute("list", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("center", "hotel");
+		return "index";
+	}
 
 	
 	@RequestMapping("/room")
-	public String room(Model model, int hotelid) {
+	public String room(Model model, int hotelid, Integer roomid) {
 		List<RoomDTO> list = null;
 		try {
 			list = room_service.roomall(hotelid);
+			model.addAttribute("roomid", roomid);
 			model.addAttribute("list", list);
 			model.addAttribute("center", "room");
 		} catch (Exception e) {

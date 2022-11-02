@@ -179,66 +179,10 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4 ftco-animate">
+				<div class="col-md-4 ftco-animate" th:each="city:${citylist}">
 					<div class="project-wrap">
-						<a href="#" class="img" style="background-image: url(images/MainJeju.jpeg);">
-							<span class="price">제주</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 ftco-animate">
-					<div class="project-wrap">
-						<a href="#" class="img" style="background-image: url(images/MainSeoul.jpg);">
-							<span class="price">서울</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 ftco-animate">
-					<div class="project-wrap">
-						<a href="#" class="img" style="background-image: url(images/MainBusan.jpeg);">
-							<span class="price">부산</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 ftco-animate">
-					<div class="project-wrap">
-						<a href="#" class="img" style="background-image: url(images/MainYeosu.webp);">
-							<span class="price">여수</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 ftco-animate">
-					<div class="project-wrap">
-						<a href="#" class="img" style="background-image: url(images/MainGangwondo.jpeg);">
-							<span class="price">강릉</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 ftco-animate">
-					<div class="project-wrap">
-						<a href="#" class="img" style="background-image: url(images/MainJeonju.png);">
-							<span class="price">전주</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 ftco-animate">
-					<div class="project-wrap">
-						<a href="#" class="img" style="background-image: url(images/destination-1.jpg);">
-							<span class="price">대구</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 ftco-animate">
-					<div class="project-wrap">
-						<a href="#" class="img" style="background-image: url(images/destination-2.jpg);">
-							<span class="price">경주</span>
-						</a>
-					</div>
-				</div>
-				<div class="col-md-4 ftco-animate">
-					<div class="project-wrap">
-						<a href="#" class="img" style="background-image: url(images/destination-3.jpg);">
-							<span class="price">고흥</span>
+						<a href="#" class="img" th:style="|background-image: url(images/${city.img});|">
+							<span class="price" th:text="${city.name}"></span>
 						</a>
 					</div>
 				</div>
