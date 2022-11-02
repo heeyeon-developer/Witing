@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg')">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -14,54 +16,66 @@
 <section class="ftco-section ftco-no-pb contact-section mb-4">
   <div class="container">
     <div class="row d-flex contact-info">
-      <div class="col-md-2 d-flex" OnClick="location.href ='/custdetail'" style="cursor:pointer;">
-       <div class="align-self-stretch box p-4 text-center">
+    <a th:href="@{/custdetail(custid=${session.logincust.custid})}">
+      <div class="col-md-2 d-flex" style="cursor:pointer;">
+        <div class="align-self-stretch box p-4 text-center" style="background : white"> 
         <div class="icon d-flex align-items-center justify-content-center">
          <span class="fa fa-map-marker"></span>
        </div>
        <h3 class="mb-2">Information</h3>
-     </div>
+     </div> 
    </div>
-   <div class="col-md-2 d-flex" OnClick="location.href ='/mypage'" style="cursor:pointer;">
-     <div class="align-self-stretch box p-4 text-center">
+   </a>
+   <a th:href="@{/coupon(custid=${session.logincust.custid})}">
+   <div class="col-md-2 d-flex" style="cursor:pointer;">
+     <div class="align-self-stretch box p-4 text-center" style="background : white">
       <div class="icon d-flex align-items-center justify-content-center">
        <span class="fa fa-phone"></span>
      </div>
      <h3 class="mb-2">Coupon</h3>
    </div>
  </div>
- <div class="col-md-2 d-flex" OnClick="location.href ='/main'" style="cursor:pointer;">
-   <div class="align-self-stretch box p-4 text-center">
+ </a>
+ <a th:href="@{/like(custid=${session.logincust.custid})}">
+ <div class="col-md-2 d-flex" style="cursor:pointer;">
+   <div class="align-self-stretch box p-4 text-center" style="background : white">
     <div class="icon d-flex align-items-center justify-content-center">
      <span class="fa fa-paper-plane"></span>
    </div>
    <h3 class="mb-2">Wishlist </h3>
  </div>
 </div>
-<div class="col-md-2 d-flex" OnClick="location.href ='/mypage'" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center">
+</a>
+<a th:href="@{/reservation(custid=${session.logincust.custid})}">
+<div class="col-md-2 d-flex" style="cursor:pointer;">
+ <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
    <span class="fa fa-globe"></span>
  </div>
  <h3 class="mb-2">Reservation</h3>
 </div>
 </div>
-<div class="col-md-2 d-flex" OnClick="location.href ='/main'" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center">
+</a>
+<a th:href="@{/review(custid=${session.logincust.custid})}">
+<div class="col-md-2 d-flex" style="cursor:pointer;">
+ <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
    <span class="fa fa-globe"></span>
  </div>
  <h3 class="mb-2">Review</h3>
 </div>
 </div>
-<div class="col-md-2 d-flex" OnClick="location.href ='/mypage'" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center">
+</a>
+<a th:href="@{/qna(custid=${session.logincust.custid})}">
+<div class="col-md-2 d-flex" style="cursor:pointer;">
+ <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
    <span class="fa fa-globe"></span>
  </div>
  <h3 class="mb-2">Q&A</h3>
 </div>
 </div>
+</a>
 </div>
 </div>
 </section>
@@ -73,10 +87,9 @@
         <form action="#" class="bg-light p-5 contact-form">
           
           <div class="form-group">
-            <textarea name="" id="" cols="30" rows="7" class="form-control" ></textarea>
-          </div>
-          <div class="form-group">
-            <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+            <h1 th:text = "${session.logincust.custname} + ' 님'"></h1>
+            <h2 th:text = "'보유 포인트 : '+${session.logincust.point} + 'P'"></h2>
+            <h2 th:text = "'가입일자 : '+${session.logincust.rdate}"></h2>
           </div>
         </form>
         
