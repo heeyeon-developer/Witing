@@ -1,7 +1,26 @@
-<!DOCTYPE html>
-<html lang="ko">
+<meta charset="utf-8">
 
- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg');">
+<script>
+//select  id를 이용하여 셀렉트 변경시마다 onSelectChange함수 실행
+$(document).ready(function(){
+	$('#search_btn').click(function(){
+		$("#city").change(onSelectChange);
+		
+		function onSelectChange(){ 
+		    var selected = $("#city option:selected");      
+		    var output = ""; 
+		    if(selected.val() != 0){  
+		     output = "<table><tr><td>" + selected.text() +"</td></tr></table>";
+		    }
+		    //div에 output 변수에 담은 text HTML로 출력하기
+		    $("#output").html(output); 
+		 };
+	});
+});
+
+</script>
+
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/hotel/jeju.jpg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
@@ -12,7 +31,7 @@
  </div>
 </section>
 
-<section class="ftco-section ftco-no-pb">
+<section id="search_s" class="ftco-section ftco-no-pb">
  <div class="container">
   <div class="row">
    <div class="col-md-12">
@@ -27,7 +46,15 @@
 		      <div class="icon"><span class="fa fa-chevron-down"></span></div>
 		      <select name="city" id="city" class="form-control">
 		        <option value="select_city">CITY</option>
-		        <option th:each="ci:${city}" th:value="${ci.name}" th:text="${ci.name}">CITY</option>
+		        <option value="1">서울</option>
+		        <option value="2">경기</option>
+		        <option value="3">인천</option>
+		        <option value="4">대전/충청</option>
+		        <option value="5">강원</option>
+		        <option value="6">광주/전라</option>
+		        <option value="7">대구/경상</option>
+		        <option value="8">부산</option>
+		        <option value="9">제주</option>
 		      </select>
 		    </div>
 		  </div>
@@ -61,11 +88,8 @@
         <option value="select_price">PRICE</option>
         <option value="">&#8361; 50,000</option>
         <option value="">&#8361; 100,000</option>
-        <option value="">&#8361; 150,000</option>
         <option value="">&#8361; 200,000</option>
-        <option value="">&#8361; 250,000</option>
         <option value="">&#8361; 300,000</option>
-        <option value="">&#8361; 400,000</option>
         <option value="">&#8361; 500,000</option>
         <option value="">&#8361; 1,000,000</option>
       </select>
@@ -76,7 +100,7 @@
 <div class="col-lg d-flex">
   <div class="form-group d-flex w-100 border-0">
    <div class="form-field w-100 align-items-center d-flex">
-    <input type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
+    <input id="search_btn" type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
   </div>
 </div>
 </div>
@@ -137,7 +161,3 @@
 </div>
 </section>
 
-
-
-</body>
-</html>
