@@ -36,10 +36,10 @@ public class MainController {
 	}
 	
 	@RequestMapping("/mypage")
-	public String mypage(Model model) {
+	public String mypage(Model model, String custid) {
 		CustDTO cust = null;
 		try {
-			cust = custservice.get("kmj");
+			cust = custservice.get(custid);
 			model.addAttribute("mypage", cust);
 			model.addAttribute("center","mypage");
 		} catch (Exception e) {
@@ -48,10 +48,11 @@ public class MainController {
 		return "index";
 	}
 	@RequestMapping("/custdetail")
-	public String custdetail(Model model) {
+	public String custdetail(Model model, String custid) {
 		CustDTO cust = null;
 		try {
-			cust = custservice.get("kmj");
+			cust = custservice.get(custid);
+			System.out.println(cust);
 			model.addAttribute("custdetail", cust);
 			model.addAttribute("center","custdetail");
 		} catch (Exception e) {
