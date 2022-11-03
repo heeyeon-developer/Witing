@@ -1,0 +1,151 @@
+<meta charset="utf-8">
+<script>
+function del(like_id){
+	var cust_id='[[${session.logincust.custid}]]';
+	var c = confirm('삭제 하시겠습니까?');
+	if(c==true){
+		location.href='[[@{/deletelike?like_id=}]]'+like_id+'&[[@{cust_id=}]]'+cust_id;
+	}
+}
+</script>
+
+
+<style>
+#heartbtn, #heartbtn2, #likedel{
+	color: red;
+}
+</style>
+
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/hotel/gyeongju2.jpg')">
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="/mypage">My Page <i class="fa fa-chevron-right"></a></i></span> <span><a th:href="@{/like(custid=${session.logincust.custid})}">Like <i class="fa fa-chevron-right"></a></i></span></p>
+       <h1 class="mb-0 bread">My Page</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+
+
+<section class="ftco-section ftco-no-pb contact-section mb-4">
+  <div class="container">
+    <div class="row d-flex contact-info">
+    <a th:href="@{/custdetail(custid=${session.logincust.custid})}">
+      <div class="col-md-2 d-flex" style="cursor:pointer;">
+        <div class="align-self-stretch box p-4 text-center" style="background : white"> 
+        <div class="icon d-flex align-items-center justify-content-center">
+         <span class="fa fa-map-marker"></span>
+       </div>
+       <h3 class="mb-2">Information</h3>
+     </div> 
+   </div>
+   </a>
+   <a th:href="@{/coupon(custid=${session.logincust.custid})}">
+   <div class="col-md-2 d-flex" style="cursor:pointer;">
+     <div class="align-self-stretch box p-4 text-center" style="background : white">
+      <div class="icon d-flex align-items-center justify-content-center">
+       <span class="fa fa-phone"></span>
+     </div>
+     <h3 class="mb-2">Coupon</h3>
+   </div>
+ </div>
+ </a>
+ <a th:href="@{/like(custid=${session.logincust.custid})}">
+ <div class="col-md-2 d-flex" style="cursor:pointer;">
+   <div class="align-self-stretch box p-4 text-center" style="background : white">
+    <div class="icon d-flex align-items-center justify-content-center">
+     <span class="fa fa-heart"></span>
+   </div>
+   <h3 class="mb-2">Wishlist </h3>
+ </div>
+</div>
+</a>
+<a th:href="@{/reservation(custid=${session.logincust.custid})}">
+<div class="col-md-2 d-flex" style="cursor:pointer;">
+ <div class="align-self-stretch box p-4 text-center" style="background : white">
+  <div class="icon d-flex align-items-center justify-content-center">
+   <span class="fa fa-globe"></span>
+ </div>
+ <h3 class="mb-2">Reservation</h3>
+</div>
+</div>
+</a>
+<a th:href="@{/review(custid=${session.logincust.custid})}">
+<div class="col-md-2 d-flex" style="cursor:pointer;">
+ <div class="align-self-stretch box p-4 text-center" style="background : white">
+  <div class="icon d-flex align-items-center justify-content-center">
+   <span class="fa fa-globe"></span>
+ </div>
+ <h3 class="mb-2">Review</h3>
+</div>
+</div>
+</a>
+<a th:href="@{/qna(custid=${session.logincust.custid})}">
+<div class="col-md-2 d-flex" style="cursor:pointer;">
+ <div class="align-self-stretch box p-4 text-center" style="background : white">
+  <div class="icon d-flex align-items-center justify-content-center">
+   <span class="fa fa-globe"></span>
+ </div>
+ <h3 class="mb-2">Q&A</h3>
+</div>
+</div>
+</a>
+</div>
+</div>
+</section>
+
+<section class="ftco-section contact-section ftco-no-pt" style="color: white">
+  <div class="container">
+    <div class="row block-9">
+      <div class="col-md-12 order-md-last d-flex">
+        <form action="#" class="bg-light p-5 contact-form">
+          
+          <div class="form-group">
+          	<h3 class="fa fa-heart" id="heartbtn"></h3> <h3 class="fa fa-heart-o" id="heartbtn2"></h3>
+            <h3 th:text = "${session.logincust.custname} + ' 님의 Like List'"></h3>
+            <br>
+            <h2></h2>
+            <h2></h2>
+            
+            <div class="row">
+            <div class="col-md-4 ftco-animate" th:each="li:${list}">
+			    <div class="project-wrap hotel">
+			     <a th:href="@{/room(hotelid=${li.hotelid})}" class="img" th:style="'background-image:url('+ @{'images/hotel/'+${li.hotelimg1}} +');'">
+			      <span class="price" th:text="${li.name}"></span>
+			    </a>
+			    <div class="text p-4">
+			      <p class="star mb-2">
+			        <span class="fa fa-star"></span>
+			        <span class="fa fa-star"></span>
+			        <span class="fa fa-star"></span>
+			        <span class="fa fa-star"></span>
+			        <span class="fa fa-star"></span>
+			      </p>
+			      <span class="days">8 Days Tour</span>
+			      
+			      <div class="like">
+			          <a th:onclick="del([[${li.likeid}]]);" data-toggle="tooltip" data-placement="left" title="Delete"><i class="fa fa-heart" id="likedel" alt=""></i></a>
+			      </div>
+			      
+			      <h3><a th:href="@{/room(hotelid=${li.hotelid})}" th:text="${li.hotelname}"></a></h3>
+			      <ul>
+			      	<li><span class="flaticon-shower"></span>2</li>
+       				<li><span class="flaticon-king-size"></span>3</li>
+       				<li><span class="fa fa-check-square-o"><li th:text="${li.feature}"></li></span></li>
+			     </ul>
+			   </div>
+			 </div>
+			</div>
+		   </div>
+            
+          </div>
+        </form>
+        
+      </div>
+   </div>
+ </div>
+</section>
+

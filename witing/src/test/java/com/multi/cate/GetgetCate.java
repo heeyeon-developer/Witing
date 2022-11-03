@@ -1,4 +1,4 @@
-package com.multi.hotel;
+package com.multi.cate;
 
 import java.util.List;
 
@@ -6,29 +6,31 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.multi.dto.HotelDTO;
-import com.multi.service.HotelService;
+import com.multi.dto.CateDTO;
+import com.multi.service.CateService;
 
 @SpringBootTest
-class GetCityName {
+class GetgetCate {
 
 	@Autowired
-	HotelService service;
+	CateService service;
 	
 	@Test
 	void contextLoads() {
-		List<HotelDTO> list = null;
+		List<CateDTO> list = null;
 		try {
-			list = service.hotelcity();
+			list = service.getcate();
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		
-		for(HotelDTO h:list) {
-			System.out.println(h);
+		for(CateDTO c:list) {
+			System.out.println(c);
 		}
-	
 	}
 
 }
+
+
+
+

@@ -10,7 +10,7 @@ import com.multi.dto.HotelDTO;
 import com.multi.service.HotelService;
 
 @SpringBootTest
-class GetCityName {
+class GetCitisHotel {
 
 	@Autowired
 	HotelService service;
@@ -19,7 +19,7 @@ class GetCityName {
 	void contextLoads() {
 		List<HotelDTO> list = null;
 		try {
-			list = service.hotelcity();
+			list = service.cityshotel(3);
 		} catch (Exception e) {
 			
 			e.printStackTrace();

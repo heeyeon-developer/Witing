@@ -15,12 +15,6 @@ public class RoomController {
 	
 	@Autowired
 	RoomService service;
-	
-	@RequestMapping("/")
-	public String main(Model model, Integer hotelid) {
-		
-		
-		return "index";
-	}
+
 
 }

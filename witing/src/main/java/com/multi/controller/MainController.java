@@ -1,5 +1,6 @@
 package com.multi.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,7 @@ public class MainController {
 	@Autowired
 	CityService cityservice;
 	
-	@RequestMapping("/main")
+	@RequestMapping("/")
 	public String main(Model model) {
 		try {
 			List<CityDTO> list = cityservice.getall();
@@ -109,16 +110,30 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		if(session != null)
+			session.invalidate();
+		return "index";
+	}
+	 
 	@RequestMapping("/register")
 	public String register(Model model) {
 		model.addAttribute("center","register");
 		return "index";
 	}
 	
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		if(session != null)
-			session.invalidate();
+	@RequestMapping("/registerimpl")
+	public String registerimpl(Model model, String custid, String custpwd, String custname, String birth, String phone, String email, String addr, String addrdetail, Integer zipcode, String gender, String country) {
+		CustDTO cust = new CustDTO(custid, custpwd, custname, Date.valueOf(birth),phone,email,addr,addrdetail,zipcode,null,gender,1000,country);
+		try {
+			custservice.register(cust);
+			model.addAttribute("name",cust.getCustname());
+			model.addAttribute("center","registerok");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "index";
 	}
 	

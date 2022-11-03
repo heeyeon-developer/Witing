@@ -1,33 +1,28 @@
-package com.multi.hotel;
-
-import java.util.List;
+package com.multi.like;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.multi.dto.HotelDTO;
-import com.multi.service.HotelService;
+import com.multi.dto.LikeDTO;
+import com.multi.service.LikeService;
 
 @SpringBootTest
-class GetCityName {
+class GetLike {
 
 	@Autowired
-	HotelService service;
+	LikeService service;
 	
 	@Test
 	void contextLoads() {
-		List<HotelDTO> list = null;
+		LikeDTO like = null;
 		try {
-			list = service.hotelcity();
+			like = service.get(1);
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		
-		for(HotelDTO h:list) {
-			System.out.println(h);
-		}
+		System.out.println(like);
 	
 	}
 
