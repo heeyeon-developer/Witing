@@ -7,9 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.multi.dto.CityDTO;
+import com.multi.dto.CateDTO;
 import com.multi.dto.HotelDTO;
 import com.multi.dto.RoomDTO;
+import com.multi.mapper.CateMapper;
 import com.multi.mapper.HotelMapper;
 import com.multi.service.CityService;
 import com.multi.service.HotelService;
@@ -30,13 +31,19 @@ public class HotelController {
 	@Autowired
 	HotelMapper mapper;
 	
+	@Autowired
+	CateMapper cate_service;
+	
 	
 	@RequestMapping("/hotel")
 	public String main(Model model) {
 		List<HotelDTO> list = null;
+		List<CateDTO> cate = null;
 		try {
 			list = service.hotelcity();
+			cate = cate_service.getcate();
 			model.addAttribute("list", list);
+			model.addAttribute("cate", cate);
 			model.addAttribute("center", "hotel");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,10 +80,15 @@ public class HotelController {
 
 	
 	@RequestMapping("/room")
-	public String room(Model model, int hotelid, Integer roomid) {
+	public String room(Model model,int hotelid,Integer roomid,String hotelname,String roomimg1,String roomimg2,String roomimg3,String roomimg4) {
 		List<RoomDTO> list = null;
 		try {
 			list = room_service.roomall(hotelid);
+			model.addAttribute("hotelname", list.get(0).getHotelname());
+			model.addAttribute("roomimg1", list.get(0).getRoomimg1());
+			model.addAttribute("roomimg2", list.get(0).getRoomimg2());
+			model.addAttribute("roomimg3", list.get(1).getRoomimg1());
+			model.addAttribute("roomimg4", list.get(1).getRoomimg2());
 			model.addAttribute("roomid", roomid);
 			model.addAttribute("list", list);
 			model.addAttribute("center", "room");

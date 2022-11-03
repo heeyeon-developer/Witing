@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.CateMapper">
+	
+	<select id="select" parameterType="Integer" resultType="CateDTO">
+		SELECT * FROM cate WHERE cateid=#{cateid}
+	</select>
+	<select id="selectall" resultType="CateDTO">
+		SELECT * FROM cate
+	</select>
+	<insert id="insert" parameterType="CateDTO">
+		INSERT INTO cate VALUES (NULL,#{topid},#{catename})
+	</insert>
+	<update id="update" parameterType="CateDTO">
+		UPDATE cate SET topid=#{topid},catename=#{catename} WHERE cateid=#{cateid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM cate WHERE cateid=#{cateid}
+	</delete>
+	<select id="getcate" resultType="CateDTO">
+		SELECT * FROM cate ca
+		INNER JOIN hotel ho ON ca.cateid = ho.cateid
+		INNER JOIN city ci ON ho.cityid = ci.cityid;
+	</select>
+	
+
+	 
+</mapper>

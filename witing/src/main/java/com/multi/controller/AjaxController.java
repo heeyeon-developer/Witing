@@ -7,13 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.multi.dto.CustDTO;
+import com.multi.dto.LikeDTO;
 import com.multi.service.CustService;
+import com.multi.service.LikeService;
 
 @RestController
 public class AjaxController {
 
 	@Autowired
 	CustService custservice;
+	
+	@Autowired
+	LikeService like_service;
 	
 	@RequestMapping("/idcheck")
 	public Object idcheck(String id) {
@@ -26,6 +31,19 @@ public class AjaxController {
 					break;
 				}
 			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@RequestMapping("/addlike")
+	public Object addlike(String custid, int hotelid) {
+		String result = "";
+		LikeDTO like = new LikeDTO(0,hotelid,custid,0,"","","","","",0,"");
+		try {
+			like_service.register(like);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

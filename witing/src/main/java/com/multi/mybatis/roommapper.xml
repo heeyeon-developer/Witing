@@ -23,7 +23,9 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM room WHERE roomid=#{roomid}
 	</delete>
 	<select id="roomall" parameterType="Integer" resultType="RoomDTO">
-		SELECT * FROM room WHERE hotelid=#{hotelid};
+		SELECT * FROM room r
+		INNER JOIN hotel h ON r.hotelid = h.hotelid
+		WHERE h.hotelid = #{hotelid};
 	</select>
 	<select id="getroom" parameterType="Integer" resultType="RoomDTO">
 		SELECT * FROM hotel h 
