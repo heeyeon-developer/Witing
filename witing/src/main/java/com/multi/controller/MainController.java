@@ -23,7 +23,7 @@ public class MainController {
 	@Autowired
 	CityService cityservice;
 	
-	@RequestMapping("/main")
+	@RequestMapping("/")
 	public String main(Model model) {
 		try {
 			List<CityDTO> list = cityservice.getall();
