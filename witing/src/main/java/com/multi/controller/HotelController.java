@@ -80,11 +80,13 @@ public class HotelController {
 
 	
 	@RequestMapping("/room")
-	public String room(Model model,int hotelid,Integer roomid,String hotelname,String roomimg1,String roomimg2,String roomimg3,String roomimg4) {
+	public String room(Model model,int hotelid,Integer roomid,String hotelname,
+			String roomimg1,String roomimg2,String roomimg3,String roomimg4,String hotelimg1) {
 		List<RoomDTO> list = null;
 		try {
 			list = room_service.roomall(hotelid);
 			model.addAttribute("hotelname", list.get(0).getHotelname());
+			model.addAttribute("hotelimg1", list.get(0).getHotelimg1());
 			model.addAttribute("roomimg1", list.get(0).getRoomimg1());
 			model.addAttribute("roomimg2", list.get(0).getRoomimg2());
 			model.addAttribute("roomimg3", list.get(1).getRoomimg1());
