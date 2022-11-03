@@ -35,25 +35,65 @@ function sample6_execDaumPostcode() {
             } 
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementById("sample6_postcode").value = data.zonecode;
-            document.getElementById("sample6_address").value = addr;
+            document.getElementById("zipcode").value = data.zonecode;
+            document.getElementById("addr").value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            document.getElementById("sample6_detailAddress").focus();
+            document.getElementById("addrdetail").focus();
         }
     }).open();
 }
 
 $(document).ready(function(){
+	$('#idcheckbtn').click(function(){
+		$.ajax({
+			url:'[[@{/idcheck}]]',
+			data:{id:$('#custid').val()},
+			success:function(result){
+				if(result==true){
+					alert("사용 가능한 아이디 입니다.");
+				}else{
+					alert("이미 사용중인 아이디 입니다. 다시 입력해주세요.");
+				}
+			}
+		})
+	});
+	
 	$('#registerbtn').click(function(){
-		if($('#password').val() != $('#confirm').val()){
+		//비밀번호, 비밀번호 확인 일치하지 않을 경우 확인 필요
+		if($('#custpwd').val() != $('#confirm').val()){
 			alert("비밀번호 확인이 일치하지 않습니다. 다시 입력해 주세요.");
 			return;
 		}
-		$('#registerform').attr({
-			method:'post',
-			action:'/registerimpl'
+		//아이디 중복될 경우 회원가입 불가
+		$.ajax({
+			url:'[[@{/idcheck}]]',
+			data:{id:$('#custid').val()},
+			success:function(result){
+				if(result==false){
+					alert("아이디 확인을 진행해 주세요.");
+				}else{
+					$('#registerform').attr({
+						method:'post',
+						data:{
+							custid:$('#custid').val(),
+							custpwd:$('#custpwd').val(),
+							custname:$('#custname').val(),
+							birth:$('#birth').val(),
+							phone:$('#phone').val(),
+							email:$('#email').val(),
+							addr:$('#addr').val(),
+							addrdetail:$('#addrdetail').val(),
+							zipcode:$('#zipcode').val(),
+							gender:$('input[name=gender]:checked').val(),
+							point:1000,
+							country:$('#country').val()
+						},
+						action:'/registerimpl'
+					});
+					$('#registerform').submit(); 
+				}
+			}
 		});
-		$('#registerform').submit();
 	});
 });
 
@@ -78,38 +118,38 @@ $(document).ready(function(){
       <div class="col-md-7 order-md-last d-flex">
         <form id="registerform" class="p-5 contact-form">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="이름" name="name">
+            <input id="custname" type="text" class="form-control" placeholder="이름" name="custname">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="아이디" name="id" style="width: 60%; display: inline-block">
-            <input class="btn" value="아이디 확인" style="margin-left:3%; width: 20%; display: inline-block; background-color: lightgray">
+            <input id="custid" type="text" class="form-control" placeholder="아이디" name="custid" style="width: 60%; display: inline-block">
+            <input id="idcheckbtn" class="btn" value="아이디 확인" style="margin-left:3%; width: 20%; display: inline-block; background-color: lightgray">
           </div>
           <div class="form-group">
-            <input id="password" type="text" class="form-control" placeholder="비밀번호" name="password" style="margin-left: 0;width: 50%; display: inline-block">
-            <input id="conrifm" type="text" class="form-control" placeholder="비밀번호 확인" name="confirm" style="margin-left: 0;width: 49%; display: inline-block">
+            <input id="custpwd" type="password" class="form-control" placeholder="비밀번호" name="custpwd" style="margin-left: 0;width: 50%; display: inline-block">
+            <input id="confirm" type="password" class="form-control" placeholder="비밀번호 확인" name="confirm" style="margin-left: 0;width: 49%; display: inline-block">
           </div>
           <div class="form-group">
             <div class="form-field">
-				<input type="text" class="form-control checkin_date col-md-6" placeholder="생년월일" name="birth" style="display:inline-block">
+				<input id="birth" type="text" class="form-control checkin_date col-md-6" placeholder="생년월일" name="birth" style="display:inline-block">
 				<div class="custom-control custom-radio" style="margin-left:5%; width:10%; display: inline-block">
-					<input type="radio" name="jb-radio" id="jb-radio-1" class="custom-control-input">
-					<label class="custom-control-label" for="jb-radio-1">남</label>
+					<input type="radio" name="gender" id="man" value="man" class="custom-control-input">
+					<label class="custom-control-label" for="man">남</label>
 				</div>
 				<div class="custom-control custom-radio" style="width:10%; display: inline-block">
-					<input type="radio" name="jb-radio" id="jb-radio-2" class="custom-control-input">
-					<label class="custom-control-label" for="jb-radio-2">여</label>
+					<input type="radio" name="gender" id="woman" value="woman" class="custom-control-input">
+					<label class="custom-control-label" for="woman">여</label>
 				</div>
 		  	</div>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="전화번호" name="phone" style="width:50%; display:inline-block;">
-            <input type="text" class="form-control" placeholder="이메일" name="email" style="width:49%; display:inline-block;">
+            <input id="phone" type="text" class="form-control" placeholder="전화번호" name="phone" style="width:50%; display:inline-block;">
+            <input id="email" type="text" class="form-control" placeholder="이메일" name="email" style="width:49%; display:inline-block;">
           </div>
           <div class="form-group">
-          	<input type="number" id="sample6_postcode" placeholder="우편번호" class="form-control" name="zipcode" style="width: 30%; display: inline-block">
+          	<input type="number" id="zipcode" placeholder="우편번호" class="form-control" name="zipcode" style="width: 30%; display: inline-block">
 			<input class="btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="margin-left:3%; width: 25%; display: inline-block; background-color: lightgray">
-			<input type="text" id="sample6_address" placeholder="주소" class="form-control" name="addr">
-			<input type="text" id="sample6_detailAddress" placeholder="상세주소" class="form-control" name="addrdetail">
+			<input type="text" id="addr" placeholder="주소" class="form-control" name="addr">
+			<input type="text" id="addrdetail" placeholder="상세주소" class="form-control" name="addrdetail">
           </div>  
           <div class="form-group">
             <div class="form-field">
@@ -130,19 +170,4 @@ $(document).ready(function(){
 
    </div>
  </div>
-</section>
-
-<section class="ftco-intro ftco-section ftco-no-pt">
- <div class="container">
-  <div class="row justify-content-center">
-   <div class="col-md-12 text-center">
-    <div class="img"  style="background-image: url(images/bg_2.jpg);">
-     <div class="overlay"></div>
-     <h2>We Are Pacific A Travel Agency</h2>
-     <p>We can manage your dream building A small river named Duden flows by their place</p>
-     <p class="mb-0"><a href="#" class="btn btn-primary px-4 py-3">Ask For A Quote</a></p>
-   </div>
- </div>
-</div>
-</div>
 </section>

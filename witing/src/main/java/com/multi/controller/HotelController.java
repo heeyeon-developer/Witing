@@ -45,6 +45,19 @@ public class HotelController {
 		return "index";
 	}
 	
+	@RequestMapping("/cityshotel")
+	public String cityshotel(Model model, Integer cityid) {
+		try {
+			List<HotelDTO> list = service.cityshotel(cityid);
+			model.addAttribute("list", list);
+			model.addAttribute("center", "hotel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "index";
+	}
+	
 	@RequestMapping("/searchimpl")
 	public String searchimpl(Model model, int hotelid) {
 		List<HotelDTO> list = null;

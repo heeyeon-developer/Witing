@@ -44,4 +44,8 @@ public class HotelService implements MyService<Integer, HotelDTO>{
 		return mapper.hotelcity();
 	}
 	
+	public List<HotelDTO> cityshotel(Integer cityid) throws Exception {
+		return mapper.cityshotel(cityid);
+	}
+	
 }

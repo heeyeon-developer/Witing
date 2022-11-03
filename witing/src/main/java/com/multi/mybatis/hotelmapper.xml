@@ -28,5 +28,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="searchhotel" parameterType="Integer" resultType="HotelDTO">
 		SELECT * FROM hotel WHERE hotelid=#{hotelid}
 	</select>
+	
+	<select id="cityshotel" parameterType="Integer" resultType="HotelDTO">
+		SELECT * 
+		  FROM hotel h
+		       INNER JOIN city c ON h.cityid = c.cityid
+		 WHERE c.cityid = #{cityid}
+	</select>
 	 
 </mapper>
