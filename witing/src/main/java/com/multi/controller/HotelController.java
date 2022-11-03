@@ -64,7 +64,7 @@ public class HotelController {
 		
 		return "index";
 	}
-	
+	 
 	@RequestMapping("/searchimpl")
 	public String searchimpl(Model model, int hotelid) {
 		List<HotelDTO> list = null;

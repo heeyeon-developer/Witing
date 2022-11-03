@@ -106,7 +106,7 @@ public class MainController {
 			session.invalidate();
 		return "index";
 	}
-	
+	 
 	@RequestMapping("/register")
 	public String register(Model model) {
 		model.addAttribute("center","register");
