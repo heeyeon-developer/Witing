@@ -37,9 +37,8 @@ public class MainController {
 	
 	@RequestMapping("/mypage")
 	public String mypage(Model model, String custid) {
-		CustDTO cust = null;
 		try {
-			cust = custservice.get(custid);
+			CustDTO cust = custservice.get(custid);
 			model.addAttribute("mypage", cust);
 			model.addAttribute("center","mypage");
 		} catch (Exception e) {
@@ -47,27 +46,38 @@ public class MainController {
 		}
 		return "index";
 	}
+	
 	@RequestMapping("/custdetail")
-	public String custdetail(Model model, String custid) {
-		CustDTO cust = null;
+	public String custdetail(Model model, String custid, String custpwd) {
+		System.out.println(custpwd);
 		try {
-			cust = custservice.get(custid);
-			System.out.println(cust);
-			model.addAttribute("custdetail", cust);
-			model.addAttribute("center","custdetail");
+			CustDTO cust = custservice.get(custid);
+			if(custpwd.equals(cust.getCustpwd())) {
+				model.addAttribute("custdetail", cust);
+				model.addAttribute("center","custdetail");
+			
+			}else {
+				model.addAttribute("status", "0");
+				model.addAttribute("center", "mypage");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "index";
 	}
+	
 	@RequestMapping("/custupdateimpl")
 	public String custupdateimpl(Model model, CustDTO cust) {
 		try {
+			System.out.println("2: "+ cust);
 			custservice.modify(cust);
+			System.out.println("2: "+ cust);
+			model.addAttribute("mypage", cust);
+			model.addAttribute("center","mypage");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/mypage";
+		return "index";
 	}
 	
 	@RequestMapping("/login")
