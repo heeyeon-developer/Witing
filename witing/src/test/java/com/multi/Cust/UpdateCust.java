@@ -1,7 +1,10 @@
 package com.multi.Cust;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
+
+
+
+
+import java.sql.Date;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,7 @@ class UpdateCust {
 	@Test
 	void contextLoads() {
 		
-		CustDTO cust = new CustDTO("kmj", "kmj123", "전경민", null, "010-1234-1234", "rudals0627@gmail.com", "경기도 광명시", "1층", 12345, null, "man", 0, "Korea");
+		CustDTO cust = new CustDTO("ddd", "aaa", "qqq", null, "111-111-111", "qqq@qqq", "qqq", "qqq", 111, null, "qq", 111, "QQQ");
 		try {
 			service.modify(cust);
 		} catch (Exception e) {
