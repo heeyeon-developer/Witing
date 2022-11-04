@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$('#infoenter_btn').click(function(){
 			$('#infoenter_form').attr({
 				'method':'post',
-				'action':'[[@{/custdetail(custid=${session.logincust.custid})}]]'
+				'action':'[[@{/custdetail(custid=${mypage.custid})}]]'
 			});
 			$('#infoenter_form').submit();
 		
@@ -33,7 +33,7 @@ $(document).ready(function(){
     <div class="modal-dialog modal-2sm">
       <div class="modal-content">
         <div class="modal-header">
-          <div>비밀번호를 입력해주세요 :)</div>
+          <div>비밀번호를 입력해주세요 : )</div>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
@@ -136,12 +136,14 @@ $(document).ready(function(){
   <div class="container">
     <div class="row block-9">
       <div class="col-md-12 order-md-last d-flex">
-        <form action="#" class="bg-light p-5 contact-form">
+       <form action="#" class="bg-light p-5 contact-form">
           
           <div class="form-group">
-            <h1 th:text = "${session.logincust.custname} + ' 님'"></h1>
-            <h2 th:text = "'보유 포인트 : '+${session.logincust.point} + 'P'"></h2>
-            <h2 th:text = "'가입일자 : '+${session.logincust.rdate}"></h2>
+            <h2>안녕하세요 : )</h2>
+            <h2 th:text = "${mypage.custname}+' 님'"></h2>
+            <h4 th:text = "'보유포인트 : '+${mypage.point}+'P'"></h4>
+            <h4 th:text = "'가입날짜 : '+${mypage.rdate}"></h4>
+            
           </div>
         </form>
         

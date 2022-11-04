@@ -11,8 +11,12 @@ $(document).ready(function(){
 				'action':'/custupdateimpl'
 			});
 			$('#custupdate_form').submit();
+			alert("정상적으로 수정되었습니다 : )");
 		}
 	});
+	
+	
+	
 });
 
 function sample6_execDaumPostcode() {
@@ -161,6 +165,14 @@ function sample6_execDaumPostcode() {
             <input type="text" class="form-control" id="custid" th:value="${custdetail.custid}" readonly="readonly"name="custid">
           </div>
           <div class="form-group">
+			<label class="control-label col-sm-2" for="custpwd">PWD:</label>
+			<input type="password" class="form-control" id="custpwd" th:value="${custdetail.custpwd}" placeholder="Enter Password" required="required" name="custpwd">
+		  </div>
+		  <div class="form-group">
+			<label class="control-label col-sm-2" for="custpwd2">PWD Check:</label>
+		    <input type="password" class="form-control" id="custpwd2" th:value="${custdetail.custpwd}" placeholder="Check password" required="required">
+		  </div>
+          <div class="form-group">
           	<label class="control-label col-sm-2" for="gender" >Gender</label>
             <input type="text" class="form-control" id="gender" th:value="${custdetail.gender}" readonly="readonly" name="gender">
           </div>
@@ -170,7 +182,7 @@ function sample6_execDaumPostcode() {
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="birth" >Birth</label>
-            <input type="date" class="form-control" id="birth" th:value="${custdetail.birth}">
+            <input type="date" class="form-control" id="birth" th:value="${custdetail.birth}" readonly="readonly" >
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="phone" >Mobile</label>
@@ -185,7 +197,7 @@ function sample6_execDaumPostcode() {
           <div class="form-group">
           	<label class="control-label col-sm-2" for="addr" >Address</label><br>
           	<input type="number" id="sample6_postcode" class="form-control" th:value="${custdetail.zipcode}" style="width: 30%; display: inline-block" name="zipcode">
-			<input type="btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 20%; display: inline-block; background-color: lightgray">
+			<input type="btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 20%; display: inline-block; background-color: lightgray; border: none; border-radius: 2px; height: 40px">
 			<input type="text" id="sample6_address" class="form-control" th:value="${custdetail.addr}" name="addr">
 			<input type="text" id="sample6_detailAddress" class="form-control" th:value="${custdetail.addrdetail}" style="display: inline-block" name="addrdetail">
           </div>

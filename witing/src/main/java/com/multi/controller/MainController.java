@@ -38,8 +38,9 @@ public class MainController {
 	
 	@RequestMapping("/mypage")
 	public String mypage(Model model, String custid) {
+		CustDTO cust = null;
 		try {
-			CustDTO cust = custservice.get(custid);
+			cust = custservice.get(custid);
 			model.addAttribute("mypage", cust);
 			model.addAttribute("center","mypage");
 		} catch (Exception e) {
@@ -50,15 +51,14 @@ public class MainController {
 	
 	@RequestMapping("/custdetail")
 	public String custdetail(Model model, String custid, String custpwd) {
-		System.out.println(custpwd);
 		try {
 			CustDTO cust = custservice.get(custid);
 			if(custpwd.equals(cust.getCustpwd())) {
 				model.addAttribute("custdetail", cust);
 				model.addAttribute("center","custdetail");
-			
 			}else {
 				model.addAttribute("status", "0");
+				model.addAttribute("mypage", cust);
 				model.addAttribute("center", "mypage");
 			}
 		} catch (Exception e) {
@@ -70,15 +70,14 @@ public class MainController {
 	@RequestMapping("/custupdateimpl")
 	public String custupdateimpl(Model model, CustDTO cust) {
 		try {
-			System.out.println("2: "+ cust);
+			System.out.println("1: "+ cust);
 			custservice.modify(cust);
 			System.out.println("2: "+ cust);
-			model.addAttribute("mypage", cust);
-			model.addAttribute("center","mypage");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "index";
+		return "redirect:mypage?custid="+cust.getCustid();
 	}
 	
 	@RequestMapping("/login")
