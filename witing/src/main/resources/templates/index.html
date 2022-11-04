@@ -46,7 +46,7 @@
 					<li class="nav-item"><a th:href="@{/hotel}" class="nav-link">Hotel</a></li>
 					<li class="nav-item"><a th:href="@{/blog}" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a th:href="@{/accompany}" class="nav-link">Accompany</a></li>
-					<li class="nav-item"><a th:href="@{/mypage}" class="nav-link">MyPage</a></li>
+					<li th:if="${session.logincust != null}" class="nav-item"><a th:href="@{/mypage(custid=${session.logincust.custid})}" class="nav-link">MyPage</a></li>
 				</ul>
 			</div>
 			<a th:href="@{/login}" th:if="${session.logincust == null}" class="btn btn-primary">Login</a>

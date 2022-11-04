@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.PostMapper">
+	
+	<select id="select" parameterType="Integer" resultType="PostDTO">
+		SELECT * FROM post WHERE postid=#{postid}
+	</select>
+	<select id="selectall" resultType="PostDTO">
+		SELECT * FROM post
+	</select>
+	<insert id="insert" parameterType="PostDTO">
+		INSERT INTO post VALUES (NULL, #{custid}, #{adminid}, #{hotelid}, #{title}, #{text}, #{img}, #{rdate},#{kind},=#{star})
+	</insert>
+	<update id="update" parameterType="PostDTO">
+		UPDATE hotel SET custid=#{custid},adminid=#{adminid},hotelid=#{hotelid}, title=#{title},
+		text=#{text}, img=#{img}, rdate=#{rdate}, kind=#{kind}, star=#{star} WHERE postid=#{postid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM post WHERE postid=#{postid}
+	</delete>
+
+	<select id="myqna" parameterType="String" resultType="PostDTO">
+		SELECT postid, custid, title, rdate FROM post
+		WHERE custid=#{custid};
+	</select>
+	 
+</mapper>

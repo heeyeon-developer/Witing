@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.AccompanyMapper">
+	
+	<select id="select" parameterType="Integer" resultType="AccompanyDTO">
+		SELECT * FROM accompany WHERE accomid=#{accomid}
+	</select>
+	<select id="selectall" resultType="AccompanyDTO">
+		SELECT * FROM accompany
+	</select>
+	<insert id="insert" parameterType="AccompanyDTO">
+		INSERT INTO accompany VALUES (NULL,#{custid},#{title},#{text},#{traveltime},#{cnt},#{locationx},#{locationy})
+	</insert>
+	<update id="update" parameterType="AccompanyDTO">
+		UPDATE accompany SET custid=#{custid},title=#{title},text=#{text},traveltime=#{traveltime},
+		cnt=#{cnt},locationx=#{locationx},locationy=#{locationy} WHERE accomid=#{accomid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM accompany WHERE accomid=#{accomid}
+	</delete>
+
+	 
+</mapper>
