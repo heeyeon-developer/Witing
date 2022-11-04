@@ -34,7 +34,9 @@ function addlike(cust_id, hotel_id){
 			'hotelid':hotel_id,		
 		},
 		success:function(data){
-		    $('#heartbtn').attr('class','fa fa-heart');
+			var id = '#heartbtn'+data;
+			alert(id);
+		    $(id).attr('class','fa fa-heart');
 			alert("likelist에 담겼습니다.");
 		}
 	});
@@ -152,7 +154,7 @@ function addlike(cust_id, hotel_id){
       
 	  <div class="like" th:if="${session.logincust != null}">
           <a th:onclick="addlike([[${session.logincust.custid}]],[[${li.hotelid}]]);" data-toggle="tooltip" data-placement="left" title="Like" id="like">
-          <i class="fa fa-heart-o" id="heartbtn" style="color:red" alt=""></i>
+          <i class="fa fa-heart-o" th:id="|heartbtn${li.hotelid}|" style="color:red" alt=""></i>
           </a>
       </div>
 	  

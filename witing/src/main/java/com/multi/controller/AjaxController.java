@@ -40,7 +40,6 @@ public class AjaxController {
 	
 	@RequestMapping("/addlike")
 	public Object addlike(String custid, int hotelid) {
-		String result = "";
 		LikeDTO like = new LikeDTO(0,hotelid,custid,0,"","","","","",0,"");
 		try {
 			like_service.register(like);
@@ -48,7 +47,6 @@ public class AjaxController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(hotelid);
-		return result;
+		return hotelid;
 	}
 }
