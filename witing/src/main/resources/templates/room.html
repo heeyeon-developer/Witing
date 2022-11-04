@@ -1,5 +1,12 @@
-<!DOCTYPE html>
-<html lang="ko">
+<style>
+#roomdetail{
+	margin-top: -50px;
+}
+
+.mb-3{
+	font-weight: bold;
+}
+</style>
 
 <body>
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/hotel/seoul.jpg');">
@@ -17,7 +24,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 ftco-animate py-md-5 mt-md-5">
-        <h3 class="mb-3" th:text="${hotelname}+' - '+${roomtype1}+', '+${roomtype2}">RoomType</h3>
+        <h3 class="mb-3" th:text="${hotelname}+' - '+${roomtype1}+', '+${roomtype2}" id="roomdetail">RoomType</h3>
         <p>
         
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -112,16 +119,9 @@
 
         <div class="sidebar-box ftco-animate">
           <h3>Recommend</h3>
-          <div class="tagcloud">
-            <a href="#" class="tag-cloud-link">서울</a>
-            <a href="#" class="tag-cloud-link">경기</a>
-            <a href="#" class="tag-cloud-link">인천</a>
-            <a href="#" class="tag-cloud-link">대전/충청</a>
-            <a href="#" class="tag-cloud-link">강원</a>
-            <a href="#" class="tag-cloud-link">광주/전라</a>
-            <a href="#" class="tag-cloud-link">대구/경상</a>
-            <a href="#" class="tag-cloud-link">부산</a>
-            <a href="#" class="tag-cloud-link">제주</a>
+          <div class="tagcloud" th:each="city:${citylist}" style="display:inline-block">
+            <a th:href="@{/cityshotel(cityid=${city.cityid})}" class="tag-cloud-link" th:text="${city.name}">서울</a>
+            
           </div>
         </div>
         
@@ -130,8 +130,3 @@
     </div>
   </div>
 </section> <!-- .section -->
-
-
-
-</body>
-</html>

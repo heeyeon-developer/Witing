@@ -1,0 +1,110 @@
+
+<style>
+#writebtn{
+	margin-top: 50px;
+	margin-left: 90%;
+}
+
+.two{
+	margin-left: 10px;
+}
+
+#a_title{
+	margin-top:-60px;
+	margin-bottom: 20px;
+}
+</style>
+
+
+
+ <!-- END nav -->
+ 
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_2.jpg');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+       <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="/accompany">Accompany <i class="fa fa-chevron-right"></i></a></span></p>
+       <h1 class="mb-0 bread">Accompany</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+	<h2 id="a_title">Accompany List</h2>
+	<table class="table table-hover">
+		<colgroup>
+			<col style="width:12%">
+			<col style="width:20%">
+			<col style="width:40%">
+			<col style="width:28%">
+		</colgroup>
+		
+		<thead>
+		<tr id="tablehead">
+			<th>No</th>
+			<th>User ID</th>
+			<th>Title</th>
+			<th>Travel Time</th>
+		</tr>
+		</thead>
+		<tbody th:each=li:${list}>
+		<tr>
+			<td th:text="${li.accomid}"></td>
+			<td th:text="${li.custid}"></td>
+			<td th:text="${li.title}"></td>
+			<td th:text="${#dates.format(li.traveltime, 'yyyy-MM-dd')}"></td>
+		</tr>
+		</tbody>
+	</table>
+	
+	<a th:href="@{/writeaccom}" th:if="${session.logincust != null}" class="btn btn-primary" id="writebtn">글 작성하기</a>
+	
+    <!-- <div class="row d-flex">
+      <div class="col-md-4 d-flex ftco-animate" th:each=li:${list}>
+       <div class="blog-entry justify-content-end">
+        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
+        </a>
+        <div class="text">
+         <div class="d-flex align-items-center mb-4 topp">
+          <div class="one">
+           <span class="day" th:text="${#dates.format(li.traveltime, 'dd')}+' '">11</span>
+         </div>
+         <div class="two">
+           <span class="yr" th:text="' '+${#dates.format(li.traveltime, 'yyyy')}">2020</span>
+           <span class="mos" th:text="' '+${#calendars.monthName(li.traveltime)}">September</span>
+         </div>
+       </div>
+       <h3 class="heading"><a class="fa fa-plane" href="#" th:text="' '+${li.title}">Most Popular Place In This World</a></h3>
+       <p class="fa fa-user-circle-o" th:text="' '+${li.custid}">id</p>
+       <p th:text="${li.text}+' A small river named Duden flows.'"></p>
+       <p><a href="#" class="btn btn-primary">Read more</a></p>
+     </div>
+   </div>
+ </div>
+</div> -->
+<div class="row mt-5">
+  <div class="col text-center">
+    <div class="block-27">
+      <ul>
+        <li><a href="#">&lt;</a></li>
+        <li class="active"><span>1</span></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&gt;</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</section>	
+
+
+
+<!-- loader -->
+<!-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> -->
+
