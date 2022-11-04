@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CateDTO;
+import com.multi.dto.CityDTO;
 import com.multi.dto.HotelDTO;
 import com.multi.dto.RoomDTO;
 import com.multi.mapper.CateMapper;
@@ -84,8 +85,11 @@ public class HotelController {
 			String roomimg1,String roomimg2,String roomimg3,String roomimg4,String hotelimg1,
 			String roomtype1,String roomtype2) {
 		List<RoomDTO> list = null;
+		List<CityDTO> city = null;
 		try {
 			list = room_service.roomall(hotelid);
+			city = city_service.getall();
+			model.addAttribute("citylist", city);
 			model.addAttribute("hotelname", list.get(0).getHotelname());
 			model.addAttribute("hotelimg1", list.get(0).getHotelimg1());
 			model.addAttribute("roomimg1", list.get(0).getRoomimg1());

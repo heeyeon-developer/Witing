@@ -1,11 +1,5 @@
 <meta charset="utf-8">
 
-<style>
-.fa fa heart{
-	color:red;
-}
-</style>
-
 <script>
 /* function getsearch(){
 	$.ajax({
@@ -35,10 +29,15 @@ function addlike(cust_id, hotel_id){
 		},
 		success:function(data){
 			var id = '#heartbtn'+data;
-			alert(id);
 		    $(id).attr('class','fa fa-heart');
 			alert("likelist에 담겼습니다.");
 		}
+		
+		/* useEffect(() => {
+		    if(wishlistList.wishlistItems.filter(InwishlistItem => InwishlistItem.id === item.id)[0]) {
+		      setColor("#ff0000");
+		    }
+		  }, []); */
 	});
 	
 };

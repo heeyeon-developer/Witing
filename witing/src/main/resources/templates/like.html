@@ -21,7 +21,7 @@ function del(like_id){
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="/mypage">My Page <i class="fa fa-chevron-right"></a></i></span> <span><a th:href="@{/like(custid=${session.logincust.custid})}">Like <i class="fa fa-chevron-right"></a></i></span></p>
+       <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="/mypage">My Page <i class="fa fa-chevron-right"></a></i></span> <span><a th:href="@{/like(custid=${session.logincust.custid})}">Like <i class="fa fa-chevron-right"></a></i></span></p>
        <h1 class="mb-0 bread">My Page</h1>
      </div>
    </div>
@@ -124,7 +124,6 @@ function del(like_id){
 			        <span class="fa fa-star"></span>
 			        <span class="fa fa-star"></span>
 			      </p>
-			      <span class="days">8 Days Tour</span>
 			      
 			      <div class="like">
 			          <a th:onclick="del([[${li.likeid}]]);" data-toggle="tooltip" data-placement="left" title="Delete"><i class="fa fa-heart" id="likedel" alt=""></i></a>
