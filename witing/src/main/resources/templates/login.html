@@ -47,21 +47,67 @@ $(document).ready(function(){
           <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
 			<li class="ftco-animate"><a href="#"><span class="fa fa-google"></span></a></li>
 			<li class="ftco-animate"><a href="#"><span class="fa fa-kakao"></span></a></li>
-		    <li><div id="naver_id_login">네이버 로그인</div></li>
+		  	<li><div id="naverIdLogin"></div></li>
 		  </ul>
         </form>
       </div>
    </div>
  </div> 
+
+  <script type="text/javascript">
+ 
+  const naverLogin = new naver.LoginWithNaverId(
+   {
+    clientId: "BU1GLCi37hGnOL4NxrA5",
+    callbackUrl: "http://localhost/",//네이버 로그인 후 돌아가는 화면
+    loginButton: {color: "green", type: 1, height: 40}
+    }
+   );
   
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-  	var naver_id_login = new naver_id_login("BU1GLCi37hGnOL4NxrA5", "http://localhost");
-  	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("green", 1,40);
-  	naver_id_login.setDomain("http://localhost/login");
-  	naver_id_login.setState(state);
-  	naver_id_login.init_naver_id_login();
-  
+    naverLogin.init();
+    console.log(naverLogin);
+
+    $('#naverIdLogin').click(function(){
+    	naverLogin.getLoginStatus(function (status) {
+	        if (status) {
+	            const nickName=naverLogin.user.getNickName();
+	            const age=naverLogin.user.getAge();
+	            const birthday=naverLogin.user.getBirthyear();
+	
+	            if(nickName===null||nickName===undefined ){
+	              alert("별명이 필요합니다. 정보제공을 동의해주세요.");
+	              naverLogin.reprompt();
+	              return ;  
+	           }else{
+	            setLoginStatus();
+	           }
+	  		}
+    	});
+    })
+    
+    	
+   	function setLoginStatus(){/* 
+   	      alert(naverLogin.user.id+" "
+   	    		  +naverLogin.user.id+" "
+   	    		  +naverLogin.user.name+" "
+   	    		  +naverLogin.user.birthyear+"-"
+   	    		  +naverLogin.user.birthday+" "
+   	    		  +naverLogin.user.mobile.replaceAll('-','')+" "
+   	    		  +naverLogin.user.email+" "); */
+   	      
+   	      $.ajax({
+   				url:'[[@{/naverlogin}]]',
+				data:{
+					custid:naverLogin.user.id,
+					custpwd:naverLogin.user.id,
+					custname:naverLogin.user.name,
+					birth:naverLogin.user.birthyear+'-'+naverLogin.user.birthday,
+					phone:'01012341234',
+					email:naverLogin.user.email,
+					gender:naverLogin.user.gender,
+					point:1000,
+					country:'Korea'
+				}
+   			});
+   	    }
 </script>

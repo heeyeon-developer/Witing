@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.multi.dto.CityDTO;
 import com.multi.dto.CustDTO;
@@ -137,4 +138,19 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping("/naverlogin")
+	public String naverlogin(Model model, HttpSession session, String custid, String custpwd, String custname, String phone, String email, String gender, String country) {
+		CustDTO cust = new CustDTO(custid.substring(0,20), custpwd.substring(0,20), custname, Date.valueOf("2022-11-11"),phone,email,"","",0,null,gender.equals("F")?"woman":"man",1000,country);
+		try {
+			CustDTO check = custservice.get(custid.substring(0,20));
+			if(check == null)//기존에 가입하지 않은 네이버 회원일 경우 데이터 저장
+				custservice.register(cust);
+			session.setAttribute("logincust", cust);
+			model.addAttribute("name",cust.getCustname());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "index";
+	}
 }
