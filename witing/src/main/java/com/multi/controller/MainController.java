@@ -100,7 +100,7 @@ public class MainController {
 			model.addAttribute("center","loginfail");
 		}
 		
-		return "index";
+		return "redirect:";
 	}
 	
 	@RequestMapping("/loginfail")
@@ -113,7 +113,7 @@ public class MainController {
 	public String logout(HttpSession session) {
 		if(session != null)
 			session.invalidate();
-		return "index";
+		return "redirect:";
 	}
 	 
 	@RequestMapping("/register")
