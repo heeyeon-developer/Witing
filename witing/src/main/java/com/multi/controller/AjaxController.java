@@ -48,6 +48,7 @@ public class AjaxController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(hotelid);
 		return result;
 	}
 }

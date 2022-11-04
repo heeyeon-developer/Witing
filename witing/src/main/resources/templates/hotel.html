@@ -1,5 +1,11 @@
 <meta charset="utf-8">
 
+<style>
+.fa fa heart{
+	color:red;
+}
+</style>
+
 <script>
 /* function getsearch(){
 	$.ajax({
@@ -11,6 +17,7 @@
 		}
 	});
 } */
+
 
 function addlike(cust_id, hotel_id){
 	
@@ -27,23 +34,14 @@ function addlike(cust_id, hotel_id){
 			'hotelid':hotel_id,		
 		},
 		success:function(data){
+		    $('#heartbtn').attr('class','fa fa-heart');
 			alert("likelist에 담겼습니다.");
 		}
 	});
 	
 };
 
-$('#like').click(function(){
-    $('#like').toggleClass('fa fa heart');
- })
-
 </script>
-
-<style>
-.fa fa heart{
-	color:red;
-}
-</style>
 
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/hotel/jeju.jpg');">
   <div class="container">
@@ -154,7 +152,7 @@ $('#like').click(function(){
       
 	  <div class="like" th:if="${session.logincust != null}">
           <a th:onclick="addlike([[${session.logincust.custid}]],[[${li.hotelid}]]);" data-toggle="tooltip" data-placement="left" title="Like" id="like">
-          <i class="fa fa-heart-o" id="heartbtn" alt=""></i>
+          <i class="fa fa-heart-o" id="heartbtn" style="color:red" alt=""></i>
           </a>
       </div>
 	  

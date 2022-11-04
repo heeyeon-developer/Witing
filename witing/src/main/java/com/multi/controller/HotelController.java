@@ -82,7 +82,7 @@ public class HotelController {
 	@RequestMapping("/room")
 	public String room(Model model,int hotelid,Integer roomid,String hotelname,
 			String roomimg1,String roomimg2,String roomimg3,String roomimg4,String hotelimg1,
-			String bedtype1,String bedtype2) {
+			String roomtype1,String roomtype2) {
 		List<RoomDTO> list = null;
 		try {
 			list = room_service.roomall(hotelid);
@@ -92,8 +92,8 @@ public class HotelController {
 			model.addAttribute("roomimg2", list.get(0).getRoomimg2());
 			model.addAttribute("roomimg3", list.get(1).getRoomimg1());
 			model.addAttribute("roomimg4", list.get(1).getRoomimg2());
-			model.addAttribute("bedtype1", list.get(0).getBedtype());
-			model.addAttribute("bedtype2", list.get(1).getBedtype());
+			model.addAttribute("roomtype1", list.get(0).getRoomtype());
+			model.addAttribute("roomtype2", list.get(1).getRoomtype());
 			model.addAttribute("roomid", roomid);
 			model.addAttribute("list", list);
 			model.addAttribute("center", "room");
