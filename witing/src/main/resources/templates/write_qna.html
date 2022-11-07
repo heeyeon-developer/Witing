@@ -1,4 +1,19 @@
+<script>
+$(document).ready(function(){
+	$('#send_btn').click(function(){
+		var c = confirm('수정하시겠습니까?');
+		if(c == true){
+			$('#custupdate_form').attr({
+				'method':'post',
+				'action':'/qnasendimpl'
+			});
+			$('#qnaform').submit();
+			alert("정상적으로 등록되었습니다 : )");
+		}
+	});
+});
 
+</script>
 <style>
 #roomdetail{
 	margin-top: -50px;
@@ -14,8 +29,8 @@
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/hotel">Hotel <i class="fa fa-chevron-right"></i></a></span> <span><a href="#">Room Details <i class="fa fa-chevron-right"></i></a></span></p>
-       <h1 class="mb-0 bread">Room Details</h1>
+       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/hotel">Hotel <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/room">Room Details <i class="fa fa-chevron-right"></i></a></span><span class="mr-2">Q&A <i class="fa fa-chevron-right"></i></span></p>
+       <h1 class="mb-0 bread">Q&A</h1>
      </div>
    </div>
  </div>
@@ -26,10 +41,14 @@
     <div class="row">
       <div class="col-lg-12 ftco-animate py-md-5 mt-md-5">
         <h3 class="mb-3" th:text="${hotelname}+' - '+${roomtype1}+', '+${roomtype2}" id="roomdetail">RoomType</h3>
-        <p>
         
-		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-		  <ol class="carousel-indicators">
+       
+<section class="ftco-section contact-section ftco-no-pt">
+  <div class="container">
+    <div class="row block-9">
+    <div class="col-md-6 d-flex">
+       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+		  <ol class="carousel-indicators" style="margin-bottom: 90px" >
 		    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 		    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 		    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
@@ -49,44 +68,50 @@
 		      <img class="d-block w-100" th:src="'/images/hotel/'+${roomimg4}" alt="Fourth slide">
 		    </div>
 		  </div>
-		  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" style="height: 300px">
 		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 		    <span class="sr-only">Previous</span>
 		  </a>
-		  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" style="height: 300px">
 		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
 		    <span class="sr-only">Next</span>
 		  </a>
 		</div>
+   </div>
+     <div class="col-md-6">
+    
+        <form id="qnaform" class=" contact-form" style="padding-top: 0">
+          <div class="form-group">
+            <input id="title" type="text" class="form-control" placeholder="Title" name="title">
+          </div>
+          <div class="form-group">
+            <input id="custid" type="text" class="form-control" th:value="${session.logincust.custid}" readonly="readonly" name="custid">
+          </div>
+          <div class="form-group">
+            <textarea id="text" cols="30" rows="7" class="form-control" placeholder="text.." name="text"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="hidden" id="hotelid" cols="30" rows="7" class="form-control" th:value="${list[0].hotelid}" name="hotelid">
+          </div>
+          <!-- <div class="form-group">
+            <input type="submit" id="send_btn" value="Send" class="btn btn-primary py-3 px-5" style="float: right">
+          </div> -->
+        </form>
+        <a href="#"><button id="send_btn" class="btn btn-primary py-3 px-5" style="float: right">Send</button></a>
+      </div>
+
+      
+ </div>
+</section>
 		
-          <!-- <img th:src="'images/hotel/'+${li.roomimg1}" alt="" class="img-fluid">
-          <img th:src="'images/hotel/'+${li.roomimg2}" alt="" class="img-fluid"> -->
-        </p>
-        <p>�꽭硫대룄援�, �깶�썙 �떆�꽕, 紐⑹슃 媛��슫, 鍮꾨뜲, �솕�옣�떎, ���썡, ���씪/��由ъ꽍 諛붾떏, TV, �뒳由ы띁, �깋�옣怨�, �쟾�솕湲�, �쐞�꽦 梨꾨꼸, �궃諛� �떆�꽕, �뿤�뼱�뱶�씪�씠�뼱, �쟾湲� 二쇱쟾�옄, 紐⑤떇肄� �꽌鍮꾩뒪, �샆�옣, 吏��긽痢� �쟾泥� �쑀�떅, �뿕由щ쿋�씠�꽣濡� �쐞痢� �씠�룞, �샆嫄몄씠, �솕�옣吏�</p>
+         
         
-        <table class="table">
-		  <thead>
-		    <tr>
-		      <th scope="col">移⑤�</th>
-		      <th scope="col">湲곗� �씤�썝(理쒕� �씤�썝)</th>
-		      <th scope="col">媛�寃�(�씤�떦 異붽�媛�寃�)</th>
-		      <th scope="col"></th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr th:each="li:${list}">
-		      <th scope="row" th:text="${li.bedtype}"></th>
-		      <td th:text="${li.standard}+'('+${li.max}+')'">Mark</td>
-		      <td th:text="'&#8361; '+${li.price}+' (&#8361; '+${li.addprice}+') '"></td>
-		      <td><button type="button" class="btn btn-dark">�삁�빟�븯湲�</button></td>
-		    </tr>
-		  </tbody>
-		</table>
-      </div> <!-- .col-md-8 -->
+        
       
       
       
 
     </div>
+  </div>
   </div>
 </section> <!-- .section -->

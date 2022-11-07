@@ -104,7 +104,7 @@
         
         
        <div class="sidebar-box ftco-animate">
-          <h3 style="display: inline-block;">QnA</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black; cursor: pointer; " th:onclick="|location.href='@{/write_qna(custid=${session.logincust.custid})}'|"></span>
+          <h3 style="display: inline-block;">QnA</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black; cursor: pointer; " th:onclick="|location.href='@{/write_qna(hotelid=${list[0].hotelid})}'|"></span>
           <div class="block-21 mb-4 d-flex">
             <div class="text">
               <h5 class="heading"><a href="#">QnA title/text</a></h5>

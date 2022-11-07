@@ -2,20 +2,19 @@ package com.multi.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.dto.CityDTO;
 import com.multi.dto.CustDTO;
-import com.multi.dto.HotelDTO;
 import com.multi.dto.PostDTO;
+import com.multi.dto.RoomDTO;
 import com.multi.service.CustService;
 import com.multi.service.HotelService;
 import com.multi.service.PostService;
+import com.multi.service.RoomService;
 
 @Controller
 public class QnAController {
@@ -25,6 +24,10 @@ public class QnAController {
 	PostService postservice;
 	@Autowired
 	HotelService hotelservice;
+	@Autowired
+	RoomService roomservice;
+	
+	
 	
 	@RequestMapping("/qna")
 	public String qna(Model model, String custid) {
@@ -55,16 +58,41 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/write_qna")
-	public String write_qna(Model model, Integer hotelid) {
-
+	public String write_qna(Model model,Integer hotelid,Integer roomid,String hotelname,
+			String roomimg1,String roomimg2,String roomimg3,String roomimg4,String hotelimg1,
+			String roomtype1,String roomtype2) {
+		List<RoomDTO> list = null;
+		List<CityDTO> city = null;
 		try {
-			HotelDTO hotel = hotelservice.get(hotelid);
-			model.addAttribute("hotel", hotel);
+			list = roomservice.roomall(hotelid);
+			model.addAttribute("citylist", city);
+			model.addAttribute("hotelname", list.get(0).getHotelname());
+			model.addAttribute("hotelimg1", list.get(0).getHotelimg1());
+			model.addAttribute("roomimg1", list.get(0).getRoomimg1());
+			model.addAttribute("roomimg2", list.get(0).getRoomimg2());
+			model.addAttribute("roomimg3", list.get(1).getRoomimg1());
+			model.addAttribute("roomimg4", list.get(1).getRoomimg2());
+			model.addAttribute("roomtype1", list.get(0).getRoomtype());
+			model.addAttribute("roomtype2", list.get(1).getRoomtype());
+			model.addAttribute("roomid", roomid);
+			model.addAttribute("list", list);
 			model.addAttribute("center", "write_qna");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "index";
+	}
+	
+	@RequestMapping("/qnasendimpl")
+	public String qnasendimpl(Model model, PostDTO qna) {
+		try {
+			postservice.register(qna);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "index";
 	}
+	
 
 }
