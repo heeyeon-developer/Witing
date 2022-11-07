@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.PlanMapper">
+	
+	<select id="select" parameterType="Integer" resultType="PlanDTO">
+		SELECT * FROM plan WHERE planid=#{planid}
+	</select>
+	<select id="selectall" resultType="PlanDTO">
+		SELECT * FROM plan
+	</select>
+	<insert id="insert" parameterType="PlanDTO">
+		INSERT INTO plan VALUES (NULL,#{accomid},#{planx},#{plany},#{idx},#{todo})
+	</insert>
+	<update id="update" parameterType="PlanDTO">
+		UPDATE plan SET accomid=#{accomid},planx=#{planx},plany=#{plany},idx=#{idx},todo=#{todo}
+		WHERE planid=#{planid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM plan WHERE planid=#{planid}
+	</delete>
+	<select id="plandetail" parameterType="Integer" resultType="PlanDTO">
+		SELECT * FROM plan pl
+		INNER JOIN accompany ac ON pl.accomid = ac.accomid
+		INNER JOIN cust cu ON ac.custid = cu.custid 
+		WHERE ac.accomid = #{accomid};
+	</select>
+	
+	
+	 
+</mapper>

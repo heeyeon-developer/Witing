@@ -4,6 +4,9 @@
  <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
   
 <script>
 $(document).ready(function(){
@@ -25,6 +28,12 @@ $(document).ready(function(){
 </script>
 
 <style>
+	#mypage_info > h2 {
+		font-family: 'Quicksand', sans-serif;
+	}
+	#mypage_info > h4 {
+		font-family: 'Quicksand', sans-serif;
+	}
 	
 </style>
 
@@ -73,7 +82,7 @@ $(document).ready(function(){
       <div data-toggle="modal" data-target="#myModal" class="col-md-2 d-flex" style="cursor:pointer;">
         <div class="align-self-stretch box p-4 text-center" style="background : white"> 
         <div class="icon d-flex align-items-center justify-content-center">
-         <span class="fa fa-map-marker"></span>
+         <span class="fa fa-user"></span>
        </div>
        <h3 class="mb-2">Information</h3>
      </div> 
@@ -82,7 +91,7 @@ $(document).ready(function(){
    <div class="col-md-2 d-flex" th:onclick="|location.href='@{/coupon(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
      <div class="align-self-stretch box p-4 text-center" style="background : white">
       <div class="icon d-flex align-items-center justify-content-center">
-       <span class="fa fa-phone"></span>
+       <span class="fa fa-ticket"></span>
      </div>
      <h3 class="mb-2">Coupon</h3>
    </div>
@@ -92,7 +101,7 @@ $(document).ready(function(){
  <div class="col-md-2 d-flex" th:onclick="|location.href='@{/like(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
    <div class="align-self-stretch box p-4 text-center" style="background : white">
     <div class="icon d-flex align-items-center justify-content-center">
-     <span class="fa fa-paper-plane"></span>
+     <span class="fa fa-heart"></span>
    </div>
    <h3 class="mb-2">Wishlist </h3>
  </div>
@@ -102,7 +111,7 @@ $(document).ready(function(){
 <div class="col-md-2 d-flex" th:onclick="|location.href='@{/reservation(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
  <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-globe"></span>
+   <span class="fa fa-bed"></span>
  </div>
  <h3 class="mb-2">Reservation</h3>
 </div>
@@ -112,7 +121,7 @@ $(document).ready(function(){
 <div class="col-md-2 d-flex" th:onclick="|location.href='@{/review(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
  <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-globe"></span>
+   <span class="fa fa-comment"></span>
  </div>
  <h3 class="mb-2">Review</h3>
 </div>
@@ -122,7 +131,7 @@ $(document).ready(function(){
 <div class="col-md-2 d-flex" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
  <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-globe"></span>
+   <span class="fa fa-question"></span>
  </div>
  <h3 class="mb-2">Q&A</h3>
 </div>
@@ -138,7 +147,7 @@ $(document).ready(function(){
       <div class="col-md-12 order-md-last d-flex">
        <form action="#" class="bg-light p-5 contact-form">
           
-          <div class="form-group">
+          <div id="mypage_info" class="form-group">
             <h2>안녕하세요 : )</h2>
             <h2 th:text = "${mypage.custname}+' 님'"></h2>
             <h4 th:text = "'보유포인트 : '+${mypage.point}+'P'"></h4>

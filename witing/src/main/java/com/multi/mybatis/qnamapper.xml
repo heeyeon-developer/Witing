@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM post
 	</select>
 	<insert id="insert" parameterType="PostDTO">
-		INSERT INTO post VALUES (NULL, #{custid}, #{adminid}, #{hotelid}, #{title}, #{text}, #{img}, #{rdate},#{kind},=#{star})
+		INSERT INTO post VALUES (NULL, #{custid}, null, #{hotelid}, #{title}, #{text}, null, NOW(),'quest',null)
 	</insert>
 	<update id="update" parameterType="PostDTO">
 		UPDATE hotel SET custid=#{custid},adminid=#{adminid},hotelid=#{hotelid}, title=#{title},

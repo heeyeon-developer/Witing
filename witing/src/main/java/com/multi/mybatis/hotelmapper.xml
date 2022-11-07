@@ -26,7 +26,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN city c ON h.cityid = c.cityid;
 	</select>
 	<select id="searchhotel" parameterType="Integer" resultType="HotelDTO">
-		SELECT * FROM hotel WHERE hotelid=#{hotelid}
+		SELECT * FROM hotel ho
+		INNER JOIN cate ca ON ho.cateid = ca.cateid
+		INNER JOIN city ci ON ho.cityid = ci.cityid
+		WHERE ho.cityid = #{cityid} AND ho.cateid = #{cateid}
 	</select>
 	
 	<select id="cityshotel" parameterType="Integer" resultType="HotelDTO">
