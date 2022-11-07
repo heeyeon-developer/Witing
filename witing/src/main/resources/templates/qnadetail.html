@@ -10,7 +10,7 @@ $(document).ready(function(){
 	$('#infoenter_btn').click(function(){
 			$('#infoenter_form').attr({
 				'method':'post',
-				'action':'[[@{/custdetail(custid=${qna.custid})}]]'
+				'action':'[[@{/custdetail(custid=${qnadetail.custid})}]]'
 			});
 			$('#infoenter_form').submit();
 		
@@ -25,6 +25,14 @@ $(document).ready(function(){
 </script>
 
 <style>
+	#td_text{
+		border-top: solid #BDBDBD 1px;
+		border-bottom: solid #BDBDBD 1px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		
+	}
+	
 </style>
 
 <!-- 개인정보 눌렀을 때 비밀번호 입력 모달 -->
@@ -59,7 +67,7 @@ $(document).ready(function(){
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a th:href="@{/mypage(custid=${qna.custid})}">My Page <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2">Q&A <i class="fa fa-chevron-right"></i></span></p>
+       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a th:href="@{/mypage(custid=${qnadetail.custid})}">My Page <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2">Q&A <i class="fa fa-chevron-right"></i></span></p>
        <h1 class="mb-0 bread">Q&A</h1>
      </div>
    </div>
@@ -118,7 +126,7 @@ $(document).ready(function(){
 </div>
 
 
-<div class="col-md-2 d-flex">
+<div class="col-md-2 d-flex" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
  <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
    <span class="fa fa-question"></span>
@@ -133,34 +141,42 @@ $(document).ready(function(){
 
 <section class="ftco-section contact-section ftco-no-pt">
   <div class="container">
-   <div class="row block-9">
-   <div class="col-md-12 order-md-last d-flex">
-       	<table class="table table-hover">
-		<colgroup>
-			<col style="width:12%">
-			<col style="width:50%">
-			<col style="width:15%">
-			<col style="width:23%">
-		</colgroup>
-		
-		<thead>
-		<tr id="tablehead">
-			<th>No</th>
-			<th style="text-align: center">Title</th>
-			<th style="text-align: right">Poster ID</th>
-			<th style="text-align: right">Post Date</th>
-		</tr>
-		</thead>
-		<tbody th:each=li:${list}>
-		<tr th:onclick="|location.href='@{/qnadetail(postid=${li.postid})}'|" style="cursor: pointer">
-			<td th:text="${li.postid}"></td>
-			<td th:text="${li.title}" style="text-align: center"></td>
-			<td th:text="${li.custid}" style="text-align: right"></td>
-			<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: right"></td>
-		</tr>
-		</tbody>
-	</table>
-        
+    <div class="row block-9">
+      <div class="col-md-12 order-md-last d-flex">
+       <div class=" p-6">
+       	<table class="container">
+       		<thead>
+       			<tr class="row">
+       				<th colspan="2" style="width:600px; padding-left:15px">
+       					<h3 style="width: 100%; padding-bottom: 15px">
+       						<strong th:text="${qnadetail.title}" style="width: 100%"></strong>
+       					</h3>
+       				</th>
+       				
+       			</tr>
+       			
+       			<tr>
+       				<th th:text="'작성자 : '+${qnadetail.custid}"></th>
+       				<th th:text="${#dates.format(qnadetail.rdate,'yyyy-MM-dd HH:mm')}" style="text-align : right; padding-right:20px"></th>
+       			</tr>
+       			<tr colspan="2">
+       				<th>&nbsp</th>
+       			</tr>
+       		</thead>
+       	
+       		<tbody>
+       			<tr>
+       				<td id="td_text" colspan="2" th:text="${qnadetail.text}+'아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아'" ></td>
+       			</tr>
+       		</tbody>
+       	
+       	</table>
+       	<div>
+       		<button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|"> 목록</button>
+       		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px"> 삭제</button>
+       	</div>
+   
+       </div>
       </div>
    </div>
  </div>

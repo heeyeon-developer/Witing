@@ -24,7 +24,7 @@
 <section class="ftco-section ftco-no-pt ftco-no-pb">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 ftco-animate py-md-5 mt-md-5">
+      <div class="col-lg-12 ftco-animate py-md-5 mt-md-5">
         <h3 class="mb-3" th:text="${hotelname}+' - '+${roomtype1}+', '+${roomtype2}" id="roomdetail">RoomType</h3>
         <p>
         
@@ -62,14 +62,14 @@
           <!-- <img th:src="'images/hotel/'+${li.roomimg1}" alt="" class="img-fluid">
           <img th:src="'images/hotel/'+${li.roomimg2}" alt="" class="img-fluid"> -->
         </p>
-        <p>세면도구, 샤워 시설, 목욕 가운, 비데, 화장실, 타월, 타일/대리석 바닥, TV, 슬리퍼, 냉장고, 전화기, 위성 채널, 난방 시설, 헤어드라이어, 전기 주전자, 모닝콜 서비스, 옷장, 지상층 전체 유닛, 엘리베이터로 위층 이동, 옷걸이, 화장지</p>
+        <p>�꽭硫대룄援�, �깶�썙 �떆�꽕, 紐⑹슃 媛��슫, 鍮꾨뜲, �솕�옣�떎, ���썡, ���씪/��由ъ꽍 諛붾떏, TV, �뒳由ы띁, �깋�옣怨�, �쟾�솕湲�, �쐞�꽦 梨꾨꼸, �궃諛� �떆�꽕, �뿤�뼱�뱶�씪�씠�뼱, �쟾湲� 二쇱쟾�옄, 紐⑤떇肄� �꽌鍮꾩뒪, �샆�옣, 吏��긽痢� �쟾泥� �쑀�떅, �뿕由щ쿋�씠�꽣濡� �쐞痢� �씠�룞, �샆嫄몄씠, �솕�옣吏�</p>
         
         <table class="table">
 		  <thead>
 		    <tr>
-		      <th scope="col">침대</th>
-		      <th scope="col">기준 인원(최대 인원)</th>
-		      <th scope="col">가격(인당 추가가격)</th>
+		      <th scope="col">移⑤�</th>
+		      <th scope="col">湲곗� �씤�썝(理쒕� �씤�썝)</th>
+		      <th scope="col">媛�寃�(�씤�떦 異붽�媛�寃�)</th>
 		      <th scope="col"></th>
 		    </tr>
 		  </thead>
@@ -78,55 +78,14 @@
 		      <th scope="row" th:text="${li.bedtype}"></th>
 		      <td th:text="${li.standard}+'('+${li.max}+')'">Mark</td>
 		      <td th:text="'&#8361; '+${li.price}+' (&#8361; '+${li.addprice}+') '"></td>
-		      <td><button type="button" class="btn btn-dark">예약하기</button></td>
+		      <td><button type="button" class="btn btn-dark">�삁�빟�븯湲�</button></td>
 		    </tr>
 		  </tbody>
 		</table>
       </div> <!-- .col-md-8 -->
       
       
-      <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
-        <div class="sidebar-box ftco-animate">
-          <h3 style="display: inline-block">Review</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black"></span>
-          <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" th:style="'background-image:url('+ @{'images/hotel/'+${hotelimg1}} +');'"></a>
-            <div class="text">
-              <h3 class="heading"><a href="#">Review title</a></h3>
-              <p>Review text...</p>
-              <div class="meta">
-                <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
-                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        
-       <div class="sidebar-box ftco-animate">
-          <h3 style="display: inline-block;">QnA</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black; cursor: pointer; " th:onclick="|location.href='@{/write_qna(custid=${session.logincust.custid})}'|"></span>
-          <div class="block-21 mb-4 d-flex">
-            <div class="text">
-              <h5 class="heading"><a href="#">QnA title/text</a></h5>
-              <div class="meta">
-                <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
-                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-
-        <div class="sidebar-box ftco-animate">
-          <h3>Recommend</h3>
-          <div class="tagcloud" th:each="city:${citylist}" style="display:inline-block">
-            <a th:href="@{/cityshotel(cityid=${city.cityid})}" class="tag-cloud-link" th:text="${city.name}">서울</a>
-            
-          </div>
-        </div>
-        
-      </div>
+      
 
     </div>
   </div>

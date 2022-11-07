@@ -3,7 +3,13 @@
 <script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
 <script>
 $(document).ready(function(){
+	
+	
 	$('#custupdate_btn').click(function(){
+		if($('#custpwd').val() != $('#custpwd2').val()){
+			alert("비밀번호 확인이 일치하지않습니다. 다시 확인해주세요.");
+			return;
+		}
 		var c = confirm('수정하시겠습니까?');
 		if(c == true){
 			$('#custupdate_form').attr({
@@ -12,6 +18,20 @@ $(document).ready(function(){
 			});
 			$('#custupdate_form').submit();
 			alert("정상적으로 수정되었습니다 : )");
+		}
+	});
+	
+	$("#pwdcheck").hide();
+	$("#pwdwrong").hide();
+	$('#custpwd2').keyup(function(){
+		var pwd = $('#custpwd').val();
+		var pwd2 = $('#custpwd2').val();
+		if(pwd == pwd2){
+			$("#pwdcheck").show();
+			$("#pwdwrong").hide();
+		}else{
+			$("#pwdcheck").hide();
+			$("#pwdwrong").show();
 		}
 	});
 	
@@ -51,7 +71,6 @@ function sample6_execDaumPostcode() {
                 if(extraAddr !== ''){
                     extraAddr = ' (' + extraAddr + ')';
                 }
-                
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
@@ -77,7 +96,7 @@ function sample6_execDaumPostcode() {
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/mypage">My Page <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2">Information <i class="fa fa-chevron-right"></i></span></p>
+       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a th:href="@{/mypage(custid=${custdetail.custid})}">My Page <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2">Information <i class="fa fa-chevron-right"></i></span></p>
        <h1 class="mb-0 bread">Information</h1>
      </div>
    </div>
@@ -92,7 +111,7 @@ function sample6_execDaumPostcode() {
       <div class="col-md-2 d-flex">
         <div class="align-self-stretch box p-4 text-center" style="background : white"> 
         <div class="icon d-flex align-items-center justify-content-center">
-         <span class="fa fa-map-marker"></span>
+         <span class="fa fa-user"></span>
        </div>
        <h3 class="mb-2">Information</h3>
      </div> 
@@ -101,7 +120,7 @@ function sample6_execDaumPostcode() {
    <div class="col-md-2 d-flex" th:onclick="|location.href='@{/coupon(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
      <div class="align-self-stretch box p-4 text-center" style="background : white">
       <div class="icon d-flex align-items-center justify-content-center">
-       <span class="fa fa-phone"></span>
+       <span class="fa fa-ticket"></span>
      </div>
      <h3 class="mb-2">Coupon</h3>
    </div>
@@ -111,7 +130,7 @@ function sample6_execDaumPostcode() {
  <div class="col-md-2 d-flex" th:onclick="|location.href='@{/like(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
    <div class="align-self-stretch box p-4 text-center" style="background : white">
     <div class="icon d-flex align-items-center justify-content-center">
-     <span class="fa fa-paper-plane"></span>
+     <span class="fa fa-heart"></span>
    </div>
    <h3 class="mb-2">Wishlist </h3>
  </div>
@@ -121,7 +140,7 @@ function sample6_execDaumPostcode() {
 <div class="col-md-2 d-flex" th:onclick="|location.href='@{/reservation(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
  <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-globe"></span>
+   <span class="fa fa-bed"></span>
  </div>
  <h3 class="mb-2">Reservation</h3>
 </div>
@@ -131,7 +150,7 @@ function sample6_execDaumPostcode() {
 <div class="col-md-2 d-flex" th:onclick="|location.href='@{/review(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
  <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-globe"></span>
+   <span class="fa fa-comment"></span>
  </div>
  <h3 class="mb-2">Review</h3>
 </div>
@@ -141,7 +160,7 @@ function sample6_execDaumPostcode() {
 <div class="col-md-2 d-flex" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
  <div class="align-self-stretch box p-4 text-center" style="background : white">
   <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-globe"></span>
+   <span class="fa fa-question"></span>
  </div>
  <h3 class="mb-2">Q&A</h3>
 </div>
@@ -165,11 +184,11 @@ function sample6_execDaumPostcode() {
             <input type="text" class="form-control" id="custid" th:value="${custdetail.custid}" readonly="readonly"name="custid">
           </div>
           <div class="form-group">
-			<label class="control-label col-sm-2" for="custpwd">PWD:</label>
+			<label class="control-label col-sm-2" for="custpwd">PWD</label>
 			<input type="password" class="form-control" id="custpwd" th:value="${custdetail.custpwd}" placeholder="Enter Password" required="required" name="custpwd">
 		  </div>
 		  <div class="form-group">
-			<label class="control-label col-sm-2" for="custpwd2">PWD Check:</label>
+			<label class="control-label col-sm-2" for="custpwd2">PWD&nbspCheck</label><span id="pwdcheck" style="padding-left: 30px"><img src="images/check.png" style="width: 20px; height: 20px"></span><span id="pwdwrong"  style="padding-left: 30px"><img src="images/wrong.png" style="width: 20px; height: 20px"></span>
 		    <input type="password" class="form-control" id="custpwd2" th:value="${custdetail.custpwd}" placeholder="Check password" required="required">
 		  </div>
           <div class="form-group">
@@ -197,7 +216,7 @@ function sample6_execDaumPostcode() {
           <div class="form-group">
           	<label class="control-label col-sm-2" for="addr" >Address</label><br>
           	<input type="number" id="sample6_postcode" class="form-control" th:value="${custdetail.zipcode}" style="width: 30%; display: inline-block" name="zipcode">
-			<input type="btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 20%; display: inline-block; background-color: lightgray; border: none; border-radius: 2px; height: 40px">
+			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 25%; display: inline-block; background-color: lightgray; border: none; border-radius: 2px; height: 40px">
 			<input type="text" id="sample6_address" class="form-control" th:value="${custdetail.addr}" name="addr">
 			<input type="text" id="sample6_detailAddress" class="form-control" th:value="${custdetail.addrdetail}" style="display: inline-block" name="addrdetail">
           </div>
