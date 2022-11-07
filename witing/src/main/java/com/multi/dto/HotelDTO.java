@@ -23,5 +23,6 @@ public class HotelDTO {
 	
 	private String name;
 	private String img;
+	private String catename;
  
 }

@@ -40,9 +40,12 @@ public class HotelController {
 	public String main(Model model) {
 		List<HotelDTO> list = null;
 		List<CateDTO> cate = null;
+		List<CityDTO> city = null;
 		try {
 			list = service.hotelcity();
 			cate = cate_service.getcate();
+			city = city_service.getall();
+			model.addAttribute("city", city);
 			model.addAttribute("list", list);
 			model.addAttribute("cate", cate);
 			model.addAttribute("center", "hotel");
@@ -67,15 +70,22 @@ public class HotelController {
 	}
 	 
 	@RequestMapping("/searchimpl")
-	public String searchimpl(Model model, int hotelid) {
-		List<HotelDTO> list = null;
+	public String searchimpl(Model model, Integer cityid, Integer cateid) {
+		List<HotelDTO> search = null;
+		List<CateDTO> cate = null;
+		List<CityDTO> city = null;
 		try {
-			list = mapper.searchhotel(hotelid);
-			model.addAttribute("list", list);
+			search = service.searchhotel(cityid, cateid);
+			cate = cate_service.getcate();
+			city = city_service.getall();
+			model.addAttribute("city", city);
+			model.addAttribute("cate", cate);
+			model.addAttribute("search", search);
+			model.addAttribute("center", "searchimpl");
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		model.addAttribute("center", "hotel");
 		return "index";
 	}
 
