@@ -11,7 +11,10 @@
 
 #a_title{
 	margin-top:-60px;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
+}
+#user_icon{
+	color: #f15d30;
 }
 </style>
 
@@ -60,12 +63,12 @@
 		</tbody>
 	</table>
 	
-	<a th:href="@{/writeaccom}" th:if="${session.logincust != null}" class="btn btn-primary" id="writebtn">글 작성하기</a>
+	<a th:href="@{/writeaccom}" th:if="${session.logincust != null}" class="btn btn-primary" id="writebtn">글 작성하기</a><br><br>
 	
-    <!-- <div class="row d-flex">
+    <div class="row d-flex">
       <div class="col-md-4 d-flex ftco-animate" th:each=li:${list}>
        <div class="blog-entry justify-content-end">
-        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
+        <a th:href="@{/plan(accomid=${li.accomid})}" class="block-20" style="background-image: url('images/image_2.jpg');">
         </a>
         <div class="text">
          <div class="d-flex align-items-center mb-4 topp">
@@ -77,14 +80,14 @@
            <span class="mos" th:text="' '+${#calendars.monthName(li.traveltime)}">September</span>
          </div>
        </div>
-       <h3 class="heading"><a class="fa fa-plane" href="#" th:text="' '+${li.title}">Most Popular Place In This World</a></h3>
-       <p class="fa fa-user-circle-o" th:text="' '+${li.custid}">id</p>
-       <p th:text="${li.text}+' A small river named Duden flows.'"></p>
+       <h3 class="heading"><a class="fa fa-plane" th:href="@{/plan(accomid=${li.accomid})}" th:text="' '+${li.title}" style="font-weight: bold;">Most Popular Place In This World</a></h3>
+       <p class="fa fa-user-circle-o" id="user_icon"><span th:text="' '+${li.custid}" style="color: black;"></span></p>
+       <p style="color: #939393;" th:text="${li.text}+' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'"></p>
        <p><a href="#" class="btn btn-primary">Read more</a></p>
      </div>
    </div>
  </div>
-</div> -->
+</div>
 <div class="row mt-5">
   <div class="col text-center">
     <div class="block-27">
