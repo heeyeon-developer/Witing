@@ -77,7 +77,7 @@
 		      <th scope="row" th:text="${li.bedtype}"></th>
 		      <td th:text="${li.standard}+'('+${li.max}+')'">Mark</td>
 		      <td th:text="'&#8361; '+${li.price}+' (&#8361; '+${li.addprice}+') '"></td>
-		      <td><button type="button" class="btn btn-dark">예약하기</button></td>
+		      <td><button th:if="${session.logincust} != null" th:onclick="|location.href='@{/reservation(custid=${session.logincust.custid},roomid=${li.roomid})}'|"type="button" class="btn btn-dark">예약하기</button></td>
 		    </tr>
 		  </tbody>
 		</table>

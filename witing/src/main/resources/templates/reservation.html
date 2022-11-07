@@ -1,0 +1,72 @@
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/ReservationBackground.jpeg');">
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Hotel</span>
+          <i class="fa fa-chevron-right"></i></a></span> <span>Room Details</span><i class="fa fa-chevron-right"></i></a></span> <span>Reservation</span></p>
+       <h1 class="mb-0 bread">Reservation</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+<section class="ftco-section contact-section ftco-no-pt">
+
+  <div class="container">
+    <div class="row block-9 justify-content-center">
+    	<h2><br>예약을 진행해주세요~~~~ :)</h2>
+      <div class="col-md-7 order-md-last d-flex">
+        <form id="registerform" class="p-5 contact-form">
+          <div class="form-group">
+            <input th:text="${roomid}" id="custname" type="text" class="form-control" th:placeholder="${custid}" name="custname">
+          </div>
+          <div class="form-group">
+            <div class="form-field">
+				<input id="birth" type="text" class="form-control checkin_date col-md-5" placeholder="start date" name="birth" style="display:inline-block">
+				<input id="birth" type="text" class="form-control checkin_date col-md-5" placeholder="end date" name="birth" style="display:inline-block">
+		  	</div>
+          </div>
+          <div class="form-group">
+            <div class="form-group">
+            <div class="form-field">
+				<div class="select-wrap">
+					<select name="country" id="people" class="form-control">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select>
+				</div> 
+			</div>
+          </div>
+            <input id="email" type="text" class="form-control" placeholder="이메일" name="email" style="width:49%; display:inline-block;">
+          </div>
+          <div class="form-group">
+          	<input type="number" id="zipcode" placeholder="우편번호" class="form-control" name="zipcode" style="width: 30%; display: inline-block">
+			<input class="btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="margin-left:3%; width: 25%; display: inline-block; background-color: lightgray">
+			<input type="text" id="addr" placeholder="주소" class="form-control" name="addr">
+			<input type="text" id="addrdetail" placeholder="상세주소" class="form-control" name="addrdetail">
+          </div>  
+          <div class="form-group">
+            <div class="form-field">
+				<div class="select-wrap">
+					<select name="country" id="country" class="form-control">
+						<option value="Korea">Korea</option>
+						<option value="USA">USA</option>
+					</select>
+				</div> 
+			</div>
+          </div>
+          <div class="form-group justify-content-center">
+            <input id="registerbtn" value="Register" class="btn btn-primary justify-content-center" style="display:inline-block; float:right;">
+          </div>
+        </form>
+        
+      </div>
+
+   </div>
+ </div>
+</section>
