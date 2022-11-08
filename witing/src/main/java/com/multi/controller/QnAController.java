@@ -96,7 +96,7 @@ public class QnAController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "index";
+		return "redirect:room?hotelid="+qna.getHotelid();
 	}
 	
 

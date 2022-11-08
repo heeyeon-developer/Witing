@@ -56,13 +56,16 @@ public class MainController {
 	@RequestMapping("/custdetail")
 	public String custdetail(Model model, String custid, String custpwd) {
 		System.out.println(custpwd);
+		System.out.println(custid);
 		try {
 			CustDTO cust = custservice.get(custid);
+			System.out.println(cust);
 			if(custpwd.equals(cust.getCustpwd())) {
 				model.addAttribute("custdetail", cust);
 				model.addAttribute("center","custdetail");
 			
 			}else {
+				model.addAttribute("mypage", cust);
 				model.addAttribute("status", "0");
 				model.addAttribute("center", "mypage");
 			}

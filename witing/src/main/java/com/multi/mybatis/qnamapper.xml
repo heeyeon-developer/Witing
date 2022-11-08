@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 
 	<select id="myqna" parameterType="String" resultType="PostDTO">
 		SELECT postid, custid, title, rdate FROM post
-		WHERE custid=#{custid};
+		WHERE kind='quest' AND custid=#{custid};
 	</select>
 	
 	<select id="qnalist5" parameterType="Integer" resultType="PostDTO">
