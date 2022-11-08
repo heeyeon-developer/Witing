@@ -31,6 +31,11 @@
 	font-weight: bold;
 }
 
+#add_icon, #minus_icon, #minus_icon2{
+	font-size: 25px;
+	color: #f15d30;
+	padding-top: 10px;
+}
 </style>
 
 <script>
@@ -45,13 +50,14 @@
 	});
 	
 	
+	
 });
  */
+
 </script>
 
 
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_2.jpg');">
-  <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
@@ -64,92 +70,101 @@
 
 <section class="ftco-section">
 <div class="container">
-                <div class="checkout_details_area mt-50 clearfix" id="writeaccom">
+   <div class="checkout_details_area mt-50 clearfix" id="writeaccom">
+       <div class="cart-title">
+           <h3 id="w_title">동행글 작성하기</h3>
+       </div>
 
-                    <div class="cart-title">
-                        <h3 id="w_title">동행글 작성하기</h3>
+          <form id="accom_form" method="post">
+              <div class="row">
+
+                  <div class="col-6 mb-3">
+                  	 <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요.">
+                  	 <div class="col-lg d-flex"></div>
+                  </div>
+                  <div class="col-2 mb-3">
+                  	 <div class="form-field">
+                   	 <input type="number" class="form-control" id="cnt" placeholder="동행 인원">
+                   	 <div class="col-lg d-flex"></div>
+					 </div>
+                  </div>
+				  <div class="col-3 mb-3">
+				     <div class="form-field">
+				      <!-- <div class="icon"><span class="fa fa-calendar"></span></div> -->
+				      <input type="text" class="form-control checkin_date" placeholder="Check In Date" id="traveltime">
+				     </div>
+				   </div>
+				  <div class="col-2 mb-3">
+					<input type="number" class="form-control" id="idx" value="1" readonly="readonly">
+					<div class="col-lg d-flex"></div>
+                  </div>
+				  <div class="col-4 mb-3">
+					<div class="form-field2">
+						<input type="text" class="form-control" id="planname" placeholder="장소">
                     </div>
+					<div class="col-lg d-flex"></div>
+                  </div>
+                  <div class="col-5 mb-3">
+					  <div class="form-field3">
+						<input type="text" class="form-control" id="todo" placeholder="일정">
+					  </div>
+					  <div class="col-lg d-flex"></div>
+				  </div>
+                   
+                  <a href="#"><i class="fa fa-plus-circle" id="add_icon"></i></a>
+             <!-- </div> -->
+                    
+                    
+  <!-- <div class="col-2 mb-3">
+                    	<input type="number" class="form-control" id="idx2" value="2" readonly="readonly">
+                    	<div class="col-lg d-flex">
+</div>
+                    </div>
+  <div class="col-4 mb-3">
+  	<div class="form-field2">
+                    	  <input type="text" class="form-control" id="planname2" placeholder="장소">
+                    	</div>
+                    	<div class="col-lg d-flex">
+  </div>
+                    </div>
+                    <div class="col-5 mb-3">
+                    	<div class="form-field3">
+                    	  <input type="text" class="form-control" id="todo2" placeholder="일정">
+                    	  </div>
+                    	<div class="col-lg d-flex">
+  </div>
+                    </div> -->
+                  
 
-                    <form id="accom_form" method="post">
-                        <div class="row">
-                            <div class="col-8 mb-3">
-                            	<div id="itemid" th:text="${itemid}" style="display:none"></div>
-                            	<input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요.">
-                            	<div class="col-lg d-flex">
-							   </div>
-                            </div>
-						    <div class="col-3 mb-3">
-						       <div class="form-field">
-						         <!-- <div class="icon"><span class="fa fa-calendar"></span></div> -->
-						         <input type="text" class="form-control checkin_date" placeholder="Check In Date" id="traveltime">
-						       </div>
-						    </div>
-						    <div class="col-2 mb-3">
-                            	<input type="number" class="form-control" id="idx" placeholder="순서 1">
-                            	<div class="col-lg d-flex">
-							 </div>
-                            </div>
-						    <div class="col-4 mb-3">
-						    	<div class="form-field2">
-                            	  <input type="text" class="form-control" id="planname" placeholder="장소">
-                            	</div>
-                            	<div class="col-lg d-flex">
-							   </div>
-                            </div>
-                            <div class="col-5 mb-3">
-                            	<div class="form-field3">
-                            	  <input type="text" class="form-control" id="todo" placeholder="일정">
-                            	  </div>
-                            	<div class="col-lg d-flex">
-							   </div>
-                            </div>
-                              
-						    <div class="col-2 mb-3">
-                            	<input type="number" class="form-control" id="idx_2" placeholder="순서 2">
-                            	<div class="col-lg d-flex">
-							 </div>
-                            </div>
-						    <div class="col-4 mb-3">
-						    	<div class="form-field2">
-                            	  <input type="text" class="form-control" id="planname_2" placeholder="장소">
-                            	</div>
-                            	<div class="col-lg d-flex">
-							   </div>
-                            </div>
-                            <div class="col-5 mb-3">
-                            	<div class="form-field3">
-                            	  <input type="text" class="form-control" id="todo_2" placeholder="일정">
-                            	  </div>
-                            	<div class="col-lg d-flex">
-							   </div>
-                            </div>
-							   
-						    <div class="col-2 mb-3">
-                            	<input type="number" class="form-control" id="idx_3" placeholder="순서 3">
-                            	<div class="col-lg d-flex">
-							 </div>
-                            </div>
-						    <div class="col-4 mb-3">
-						    	<div class="form-field2">
-                            	  <input type="text" class="form-control" id="planname_3" placeholder="장소">
-                            	</div>
-                            	<div class="col-lg d-flex">
-							   </div>
-                            </div>
-                            <div class="col-5 mb-3">
-                            	<div class="form-field3">
-                            	  <input type="text" class="form-control" id="todo_3" placeholder="일정">
-                            	  </div>
-                            	<div class="col-lg d-flex">
-							   </div>
-                            </div>
-                            
-                            <div class="col-11 mb-3">
-                                <textarea id="accom_text" name="comment" class="form-control w-100" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
-                            </div>
-                        </div>
-                    </form>
-                    <button id="writeaccom_btn" type="button" class="btn btn-primary">등록하기</button>
-                </div>
+					<i class="fa fa-minus-circle" id="minus_icon"></i>
+
+
+ <!-- <div class="col-2 mb-3">
+                    	<input type="number" class="form-control" id="idx3" value="3" readonly="readonly">
+                    	<div class="col-lg d-flex">
+</div>
+                    </div>
+  <div class="col-4 mb-3">
+  	<div class="form-field2">
+                    	  <input type="text" class="form-control" id="planname3" placeholder="장소">
+                    	</div>
+                    	<div class="col-lg d-flex">
+  </div>
+                    </div>
+                    <div class="col-5 mb-3">
+                    	<div class="form-field3">
+                    	  <input type="text" class="form-control" id="todo3" placeholder="일정">
+                    	  </div>
+                    	<div class="col-lg d-flex">
+  </div>
+                    </div> -->
+                  
+	                  <div class="col-11 mb-3">
+	                      <textarea id="text" name="comment" class="form-control w-100" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
+	                  </div>
+			</div>
+          </form>
+          <button id="writeaccom_btn" type="button" class="btn btn-primary">등록하기</button>
+      </div>
 </div>
 </section>
