@@ -28,6 +28,7 @@ public class PlanController {
 			list = service.plandetail(accomid);
 			model.addAttribute("list", list);
 			model.addAttribute("center", "plan");
+			
 			model.addAttribute("title", list.get(0).getTitle());
 			model.addAttribute("traveltime", list.get(0).getTraveltime());
 			model.addAttribute("cnt", list.get(0).getCnt());
@@ -36,11 +37,15 @@ public class PlanController {
 			model.addAttribute("custid", list.get(0).getCustid());
 			model.addAttribute("birth", list.get(0).getBirth());
 			model.addAttribute("text", list.get(0).getText());
+			
+			/*
 			model.addAttribute("planname", list.get(0).getPlanname());
 			model.addAttribute("planname1", list.get(1).getPlanname());
 			model.addAttribute("planname2", list.get(2).getPlanname());
 			model.addAttribute("todo", list.get(0).getTodo());
-			model.addAttribute("todo1", list.get(1).getTodo());
+			model.addAttribute("todo1", list.get(1).getTodo());*/
+//			for(PlanDTO i : list)
+//				System.out.println(i);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
