@@ -54,10 +54,14 @@ function addlike(cust_id, hotel_id){
                 $("#likecnt").empty();
                 $("#likecnt").append(jdata.likecnt);
             } */
-			
-			var id = '#heartbtn'+data;
-		    $(id).attr('class','fa fa-heart');
-			alert("likelist에 담겼습니다.");
+            var id = '#heartbtn'+data[0];
+			if(data[1] == -1){
+				$(id).attr('class','fa fa-heart-o');
+				alert("likelist에서 삭제되었습니다.");
+			}else{
+			    $(id).attr('class','fa fa-heart');
+				alert("likelist에 담겼습니다.");
+			}
 		}
 		
 		/* useEffect(() => {

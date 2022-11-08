@@ -49,13 +49,31 @@ public class AjaxController {
 	@RequestMapping("/addlike")
 	public Object addlike(String custid, int hotelid) {
 		LikeDTO like = new LikeDTO(0,hotelid,custid,0,"","","","","",0,"");
+		int[] result = {hotelid,0};
+		int likeid = 0;
 		try {
-			like_service.register(like);
+			//고객의 likelist불러오기
+			List<LikeDTO> list = like_service.likehotel(custid);
+			boolean check = false;
+			
+			for(LikeDTO h : list) {
+				if(hotelid == h.getHotelid()) {
+					check = true;
+					likeid = h.getLikeid();//삭제시 필요한 고객의 likeid 가져오기
+					break;
+				}
+			}
+			if(check) {//이미 like에 담겨있다면 삭제
+				like_service.remove(likeid);
+				result[1] = -1;
+			}else {//담겨있지 않다면 추가
+				like_service.register(like);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return hotelid;
+		return result;
 	}
 	
 	@RequestMapping("/likehearts")

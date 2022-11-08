@@ -19,6 +19,7 @@ public class ReservationDTO {
 	private Integer reservid;
 	private Integer roomid;
 	private String custid;
+	private Integer people;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date sdate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
