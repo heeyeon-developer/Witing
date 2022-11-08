@@ -167,11 +167,10 @@ $(document).ready(function(){
         	<i class="fa fa-users" id="user"> <p th:text="|모집인원 : ${cnt}명|" id="cnt"></p></i>
         	<p></p>
         </div>
-        
-        <i class="fa fa-check" id="check"><span th:text="| ${planname} ${todo}|" id="plan"></span></i><br>
-        <i class="fa fa-check" id="check"><span th:text="| ${planname1} ${todo1}|" id="plan"></span></i><br>
+        <div th:each="todo:${list}">
+        <i class="fa fa-check" id="check"><span th:text="| ${todo.planname} : ${todo.todo}|" th:id="|plan+${todo.idx}"></span></i><br>
+        </div>
         <br><p th:text="${text}" style="color:black;"></p>
-        
         
         <button id="p_one">PLAN1</button>
 		<button id="p_two">PLAN2</button>
