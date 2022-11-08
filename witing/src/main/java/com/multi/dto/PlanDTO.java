@@ -20,12 +20,8 @@ public class PlanDTO {
 	private float plany;
 	private int idx;
 	private String todo;
-	private String todo1;
-	private String todo2;
-	
+
 	private String planname;
-	private String planname1;
-	private String planname2;
 	private String custid;
 	private String title;
 	private String text;

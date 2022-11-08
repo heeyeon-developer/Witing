@@ -21,8 +21,7 @@ public class PlanController {
 	
 	@RequestMapping("/plan")
 	public String main(Model model, int accomid, String title, Date traveltime, Integer cnt, String gender,
-			String country, String custid, Date birth, String text, String planname, String planname1,
-			String planname2, String todo, String todo1, String todo2) {
+			String country, String custid, Date birth, String text, String planname, String todo) {
 		List<PlanDTO> list = null;
 		try {
 			list = service.plandetail(accomid);
