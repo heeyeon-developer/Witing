@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.dto.CustDTO;
 import com.multi.dto.LikeDTO;
+import com.multi.service.CustService;
 import com.multi.service.LikeService;
 
 @Controller
@@ -16,11 +18,16 @@ public class LikeController {
 	@Autowired
 	LikeService service;
 	
+	@Autowired
+	CustService custservice;
+	
 	@RequestMapping("/like")
 	public String main(Model model, String custid) {
 		List<LikeDTO> list = null;
 		try {
+			CustDTO cust = custservice.get(custid);
 			list = service.likehotel(custid);
+			model.addAttribute("like", cust);
 			model.addAttribute("list", list);
 			model.addAttribute("center", "like");
 		} catch (Exception e) {

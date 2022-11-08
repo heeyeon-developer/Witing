@@ -1,8 +1,6 @@
 
 <style>
-#roomdetail{
-	margin-top: -50px;
-}
+
 
 .mb-3{
 	font-weight: bold;
@@ -104,10 +102,19 @@
         
         
        <div class="sidebar-box ftco-animate">
-          <h3 style="display: inline-block;">QnA</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black; cursor: pointer; " th:onclick="|location.href='@{/write_qna(hotelid=${list[0].hotelid})}'|"></span>
+          <h3 style="display: inline-block;">QnA</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black; cursor: pointer; " th:onclick="|location.href='@{/writeqna(hotelid=${list[0].hotelid})}'|"></span>
           <div class="block-21 mb-4 d-flex">
-            <div class="text">
-              <h5 class="heading"><a href="#">QnA title/text</a></h5>
+            <div class="text" style="width: 329px">
+              
+              <table>
+              	<tbody th:each=li:${qnalist5}>
+				<tr style="cursor: pointer; color: gray">
+				<ul style="padding-left: 20px">
+					<li th:text="${li.title}" ><td th:text="${li.title}" style="text-align: left"></td></li>
+				</ul>
+				</tr>
+				</tbody>
+              </table>
               <div class="meta">
                 <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
                 <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>

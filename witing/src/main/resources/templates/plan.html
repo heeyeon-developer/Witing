@@ -1,8 +1,4 @@
 <style>
-#plan_title{
-	margin-top: -50px;
-}
-
 .mb-3{
 	font-weight: bold;
 }
@@ -55,8 +51,16 @@
 </style>
 
 <script>
-var lat = 37.5276891;
-var lng = 127.051432;
+$(document).ready(function(){
+	$('#donglechat').hide();
+	
+	$('#accom_btn').click(function(){
+		$('#donglechat').show();
+	})
+});
+
+var lat = 37.5666805;
+var lng = 126.9784147;
 var map;
 //초기 좌표
 
@@ -173,7 +177,7 @@ $(document).ready(function(){
         	<p></p>
         </div>
         <div th:each="todo:${list}">
-        <i class="fa fa-check" id="check"><span th:text="| ${todo.planname} : ${todo.todo}|" th:id="|plan+${todo.idx}"></span></i><br>
+        <i class="fa fa-check" id="check"><span th:text="| ${todo.planname} : ${todo.todo}|" th:id="|plan+${todo.idx}" style="color:black;"></span></i><br>
         </div>
         <br><p th:text="${text}" style="color:black;"></p>
         
@@ -203,6 +207,8 @@ $(document).ready(function(){
           </div>
           <a href="#" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">동행 신청하기</a><br><br>
         </div>
+        
+        <div id="donglechat"><iframe src="https://service.dongledongle.com/bdb97" frameborder="0" width="100%" height="500"></iframe></div>
         
         
        <!-- <div class="sidebar-box ftco-animate">

@@ -1,8 +1,7 @@
 
 <style>
 #writebtn{
-	margin-top: -30px;
-	margin-left: 90%;
+	margin-top: -15px;
 }
 
 .two{
@@ -10,7 +9,6 @@
 }
 
 #a_title{
-	margin-top:-60px;
 	margin-bottom: 30px;
 }
 #user_icon{
@@ -26,6 +24,9 @@
 }
 #tablelist, #photolist{
 	color: gray;
+}
+#tablelist:focus, #photolist:focus{
+	color: #f15d30;
 }
 </style>
 
@@ -56,22 +57,10 @@ $(document).ready(function(){
 		$('#photo_list').show();
 		$('#list_table').hide();
 	})
+	
+	
 });
 
-var imgArray= new Array();
-	imgArray[0]="image_1.jpg";  //사진
-	imgArray[1]="image_2.jpg"; //사진
-	imgArray[2]="image_3.jpg";    //사진
-	imgArray[3]="image_4.jpg";    //사진
-	imgArray[4]="image_5.jpg";    //사진
-	imgArray[5]="image_6.jpg";    //사진
-	
-
-function showImage() {
-	    var imgNum=Math.round(Math.random()*3);
-	    var objImg=document.getElementById("introImg");
-	    objImg.src=imgArray[imgNum];
-}
 </script>
 
 
@@ -79,7 +68,6 @@ function showImage() {
  <!-- END nav -->
  
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_2.jpg');">
-  <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
@@ -92,9 +80,9 @@ function showImage() {
 
 <section class="ftco-section">
   <div class="container">
-  	<div id="list_icon">
-	  	<span><a href="#" class="fa fa-list" onclick="tablelist()" id="tablelist"></a></span>
-	  	<span><a href="#" class="fa fa-file-image-o" onclick="photolist()" id="photolist"></a></span>
+  	<div id="list_icon" onclick="listicon">
+	  	<span><a href="#" class="fa fa-list" id="tablelist" onclick="tablelist"></a></span>
+	  	<span><a href="#" class="fa fa-file-image-o" id="photolist" onclick="photolist"></a></span>
   	</div>
 	<h2 id="a_title">Accompany List</h2>
 	<table class="table table-hover" id="list_table">
@@ -129,7 +117,7 @@ function showImage() {
     <div class="row d-flex">
       <div class="col-md-4 d-flex ftco-animate" th:each=li:${list}>
        <div class="blog-entry justify-content-end">
-        <a th:href="@{/plan(accomid=${li.accomid})}" class="block-20" style="background-image: url('images/image_2.jpg');">
+        <a th:href="@{/plan(accomid=${li.accomid})}" class="block-20" th:style="|background-image: url('images/image_${li.accomid}.jpg');|">
         </a>
         <div class="text">
          <div class="d-flex align-items-center mb-4 topp">

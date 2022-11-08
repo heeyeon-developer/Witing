@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.dto.CateDTO;
 import com.multi.dto.CityDTO;
 import com.multi.dto.HotelDTO;
+import com.multi.dto.PostDTO;
 import com.multi.dto.RoomDTO;
 import com.multi.mapper.CateMapper;
 import com.multi.mapper.HotelMapper;
 import com.multi.service.CityService;
 import com.multi.service.HotelService;
+import com.multi.service.PostService;
 import com.multi.service.RoomService;
 
 @Controller
@@ -34,6 +36,9 @@ public class HotelController {
 	
 	@Autowired
 	CateMapper cate_service;
+	
+	@Autowired
+	PostService post_service;
 	
 	
 	@RequestMapping("/hotel")
@@ -96,9 +101,11 @@ public class HotelController {
 			String roomtype1,String roomtype2) {
 		List<RoomDTO> list = null;
 		List<CityDTO> city = null;
+		List<PostDTO> post = null;
 		try {
 			list = room_service.roomall(hotelid);
 			city = city_service.getall();
+			post = post_service.qnalist5(hotelid);
 			model.addAttribute("citylist", city);
 			model.addAttribute("hotelname", list.get(0).getHotelname());
 			model.addAttribute("hotelimg1", list.get(0).getHotelimg1());
@@ -110,6 +117,7 @@ public class HotelController {
 			model.addAttribute("roomtype2", list.get(1).getRoomtype());
 			model.addAttribute("roomid", roomid);
 			model.addAttribute("list", list);
+			model.addAttribute("qnalist5", post);
 			model.addAttribute("center", "room");
 		} catch (Exception e) {
 			e.printStackTrace();
