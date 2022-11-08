@@ -57,8 +57,8 @@ public class QnAController {
 		return "index";
 	}
 	
-	@RequestMapping("/write_qna")
-	public String write_qna(Model model,Integer hotelid,Integer roomid,String hotelname,
+	@RequestMapping("/writeqna")
+	public String writeqna(Model model,Integer hotelid,Integer roomid,String hotelname,
 			String roomimg1,String roomimg2,String roomimg3,String roomimg4,String hotelimg1,
 			String roomtype1,String roomtype2) {
 		List<RoomDTO> list = null;
@@ -76,7 +76,7 @@ public class QnAController {
 			model.addAttribute("roomtype2", list.get(1).getRoomtype());
 			model.addAttribute("roomid", roomid);
 			model.addAttribute("list", list);
-			model.addAttribute("center", "write_qna");
+			model.addAttribute("center", "writeqna");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,6 +86,11 @@ public class QnAController {
 	
 	@RequestMapping("/qnasendimpl")
 	public String qnasendimpl(Model model, PostDTO qna) {
+		
+		System.out.println(qna.getTitle());
+		System.out.println(qna.getCustid());
+		System.out.println(qna.getText());
+		System.out.println(qna.getHotelid());
 		try {
 			postservice.register(qna);
 		} catch (Exception e) {

@@ -42,5 +42,8 @@ public class PostService implements MyService<Integer, PostDTO>{
 	public List<PostDTO> myqna(String custid) throws Exception {
 		return mapper.myqna(custid);
 	}
+	public List<PostDTO> qnalist5(int hotelid) throws Exception {
+		return mapper.qnalist5(hotelid);
+	}
 
 }

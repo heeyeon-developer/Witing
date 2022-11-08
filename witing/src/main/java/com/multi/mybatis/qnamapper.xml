@@ -25,5 +25,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT postid, custid, title, rdate FROM post
 		WHERE custid=#{custid};
 	</select>
-	 
+	
+	<select id="qnalist5" parameterType="Integer" resultType="PostDTO">
+		SELECT * FROM post WHERE kind='quest' AND hotelid = #{hotelid}
+		ORDER BY rdate DESC
+		LIMIT 5;
+	</select>
+	
+	
 </mapper>

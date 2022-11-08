@@ -12,4 +12,5 @@ import com.multi.frame.MyMapper;
 @Mapper
 public interface PostMapper extends MyMapper<Integer, PostDTO> {
 	public List<PostDTO> myqna(String custid) throws Exception;
+	public List<PostDTO> qnalist5(int hotelid) throws Exception;
 }
