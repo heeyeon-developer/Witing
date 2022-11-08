@@ -86,11 +86,14 @@ public class KakaoAPI {
 			JsonParser parser = new JsonParser();
 	        JsonElement element = parser.parse(result);
 	        
+	        JsonObject kakao_properties = element.getAsJsonObject().get("properties").getAsJsonObject();	
 	        JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();	
 	        
-	        userInfo.put("email", kakao_account.get("email").toString());
-	        userInfo.put("birthday", kakao_account.get("birthday").toString());
-	        userInfo.put("gender", kakao_account.get("gender").equals("female")? "woman" : "man");
+	        String birthday = kakao_account.get("birthday").toString().replaceAll("\"","");
+	        userInfo.put("name", kakao_properties.get("nickname").toString().replaceAll("\"",""));
+	        userInfo.put("email", kakao_account.get("email").toString().replaceAll("\"",""));
+	        userInfo.put("birthday", birthday.substring(0,2)+"-"+birthday.substring(2,4));
+	        userInfo.put("gender", kakao_account.get("gender").toString().replaceAll("\"","").equals("female")? "woman" : "man");
 	        
 		}catch(IOException e){
 			e.printStackTrace();
