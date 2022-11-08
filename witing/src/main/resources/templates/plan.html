@@ -46,6 +46,11 @@
 	border:1px solid black;
 }
 
+.block-21 .text .meta_p > div {
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 5px; }
+
 
 </style>
 
@@ -189,8 +194,8 @@ $(document).ready(function(){
             <a class="blog-img mr-4" style="background-image: url('images/hotel/usercat2.png');"></a>
             <div class="text">
               <h3 class="heading"><a href="#" th:text="${custid}"></a></h3>
-              <p th:text="|${country} · ${gender} · ${#dates.format(birth, 'yyyy')}년생 or MBTI 어떤지..^^|"></p>
-              <div class="meta">
+              <p>MBTI 자리</p>
+              <div class="meta_p">
                 <div><span class="fa fa-calendar"><span th:text="| ${#dates.format(birth, 'yyyy')}년생|"></span></span></div>
                 <div><span class="fa fa-venus-mars"><span th:text="| ${gender}|"></span></span></div>
                 <div><span class="fa fa-globe"><span th:text="| ${country}|"></span></span></div>
