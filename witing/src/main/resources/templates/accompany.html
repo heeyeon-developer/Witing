@@ -1,7 +1,7 @@
 
 <style>
 #writebtn{
-	margin-top: 50px;
+	margin-top: -30px;
 	margin-left: 90%;
 }
 
@@ -16,7 +16,63 @@
 #user_icon{
 	color: #f15d30;
 }
+#list_icon{
+	font-size: 25px;
+	float: right;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: -20px;
+	margin-bottom: -50px;
+}
+#tablelist, #photolist{
+	color: gray;
+}
 </style>
+
+<script>
+/* $(document).ready(function(){
+	$('#photo_list').hide();
+});
+
+
+function tablelist(){
+	$('#list_table').show();
+	$('#photo_list').hide();
+}
+
+function photolist(){
+	$('#photo_list').show();
+	$('#list_table').hide();
+} */
+
+$(document).ready(function(){
+	$('#photo_list').hide();
+	
+	$('#tablelist').click(function(){
+		$('#list_table').show();
+		$('#photo_list').hide();
+	})
+	$('#photolist').click(function(){
+		$('#photo_list').show();
+		$('#list_table').hide();
+	})
+});
+
+var imgArray= new Array();
+	imgArray[0]="image_1.jpg";  //사진
+	imgArray[1]="image_2.jpg"; //사진
+	imgArray[2]="image_3.jpg";    //사진
+	imgArray[3]="image_4.jpg";    //사진
+	imgArray[4]="image_5.jpg";    //사진
+	imgArray[5]="image_6.jpg";    //사진
+	
+
+function showImage() {
+	    var imgNum=Math.round(Math.random()*3);
+	    var objImg=document.getElementById("introImg");
+	    objImg.src=imgArray[imgNum];
+}
+</script>
 
 
 
@@ -36,8 +92,12 @@
 
 <section class="ftco-section">
   <div class="container">
+  	<div id="list_icon">
+	  	<span><a href="#" class="fa fa-list" onclick="tablelist()" id="tablelist"></a></span>
+	  	<span><a href="#" class="fa fa-file-image-o" onclick="photolist()" id="photolist"></a></span>
+  	</div>
 	<h2 id="a_title">Accompany List</h2>
-	<table class="table table-hover">
+	<table class="table table-hover" id="list_table">
 		<colgroup>
 			<col style="width:12%">
 			<col style="width:20%">
@@ -57,14 +117,15 @@
 		<tr>
 			<td th:text="${li.accomid}"></td>
 			<td th:text="${li.custid}"></td>
-			<td th:text="${li.title}"></td>
+			<td><a th:href="@{/plan(accomid=${li.accomid})}" th:text="${li.title}" style="color: black;"></a></td>
 			<td th:text="${#dates.format(li.traveltime, 'yyyy-MM-dd')}"></td>
 		</tr>
 		</tbody>
+	<a th:href="@{/writeaccom}" th:if="${session.logincust != null}" class="btn btn-primary" id="writebtn">글 작성하기</a><br><br>
 	</table>
 	
-	<a th:href="@{/writeaccom}" th:if="${session.logincust != null}" class="btn btn-primary" id="writebtn">글 작성하기</a><br><br>
 	
+<form id="photo_list">
     <div class="row d-flex">
       <div class="col-md-4 d-flex ftco-animate" th:each=li:${list}>
        <div class="blog-entry justify-content-end">
@@ -88,6 +149,7 @@
    </div>
  </div>
 </div>
+</form>
 <div class="row mt-5">
   <div class="col text-center">
     <div class="block-27">

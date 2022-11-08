@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.ReservationMapper">
+	
+	<select id="select" parameterType="Integer" resultType="ReservationDTO">
+		SELECT * FROM reservation WHERE reservid=#{reservid}
+	</select>
+	<select id="selectall" resultType="ReservationDTO">
+		SELECT * FROM reservation
+	</select>
+	<insert id="insert" parameterType="ReservationDTO">
+		INSERT INTO reservation VALUES (NULL,#{roomid},#{custid},#{sdate},#{edate})
+	</insert>
+	<update id="update" parameterType="ReservationDTO">
+		UPDATE reservation SET roomid=#{roomid},sdate=#{sdate},edate=#{edate}  
+		 WHERE reservid=#{reservid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM reservation WHERE reservid=#{reservid}
+	</delete>
+	<select id="getcustcoupon" parameterType="Integer" resultType="ReservationDTO">
+		SELECT * FROM reservation WHERE reservid=#{reservid}
+	</select>
+	 
+</mapper>

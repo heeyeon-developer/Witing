@@ -17,6 +17,7 @@ $(document).ready(function(){
 });
 </script>
 
+
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/LoginBackground.jpeg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -30,7 +31,7 @@ $(document).ready(function(){
 
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-3 order-md-last d-flex">
+      <div>
         <form id="loginform" class="p-5 contact-form justify-content-center">
           <div class="form-group">
             <input id="custid" type="text" class="form-control" placeholder="ID" name="id">
@@ -44,70 +45,11 @@ $(document).ready(function(){
           <div class="form-group">
             <input id="registerbtn" value="Register" class="btn btn-primary">
           </div>
-          <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
-			<li class="ftco-animate"><a href="#"><span class="fa fa-google"></span></a></li>
-			<li class="ftco-animate"><a href="#"><span class="fa fa-kakao"></span></a></li>
-		  	<li><div id="naverIdLogin"></div></li>
+          <ul class="ftco-footer-social list-unstyled">
+          	<li style="width:55%;"><a href="https://nid.naver.com/oauth2.0/authorize?client_id=ZE3hNmeMKJrWvZZM3mFA&state=STATE&redirect_uri=http://localhost/naverlogin&response_type=code"><img src="/images/naver_loginbtn.png" style="height:100%;"></a></li>
+			<li><a href="https://kauth.kakao.com/oauth/authorize?client_id=028dd45a5b014d0ffd5d4acc640599d4&redirect_uri=http://localhost/kakaologin&response_type=code"><img src="/images/kakao_login_medium.png" style="height:100%;"></a></li>
 		  </ul>
         </form>
       </div>
    </div>
  </div> 
-
-  <script type="text/javascript">
- 
-  const naverLogin = new naver.LoginWithNaverId(
-   {
-    clientId: "BU1GLCi37hGnOL4NxrA5",
-    callbackUrl: "http://localhost/",//네이버 로그인 후 돌아가는 화면
-    loginButton: {color: "green", type: 1, height: 40}
-    }
-   );
-  
-    naverLogin.init();
-    console.log(naverLogin);
-
-    $('#naverIdLogin').click(function(){
-    	naverLogin.getLoginStatus(function (status) {
-	        if (status) {
-	            const nickName=naverLogin.user.getNickName();
-	            const age=naverLogin.user.getAge();
-	            const birthday=naverLogin.user.getBirthyear();
-	
-	            if(nickName===null||nickName===undefined ){
-	              alert("별명이 필요합니다. 정보제공을 동의해주세요.");
-	              naverLogin.reprompt();
-	              return ;  
-	           }else{
-	            setLoginStatus();
-	           }
-	  		}
-    	});
-    })
-    
-    	
-   	function setLoginStatus(){/* 
-   	      alert(naverLogin.user.id+" "
-   	    		  +naverLogin.user.id+" "
-   	    		  +naverLogin.user.name+" "
-   	    		  +naverLogin.user.birthyear+"-"
-   	    		  +naverLogin.user.birthday+" "
-   	    		  +naverLogin.user.mobile.replaceAll('-','')+" "
-   	    		  +naverLogin.user.email+" "); */
-   	      
-   	      $.ajax({
-   				url:'[[@{/naverlogin}]]',
-				data:{
-					custid:naverLogin.user.id,
-					custpwd:naverLogin.user.id,
-					custname:naverLogin.user.name,
-					birth:naverLogin.user.birthyear+'-'+naverLogin.user.birthday,
-					phone:'01012341234',
-					email:naverLogin.user.email,
-					gender:naverLogin.user.gender,
-					point:1000,
-					country:'Korea'
-				}
-   			});
-   	    }
-</script>

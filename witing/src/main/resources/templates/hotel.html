@@ -69,6 +69,22 @@ function addlike(cust_id, hotel_id){
 	
 };
 
+$(document).ready(function(){
+	var custid = $('#custid').text();
+	if(custid != ''){
+		$.ajax({
+			url:'/likehearts',
+			data:{custid:custid},
+			success:function(result){
+				$.each(result,function(i,hodelid){
+					var id = '#heartbtn'+hodelid;
+					$(id).attr('class','fa fa-heart');
+				});
+			}
+		});
+	}
+});
+
 </script>
 
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/hotel/jeju.jpg');">
@@ -148,6 +164,7 @@ function addlike(cust_id, hotel_id){
   <div class="form-group d-flex w-100 border-0">
    <div class="form-field w-100 align-items-center d-flex">
     <input id="search_btn" type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
+     <div id="custid" th:if="${session.logincust != null}" style="display:none;" th:text="${session.logincust.custid}">
   </div>
   </div>
 </div>
