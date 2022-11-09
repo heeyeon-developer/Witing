@@ -6,7 +6,11 @@ $(document).ready(function(){
 	
 	
 	$('#custupdate_btn').click(function(){
-		if($('#custpwd').val() != $('#custpwd2').val()){
+		if($('#custpwd1').val() != $('#custpwd2').val()){
+			var p = $('#custpwd1').val();
+			var b = $('#custpwd2').val();
+			
+			alert(p );
 			alert("비밀번호 확인이 일치하지않습니다. 다시 확인해주세요.");
 			return;
 		}
@@ -24,9 +28,9 @@ $(document).ready(function(){
 	$("#pwdcheck").hide();
 	$("#pwdwrong").hide();
 	$('#custpwd2').keyup(function(){
-		var pwd = $('#custpwd').val();
+		var pwd1 = $('#custpwd1').val();
 		var pwd2 = $('#custpwd2').val();
-		if(pwd == pwd2){
+		if(pwd1 == pwd2){
 			$("#pwdcheck").show();
 			$("#pwdwrong").hide();
 		}else{
@@ -38,6 +42,7 @@ $(document).ready(function(){
 	
 	
 });
+
 
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -91,12 +96,11 @@ function sample6_execDaumPostcode() {
 </style>
 
 
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg')">
-  
+<!-- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg')">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a th:href="@{/mypage(custid=${custdetail.custid})}">My Page <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2">Information <i class="fa fa-chevron-right"></i></span></p>
+       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a th:href="@{/mypage(custid=${cust.custid})}">My Page <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2">Information <i class="fa fa-chevron-right"></i></span></p>
        <h1 class="mb-0 bread">Information</h1>
      </div>
    </div>
@@ -168,7 +172,7 @@ function sample6_execDaumPostcode() {
 
 </div>
 </div>
-</section>
+</section> -->
 
 <section class="ftco-section contact-section ftco-no-pt">
   <div class="container">
@@ -177,56 +181,56 @@ function sample6_execDaumPostcode() {
         <form id="custupdate_form" class=" p-5 contact-form">
           <div class="form-group">
           	<label class="control-label col-sm-2" for="custname" >NAME</label>
-            <input type="text" class="form-control" id="custname" th:value="${custdetail.custname}" name="custname">
+            <input type="text" class="form-control" id="custname" th:value="${cust.custname}" name="custname">
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="custid" >ID</label>
-            <input type="text" class="form-control" id="custid" th:value="${custdetail.custid}" readonly="readonly"name="custid">
+            <input type="text" class="form-control" id="custid" th:value="${cust.custid}" readonly="readonly"name="custid">
           </div>
           <div class="form-group">
 			<label class="control-label col-sm-2" for="custpwd">PWD</label>
-			<input type="password" class="form-control" id="custpwd" th:value="${custdetail.custpwd}" placeholder="Enter Password" required="required" name="custpwd">
+			<input type="password" class="form-control" id="custpwd1" th:value="${cust.custpwd}" placeholder="Check password" name="custpwd" required="required">
 		  </div>
 		  <div class="form-group">
 			<label class="control-label col-sm-2" for="custpwd2">PWD&nbspCheck</label><span id="pwdcheck" style="padding-left: 30px"><img src="images/check.png" style="width: 20px; height: 20px"></span><span id="pwdwrong"  style="padding-left: 30px"><img src="images/wrong.png" style="width: 20px; height: 20px"></span>
-		    <input type="password" class="form-control" id="custpwd2" th:value="${custdetail.custpwd}" placeholder="Check password" required="required">
+		    <input type="password" class="form-control" id="custpwd2" th:value="${cust.custpwd}" placeholder="Check password" required="required">
 		  </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="gender" >Gender</label>
-            <input type="text" class="form-control" id="gender" th:value="${custdetail.gender}" readonly="readonly" name="gender">
+            <input type="text" class="form-control" id="gender" th:value="${cust.gender}" readonly="readonly" name="gender">
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="country" >Nationality</label>
-            <input type="text" class="form-control" id="country" th:value="${custdetail.country}" name="country">
+            <input type="text" class="form-control" id="country" th:value="${cust.country}" name="country">
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="birth" >Birth</label>
-            <input type="date" class="form-control" id="birth" th:value="${custdetail.birth}" readonly="readonly" >
+            <input type="date" class="form-control" id="birth" th:value="${cust.birth}" readonly="readonly" >
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="phone" >Mobile</label>
 			  <!-- <input type="tel" id="phone" name="phone" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required><br><br> -->
 			 <!--  <small>Format: 123-45-678</small><br><br> -->
-            <input type="tel" class="form-control" id="phone" th:value="${custdetail.phone}" name="phone">
+            <input type="tel" class="form-control" id="phone" th:value="${cust.phone}" name="phone">
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="email" >Email</label>
-            <input type="email" class="form-control" id="email" th:value="${custdetail.email}" required="required" name="email">
+            <input type="email" class="form-control" id="email" th:value="${cust.email}" required="required" name="email">
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="addr" >Address</label><br>
-          	<input type="number" id="sample6_postcode" class="form-control" th:value="${custdetail.zipcode}" style="width: 30%; display: inline-block" name="zipcode">
+          	<input type="number" id="sample6_postcode" class="form-control" th:value="${cust.zipcode}" style="width: 30%; display: inline-block" name="zipcode">
 			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="width: 25%; display: inline-block; background-color: lightgray; border: none; border-radius: 2px; height: 40px">
-			<input type="text" id="sample6_address" class="form-control" th:value="${custdetail.addr}" name="addr">
-			<input type="text" id="sample6_detailAddress" class="form-control" th:value="${custdetail.addrdetail}" style="display: inline-block" name="addrdetail">
+			<input type="text" id="sample6_address" class="form-control" th:value="${cust.addr}" name="addr">
+			<input type="text" id="sample6_detailAddress" class="form-control" th:value="${cust.addrdetail}" style="display: inline-block" name="addrdetail">
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="point" >Point</label>
-            <input type="number" class="form-control" id="point" th:value="${custdetail.point}" readonly="readonly" name="point">
+            <input type="number" class="form-control" id="point" th:value="${cust.point}" readonly="readonly" name="point">
           </div>
           <div class="form-group">
           	<label class="control-label col-sm-2" for="rdate" >Register</label>
-            <input type="date" class="form-control" id="rdate" th:value="${custdetail.rdate}" readonly="readonly" name="rdate">
+            <input type="date" class="form-control" id="rdate" th:value="${cust.rdate}" readonly="readonly" name="rdate">
           </div>
           <!-- <div class="form-group">
             <input type="submit" value="Update" class="btn btn-primary py-3 px-5">

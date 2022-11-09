@@ -35,10 +35,12 @@ public class QnAController {
 		try {
 			CustDTO cust = custservice.get(custid);
 			List<PostDTO> list = postservice.myqna(custid);
-			System.out.println(list);
-			model.addAttribute("qna", cust);
+			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
+			model.addAttribute("pagename", "Q&A");
+			model.addAttribute("cust", cust);
 			model.addAttribute("list", list);
-			model.addAttribute("center", "qna");
+			model.addAttribute("mpcenter", "qna");
+			model.addAttribute("center", "mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,8 +51,13 @@ public class QnAController {
 	public String qnadetail(Model model, int postid) {
 		try {
 			PostDTO post = postservice.get(postid);
+			model.addAttribute("imgpath", "/images/qnadetailimg.jpg");
+			model.addAttribute("pagename", "My Page");
+			model.addAttribute("pagename", "Q&A");
+			model.addAttribute("cust", post);  /* mypageindex와 파라미터 맞춰주기 위한 것 */ 
 			model.addAttribute("qnadetail", post);
-			model.addAttribute("center", "qnadetail");
+			model.addAttribute("mpcenter", "qnadetail");
+			model.addAttribute("center", "mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,17 +93,41 @@ public class QnAController {
 	
 	@RequestMapping("/qnasendimpl")
 	public String qnasendimpl(Model model, PostDTO qna) {
-		
-		System.out.println(qna.getTitle());
-		System.out.println(qna.getCustid());
-		System.out.println(qna.getText());
-		System.out.println(qna.getHotelid());
 		try {
 			postservice.register(qna);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "redirect:room?hotelid="+qna.getHotelid();
+	}
+	
+	@RequestMapping("/qnamore")
+	public String qnamore(Model model, Integer hotelid) {
+		List<PostDTO> list = null;
+		try {
+			list = postservice.hotelqnaall(hotelid);
+			model.addAttribute("list", list);
+			model.addAttribute("center", "qnamore");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "index";
+	}
+	@RequestMapping("/qnamoredetail")
+	public String qnamoredetail(Model model, int postid) {
+		PostDTO post = null;
+		
+		try {
+			post = postservice.get(postid);
+			System.out.println(post);
+			model.addAttribute("qnadetail",post);
+			model.addAttribute("center", "qnamoredetail");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "index";
 	}
 	
 

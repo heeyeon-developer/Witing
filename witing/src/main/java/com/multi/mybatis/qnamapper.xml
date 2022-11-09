@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM post
 	</select>
 	<insert id="insert" parameterType="PostDTO">
-		INSERT INTO post VALUES (NULL, #{custid}, null, #{hotelid}, #{title}, #{text}, null, NOW(),'quest',null)
+		INSERT INTO post VALUES (NULL, #{custid}, null, #{hotelid}, #{title}, #{text}, null, NOW(),'quest',null,#{secret})
 	</insert>
 	<update id="update" parameterType="PostDTO">
 		UPDATE hotel SET custid=#{custid},adminid=#{adminid},hotelid=#{hotelid}, title=#{title},
@@ -30,6 +30,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM post WHERE kind='quest' AND hotelid = #{hotelid}
 		ORDER BY rdate DESC
 		LIMIT 5;
+	</select>
+	
+	<select id="hotelqnaall" parameterType="Integer" resultType="PostDTO">
+		SELECT * FROM post WHERE kind='quest' AND hotelid = #{hotelid}
+		ORDER BY rdate DESC
 	</select>
 	
 	

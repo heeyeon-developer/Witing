@@ -102,19 +102,20 @@
         
         
        <div class="sidebar-box ftco-animate">
-          <h3 style="display: inline-block;">QnA</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black; cursor: pointer; " th:onclick="|location.href='@{/writeqna(hotelid=${list[0].hotelid})}'|"></span>
+          <h3 style="display: inline-block; margin-bottom: 5px">QnA</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black; cursor: pointer; " th:onclick="|location.href='@{/writeqna(hotelid=${list[0].hotelid})}'|"></span>
           <div class="block-21 mb-4 d-flex">
             <div class="text" style="width: 329px">
               
               <table>
               	<tbody th:each=li:${qnalist5}>
 				<tr style="cursor: pointer; color: gray">
-				<ul style="padding-left: 20px">
+				<ul style="padding-left: 20px; margin-bottom: 0">
 					<li th:text="${li.title}" ><td th:text="${li.title}" style="text-align: left"></td></li>
 				</ul>
 				</tr>
 				</tbody>
               </table>
+              <div style="text-align: right"><a th:href="@{/qnamore(hotelid=${list[0].hotelid})}" style="color: gray">더보기</a></div>
               <div class="meta">
                 <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
                 <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
