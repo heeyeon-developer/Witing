@@ -45,8 +45,11 @@ public class MainController {
 	public String mypage(Model model, String custid) {
 		try {
 			CustDTO cust = custservice.get(custid);
-			model.addAttribute("mypage", cust);
-			model.addAttribute("center","mypage");
+			model.addAttribute("imgpath", "/images/mypageimg.jpg");
+			model.addAttribute("pagename", "My Page");
+			model.addAttribute("cust", cust);
+			model.addAttribute("mpcenter", "mypage");
+			model.addAttribute("center","mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -55,19 +58,24 @@ public class MainController {
 	
 	@RequestMapping("/custdetail")
 	public String custdetail(Model model, String custid, String custpwd) {
-		System.out.println(custpwd);
-		System.out.println(custid);
 		try {
 			CustDTO cust = custservice.get(custid);
-			System.out.println(cust);
 			if(custpwd.equals(cust.getCustpwd())) {
-				model.addAttribute("custdetail", cust);
-				model.addAttribute("center","custdetail");
+				model.addAttribute("imgpath", "/images/custdetailimg.jpg");
+				model.addAttribute("pagename", "Infomation");
+				model.addAttribute("cust", cust);
+				model.addAttribute("mpcenter", "custdetail");
+				model.addAttribute("center","mypageindex");
+				
 			
 			}else {
-				model.addAttribute("mypage", cust);
+				model.addAttribute("cust", cust);
 				model.addAttribute("status", "0");
-				model.addAttribute("center", "mypage");
+				model.addAttribute("imgpath", "/images/mypageimg.jpg");
+				model.addAttribute("pagename", "My Page");
+				model.addAttribute("mpcenter", "mypage");
+				model.addAttribute("center","mypageindex");
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,14 +86,15 @@ public class MainController {
 	@RequestMapping("/custupdateimpl")
 	public String custupdateimpl(Model model, CustDTO cust) {
 		try {
-			System.out.println("2: "+ cust);
 			custservice.modify(cust);
-			System.out.println("2: "+ cust);
-			model.addAttribute("mypage", cust);
-			model.addAttribute("center","mypage");
+			model.addAttribute("imgpath", "/images/mypageimg.jpg");
+			model.addAttribute("pagename", "My Page");
+			model.addAttribute("cust", cust);
+			model.addAttribute("mpcenter", "mypage");
+			model.addAttribute("center","mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "index";
+		return "redirect:mypage?custid="+cust.getCustid();
 	}
 }

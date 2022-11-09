@@ -26,4 +26,5 @@ public class PostDTO {
 	private Date rdate;
 	private String kind;
 	private int star;
+	private boolean secret;
 }

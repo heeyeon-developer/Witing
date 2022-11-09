@@ -1,0 +1,101 @@
+
+<style>
+#writebtn{
+	margin-top: -15px;
+}
+
+.two{
+	margin-left: 10px;
+}
+
+#a_title{
+	margin-bottom: 30px;
+}
+#user_icon{
+	color: #f15d30;
+}
+#list_icon{
+	font-size: 25px;
+	float: right;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: -20px;
+	margin-bottom: -50px;
+}
+#tablelist, #photolist{
+	color: gray;
+}
+#tablelist:focus, #photolist:focus{
+	color: #f15d30;
+}
+</style>
+
+
+ <!-- END nav -->
+ 
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/myqnaimg.jpg');">
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+      <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/hotel">Hotel <i class="fa fa-chevron-right"></i></a></span> <span><a href="#">Q&A <i class="fa fa-chevron-right"></i></a></span></p>
+       <h1 class="mb-0 bread"> Q&A </h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+	<h2 id="a_title">Q&A List</h2>
+	<table class="table table-hover">
+		<colgroup>
+			<col style="width:12%">
+			<col style="width:50%">
+			<col style="width:15%">
+			<col style="width:23%">
+		</colgroup>
+		
+		<thead>
+		<tr id="tablehead">
+			<th>No</th>
+			<th style="text-align: center">Title</th>
+			<th style="text-align: right">Poster ID</th>
+			<th style="text-align: right">Post Date</th>
+			<th>&nbsp&nbsp&nbsp&nbsp</th>
+		</tr>
+		</thead>
+		<tbody th:each=li:${list}>
+		<tr th:onclick="|location.href='@{/qnamoredetail(postid=${li.postid})}'|" style="cursor: pointer">
+			<td th:text="${li.postid}"></td>
+			<td th:text="${li.title}" style="text-align: center"></td>
+			<td th:text="${li.custid}" style="text-align: right"></td>
+			<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: right"></td>
+			<td class="fa fa-lock"></td>
+		</tr>
+		</tbody>
+	</table>
+	
+	
+<div class="row mt-5">
+  <div class="col text-center">
+    <div class="block-27">
+      <ul>
+        <li><a href="#">&lt;</a></li>
+        <li class="active"><span>1</span></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&gt;</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+</section>	
+
+
+
+<!-- loader -->
+<!-- <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> -->
+

@@ -15,7 +15,7 @@ class RegisterQna {
 	
 	@Test
 	void contextLoads() {
-		PostDTO post = new PostDTO(0, "kmj", null, 1, "test", "test", null, null, "quest", 0);
+		PostDTO post = new PostDTO(1, "kmj", null, 1, "123", "123", null, null, "quest", 0, false);
 		try {
 
 			service.register(post);

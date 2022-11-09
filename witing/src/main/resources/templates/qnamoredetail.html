@@ -1,0 +1,81 @@
+<meta charset="utf-8">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+  
+<script>
+
+</script>
+
+<style>
+	#td_text{
+		border-top: solid #BDBDBD 1px;
+		border-bottom: solid #BDBDBD 1px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		
+	}
+	
+</style>
+
+
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg')">
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+      <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/hotel">Hotel <i class="fa fa-chevron-right"></i></a></span> <span><a href="#">Q&A <i class="fa fa-chevron-right"></i></a></span></p>
+       <h1 class="mb-0 bread">Hotel Q&A </h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+
+
+<section class="ftco-section contact-section" >
+  <div class="container">
+    <div class="row block-9">
+      <div class="col-md-12 order-md-last d-flex">
+       <div class=" p-6">
+       	<table class="container">
+       		<thead>
+       			<tr class="row">
+       				<th colspan="2" style="width:600px; padding-left:15px">
+       					<h3 style="width: 100%; padding-bottom: 15px">
+       						<strong th:text="${qnadetail.title}" style="width: 100%"></strong>
+       					</h3>
+       				</th>
+       				
+       			</tr>
+       			
+       			<tr>
+       				<th th:text="'작성자 : '+${qnadetail.custid}"></th>
+       				<th th:text="${#dates.format(qnadetail.rdate,'yyyy-MM-dd HH:mm')}" style="text-align : right; padding-right:20px"></th>
+       			</tr>
+       			<tr colspan="2">
+       				<th>&nbsp</th>
+       			</tr>
+       		</thead>
+       	
+       		<tbody>
+       			<tr>
+       				<td id="td_text" colspan="2" th:text="${qnadetail.text}+'아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아'" ></td>
+       			</tr>
+       		</tbody>
+       	
+       	</table>
+       	<div>
+       		<button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px"> <a th:href="@{/qnamore(hotelid=${qnadetail.hotelid})}">목록</a></button>
+       		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px"> 삭제</button> 
+       	</div>
+   
+       </div>
+      </div>
+   </div>
+ </div>
+</section>
+
+
