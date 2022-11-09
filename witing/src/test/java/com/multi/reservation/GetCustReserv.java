@@ -1,6 +1,5 @@
 package com.multi.reservation;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -11,16 +10,18 @@ import com.multi.dto.ReservationDTO;
 import com.multi.service.ReservationService;
 
 @SpringBootTest
-class RegisterReservation {
+class GetCustReserv {
 
 	@Autowired
 	ReservationService service;
 	
 	@Test
 	void contextLoads() {
+		List<ReservationDTO> list = null;
 		try {
-			service.register(new ReservationDTO(null,4,"n_heeyeon3471",2, Date.valueOf("2022-11-08"),Date.valueOf("2022-11-10"),1,""));
-			
+			list = service.custreserv("hyk");
+			for(ReservationDTO coupon : list)
+				System.out.println(coupon);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

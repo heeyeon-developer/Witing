@@ -90,19 +90,19 @@ public class LoginController {
 	public String kakaologin(Model model, String code, HttpSession session) {
 		String access_Token = kakao.getAccessToken(code);
 		HashMap<String, String> userInfo = kakao.getUserInfo(access_Token);
-		System.out.println("kakaologin controller? : "+userInfo);
+//		System.out.println("kakaologin controller? : "+userInfo);
 		try {
 			CustDTO existcust = custservice.get("k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")));
-			System.out.println("exist"+existcust);
-			System.out.println("??!?");
+//			System.out.println("exist"+existcust);
+//			System.out.println("??!?");
 			if(existcust == null) {//최초 카카오 로그인시 DBd에 데이터 저장
 				CustDTO cust = new CustDTO("k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), "k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), userInfo.get("name"), Date.valueOf("2022-"+userInfo.get("birthday")), "010-1234-1234", userInfo.get("email"), "", "", 12345, null, userInfo.get("gender"), 1000, "Korea");
 				custservice.register(cust);
-				System.out.println("??"+cust);
+//				System.out.println("??"+cust);
 				session.setAttribute("logincust", cust);
 			}else {//최초 카카오 로그인이 아닐경우 기존 데이터 조회하여 session에 추
 				session.setAttribute("logincust", existcust);
-				System.out.println("who?");
+//				System.out.println("who?");
 			}
 			model.addAttribute("citylist",cityservice.getall());
 			session.setAttribute("access_Token", access_Token);

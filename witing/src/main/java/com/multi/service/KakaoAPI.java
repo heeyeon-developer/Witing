@@ -40,21 +40,21 @@ public class KakaoAPI {
 			bw.write(sb.toString());
 			bw.flush();
 			//결과 코드가 200일 경우 성공
-			System.out.println("responseCode : "+conn.getResponseCode());
+//			System.out.println("responseCode : "+conn.getResponseCode());
 			//요청을 통해 얻은 JSON타입의 Response 메세지
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			while((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("responseBody : "+result);
+//			System.out.println("responseBody : "+result);
 			//JSON 데이터 파싱
 			JsonParser parser = new JsonParser();
 			JsonElement element = parser.parse(result);
 			access_Token = element.getAsJsonObject().get("access_token").getAsString();
 			refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
 			
-			System.out.println("access_token : "+access_Token);
-			System.out.println("refresh_token : "+refresh_Token);
+//			System.out.println("access_token : "+access_Token);
+//			System.out.println("refresh_token : "+refresh_Token);
 			br.close();
 			bw.close();
 			
@@ -74,14 +74,14 @@ public class KakaoAPI {
 			conn.setRequestMethod("POST");
 			//요청에 필요한 Header에 포함될 내용
 			conn.setRequestProperty("Authorization", "Bearer "+access_Token);
-			System.out.println("responseCode : "+conn.getResponseCode());
+//			System.out.println("responseCode : "+conn.getResponseCode());
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			System.out.println(br);
+//			System.out.println(br);
 			while((line = br.readLine()) != null) {
 				result += line;
 			}
-			System.out.println("response body : "+result);
+//			System.out.println("response body : "+result);
 			
 			JsonParser parser = new JsonParser();
 	        JsonElement element = parser.parse(result);

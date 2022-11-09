@@ -38,5 +38,9 @@ public class ReservationService implements MyService<Integer, ReservationDTO> {
 	public List<ReservationDTO> getall() throws Exception {
 		return mapper.selectall();
 	}
+	
+	public List<ReservationDTO> custreserv(String k) throws Exception {
+		return mapper.custreserv(k);
+	}
 
 }

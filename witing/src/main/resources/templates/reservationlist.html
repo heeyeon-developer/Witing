@@ -51,8 +51,8 @@ $(document).ready(function(){
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="/mypage">My Page <i class="fa fa-chevron-right"></a></i></span> <span><a th:href="@{/like(custid=${session.logincust.custid})}">Like <i class="fa fa-chevron-right"></a></i></span></p>
-       <h1 class="mb-0 bread">My Page</h1>
+       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="/mypage"> My Page <i class="fa fa-chevron-right"></a></i></span> <span><a th:href="@{/like(custid=${session.logincust.custid})}"> Reservation <i class="fa fa-chevron-right"></a></i></span></p>
+       <h1 class="mb-0 bread">Reservation</h1>
      </div>
    </div>
  </div>
@@ -130,25 +130,24 @@ $(document).ready(function(){
 	<table class="table table-hover">
 		<colgroup>
 			<col style="width:10%">
-			<col style="width:60%">
+			<col style="width:40%">
 			<col style="width:15%">
-			<col style="width:15%">
+			<col style="width:35%">
 		</colgroup>
-		
 		<thead>
 		<tr id="tablehead">
 			<th>No</th>
-			<th>Coupon Name</th>
-			<th>Discountprice</th>
-			<th>Discountpercent</th>
+			<th>숙박 시설 정보</th>
+			<th>숙박인원</th>
+			<th>일정</th>
 		</tr>
 		</thead>
-		<tbody th:each=li:${list}>
-		<tr>
-			<td th:text="${li.couponid}"></td>
-			<td th:text="${li.kind}"></td>
-			<td th:text="${li.discountprice}"></td>
-			<td th:text="|${li.discountpercent}%|"></td>
+		<tbody th:each="li:${list}">
+		<tr th:onclick="|location.href='@{/room(hotelid=${li.hotelid})}'|" style="cursor:pointer">
+			<td th:text="${li.reservid}"></td>
+			<td th:text="${li.info}"></td>
+			<td th:text="${li.people}"></td>
+			<td th:text="|${#dates.format(li.sdate, 'yyyy-MM-dd')} ~ ${#dates.format(li.edate, 'yyyy-MM-dd')}|"></td>
 		</tr>
 		</tbody>
 	</table>

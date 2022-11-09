@@ -55,8 +55,8 @@ public class NaverAPI {
 			access_Token = element.getAsJsonObject().get("access_token").getAsString();
 			refresh_Token = element.getAsJsonObject().get("refresh_token").getAsString();
 			
-			System.out.println("access_token : "+access_Token);
-			System.out.println("refresh_token : "+refresh_Token);
+//			System.out.println("access_token : "+access_Token);
+//			System.out.println("refresh_token : "+refresh_Token);
 			br.close();
 			bw.close();
 			
@@ -79,7 +79,7 @@ public class NaverAPI {
 //			System.out.println("responseCode : "+conn.getResponseCode());
 			
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			System.out.println(br);
+//			System.out.println(br);
 			while((line = br.readLine()) != null) {
 				result += line;
 			}

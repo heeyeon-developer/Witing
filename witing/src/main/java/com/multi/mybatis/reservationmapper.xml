@@ -20,8 +20,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM reservation WHERE reservid=#{reservid}
 	</delete>
-	<select id="getcustcoupon" parameterType="Integer" resultType="ReservationDTO">
-		SELECT * FROM reservation WHERE reservid=#{reservid}
+	<select id="custreserv" parameterType="String" resultType="ReservationDTO">
+		SELECT re.reservid, re.roomid, re.custid, re.people, h.hotelid, concat(h.hotelname,concat('-',ro.roomtype)) AS info, re.sdate, re.edate
+		  FROM reservation re
+			   INNER JOIN room ro ON ro.roomid = re.roomid
+		       INNER JOIN hotel h ON h.hotelid = ro.hotelid
+		 WHERE re.custid=#{custid}
 	</select>
 	 
 </mapper>

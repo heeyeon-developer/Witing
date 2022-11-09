@@ -24,4 +24,7 @@ public class ReservationDTO {
 	private Date sdate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date edate;
+	
+	private Integer hotelid;
+	private String info;
 }

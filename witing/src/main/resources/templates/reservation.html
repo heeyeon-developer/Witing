@@ -1,3 +1,5 @@
+ <link rel="stylesheet" href="/css/calender.css">
+
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/ReservationBackground.jpeg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -16,22 +18,45 @@
     <div class="row block-9 justify-content-center">
     	<h2><br>예약을 위해 아래 항목들을 입력해주세요 :)</h2>
       <div class="col-md-7 order-md-last d-flex">
+      	<div class="calender-main">
+		    <div class="calender-wrap">
+		      <div class="calender">
+		        <table id="calendar" align="center">
+		          <thead>
+		            <tr class="btn-wrap clearfix">
+		              <td>
+		                <label id="prev">
+							&#60;
+		                </label>
+		              </td>
+		              <td align="center" id="current-year-month" colspan="5"></td>
+		              <td>
+		                <label id="next">
+		                    &#62;
+		                </label>
+		              </td>
+		            </tr>
+		            <tr>
+		                <td class = "sun" align="center">Sun</td>
+		                <td align="center">Mon</td>
+		                <td align="center">Tue</td>
+		                <td align="center">Wed</td>
+		                <td align="center">Thu</td>
+		                <td align="center">Fri</td>
+		                <td class= "sat" align="center">Sat</td>
+		              </tr>
+		          </thead>
+		          <tbody id="calendar-body" class="calendar-body"></tbody>
+		        </table>
+		      </div>
+		    </div>
+		  </div>
         <form id="registerform" class="p-5 contact-form">
           <div class="form-group">
-            <input id="custname" type="text" class="form-control" placeholder="예약자 성함" name="custname">
+            <input id="custname" type="text" class="form-control" th:placeholder="${custname}" name="custname">
           </div>
           <div class="form-group">
-            <input id="roomid" type="text" class="form-control" placeholder="객실정보" name="roomid" style="width: 60%; display: inline-block">
-          </div>
-          <div class="calender" style="width:100%; height:50%; background-color:lightgray;">
-          	<div class="calender_header">
-          		<div class="year-month"></div>
-          		<div class="nav">
-          			<button class="nav-btn go-prev">&lt;</button>
-          			<button class="nav-btn go-today">Today</button>
-          			<button class="nav-btn go-next">&gt;</button>
-          		</div>
-          	</div>
+            <input id="roomid" type="text" class="form-control" th:placeholder="${roominfo}" name="roomid">
           </div>
           <div class="form-group">
             <div class="form-field">
@@ -57,7 +82,7 @@
 			</div>
           </div>
           <div class="form-group justify-content-center">
-            <input id="registerbtn" value="Register" class="btn btn-primary justify-content-center" style="display:inline-block; float:right;">
+            <input id="pay" value="결제하기" class="btn btn-primary justify-content-center" style="display:inline-block; float:right;">
           </div>
         </form>
         
@@ -66,4 +91,6 @@
    </div>
  </div>
 </section>
-<script src="/js/calender.js"></script>
+
+ <script src="/js/calender.js"></script>
+
