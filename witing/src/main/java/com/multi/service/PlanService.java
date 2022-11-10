@@ -45,4 +45,8 @@ public class PlanService implements MyService<Integer, PlanDTO>{
 		return mapper.plandetail(accomid);
 	}
 	
+	public List<PlanDTO> xy(int accomid) throws Exception {
+		return mapper.xy(accomid);
+	}
+	
 }

@@ -1,158 +1,51 @@
 <style>
-.mb-3{
-	font-weight: bold;
-}
+.mb-3{font-weight: bold;}
 
-#dateicon, #user{
-	color: #f15d30;
-	padding-left: 30px;
-}
+#dateicon, #user{color: #f15d30; padding-left: 30px;}
 
-#dateicon{
-	padding-top: 25px;
-}
+#dateicon{padding-top: 25px;}
 
-#user{
-	padding-top: -10px;
-	margin-bottom: -5%;
-}
+#user{padding-top: -10px;margin-bottom: -5%;}
 
-#date, #cnt{
-	float: right;
-	color: black;
-	padding-left: 10px;
-}
+#date, #cnt{float: right;color: black;padding-left: 10px;}
 
-#planinfo{
-	border: 1px solid #d3d3d3;
-	margin-bottom: 30px;
-}
-#accom_btn{
-	margin-left: 30%;
-}
+#planinfo{border: 1px solid #d3d3d3;margin-bottom: 30px;}
+
+#accom_btn{margin-left: 30%;}
 
 #check{color: #f15d30;}
 
 #plan{color: black;}
 
-
-#map{
-	width:100%;
-	height:400px; 
-	border:1px solid black;
+#to {
+	width: 350px;
+	height: 400px;
+	overflow: auto;
+	border: 2px solid #f15d30;;
 }
 
-.block-21 .text .meta_p > div {
-    display: inline-block;
-    font-size: 14px;
-    margin-right: 5px; }
+#target{
+	width: 100px;
+	height: 35px;
+}
+#totext{
+	margin-left: -5px;
+	width: 190px;
+	height: 35px;
+}
+
+#to_title{
+	margin-bottom: -20px;
+}
+
+#disconnect, #connect{
+	float: right;
+	margin-top: -20px;
+}
 
 
 </style>
 
-<script>
-$(document).ready(function(){
-	$('#donglechat').hide();
-	
-	$('#accom_btn').click(function(){
-		$('#donglechat').show();
-	})
-});
-
-var lat = 37.5666805;
-var lng = 126.9784147;
-var map;
-//초기 좌표
-
-function display(lat, lng){
-	var mapContainer = document.querySelector('#map')
-	var mapOption = {
-		 center: new kakao.maps.LatLng(lat,lng), // 지도의 중심좌표
-	        level: 8 // 지도의 확대 레벨
-	};
-	map = new kakao.maps.Map(mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-	var zoomControl = new kakao.maps.ZoomControl();
-	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-	
-};
- function displaymarker(data){
-	var imageSrc = "/images/mk.png"; 
-	// 마커 이미지의 이미지 크기 입니다
-    var imageSize = new kakao.maps.Size(24, 35); 
-    // 마커 이미지를 생성합니다    
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-    
-	
-	for(var i=0; i<data.length; i++){
-		var marker = new kakao.maps.Marker({
-	        map: map, 
-	        position: new kakao.maps.LatLng(data[i].lat, data[i].lng),
-	        image: markerImage
-	    });
-		
-		var iwContent = '<h3>'+data[i].title+'</h3>';//html넣기도 가능 
-		iwContent += '<img width="50px" src="/images/map.jpg">';
-	    var iwPosition = new kakao.maps.LatLng(data[i].lat, data[i].lng); //인포윈도우 표시 위치입니다
-
-		var infowindow = new kakao.maps.InfoWindow({
-		    position : iwPosition, 
-		    content : iwContent 
-		});
-		kakao.maps.event.addListener(marker, 'mouseover', mouseoverListener(marker, infowindow));
-		kakao.maps.event.addListener(marker, 'mouseout', mousedoutListener(marker, infowindow));
-		kakao.maps.event.addListener(marker, 'click', mouseclickListener(data[i].target));
-	};
-	
-	function mouseoverListener(marker, infowindow) {	
-		return function(){
-			infowindow.open(map, marker);			
-		};
-	}
-	function mousedoutListener(marker, infowindow) {
-	    return function(){
-			infowindow.close();	    	
-	    };
-	}
-	function mouseclickListener(target) {
-	    return function(){
-	    	location.href= target;
-	    };
-	}
-};
-
-function getdata(loc){
-	$.ajax({
-		url:'/getmarker2',
-		data:{'loc':loc},
-		success:function(data){
-			displaymarker(data);
-		}
-	})
-};
-
-function go(lat,lng,loc){
-	var moveLatLon = new kakao.maps.LatLng(lat, lng);
-	map.panTo(moveLatLon);
-	getdata(loc);
-};
-
-$(document).ready(function(){
-	display(lat,lng);
-	$('#p_one').click(function(){
-		go(37.5527401,126.9930781,'p_one');
-	});
-	$('#p_two').click(function(){
-		go(35.1223984,129.0896448,'p_two');
-	});
-	$('#p_three').click(function(){
-		go(33.5199183,126.6142571,'p_three');
-	});
-	//3. 디스플레이를 만들어서 뿌림
-});
-</script>
 
 <body>
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_4.jpg');">
@@ -181,10 +74,18 @@ $(document).ready(function(){
         </div>
         <br><p th:text="${text}" style="color:black;"></p>
         
-        <button id="p_one">PLAN1</button>
-		<button id="p_two">PLAN2</button>
-		<button id="p_three">PLAN3</button>
-		<div id="map"></div>
+
+		<div th:each="xy:${xy}">
+			<span th:text="${xy.planx}"></span>
+			<span th:text="${xy.plany}"></span><br><br>
+		</div>
+		<div th:each="xy:${xy}">
+			<span th:text="${xy.locationx}"></span>
+			<span th:text="${xy.locationy}"></span>
+		</div>
+		
+		<div id="map" style="width:100%;height:350px;"></div>
+		
         
         
       </div> <!-- .col-md-8 -->
@@ -198,7 +99,7 @@ $(document).ready(function(){
             <div class="text">
               <h3 class="heading"><a href="#" th:text="${custid}"></a></h3>
               <p>MBTI 자리</p>
-              <div class="meta_p">
+              <div class="meta">
                 <div><span class="fa fa-calendar"><span th:text="| ${#dates.format(birth, 'yyyy')}년생|"></span></span></div>
                 <div><span class="fa fa-venus-mars"><span th:text="| ${gender}|"></span></span></div>
                 <div><span class="fa fa-globe"><span th:text="| ${country}|"></span></span></div>
@@ -206,36 +107,90 @@ $(document).ready(function(){
             </div>
           </div>
           <a href="#" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">동행 신청하기</a><br><br>
+          <a href="/chat" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">Chatting</a><br><br>
         </div>
         
         <div id="donglechat"><iframe src="https://service.dongledongle.com/bdb97" frameborder="0" width="100%" height="500"></iframe></div>
-        
-        
-       <!-- <div class="sidebar-box ftco-animate">
-          <h3>QnA</h3>
-          <div class="block-21 mb-4 d-flex">
-            <div class="text">
-              <h5 class="heading"><a href="#">QnA title/text</a></h5>
-              <div class="meta">
-                <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
-                <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>
-                <div><a href="#"><span class="fa fa-comment"></span> 19</a></div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        
-
-        <!-- <div class="sidebar-box ftco-animate">
-          <h3>Recommend</h3>
-          <div class="tagcloud" th:each="city:${citylist}" style="display:inline-block">
-            <a th:href="@{/cityshotel(cityid=${city.cityid})}" class="tag-cloud-link" th:text="${city.name}">서울</a>
-            
-          </div>
-        </div> -->
         
       </div>
 
     </div>
   </div>
 </section> <!-- .section -->
+</body>
+
+<script>
+$(document).ready(function(){
+	$('#donglechat').hide();
+	/* $('#websoket').hide(); */
+	
+	$('#accom_btn').click(function(){
+		$('#donglechat').show();
+		/* $('#websoket').show(); */
+	})
+});
+
+
+/* KaKaoMap Start */
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.543858, 126.668044), // 지도의 중심좌표
+        level: 4 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 
+// 마커를 표시할 위치와 title 객체 배열입니다 
+var positions = [
+    {
+        title: '교촌', 
+        latlng: new kakao.maps.LatLng(33.542639, 126.668572)
+    },
+    {
+        title: '스타벅스', 
+        latlng: new kakao.maps.LatLng(33.542495, 126.667400)
+    }
+];
+
+	$.ajax({
+		url:'/map',
+		success: function(data){
+			
+		},
+		/* error : function(){
+			alert('');
+		}, */
+		async: false
+	})
+
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+}
+
+function map(){
+	$.ajax({
+		url:'/map',
+		success:function(data){
+			displaymap(data);
+		}
+	})
+}
+
+
+</script>
