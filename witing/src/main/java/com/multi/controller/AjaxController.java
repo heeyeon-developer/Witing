@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.multi.dto.CityDTO;
 import com.multi.dto.CustDTO;
 import com.multi.dto.LikeDTO;
+import com.multi.dto.PlanDTO;
 import com.multi.service.CityService;
 import com.multi.service.CustService;
 import com.multi.service.LikeService;
+import com.multi.service.PlanService;
 
 @RestController
 public class AjaxController {
@@ -27,6 +29,8 @@ public class AjaxController {
 	LikeService like_service;
 	@Autowired
 	CityService city_service;
+	@Autowired
+	PlanService plan_service;
 	
 	@RequestMapping("/idcheck")
 	public Object idcheck(String id) {
@@ -92,5 +96,19 @@ public class AjaxController {
 			e.printStackTrace();
 		}
 		return likelist;
+	}
+	
+	@RequestMapping("/map")
+	public Object map(Model model, int accomid) {
+		List<PlanDTO> data = null;
+		try {
+			data = plan_service.xy(accomid);
+			System.out.println(data);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return data;
 	}
 }

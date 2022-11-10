@@ -38,6 +38,7 @@ public class PlanController {
 			model.addAttribute("custid", list.get(0).getCustid());
 			model.addAttribute("birth", list.get(0).getBirth());
 			model.addAttribute("text", list.get(0).getText());
+			model.addAttribute("accomid",accomid);
 			
 			/*
 			model.addAttribute("planname", list.get(0).getPlanname());
@@ -58,19 +59,6 @@ public class PlanController {
 	public String chat(Model model) {
 		model.addAttribute("center", "chat");
 		return "index";
-	}
-	
-	@RequestMapping("/map")
-	public String map(Model model, int accomid) {
-		List<PlanDTO> map = null;
-		try {
-			map = service.xy(accomid);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return "";
 	}
 
 	@RequestMapping("/getmarker")

@@ -9,6 +9,7 @@ var leapYear=[31,29,31,30,31,30,31,31,30,31,30,31];
 var notLeapYear=[31,28,31,30,31,30,31,31,30,31,30,31];
 var pageFirst = first;
 var pageYear;
+var tdGroup = [];
 
 if(first.getFullYear() % 4 === 0){
     pageYear = leapYear;
@@ -29,11 +30,10 @@ function prev(){
         pageFirst = new Date(first.getFullYear(), first.getMonth()-1, 1);
         first = pageFirst;
     }
-    today = new Date(today.getFullYear(), today.getMonth()-1, today.getDate());
+    today = new Date(today.getFullYear(), today.getMonth()-1, 1);
     currentTitle.innerHTML = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'+ first.getFullYear();
     removeCalendar();
     showCalendar();
-    showMain();
     clickedDate1 = document.getElementById(today.getDate());
     clickedDate1.classList.add('active');
     clickStart();
@@ -53,15 +53,21 @@ function next(){
         pageFirst = new Date(first.getFullYear(), first.getMonth()+1, 1);
         first = pageFirst;
     }
-    today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+    today = new Date(today.getFullYear(), today.getMonth() + 1, 1);
     currentTitle.innerHTML = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'+ first.getFullYear();
     removeCalendar();
     showCalendar(); 
-    showMain();
-    clickedDate1 = document.getElementById(today.getDate());
-    clickedDate1.classList.add('active');  
     clickStart();
+    clickedDate1 = document.getElementById(today.getDate());
+    clickedDate1.classList.add('active');     
     reshowingList();
+}
+
+function clickStart(){
+    for(let i = 1; i <= pageYear[first.getMonth()]; i++){
+        tdGroup[i] = document.getElementById(i);
+        tdGroup[i].addEventListener('click',changeToday);
+    }
 }
 
 function showCalendar(){
@@ -109,14 +115,16 @@ var prevBtn = document.getElementById('prev');
 var nextBtn = document.getElementById('next');
 prevBtn.addEventListener('click',prev);
 nextBtn.addEventListener('click',next);
-var tdGroup = [];
 
-function clickStart(){
-    for(let i = 1; i <= pageYear[first.getMonth()]; i++){
-        tdGroup[i] = document.getElementById(i);
-        tdGroup[i].addEventListener('click',changeToday);
+var sdate = new Date();
+
+function paintDate(){
+	for(let i = sdate.getDate(); i < today.getDate(); i++){
+		tdGroup[i].classList.add('active');
     }
 }
+
+
 function changeToday(e){
     for(let i = 1; i <= pageYear[first.getMonth()]; i++){
         if(tdGroup[i].classList.contains('active')){
@@ -134,15 +142,19 @@ function changeToday(e){
     	$('#edate').val('');
     	$('#sdate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
     }else{
-    	$('#edate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
+    	sdate = new Date($('#sdate').val());
+    	if(sdate.getFullYear() <= today.getFullYear() && sdate.getMonth() <= today.getMonth() && sdate.getDate() < today.getDate()){
+    	  paintDate();
+    	  $('#edate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
+    	}else{ 
+    	  $('#sdate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
+    	}
     }
     	
     showMain();
     keyValue = today.getFullYear() + '' + today.getMonth()+ '' + today.getDate();
     
-    reshowingList();
-    datecnt++;
-    
+    reshowingList();    
 }
 
 $(document).ready(function(){
