@@ -49,4 +49,10 @@ public class PostService implements MyService<Integer, PostDTO>{
 		return mapper.hotelqnaall(hotelid);
 	}
 
+	public PostDTO selectanswer(int postid) throws Exception {
+		return mapper.selectanswer(postid);
+	}
+	public PostDTO answercheck(int toppostid) throws Exception {
+		return mapper.answercheck(toppostid);
+	}
 }

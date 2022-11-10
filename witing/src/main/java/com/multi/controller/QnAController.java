@@ -35,6 +35,9 @@ public class QnAController {
 		try {
 			CustDTO cust = custservice.get(custid);
 			List<PostDTO> list = postservice.myqna(custid);
+			int toppostid = list.get(0).getPostid();
+			PostDTO post = postservice.answercheck(toppostid);
+			model.addAttribute("answer", post);
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
 			model.addAttribute("pagename", "Q&A");
 			model.addAttribute("cust", cust);
@@ -49,14 +52,37 @@ public class QnAController {
 	
 	@RequestMapping("/qnadetail")
 	public String qnadetail(Model model, int postid) {
+		int toppostid = postid;
+		PostDTO post = null;
+		PostDTO answer = null;
 		try {
-			PostDTO post = postservice.get(postid);
+			post = postservice.get(postid);
+			answer = postservice.selectanswer(toppostid);
 			model.addAttribute("imgpath", "/images/qnadetailimg.jpg");
 			model.addAttribute("pagename", "My Page");
 			model.addAttribute("pagename", "Q&A");
 			model.addAttribute("cust", post);  /* mypageindex와 파라미터 맞춰주기 위한 것 */ 
 			model.addAttribute("qnadetail", post);
+			model.addAttribute("answer", answer);
 			model.addAttribute("mpcenter", "qnadetail");
+			model.addAttribute("center", "mypageindex");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
+	@RequestMapping("/deleteqna")
+	public String qnadelete(Model model, int postid, String custid) {
+		try {
+			postservice.remove(postid);
+			CustDTO cust = custservice.get(custid);
+			List<PostDTO> list = postservice.myqna(custid);
+			model.addAttribute("list", list);
+			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
+			model.addAttribute("pagename", "Q&A"); 
+			model.addAttribute("cust", cust);
+			model.addAttribute("mpcenter", "qna");
 			model.addAttribute("center", "mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,12 +119,17 @@ public class QnAController {
 	
 	@RequestMapping("/qnasendimpl")
 	public String qnasendimpl(Model model, PostDTO qna) {
+		System.out.println("postid : "+qna.getPostid());
+		System.out.println("custid : "+qna.getCustid());
+		System.out.println("title : "+qna.getTitle());
+		System.out.println("text : "+qna.getText());
+		System.out.println(qna);
 		try {
 			postservice.register(qna);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:room?hotelid="+qna.getHotelid();
+		return "redirect:qnamore?hotelid="+qna.getHotelid();
 	}
 	
 	@RequestMapping("/qnamore")
@@ -116,12 +147,16 @@ public class QnAController {
 	}
 	@RequestMapping("/qnamoredetail")
 	public String qnamoredetail(Model model, int postid) {
+		int toppostid = postid;
 		PostDTO post = null;
+		PostDTO answer = null;
 		
 		try {
 			post = postservice.get(postid);
+			answer = postservice.selectanswer(toppostid);
 			System.out.println(post);
 			model.addAttribute("qnadetail",post);
+			model.addAttribute("answer", answer);
 			model.addAttribute("center", "qnamoredetail");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -129,6 +164,7 @@ public class QnAController {
 		
 		return "index";
 	}
+	
 	
 
 }

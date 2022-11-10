@@ -6,13 +6,20 @@
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
   
 <script>
+function del(postid){
+	var custid = '[[${session.logincust.custid}]]';	// 사용자의 id
+	var c = confirm('삭제 하시겠습니까?');
+	if(c == true){
+	location.href='/deleteqna?postid='+postid+'&custid='+custid;	// delete에게 삭제하고자 하는 카트의 id와 사용자의 id를 보낸다.  
 
+	}
+}
 </script>
 
 <style>
 	#td_text{
-		border-top: solid #BDBDBD 1px;
-		border-bottom: solid #BDBDBD 1px;
+		/* border-top: solid #BDBDBD 1px;
+		border-bottom: solid #BDBDBD 1px; */
 		padding-top: 20px;
 		padding-bottom: 20px;
 		
@@ -20,120 +27,19 @@
 	
 </style>
 
-<!-- 개인정보 눌렀을 때 비밀번호 입력 모달 -->
-<!-- <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-2sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div>비밀번호를 입력해주세요 : )</div>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-        <form id="infoenter_form">
-          <div class="form-group">
-            <input id="custpwd" type="password" class="form-control" placeholder="Password" name="custpwd">
-          </div>
-          </form>
-          <p></p>
-        </div>
-        <div class="modal-footer">
-		<a th:href="@{/custdetail(custid=${session.logincust.custid})}">
-		<a href=#>
-          <button id="infoenter_btn" type="button" class="btn btn-default" style="background-color: #f15d30; color: white">Submit</button>
-        </a>
-        </div>
-      </div>
-    </div>
-</div> -->
-<!-- 모달 끝 -->
-
-<!-- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg')">
-  <div class="container">
-    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
-      <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a th:href="@{/mypage(custid=${qnadetail.custid})}">My Page <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2">Q&A <i class="fa fa-chevron-right"></i></span></p>
-       <h1 class="mb-0 bread">Q&A</h1>
-     </div>
-   </div>
- </div>
-</section>
-
-<section class="ftco-section ftco-no-pb contact-section mb-4">
-  <div class="container">
-    <div class="row d-flex contact-info">
-      <div data-toggle="modal" data-target="#myModal" class="col-md-2 d-flex" style="cursor:pointer;">
-        <div class="align-self-stretch box p-4 text-center" style="background : white"> 
-        <div class="icon d-flex align-items-center justify-content-center">
-         <span class="fa fa-user"></span>
-       </div>
-       <h3 class="mb-2">Information</h3>
-     </div> 
-   </div>
-   
-   <div class="col-md-2 d-flex" th:onclick="|location.href='@{/coupon(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
-     <div class="align-self-stretch box p-4 text-center" style="background : white">
-      <div class="icon d-flex align-items-center justify-content-center">
-       <span class="fa fa-ticket"></span>
-     </div>
-     <h3 class="mb-2">Coupon</h3>
-   </div>
- </div>
- 
- 
- <div class="col-md-2 d-flex" th:onclick="|location.href='@{/like(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
-   <div class="align-self-stretch box p-4 text-center" style="background : white">
-    <div class="icon d-flex align-items-center justify-content-center">
-     <span class="fa fa-heart"></span>
-   </div>
-   <h3 class="mb-2">Wishlist </h3>
- </div>
-</div>
-
-
-<div class="col-md-2 d-flex" th:onclick="|location.href='@{/reservation(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center" style="background : white">
-  <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-bed"></span>
- </div>
- <h3 class="mb-2">Reservation</h3>
-</div>
-</div>
-
-
-<div class="col-md-2 d-flex" th:onclick="|location.href='@{/review(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center" style="background : white">
-  <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-comment"></span>
- </div>
- <h3 class="mb-2">Review</h3>
-</div>
-</div>
-
-
-<div class="col-md-2 d-flex" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center" style="background : white">
-  <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-question"></span>
- </div>
- <h3 class="mb-2">Q&A</h3>
-</div>
-</div>
-
-</div>
-</div>
-</section> -->
-
 <section class="ftco-section contact-section ftco-no-pt">
   <div class="container">
     <div class="row block-9">
-      <div class="col-md-12 order-md-last d-flex">
+    
+<!-- 질문 -->
+      <div class="col-md-12 order-md-last"  style="border: solid lightgray 1px; padding: 40px">
        <div class=" p-6">
        	<table class="container">
        		<thead>
        			<tr class="row">
        				<th colspan="2" style="width:600px; padding-left:15px">
        					<h3 style="width: 100%; padding-bottom: 15px">
+       						<span>Q.</span>
        						<strong th:text="${qnadetail.title}" style="width: 100%"></strong>
        					</h3>
        				</th>
@@ -151,18 +57,57 @@
        	
        		<tbody>
        			<tr>
-       				<td id="td_text" colspan="2" th:text="${qnadetail.text}+'아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아'" ></td>
+       				<td id="td_text" colspan="2" th:text="${qnadetail.text}" ></td>
        			</tr>
        		</tbody>
        	
        	</table>
        	<div>
        		<button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|"> 목록</button>
-       		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px"> 삭제</button>
+       		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px" th:onclick="del([[${qnadetail.postid}]]);"> 삭제</button>
        	</div>
-   
        </div>
       </div>
+<!-- 질문 끝 -->
+      
+<!-- 답변 -->
+      <div class="col-md-12 order-md-last "  style="border: solid lightgray 1px; padding: 40px" th:if="${answer != null}">
+       <div class=" p-6">
+       	<table class="container">
+       		<thead>
+       			<tr class="row">
+       				<th colspan="2" style="width:600px; padding-left:15px">
+       					<h3 style="width: 100%; padding-bottom: 15px">
+       						<span>A.</span>
+       						<strong th:text="${answer.title}" style="width: 100%"></strong>
+       					</h3>
+       				</th>
+       				
+       			</tr>
+       			
+       			<tr>
+       				<th th:text="'작성자 : '+${answer.adminid}"></th>
+       				<th th:text="${#dates.format(answer.rdate,'yyyy-MM-dd HH:mm')}" style="text-align : right; padding-right:20px"></th>
+       			</tr>
+       			<tr colspan="2">
+       				<th>&nbsp</th>
+       			</tr>
+       		</thead>
+       	
+       		<tbody>
+       			<tr>
+       				<td id="td_text" colspan="2" th:text="${answer.text}" ></td>
+       			</tr>
+       		</tbody>
+       	
+       	</table>
+       	<div>
+       		<!-- <button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|"> 목록</button>
+       		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px" th:onclick="del([[${qnadetail.postid}]]);"> 삭제</button> -->
+       	</div>
+       </div>
+      </div>
+<!-- 답변 끝 -->
    </div>
  </div>
 </section>

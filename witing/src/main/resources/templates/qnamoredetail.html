@@ -11,8 +11,8 @@
 
 <style>
 	#td_text{
-		border-top: solid #BDBDBD 1px;
-		border-bottom: solid #BDBDBD 1px;
+		/* border-top: solid #BDBDBD 1px;
+		border-bottom: solid #BDBDBD 1px; */
 		padding-top: 20px;
 		padding-bottom: 20px;
 		
@@ -38,13 +38,15 @@
 <section class="ftco-section contact-section" >
   <div class="container">
     <div class="row block-9">
-      <div class="col-md-12 order-md-last d-flex">
+<!-- 질문 -->
+      <div class="col-md-12 order-md-last" style=" background-color: #F6F6F6; padding: 40px">
        <div class=" p-6">
        	<table class="container">
        		<thead>
        			<tr class="row">
        				<th colspan="2" style="width:600px; padding-left:15px">
        					<h3 style="width: 100%; padding-bottom: 15px">
+       						<span>Q.</span>
        						<strong th:text="${qnadetail.title}" style="width: 100%"></strong>
        					</h3>
        				</th>
@@ -60,20 +62,55 @@
        			</tr>
        		</thead>
        	
-       		<tbody>
+       		<tbody style="background-color: #EAEAEA">
        			<tr>
-       				<td id="td_text" colspan="2" th:text="${qnadetail.text}+'아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아'" ></td>
+       				<td id="td_text" colspan="2" th:text="${qnadetail.text}" ></td>
        			</tr>
        		</tbody>
        	
        	</table>
        	<div>
        		<button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px"> <a th:href="@{/qnamore(hotelid=${qnadetail.hotelid})}" style="color:white">목록</a></button>
-       		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px"> 삭제</button> 
+       		<!-- <button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px"> 삭제</button>  -->
        	</div>
-   
        </div>
       </div>
+<!-- 질문 끝 -->
+
+<!-- 답변 -->
+      <div class="col-md-12 order-md-last "  style="background-color: #F6F6F6; padding: 40px" th:if="${answer != null}">
+       <div class=" p-6">
+       	<table class="container">
+       		<thead>
+       			<tr class="row">
+       				<th colspan="2" style="width:600px; padding-left:15px">
+       					<h3 style="width: 100%; padding-bottom: 15px">
+       						<span>A.</span>
+       						<strong th:text="${answer.title}" style="width: 100%"></strong>
+       					</h3>
+       				</th>
+       				
+       			</tr>
+       			
+       			<tr>
+       				<th th:text="'작성자 : '+${answer.adminid}"></th>
+       				<th th:text="${#dates.format(answer.rdate,'yyyy-MM-dd HH:mm')}" style="text-align : right; padding-right:20px"></th>
+       			</tr>
+       			<tr colspan="2">
+       				<th>&nbsp</th>
+       			</tr>
+       		</thead>
+       	
+       		<tbody style="background-color: #EAEAEA">
+       			<tr>
+       				<td id="td_text" colspan="2" th:text="${answer.text}" ></td>
+       			</tr>
+       		</tbody>
+       	
+       	</table>
+       </div>
+      </div>
+<!-- 답변 끝 -->
    </div>
  </div>
 </section>
