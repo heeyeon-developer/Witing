@@ -50,9 +50,14 @@ public class ReservationController {
 	@RequestMapping("/reservationlist")
 	public String reservationlist(Model model, String custid) {
 		try {
+			CustDTO cust = custservice.get(custid);
 			List<ReservationDTO> list = reservationservice.custreserv(custid);
+			model.addAttribute("cust", cust);
+			model.addAttribute("imgpath", "images/hotel/gyeongju2.jpg");
+			model.addAttribute("pagename","Reservation");
 			model.addAttribute("list",list);
-			model.addAttribute("center","reservationlist");
+			model.addAttribute("mpcenter", "reservationlist");
+			model.addAttribute("center","mypageindex");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -27,9 +27,13 @@ public class LikeController {
 		try {
 			CustDTO cust = custservice.get(custid);
 			list = service.likehotel(custid);
+			model.addAttribute("imgpath", "images/hotel/gyeongju2.jpg");
+			model.addAttribute("pagename", "Wishlist");
+			model.addAttribute("cust", cust);
 			model.addAttribute("like", cust);
 			model.addAttribute("list", list);
-			model.addAttribute("center", "like");
+			model.addAttribute("mpcenter", "like");
+			model.addAttribute("center", "mypageindex");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

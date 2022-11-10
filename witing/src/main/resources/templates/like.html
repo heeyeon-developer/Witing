@@ -1,21 +1,6 @@
 <meta charset="utf-8">
 <script>
-$(document).ready(function(){
-	$('#infoenter_btn').click(function(){
-			$('#infoenter_form').attr({
-				'method':'post',
-				'action':'[[@{/custdetail(custid=${like.custid})}]]'
-			});
-			$('#infoenter_form').submit();
-		
-	});
-	
-	var status = "[[${status}]]";
-	
-	if(status=="0"){
-		alert("비밀번호가 틀렸습니다 :(");
-	}
-});
+
 
 function del(like_id){
 	var cust_id='[[${session.logincust.custid}]]';
@@ -34,7 +19,7 @@ function del(like_id){
 </style>
 
 
-<div class="modal fade" id="myModal" role="dialog">
+<!-- <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-2sm">
       <div class="modal-content">
         <div class="modal-header">
@@ -51,17 +36,17 @@ function del(like_id){
           <p></p>
         </div>
         <div class="modal-footer">
-		<!-- <a th:href="@{/custdetail(custid=${session.logincust.custid})}"> -->
+		<a th:href="@{/custdetail(custid=${session.logincust.custid})}">
 		<a href=#>
           <button id="infoenter_btn" type="button" class="btn btn-default" style="background-color: #f15d30; color: white">Submit</button>
         </a>
         </div>
       </div>
     </div>
-</div>
+</div> -->
 <!-- 모달 끝 -->
 
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/hotel/gyeongju2.jpg')">
+<!-- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/hotel/gyeongju2.jpg')">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
@@ -135,7 +120,7 @@ function del(like_id){
 
 </div>
 </div>
-</section>
+</section> -->
 
 
 <section class="ftco-section contact-section ftco-no-pt" style="color: white">

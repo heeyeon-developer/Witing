@@ -108,8 +108,8 @@
               
               <table>
               	<tbody th:each=li:${qnalist5}>
-				<tr style="cursor: pointer; color: gray">
-				<ul style="padding-left: 20px; margin-bottom: 0">
+				<tr >
+				<ul style="padding-left: 20px; margin-bottom: 0; cursor: pointer; color: gray" th:onclick="|location.href='@{/qnamoredetail(postid=${li.postid})}'|">
 					<li th:text="${li.title}" ><td th:text="${li.title}" style="text-align: left"></td></li>
 				</ul>
 				</tr>
