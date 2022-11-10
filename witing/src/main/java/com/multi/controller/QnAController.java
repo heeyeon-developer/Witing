@@ -35,9 +35,17 @@ public class QnAController {
 		try {
 			CustDTO cust = custservice.get(custid);
 			List<PostDTO> list = postservice.myqna(custid);
-			int toppostid = list.get(0).getPostid();
-			PostDTO post = postservice.answercheck(toppostid);
-			model.addAttribute("answer", post);
+//			int toppostid = list.get(0).getPostid();
+//			PostDTO post = postservice.answercheck(toppostid);
+			
+			for(int i=0; i<list.size(); i++) {
+				if(postservice.answercheck(list.get(i).getPostid()) != null) {
+					list.get(i).setAnswer("답변완료");
+				}else {
+					list.get(i).setAnswer("답변미완료");
+				}
+			}
+//			model.addAttribute("answer", post);
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
 			model.addAttribute("pagename", "Q&A");
 			model.addAttribute("cust", cust);

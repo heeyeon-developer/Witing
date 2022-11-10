@@ -36,7 +36,7 @@
 			<td th:text="${li.title}" style="text-align: center"></td>
 			<td th:text="${li.custid}" style="text-align: right"></td>
 			<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: right"></td>
-			<td th:if="${answer != null}">답변완료</td>
+			<td th:text="${li.answer}">답변완료</td>
 		</tr>
 		</tbody>
 	</table>
