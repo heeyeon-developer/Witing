@@ -13,5 +13,6 @@ import com.multi.frame.MyMapper;
 @Mapper
 public interface PlanMapper extends MyMapper<Integer, PlanDTO> {
 	public List<PlanDTO> plandetail(int accomid);
+	public List<PlanDTO> xy(int accomid);
 
 }

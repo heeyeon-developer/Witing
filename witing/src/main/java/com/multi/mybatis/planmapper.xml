@@ -26,7 +26,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN cust cu ON ac.custid = cu.custid 
 		WHERE ac.accomid = #{accomid};
 	</select>
-	
-	
+	<select id="xy" parameterType="Integer" resultType="PlanDTO">
+		SELECT ac.accomid, pl.planid, pl.planname, pl.idx, pl.todo, FORMAT(pl.planx,6) AS planx, format(pl.plany,6) AS plany,
+		ac.custid, ac.title, ac.accomtext, ac.traveltime,
+		FORMAT(ac.locationx, 6) AS locationx, FORMAT(ac.locationy, 6) AS locationy FROM plan pl
+		INNER JOIN accompany ac ON pl.accomid = ac.accomid
+		WHERE ac.accomid = #{accomid};
+	</select>
 	 
 </mapper>
