@@ -29,4 +29,5 @@ public class PostDTO {
 	private boolean secret;
 	private int toppostid;
 	
+	private String answer;
 }
