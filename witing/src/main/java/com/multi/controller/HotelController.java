@@ -102,10 +102,12 @@ public class HotelController {
 		List<RoomDTO> list = null;
 		List<CityDTO> city = null;
 		List<PostDTO> post = null;
+		List<PostDTO> post2 = null;
 		try {
 			list = room_service.roomall(hotelid);
 			city = city_service.getall();
 			post = post_service.qnalist5(hotelid);
+			post2 = post_service.reviewlist5(hotelid);
 			model.addAttribute("citylist", city);
 			model.addAttribute("hotelname", list.get(0).getHotelname());
 			model.addAttribute("hotelimg1", list.get(0).getHotelimg1());
@@ -118,6 +120,7 @@ public class HotelController {
 			model.addAttribute("roomid", roomid);
 			model.addAttribute("list", list);
 			model.addAttribute("qnalist5", post);
+			model.addAttribute("reviewlist5", post2);
 			model.addAttribute("center", "room");
 		} catch (Exception e) {
 			e.printStackTrace();
