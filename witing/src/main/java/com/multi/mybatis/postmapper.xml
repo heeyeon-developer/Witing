@@ -36,7 +36,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM post WHERE kind='quest' AND hotelid = #{hotelid}
 		ORDER BY rdate DESC
 	</select>
-	
+	<insert id="qnainsert" parameterType="PostDTO">
+		INSERT INTO post VALUES (NULL, #{custid}, null, #{hotelid}, #{title}, #{text}, null, NOW(),'quest',null,#{secret},#{toppostid})
+	</insert>
+	<insert id="reviewinsert" parameterType="PostDTO">
+		INSERT INTO post VALUES (NULL, #{custid}, null, #{hotelid}, #{title}, #{text}, #{img}, NOW(),'review',#{star},#{secret},null)
+	</insert>
 	<select id="selectanswer" parameterType="Integer" resultType="PostDTO">
 		SELECT * FROM post WHERE kind='answer' AND toppostid = #{postid}
 	</select>
@@ -45,5 +50,22 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM post WHERE kind='answer' AND toppostid = #{toppostid}
 	</select>
 	
+	<select id="myreview" parameterType="String" resultType="PostDTO">
+		SELECT * FROM post WHERE kind='review' AND custid = #{custid}
+	</select>
+	<select id="reviewdetail" parameterType="Integer" resultType="PostDTO">
+		SELECT * FROM post p
+		INNER JOIN hotel h ON p.hotelid = h.hotelid
+		WHERE postid = #{postid};
+	</select>
+	<select id="reviewlist5" parameterType="Integer" resultType="PostDTO">
+		SELECT * FROM post WHERE kind='review' AND hotelid = #{hotelid}
+		ORDER BY rdate DESC
+		LIMIT 5;
+	</select>
+	<select id="hotelreviewall" parameterType="Integer" resultType="PostDTO">
+		SELECT * FROM post WHERE kind='review' AND hotelid = #{hotelid}
+		ORDER BY rdate DESC
+	</select>
 	
 </mapper>

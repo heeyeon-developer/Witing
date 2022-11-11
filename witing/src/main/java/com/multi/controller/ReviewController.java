@@ -3,6 +3,7 @@ package com.multi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +17,9 @@ import com.multi.service.HotelService;
 import com.multi.service.PostService;
 import com.multi.service.RoomService;
 
+
 @Controller
-public class QnAController {
+public class ReviewController {
 	@Autowired
 	CustService custservice;
 	@Autowired
@@ -27,70 +29,60 @@ public class QnAController {
 	@Autowired
 	RoomService roomservice;
 	
+	@Value("${admindir}")
+	String admindir;
+	@Value("${custdir}")
+	String custdir;
 	
-	
-	@RequestMapping("/qna")
-	public String qna(Model model, String custid) {
-		System.out.println(custid);
+	@RequestMapping("/review")
+	public String review(Model model, String custid) {
+		CustDTO cust = null;
+		List<PostDTO> list = null;
 		try {
-			CustDTO cust = custservice.get(custid);
-			List<PostDTO> list = postservice.myqna(custid);
-//			int toppostid = list.get(0).getPostid();
-//			PostDTO post = postservice.answercheck(toppostid);
-			
-			for(int i=0; i<list.size(); i++) {
-				if(postservice.answercheck(list.get(i).getPostid()) != null) {
-					list.get(i).setAnswer("답변완료");
-				}else {
-					list.get(i).setAnswer("미완료");
-				}
-			}
-//			model.addAttribute("answer", post);
+			cust = custservice.get(custid);
+			list = postservice.myreview(custid);
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
-			model.addAttribute("pagename", "Q&A");
+			model.addAttribute("pagename", "Review");
 			model.addAttribute("cust", cust);
 			model.addAttribute("list", list);
-			model.addAttribute("mpcenter", "qna");
+			model.addAttribute("mpcenter", "review");
 			model.addAttribute("center", "mypageindex");
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return "index";
 	}
-	
-	@RequestMapping("/qnadetail")
-	public String qnadetail(Model model, int postid) {
-		int toppostid = postid;
+	@RequestMapping("/reviewdetail")
+	public String reviewdetail(Model model, int postid) {
 		PostDTO post = null;
-		PostDTO answer = null;
 		try {
-			post = postservice.get(postid);
-			answer = postservice.selectanswer(toppostid);
-			model.addAttribute("imgpath", "/images/qnadetailimg.jpg");
-			model.addAttribute("pagename", "My Page");
-			model.addAttribute("pagename", "Q&A");
-			model.addAttribute("cust", post);  /* mypageindex와 파라미터 맞춰주기 위한 것 */ 
-			model.addAttribute("qnadetail", post);
-			model.addAttribute("answer", answer);
-			model.addAttribute("mpcenter", "qnadetail");
+			post = postservice.reviewdetail(postid);
+			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
+			model.addAttribute("pagename", "Review");
+			model.addAttribute("cust", post); /* mypageindex와 파라미터를 맞추기 위함 */
+			model.addAttribute("reviewdetail", post);
+			model.addAttribute("mpcenter", "reviewdetail");
 			model.addAttribute("center", "mypageindex");
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return "index";
 	}
-	
-	@RequestMapping("/deleteqna")
+	@RequestMapping("/deletereview")
 	public String qnadelete(Model model, int postid, String custid) {
 		try {
 			postservice.remove(postid);
 			CustDTO cust = custservice.get(custid);
-			List<PostDTO> list = postservice.myqna(custid);
+			List<PostDTO> list = postservice.myreview(custid);
 			model.addAttribute("list", list);
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
-			model.addAttribute("pagename", "Q&A"); 
+			model.addAttribute("pagename", "Review"); 
 			model.addAttribute("cust", cust);
-			model.addAttribute("mpcenter", "qna");
+			model.addAttribute("mpcenter", "review");
 			model.addAttribute("center", "mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,8 +90,8 @@ public class QnAController {
 		return "index";
 	}
 	
-	@RequestMapping("/writeqna")
-	public String writeqna(Model model,Integer hotelid,Integer roomid,String hotelname,
+	@RequestMapping("writereview")
+	public String writereview(Model model,Integer hotelid,Integer roomid,String hotelname,
 			String roomimg1,String roomimg2,String roomimg3,String roomimg4,String hotelimg1,
 			String roomtype1,String roomtype2) {
 		List<RoomDTO> list = null;
@@ -117,62 +109,45 @@ public class QnAController {
 			model.addAttribute("roomtype2", list.get(1).getRoomtype());
 			model.addAttribute("roomid", roomid);
 			model.addAttribute("list", list);
-			model.addAttribute("center", "writeqna");
+			model.addAttribute("center", "writereview");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return "index";
 	}
-	
-	@RequestMapping("/qnasendimpl")
-	public String qnasendimpl(Model model, PostDTO qna) {
-		System.out.println("postid : "+qna.getPostid());
-		System.out.println("custid : "+qna.getCustid());
-		System.out.println("title : "+qna.getTitle());
-		System.out.println("text : "+qna.getText());
-		System.out.println(qna);
+	@RequestMapping("/reviewsendimpl")
+	public String reviewsendimpl(Model model, PostDTO review) {
+		
 		try {
-			postservice.qnainsert(qna);
+			postservice.reviewinsert(review);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:qnamore?hotelid="+qna.getHotelid();
+		return "redirect:reviewmore?hotelid="+review.getHotelid();
 	}
 	
-	@RequestMapping("/qnamore")
-	public String qnamore(Model model, Integer hotelid) {
+	@RequestMapping("/reviewmore")
+	public String reviewmore(Model model, Integer hotelid) {
 		List<PostDTO> list = null;
 		try {
-			list = postservice.hotelqnaall(hotelid);
-			for(int i=0; i<list.size();i++) {
-				if(postservice.answercheck(list.get(i).getPostid()) != null) {
-					list.get(i).setAnswer("답변완료");
-				}else {
-					list.get(i).setAnswer("미완료");
-				}
-			}
+			list = postservice.hotelreviewall(hotelid);
+			
 			model.addAttribute("list", list);
-			model.addAttribute("center", "qnamore");
+			model.addAttribute("center", "reviewmore");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		return "index";
 	}
-	@RequestMapping("/qnamoredetail")
-	public String qnamoredetail(Model model, int postid) {
-		int toppostid = postid;
+	@RequestMapping("/reviewmoredetail")
+	public String reviewmoredetail(Model model, int postid) {
 		PostDTO post = null;
-		PostDTO answer = null;
-		
 		try {
-			post = postservice.get(postid);
-			answer = postservice.selectanswer(toppostid);
-			System.out.println(post);
-			model.addAttribute("qnadetail",post);
-			model.addAttribute("answer", answer);
-			model.addAttribute("center", "qnamoredetail");
+			post = postservice.reviewdetail(postid);
+			model.addAttribute("reviewdetail",post);
+			model.addAttribute("center", "reviewmoredetail");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

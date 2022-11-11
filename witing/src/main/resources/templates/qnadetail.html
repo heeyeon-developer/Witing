@@ -32,7 +32,7 @@ function del(postid){
     <div class="row block-9">
     
 <!-- 질문 -->
-      <div class="col-md-12 order-md-last"  style="border: solid lightgray 1px; padding: 40px">
+      <div class="col-md-12 order-md-last"  style="background-color: #F6F6F6; padding: 40px">
        <div class=" p-6">
        	<table class="container">
        		<thead>
@@ -55,7 +55,7 @@ function del(postid){
        			</tr>
        		</thead>
        	
-       		<tbody>
+       		<tbody style="background-color: #EAEAEA; height: 100px">
        			<tr>
        				<td id="td_text" colspan="2" th:text="${qnadetail.text}" ></td>
        			</tr>
@@ -71,7 +71,7 @@ function del(postid){
 <!-- 질문 끝 -->
       
 <!-- 답변 -->
-      <div class="col-md-12 order-md-last "  style="border: solid lightgray 1px; padding: 40px" th:if="${answer != null}">
+      <div class="col-md-12 order-md-last "  style="background-color: #F6F6F6; padding: 40px" th:if="${answer != null}">
        <div class=" p-6">
        	<table class="container">
        		<thead>
@@ -94,7 +94,7 @@ function del(postid){
        			</tr>
        		</thead>
        	
-       		<tbody>
+       		<tbody style="background-color: #EAEAEA; height: 100px">
        			<tr>
        				<td id="td_text" colspan="2" th:text="${answer.text}" ></td>
        			</tr>
