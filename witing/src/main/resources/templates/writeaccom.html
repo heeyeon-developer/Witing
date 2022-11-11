@@ -18,10 +18,10 @@
 	margin-bottom: 20px;
 }
 
-.col-5 mb-3{
+/* .col-5 mb-3{
 	padding-left: 0;
 	padding-right: 0;
-}
+} */
 
 #writeaccom{
 	float: center;
@@ -31,28 +31,160 @@
 	font-weight: bold;
 }
 
-#add_icon, #minus_icon, #minus_icon2{
+#add_icon, #minus_icon, #minus_icon3{
 	font-size: 25px;
 	color: #f15d30;
 	padding-top: 10px;
 }
+
+#sample4_roadAddress{
+	width: 300px;
+	display:inline-block
+}
+#planname{
+	margin-left: -4px;
+	width: 450px;
+	display:inline-block
+}
+#addr_btn{
+	width:102px;
+	display:inline-block;
+	margin-left: -4px;
+}
 </style>
 
 <script>
-
-/* $(document).ready(function(){
-	$('#savequest_btn').click(function(){
-		var custid = '[[${session.logincust.custid}]]';
-		var itemid = $('#itemid').text();
-		var title = $('#title').val();
-		var quest_text = $('#quest_text').val();
-		location.href="[[@{/registerquest?custid=}]]"+custid+"&[[@{itemid=}]]"+itemid+"&[[@{title=}]]"+title+"&[[@{quest_text=}]]"+quest_text;
+$(document).ready(function(){
+	$('#writeaccom_btn').click(function(){
+		var c = confirm('등록하시겠습니까?');
+		if(c == true){
+			var custid = '[[${session.logincust.custid}]]';
+			var title = $('#title').val();
+			var cnt = $('#cnt').val();
+			var traveltime = $('#traveltime').val();
+			var idx = $('#idx').val();
+			var planname = $('#planname').val();
+			var todo = $('#todo').val();
+			var accomtext = $('#accomtext').val();
+			location.href="[[@{/accomimpl?custid=}]]"+custid+"&[[@{title=}]]"+title+"&[[@{cnt=}]]"+cnt+"&[[@{traveltime=}]]"+traveltime
+			+"&[[@{idx=}]]"+idx+"&[[@{planname=}]]"+planname+"&[[@{todo=}]]"+todo+"&[[@{accomtext=}]]"+accomtext;
+		};
+		alert("정상적으로 등록되었습니다 : )");
 	});
 	
-	
-	
+	/* $('#writeaccom_btn').click(function(){
+		var c = confirm('등록하시겠습니까?');
+		if(c == true){
+			$('#accom_form').attr({
+				'method':'post',
+				'action':'/accomimpl'
+			});
+			$('#accom_form').submit();
+			alert("정상적으로 등록되었습니다 : )");
+		}
+	}); */
 });
- */
+
+/* var geocoder = new kakao.maps.services.Geocoder();
+
+$("#addr_btn").click(function(){
+	new daum.Postcode({
+        oncomplete: function(data) {
+            $("#addr_btn").val(data.address);
+            $("#addr_btn").prop("readonly",true);
+            $("input[name=place]").val(data.sido);
+            var juso =  $("#address").val();
+        	geocoder.addressSearch(juso, callback);  
+        }
+    }).open()
+});
+
+var callback = function(result, status) {
+    if (status === kakao.maps.services.Status.OK) {
+	$("input[name=planx]").val(result[0].x);
+	$("input[name=plany]").val(result[0].y);
+    }
+}; */
+
+function sample4_execDaumPostcode() {
+     new daum.Postcode({
+         oncomplete: function(data) {
+             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+             // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+             var roadAddr = data.roadAddress; // 도로명 주소 변수
+             var extraRoadAddr = ''; // 참고 항목 변수
+
+             // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+             // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+             if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                 extraRoadAddr += data.bname;
+             }
+             // 건물명이 있고, 공동주택일 경우 추가한다.
+             if(data.buildingName !== '' && data.apartment === 'Y'){
+                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+             }
+             // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+             if(extraRoadAddr !== ''){
+                 extraRoadAddr = ' (' + extraRoadAddr + ')';
+             }
+
+             // 우편번호와 주소 정보를 해당 필드에 넣는다.
+             document.getElementById("sample4_roadAddress").value = roadAddr;
+             
+             // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+             /* if(roadAddr !== ''){
+                 document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+             } else {
+                 document.getElementById("sample4_extraAddress").value = '';
+             } */
+
+             var guideTextBox = document.getElementById("guide");
+             // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+             if(data.autoRoadAddress) {
+                 var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                 guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                 guideTextBox.style.display = 'block';
+
+
+             } else {
+                 guideTextBox.innerHTML = '';
+                 guideTextBox.style.display = 'none';
+             }
+         }
+     }).open();
+ }
+
+ 
+/* $(document).ready(function(){
+	$('#idx2').hide();
+	$('#planname2').hide();
+	$('#todo2').hide();
+	$('#minus_icon').hide();
+	
+	$('#idx3').hide();
+	$('#planname3').hide();
+	$('#todo3').hide();
+	$('#minus_icon3').hide();
+
+	
+ 	$('#add_icon').click(function(){
+		$('#idx2').show();
+		$('#planname2').show();
+		$('#todo2').show();
+		$('#minus_icon').show();
+	})
+	$('#minus_icon').click(function(){
+		$('#idx2').hide();
+		$('#planname2').hide();
+		$('#todo2').hide();
+		$('#minus_icon').hide();
+	})  
+	
+	
+}); */
+
 
 </script>
 
@@ -77,94 +209,104 @@
 
           <form id="accom_form" method="post">
               <div class="row">
+              
+              	<!-- <input type="hidden" name="place">
+				<input type="hidden" name="planx">
+				<input type="hidden" name="plany"> -->
 
-                  <div class="col-6 mb-3">
-                  	 <input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요.">
-                  	 <div class="col-lg d-flex"></div>
-                  </div>
-                  <div class="col-2 mb-3">
-                  	 <div class="form-field">
-                   	 <input type="number" class="form-control" id="cnt" placeholder="동행 인원">
-                   	 <div class="col-lg d-flex"></div>
-					 </div>
-                  </div>
-				  <div class="col-3 mb-3">
-				     <div class="form-field">
+                <div class="col-2 mb-3">
+                  	<input type="text" class="form-control" id="custid" th:value="${session.logincust.custid}" readonly="readonly" name="custid">
+                  	<div class="col-lg d-flex"></div>
+                </div>
+                <div class="col-5 mb-3">
+                	<div class="form-field">
+                  	<input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요." name="title">
+                  	<div class="col-lg d-flex"></div></div>
+                </div>
+                <div class="col-2 mb-3">
+					<div class="form-field">
+					<input type="number" class="form-control" id="cnt" placeholder="동행 모집 인원" name="cnt">
+                   	<div class="col-lg d-flex"></div>
+					</div>
+                </div>
+				<div class="col-2 mb-3">
+					<div class="form-field">
 				      <!-- <div class="icon"><span class="fa fa-calendar"></span></div> -->
-				      <input type="text" class="form-control checkin_date" placeholder="Check In Date" id="traveltime">
-				     </div>
-				   </div>
-				  <div class="col-2 mb-3">
-					<input type="number" class="form-control" id="idx" value="1" readonly="readonly">
+					<input type="text" class="form-control checkin_date" placeholder="Check In Date" id="traveltime" name="traveltime">
+					</div>
+				</div>
+				<div class="col-2 mb-3">
+					<input type="number" class="form-control" id="idx" value="1" readonly="readonly" name="idx">
 					<div class="col-lg d-flex"></div>
-                  </div>
-				  <div class="col-4 mb-3">
-					<div class="form-field2">
-						<input type="text" class="form-control" id="planname" placeholder="장소">
+				</div>
+				<div class="col-9 mb-3">
+					<div class="form-field">
+						<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명 주소">
+						<span id="guide" style="color:#999;display:none"></span>
+						<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname">
+						<input type="button" class="form-control" onclick="sample4_execDaumPostcode()" value="장소 찾기" id="addr_btn"><br>
                     </div>
 					<div class="col-lg d-flex"></div>
-                  </div>
-                  <div class="col-5 mb-3">
-					  <div class="form-field3">
-						<input type="text" class="form-control" id="todo" placeholder="일정">
-					  </div>
-					  <div class="col-lg d-flex"></div>
-				  </div>
+				</div>
+				<div class="col-11 mb-3">
+					<div class="form-field3">
+						<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo">
+					</div>
+					<div class="col-lg d-flex"></div>
+				</div>
                    
                   <a href="#"><i class="fa fa-plus-circle" id="add_icon"></i></a>
              <!-- </div> -->
                     
-                    
-  <!-- <div class="col-2 mb-3">
-                    	<input type="number" class="form-control" id="idx2" value="2" readonly="readonly">
-                    	<div class="col-lg d-flex">
-</div>
-                    </div>
-  <div class="col-4 mb-3">
-  	<div class="form-field2">
-                    	  <input type="text" class="form-control" id="planname2" placeholder="장소">
-                    	</div>
-                    	<div class="col-lg d-flex">
-  </div>
-                    </div>
-                    <div class="col-5 mb-3">
-                    	<div class="form-field3">
-                    	  <input type="text" class="form-control" id="todo2" placeholder="일정">
-                    	  </div>
-                    	<div class="col-lg d-flex">
-  </div>
-                    </div> -->
-                  
+                <!--     
+				<div class="col-2 mb-3">
+					<input type="number" class="form-control" id="idx2" value="2" readonly="readonly">
+					<div class="col-lg d-flex"></div>
+				</div>
+				<div class="col-4 mb-3">
+					<div class="form-field2">
+					<input type="text" class="form-control" id="planname2" placeholder="장소">
+ 					</div>
+					<div class="col-lg d-flex"></div>
+				</div>
+				<div class="col-5 mb-3">
+  					<div class="form-field3">
+					<input type="text" class="form-control" id="todo2" placeholder="일정">
+					</div>
+					<div class="col-lg d-flex"></div>
+				</div> 
 
 					<i class="fa fa-minus-circle" id="minus_icon"></i>
 
 
- <!-- <div class="col-2 mb-3">
-                    	<input type="number" class="form-control" id="idx3" value="3" readonly="readonly">
-                    	<div class="col-lg d-flex">
-</div>
-                    </div>
-  <div class="col-4 mb-3">
-  	<div class="form-field2">
-                    	  <input type="text" class="form-control" id="planname3" placeholder="장소">
-                    	</div>
-                    	<div class="col-lg d-flex">
-  </div>
-                    </div>
-                    <div class="col-5 mb-3">
-                    	<div class="form-field3">
-                    	  <input type="text" class="form-control" id="todo3" placeholder="일정">
-                    	  </div>
-                    	<div class="col-lg d-flex">
-  </div>
-                    </div> -->
-                  
-	                  <div class="col-11 mb-3">
-	                      <textarea id="text" name="comment" class="form-control w-100" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
-	                  </div>
+				<div class="col-2 mb-3">
+					<input type="number" class="form-control" id="idx3" value="3" readonly="readonly">
+					<div class="col-lg d-flex"></div>
+				</div>
+				<div class="col-4 mb-3">
+					<div class="form-field2">
+					<input type="text" class="form-control" id="planname3" placeholder="장소">
+					</div>
+					<div class="col-lg d-flex"></div>
+				</div>
+  				<div class="col-5 mb-3">
+					<div class="form-field3">
+					<input type="text" class="form-control" id="todo3" placeholder="일정">
+					</div>
+					<div class="col-lg d-flex"></div>
+				</div>
+				 -->
+				<!-- <i class="fa fa-minus-circle" id="minus_icon3"></i> -->
+                    
+				<div class="col-11 mb-3">
+					<textarea id="accomtext" class="form-control w-100" cols="30" rows="10" placeholder="내용을 입력해주세요." name="accomtext"></textarea>
+	            </div>
 			</div>
           </form>
           <button id="writeaccom_btn" type="button" class="btn btn-primary">등록하기</button>
       </div>
+
+
+
 </div>
 </section>

@@ -116,7 +116,67 @@ function mapmarker(){
 	})
 }
 
+/* Websocket Start */
+var stompClient = null;
+var id = '[[${session.logincust.custid}]]';
+// 서버소켓에 연결
+function connect() {
+	var socket = new SockJS('http://127.0.0.1/ws');
+	stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, function(frame) { 
+		setConnected(true);
+		console.log('Connected: ' + frame);
+
+		stompClient.subscribe('/send/to/'+id, function(msg) { 
+			$("#to").prepend(
+					"<p>" + JSON.parse(msg.body).sendid +":"+
+					JSON.parse(msg.body).content1
+							+ "</p>");
+		});
+	});
+}
+
+
+// 연결 끊기
+function disconnect() {
+	if (stompClient !== null) {
+		stompClient.disconnect();
+	}
+	setConnected(false);
+	console.log("Disconnected");
+}
+
+// connect&disconnect버튼 활성화/비활성화
+function setConnected(connected) {
+	if (connected) {
+		$("#status").text("Connected");
+	} else {
+		$("#status").text("Disconnected");
+	}
+	
+}
+
+function sendTo() {
+	var msg = JSON.stringify({
+		'sendid' : id,
+		'receiveid' : $('#target').val(),
+		'content1' : $('#totext').val()
+	});
+	stompClient.send('/receiveto', {}, msg);
+}
+
 $(document).ready(function(){
+	$('#del_btn').click(function(){
+		var c = confirm('삭제하시겠습니까?');
+		if(c == true){
+			var planid = $('#planid').text();
+			var accomid = $('#accomid').text();
+			location.href="[[@{/deleteaccom?planid=}]]"+planid+"&[[@{accomid=}]]"+accomid;
+		}
+		alert('정상적으로 삭제되었습니다.');
+	});
+	
 	$('#donglechat').hide();
 	/* $('#websoket').hide(); */
 	
@@ -125,6 +185,16 @@ $(document).ready(function(){
 		/* $('#websoket').show(); */
 	})
 	mapmarker();
+	
+	$("#connect").click(function() {
+		connect();
+	});
+	$("#disconnect").click(function() {
+		disconnect();
+	});
+	$("#sendto").click(function() {
+		sendTo();
+	});
 });
 
 </script>
@@ -136,7 +206,8 @@ $(document).ready(function(){
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
        <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/accompany">Accompany <i class="fa fa-chevron-right"></i></a></span> <span><a href="#">Plan Details <i class="fa fa-chevron-right"></i></a></span></p>
-       <h1 class="mb-0 bread">Plan Details</h1><div id="accomid" style="display:none;" th:text="${accomid}"></div>
+       <h1 class="mb-0 bread">Plan Details</h1>
+       <div id="accomid" style="display:none;" th:text="${accomid}"></div><div id="planid" style="display:none;" th:text="${planid}"></div>
      </div>
    </div>
  </div>
@@ -147,6 +218,8 @@ $(document).ready(function(){
     <div class="row">
       <div class="col-lg-8 ftco-animate py-md-5 mt-md-5">
         <h3 class="mb-3" th:text="${title}" id="plan_title">RoomType</h3>
+           <button type="button" class="btn btn-primary" id="del_btn" style="float: right; margin-top: -50px; margin-right: 65px;"><a th:if="${session.logincust.custid}" style="color:white">삭제</a></button>
+           <button type="button" class="btn btn-primary" style="float: right; margin-top: -50px"><a th:href="@{/accompany}" style="color:white">목록</a></button>
         <div id="planinfo">
         	<i class="fa fa-calendar" id="dateicon"><p th:text="| ${#dates.format(traveltime, 'yyyy-MM-dd HH:mm')}|" id="date"></p></i><br>
         	<i class="fa fa-users" id="user"> <p th:text="|모집인원 : ${cnt}명|" id="cnt"></p></i>
@@ -155,17 +228,7 @@ $(document).ready(function(){
         <div th:each="todo:${list}">
         <i class="fa fa-check" id="check"><span th:text="| ${todo.planname} : ${todo.todo}|" th:id="|plan+${todo.idx}" style="color:black;"></span></i><br>
         </div>
-        <br><p th:text="${text}" style="color:black;"></p>
-        
-
-		<div th:each="xy:${xy}">
-			<span th:text="${xy.planx}"></span>
-			<span th:text="${xy.plany}"></span><br><br>
-		</div>
-		<div th:each="xy:${xy}">
-			<span th:text="${xy.locationx}"></span>
-			<span th:text="${xy.locationy}"></span>
-		</div>
+        <br><p th:text="${accomtext}" style="color:black;"></p>
 		
 		<div id="map" style="width:100%;height:350px;"></div>
 		
@@ -175,7 +238,8 @@ $(document).ready(function(){
       
       
       <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
-        <div class="sidebar-box ftco-animate">
+  
+		<div class="sidebar-box ftco-animate">
           <h3>User</h3>
           <div class="block-21 mb-4 d-flex">
             <a class="blog-img mr-4" style="background-image: url('images/hotel/usercat2.png');"></a>
@@ -191,6 +255,18 @@ $(document).ready(function(){
           </div>
           <a href="#" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">동행 신청하기</a><br><br>
           <a href="/chat" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">Chatting</a><br><br>
+        </div>
+        
+        <div>
+        
+        <H5 th:text="${session.logincust.custid}">ID</H5>
+		<H5 id="status">Status</H5>
+		<button id="connect">Connect</button>
+		<button id="disconnect">Disconnect</button>
+        <h3>To</h3>
+		<div id="to"></div>
+		<input type="text" id="target">
+		<input type="text" id="totext"><button id="sendto">Send</button>
         </div>
         
         <div id="donglechat"><iframe src="https://service.dongledongle.com/bdb97" frameborder="0" width="100%" height="500"></iframe></div>

@@ -1,7 +1,6 @@
 <meta charset="utf-8">
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
   
@@ -15,10 +14,10 @@
        	<table class="table table-hover">
 		<colgroup>
 			<col style="width:12%">
-			<col style="width:50%">
-			<col style="width:15%">
+			<col style="width:55%">
+			<col style="width:20%">
 			<col style="width:13%">
-			<col style="width:10%">
+			
 		</colgroup>
 		
 		<thead>
@@ -27,16 +26,16 @@
 			<th style="text-align: center">Title</th>
 			<th style="text-align: center">Poster ID</th>
 			<th style="text-align: center">Post Date</th>
-			<th style="text-align: center">Answer</th>
+			
 		</tr>
 		</thead>
 		<tbody th:each=li:${list}>
-		<tr th:onclick="|location.href='@{/qnadetail(postid=${li.postid})}'|" style="cursor: pointer">
+		<tr th:onclick="|location.href='@{/reviewdetail(postid=${li.postid})}'|" style="cursor: pointer">
 			<td th:text="${li.postid}" ></td>
 			<td th:text="${li.title}" style="text-align: center"></td>
 			<td th:text="${li.custid}" style="text-align: center"></td>
 			<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: center"></td>
-			<td th:text="${li.answer}" style="text-align: center">답변완료</td>
+			
 		</tr>
 		</tbody>
 	</table>

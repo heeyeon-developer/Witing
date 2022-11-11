@@ -1,13 +1,15 @@
+<link href="/assets/css/star.css" rel="stylesheet"/>
 <script>
 $(document).ready(function(){
 	$('#send_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		if(c == true){
-			$('#qnaform').attr({
+			$('#reviewform').attr({
+				'enctype':'multipart/form-data',
 				'method':'post',
-				'action':'/qnasendimpl'
+				'action':'/reviewsendimpl'
 			});
-			$('#qnaform').submit();
+			$('#reviewform').submit();
 			alert("정상적으로 등록되었습니다 : )");
 		}
 	});
@@ -22,6 +24,35 @@ $(document).ready(function(){
 .mb-3{
 	font-weight: bold;
 }
+#reviewform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#reviewform input[type=radio]{
+    display: none; /* 라디오박스 감춤 */
+}
+#reviewform label{
+    font-size: 3em; /* 이모지 크기 */
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+}
+#reviewform label:hover{
+    text-shadow: 0 0 0 #FFE400; /* 마우스 호버 */
+}
+#reviewform label:hover ~ label{
+    text-shadow: 0 0 0 #FFE400; /* 마우스 호버 뒤에오는 이모지들 */
+}
+#reviewform fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#reviewform fieldset legend{
+    text-align: left;
+}
+#reviewform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #FFE400; /* 마우스 클릭 체크 */
+}
 </style>
 
 <body>
@@ -29,8 +60,8 @@ $(document).ready(function(){
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/hotel">Hotel <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2">Q&A <i class="fa fa-chevron-right"></i></span></p>
-       <h1 class="mb-0 bread">Q&A</h1>
+       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/hotel">Hotel <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2">Review <i class="fa fa-chevron-right"></i></span></p>
+       <h1 class="mb-0 bread">Review</h1>
      </div>
    </div>
  </div>
@@ -80,15 +111,25 @@ $(document).ready(function(){
    </div>
      <div class="col-md-6">
     
-        <form id="qnaform" class=" contact-form" style="padding-top: 0">
+        <form id="reviewform" class=" contact-form" style="padding-top: 0">
+	      <fieldset>
+	        <input type="radio" name="star" value=5 id="rate1"><label for="rate1">⭐</label>
+	        <input type="radio" name="star" value=4 id="rate2"><label for="rate2">⭐</label>
+	        <input type="radio" name="star" value=3 id="rate3"><label for="rate3">⭐</label>
+	        <input type="radio" name="star" value=2 id="rate4"><label for="rate4">⭐</label>
+	        <input type="radio" name="star" value=1 id="rate5"><label for="rate5">⭐</label>
+   		  </fieldset>
+   		  <!-- <div class="form-group">
+			<input type="file" class="form-control" id="img" name="img">
+		  </div> -->
           <div class="form-group">
-            <input id="title" type="text" class="form-control" placeholder="Title" name="title">
+            <input id="title" type="text" class="form-control" placeholder="제목" name="title">
           </div>
           <div class="form-group">
             <input id="custid" type="text" class="form-control" th:value="${session.logincust.custid}" readonly="readonly" name="custid">
           </div>
           <div class="form-group">
-            <textarea id="text" cols="30" rows="7" class="form-control" placeholder="text.." name="text"></textarea>
+            <textarea id="text" cols="30" rows="7" class="form-control" placeholder="내용을 입력하세요." name="text"></textarea>
           </div>
           <div class="form-group">
             <input type="hidden" id="hotelid" cols="30" rows="7" class="form-control" th:value="${list[0].hotelid}" name="hotelid">
@@ -100,7 +141,7 @@ $(document).ready(function(){
             <input id="secret" type="checkbox" cols="30" rows="7" class="form-control"  name="secret" style="float: right">
           </div> -->
         </form>
-        <a href="#"><button id="send_btn" class="btn btn-primary py-3 px-5" style="float: right">Send</button></a>
+        <a href="#"><button id="send_btn" class="btn btn-primary py-3 px-5" style="float: right">등록하기</button></a>
       </div>
 
       

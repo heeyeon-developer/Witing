@@ -1,26 +1,24 @@
-package com.multi.qna;
+package com.multi.accom;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.multi.dto.PostDTO;
-import com.multi.service.PostService;
+import com.multi.service.AccompanyService;
+import com.multi.service.PlanService;
 
 @SpringBootTest
-class RegisterQna {
-
+class DeleteAccom {
 	@Autowired
-	PostService service;
-	
+	AccompanyService service;
+
 	@Test
 	void contextLoads() {
-		PostDTO post = new PostDTO(0, "kmj", null, 1, "123", "123", null, null, "quest", 0, false, 0, "",null);
 		try {
-
-			service.register(post);
-			
+			service.remove(34);
+			System.out.println("DELETED");
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

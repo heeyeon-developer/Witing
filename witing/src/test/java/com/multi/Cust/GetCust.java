@@ -1,30 +1,32 @@
-package com.multi.accom;
+package com.multi.Cust;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.multi.dto.AccompanyDTO;
-import com.multi.service.AccompanyService;
+import com.multi.dto.CustDTO;
+import com.multi.service.CustService;
 
 @SpringBootTest
-class GetAccom {
+public class GetCust {
 
 	@Autowired
-	AccompanyService service;
+	CustService service;
 	
 	@Test
 	void contextLoads() {
-		AccompanyDTO accom = null;
 		try {
-			accom = service.get(34);
+			List<CustDTO> list = null;
+			list = service.custget("dbb");
+			for(CustDTO cust : list)
+				System.out.println(cust);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(accom);
-	
 	}
+
 
 }

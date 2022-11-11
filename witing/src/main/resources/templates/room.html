@@ -85,12 +85,22 @@
       
       <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
         <div class="sidebar-box ftco-animate">
-          <h3 style="display: inline-block">Review</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black"></span>
+          <h3 style="display: inline-block; margin-bottom: 5px">Review</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black; cursor: pointer;" th:onclick="|location.href='@{/writereview(hotelid=${list[0].hotelid})}'|"></span>
           <div class="block-21 mb-4 d-flex">
             <a class="blog-img mr-4" th:style="'background-image:url('+ @{'images/hotel/'+${hotelimg1}} +');'"></a>
             <div class="text">
-              <h3 class="heading"><a href="#">Review title</a></h3>
-              <p>Review text...</p>
+            	
+              <table>
+              	<tbody th:each=li:${reviewlist5}>
+				<tr >
+				<ul style="padding-left: 20px; margin-bottom: 0; cursor: pointer; color: gray" th:onclick="|location.href='@{/reviewmoredetail(postid=${li.postid})}'|">
+					<li th:text="${li.title}" ><td th:text="${li.title}" style="text-align: left"></td></li>
+				</ul>
+				</tr>
+				</tbody>
+              </table>
+             
+              <div style="text-align: right"><a th:href="@{/reviewmore(hotelid=${list[0].hotelid})}" style="color: gray">목록</a></div>
               <div class="meta">
                 <div><a href="#"><span class="fa fa-calendar"></span> September 11, 2020</a></div>
                 <div><a href="#"><span class="fa fa-user"></span> Admin</a></div>

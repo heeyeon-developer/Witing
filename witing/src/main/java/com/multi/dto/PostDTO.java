@@ -30,4 +30,6 @@ public class PostDTO {
 	private int toppostid;
 	
 	private String answer;
+	
+	private String hotelname;
 }
