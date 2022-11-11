@@ -2,6 +2,8 @@ package com.multi.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,17 +16,19 @@ import lombok.ToString;
 @Getter
 @ToString
 public class PlanDTO {
-	private int planid;
-	private int accomid;
+	private Integer planid;
+	private Integer accomid;
+	private String planname;
 	private float planx;
 	private float plany;
 	private int idx;
 	private String todo;
 
-	private String planname;
 	private String custid;
 	private String title;
-	private String text;
+	private String accomtext;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date traveltime;
 	private int cnt;
 	private float locationx;

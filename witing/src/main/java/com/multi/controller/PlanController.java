@@ -10,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.dto.CustDTO;
 import com.multi.dto.PlanDTO;
+import com.multi.dto.PostDTO;
+import com.multi.service.CustService;
 import com.multi.service.PlanService;
 
 @Controller
@@ -19,9 +22,12 @@ public class PlanController {
 	@Autowired
 	PlanService service;
 	
+	@Autowired
+	CustService cust_service;
+	
 	@RequestMapping("/plan")
 	public String main(Model model, int accomid, String title, Date traveltime, Integer cnt, String gender,
-			String country, String custid, Date birth, String text, String planname, String todo) {
+			String country, String custid, Date birth, String accomtext, String planname, String todo, Integer planid) {
 		List<PlanDTO> list = null;
 		List<PlanDTO> xy = null;
 		try {
@@ -37,8 +43,9 @@ public class PlanController {
 			model.addAttribute("country", list.get(0).getCountry());
 			model.addAttribute("custid", list.get(0).getCustid());
 			model.addAttribute("birth", list.get(0).getBirth());
-			model.addAttribute("text", list.get(0).getText());
+			model.addAttribute("accomtext", list.get(0).getAccomtext());
 			model.addAttribute("accomid",accomid);
+			model.addAttribute("planid",planid);
 			
 			/*
 			model.addAttribute("planname", list.get(0).getPlanname());

@@ -4,27 +4,24 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.multi.dto.AccompanyDTO;
 import com.multi.service.AccompanyService;
+import com.multi.service.PlanService;
 
 @SpringBootTest
-class GetAccom {
-
+class DeleteAccom {
 	@Autowired
 	AccompanyService service;
-	
+
 	@Test
 	void contextLoads() {
-		AccompanyDTO accom = null;
 		try {
-			accom = service.get(34);
+			service.remove(34);
+			System.out.println("DELETED");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		System.out.println(accom);
-	
 	}
 
 }

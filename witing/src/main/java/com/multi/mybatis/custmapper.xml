@@ -21,5 +21,8 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="String">
 		DELETE FROM cust WHERE custid=#{custid}
 	</delete>
+	<select id="custget" parameterType="String" resultType="CustDTO">
+		SELECT * FROM cust WHERE custid=#{custid}
+	</select>
 	
 </mapper>

@@ -39,5 +39,9 @@ public class CustService implements MyService<String, CustDTO>{
 	public List<CustDTO> getall() throws Exception {
 		return mapper.selectall();
 	}
+	
+	public List<CustDTO> custget(String custid) throws Exception {
+		return mapper.custget(custid);
+	}
 
 }

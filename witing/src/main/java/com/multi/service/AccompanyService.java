@@ -39,5 +39,9 @@ public class AccompanyService implements MyService<Integer, AccompanyDTO>{
 	public List<AccompanyDTO> getall() throws Exception {
 		return mapper.selectall();
 	}
+	
+	public void accomdel(int accomid) throws Exception {
+		mapper.accomdel(accomid);
+	}
 
 }

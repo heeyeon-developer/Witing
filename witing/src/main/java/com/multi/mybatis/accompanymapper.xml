@@ -11,14 +11,22 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM accompany
 	</select>
 	<insert id="insert" parameterType="AccompanyDTO">
-		INSERT INTO accompany VALUES (NULL,#{custid},#{title},#{text},#{traveltime},#{cnt},#{locationx},#{locationy})
+		INSERT INTO accompany VALUES (NULL,#{custid},#{title},#{accomtext},#{traveltime},#{cnt},#{locationx},#{locationy})
+		<selectKey keyProperty="accomid" resultType="Integer" order="AFTER"> 
+                SELECT LAST_INSERT_ID()
+      	</selectKey> 
 	</insert>
 	<update id="update" parameterType="AccompanyDTO">
-		UPDATE accompany SET custid=#{custid},title=#{title},text=#{text},traveltime=#{traveltime},
+		UPDATE accompany SET custid=#{custid},title=#{title},text=#{accomtext},traveltime=#{traveltime},
 		cnt=#{cnt},locationx=#{locationx},locationy=#{locationy} WHERE accomid=#{accomid}
 	</update>
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM accompany WHERE accomid=#{accomid}
+	</delete>
+	<delete id="accomdel" parameterType="Integer">
+		DELETE FROM pl, ac USING plan pl
+		LEFT JOIN accompany ac ON pl.accomid = pl.accomid
+		WHERE pl.accomid = #{accomid};
 	</delete>
 
 	 

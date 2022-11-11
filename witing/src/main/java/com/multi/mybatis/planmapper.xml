@@ -11,10 +11,10 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM plan
 	</select>
 	<insert id="insert" parameterType="PlanDTO">
-		INSERT INTO plan VALUES (NULL,#{accomid},#{planx},#{plany},#{idx},#{todo})
+		INSERT INTO plan VALUES (NULL,#{accomid},#{planname},#{planx},#{plany},#{idx},#{todo})
 	</insert>
 	<update id="update" parameterType="PlanDTO">
-		UPDATE plan SET accomid=#{accomid},planx=#{planx},plany=#{plany},idx=#{idx},todo=#{todo}
+		UPDATE plan SET accomid=#{accomid},planname=#{planname},planx=#{planx},plany=#{plany},idx=#{idx},todo=#{todo}
 		WHERE planid=#{planid}
 	</update>
 	<delete id="delete" parameterType="Integer">
