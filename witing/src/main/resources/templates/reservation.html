@@ -1,11 +1,46 @@
- <link rel="stylesheet" href="/css/calender.css">
-
+<head>
+<link rel="stylesheet" href="/css/calender.css"> 
+ <!-- jQuery 결제 API 연동-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
+	<script>
+	 var IMP = window.IMP; 
+	 IMP.init("imp83780347"); 
+	
+	 function requestPay() {
+	     IMP.request_pay({
+	         pg : 'kcp',
+	         pay_method : 'card',
+	         merchant_uid: "w-"+Math.floor(Math.random()*100000,0)+ "-"+Math.floor(Math.random()*100000,0),
+	         name : $('#roominfo').val(),
+	         amount : $('#totalprice').val(),
+	         buyer_name : $('#custname').val()
+	     }, function (rsp) { // callback
+	    	 alert($('#custname').val());
+	         if (rsp.success) {
+	        	 //성공하면 결제 완료 페이지 보여주기
+	             console.log(rsp);
+	             $('#reservform').attr({
+	            	 method:'post',
+	            	 action:'/reservimpl'
+	             });
+	             $('#reservform').submit();
+	         } else {
+	             console.log(rsp);
+	        	 alert("결제가 실패하였습니다. 다시 결제를 진행해 주세요.");
+	         }
+	     });
+	 }
+	</script>
+ </head>
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/ReservationBackground.jpeg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Hotel</span>
-          <i class="fa fa-chevron-right"></i></a></span> <span>Room Details</span><i class="fa fa-chevron-right"></i></a></span> <span>Reservation</span></p>
+          <i class="fa fa-chevron-right"></i></a></span> <span>Room Details </span><i class="fa fa-chevron-right"></i></a></span> <span>Reservation</span></p>
        <h1 class="mb-0 bread">Reservation</h1>
      </div>
    </div>
@@ -16,7 +51,6 @@
 
   <div class="container">
     <div class="row block-9 justify-content-center">
-    	<h2><br>예약을 위해 아래 항목들을 입력해주세요 :)</h2>
       <div class="col-md-7 order-md-last d-flex">
       	<div class="calender-main">
 		    <div class="calender-wrap">
@@ -51,16 +85,18 @@
 		      </div>
 		    </div>
 		  </div>
-        <form id="registerform" class="p-5 contact-form">
+		<div>
+        <form id="reservform" class="p-5 contact-form">
           <div class="form-group">
-            <input id="custname" type="text" class="form-control" th:placeholder="${custname}" name="custname">
+            <input id="custname" type="text" class="form-control" th:value="${custname}">
+            <input id="custid" th:value="${custid}" style="display:none" name="custid">
           </div>
           <div class="form-group">
-            <input id="roomid" type="text" class="form-control" th:placeholder="${roominfo}" name="roomid">
+            <input id="roominfo" type="text" class="form-control" th:value="${roominfo}">
+          	<input id="roomid" th:value="${roomid}" style="display:none" name="roomid">
           </div>
           <div class="form-group">
             <div class="form-field">
-            	
 				<input id="sdate" type="text" class="form-control checkin_date col-md-5" placeholder="예약 시작일" name="sdate" style="display:inline-block">
 				<input id="edate" type="text" class="form-control checkin_date col-md-5" placeholder="예약 마지막일" name="edate" style="display:inline-block">
 		  	</div>
@@ -69,7 +105,7 @@
           <span>인원수</span>
             <div class="form-field">
 				<div class="select-wrap">
-					<select name="people" id="people" class="form-control">
+					<select name="cnt" id="cnt" class="form-control">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -81,11 +117,12 @@
 				</div> 
 			</div>
           </div>
-          <div class="form-group justify-content-center">
-            <input id="pay" value="결제하기" class="btn btn-primary justify-content-center" style="display:inline-block; float:right;">
+          <div class="form-group">
+            <input id="totalprice" type="text" class="form-control" th:value="${totalprice}" name="totalprice">
           </div>
         </form>
-        
+        	<button id="payBtn" onclick="requestPay()" class="btn btn-primary justify-content-center" style="display:inline-block; float:right;">결제하기</button>
+        </div>
       </div>
 
    </div>
@@ -93,4 +130,3 @@
 </section>
 
  <script src="/js/calender.js"></script>
-

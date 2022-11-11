@@ -9,7 +9,6 @@
   width: 110%;
   height: 50%;
   margin:0 auto;
-  border-radius: 20px;
   overflow: hidden;
 }
 .main-wrap{
@@ -46,6 +45,11 @@
 .active{
   border-radius: 50%;
   color: orange;
+  text-align: center;
+}
+
+tr{
+	text-align: center;
 }
 
 @media(min-width: 850px){
@@ -166,5 +170,8 @@
     border-radius: 50%;
     color: orange;
     text-align: center;
+  }
+  tr{
+	text-align: center;
   }
 }

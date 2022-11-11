@@ -13,8 +13,9 @@
 <section class="ftco-section contact-section ftco-no-pt">
 <div class="container">
     <div class="row block-9 justify-content-center">
-    	<h2 th:text="|${name}님 가입이 완료되었습니다!<br>로그인 후 서비스를 이용해주세요 :)|"></h2>
-          <a th:href="@{/main}" th:if="${session.logincust == null}" class="btn btn-primary">Home</a>
+    	<h2 th:text="|${name}님 가입이 완료되었습니다!|"></h2>
+    	<h2>로그인 후 서비스를 이용해주세요 :)</h2>
+          <a th:href="@{/}" th:if="${session.logincust == null}" class="btn btn-primary">Home</a>
         </form>
         
       </div>

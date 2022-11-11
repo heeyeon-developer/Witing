@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.OrderlistMapper">
+	
+	<select id="select" parameterType="Integer" resultType="OrderlistDTO">
+		SELECT * FROM orderlist WHERE orderid=#{orderid}
+	</select>
+	<select id="selectall" resultType="OrderlistDTO">
+		SELECT * FROM orderlist
+	</select>
+	<insert id="insert" parameterType="OrderlistDTO">
+		INSERT INTO orderlist VALUES (NULL,#{custid},#{roomid},#{totalprice},NOW(),#{cnt},#{sdate},#{edate})
+		<selectKey keyProperty="orderid" resultType="Integer" order="AFTER"> 
+                SELECT LAST_INSERT_ID()
+      	</selectKey> 
+	</insert>
+	<update id="update" parameterType="OrderlistDTO">
+		UPDATE orderlist SET roomid=#{roomid},cnt=#{cnt},sdate=#{sdate},edate=#{edate}  
+		 WHERE orderid=#{orderid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM orderlist WHERE orderid=#{orderid}
+	</delete>
+	 
+</mapper>

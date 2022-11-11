@@ -1,0 +1,57 @@
+<style>
+h2{
+	margin-top:5%;
+}
+ul, li{
+	margin-top:20%;
+	list-style:none;
+	text-align:center;
+	margin:auto;
+}
+
+</style>
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/ReservationBackground.jpeg');">
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Reservation</span></p>
+       <h1 class="mb-0 bread">Reservation</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+<section class="ftco-section contact-section ftco-no-pt">
+<div class="container">
+    <div class="row block-9 justify-content-center">
+    	<h2>예약 상세내용을 확인해주세요 :)</h2>
+    	<ul>
+    	<li><img style="width:60%" src="images/MainSeoul.jpg"></li>
+    		<li style="width:30%">
+    			<table>
+					<tr>
+						<td>예약자 성함</td>
+						<td th:text="${name}"></td>
+					</tr>
+					<tr>
+						<td>숙박 정보</td>
+						<td th:text="${roominfo}"></td>
+					</tr>
+					<tr>
+						<td>결제 가격</td>
+						<td th:text="${order.totalprice}"></td>
+					</tr>
+					<tr>
+						<td>숙박 인원</td>
+						<td th:text="${order.cnt}"></td>
+					</tr>
+				</table>
+    		</li>
+    		<li><a type:"button" th:href="@{/}" class="btn btn-primary">Home</a></li>
+    	</ul>
+    	
+      </div>
+      
+ </div>
+
+</section>

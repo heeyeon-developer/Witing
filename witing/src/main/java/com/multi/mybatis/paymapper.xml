@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.PayMapper">
+	
+	<select id="select" parameterType="Integer" resultType="PayDTO">
+		SELECT * FROM pay WHERE payid=#{payid}
+	</select>
+	<select id="selectall" resultType="PayDTO">
+		SELECT * FROM pay
+	</select>
+	<insert id="insert" parameterType="PayDTO">
+		INSERT INTO pay VALUES (NULL,#{orderid},#{price},#{paystatus},#{payment}) 
+	</insert>
+	<update id="update" parameterType="PayDTO">
+		UPDATE pay SET orderid=#{orderid},price=#{price}  
+		 WHERE payid=#{payid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM pay WHERE payid=#{payid}
+	</delete>
+	 
+</mapper>
