@@ -9,5 +9,5 @@ import com.multi.frame.MyMapper;
 @Repository
 @Mapper
 public interface AccompanyMapper extends MyMapper<Integer, AccompanyDTO> {
-	
+	public void accomdel(int accomid) throws Exception;
 }

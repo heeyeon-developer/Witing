@@ -1,7 +1,8 @@
 
 <style>
 #writebtn{
-	margin-top: -15px;
+	float: right;
+	margin-top: -12px;
 }
 
 .two{
@@ -131,7 +132,7 @@ $(document).ready(function(){
        </div>
        <h3 class="heading"><a class="fa fa-plane" th:href="@{/plan(accomid=${li.accomid})}" th:text="' '+${li.title}" style="font-weight: bold;">Most Popular Place In This World</a></h3>
        <p class="fa fa-user-circle-o" id="user_icon"><span th:text="' '+${li.custid}" style="color: black;"></span></p>
-       <p style="color: #939393;" th:text="${li.text}+' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'"></p>
+       <p style="color: #939393;" th:text="${li.accomtext}+' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'"></p>
        <p><a href="#" class="btn btn-primary">Read more</a></p>
      </div>
    </div>

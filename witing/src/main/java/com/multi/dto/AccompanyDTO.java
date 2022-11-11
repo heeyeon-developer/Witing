@@ -2,6 +2,8 @@ package com.multi.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,9 @@ public class AccompanyDTO {
 	private int accomid;
 	private String custid;
 	private String title;
-	private String text;
+	private String accomtext;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date traveltime;
 	private int cnt;
 	private float locationx;
