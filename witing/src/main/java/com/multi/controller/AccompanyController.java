@@ -1,6 +1,7 @@
 package com.multi.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,15 @@ public class AccompanyController {
 	}
 	
 	@RequestMapping("/deleteaccom")
-	public String deleteplan(Model model, Integer planid, Integer accomid) {
+	public String deleteplan(Model model, Integer accomid) {
 		try {
-			plan_service.remove(planid);
-			System.out.println(planid);
-			System.out.println(accomid);
+			List<Integer> deplan = new ArrayList<>();
+			for(PlanDTO a : plan_service.plandetail(accomid)) {
+				deplan.add(a.getPlanid());
+			}
+			for(Integer i : deplan)
+				plan_service.remove(i);
 			service.remove(accomid);
-			System.out.println(2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

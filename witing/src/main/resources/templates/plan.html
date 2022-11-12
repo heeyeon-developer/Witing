@@ -170,9 +170,8 @@ $(document).ready(function(){
 	$('#del_btn').click(function(){
 		var c = confirm('삭제하시겠습니까?');
 		if(c == true){
-			var planid = $('#planid').text();
 			var accomid = $('#accomid').text();
-			location.href="[[@{/deleteaccom?planid=}]]"+planid+"&[[@{accomid=}]]"+accomid;
+			location.href="[[@{/deleteaccom?accomid=}]]"+accomid;
 		}
 		alert('정상적으로 삭제되었습니다.');
 	});
@@ -207,7 +206,7 @@ $(document).ready(function(){
       <div class="col-md-9 ftco-animate pb-5 text-center">
        <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/accompany">Accompany <i class="fa fa-chevron-right"></i></a></span> <span><a href="#">Plan Details <i class="fa fa-chevron-right"></i></a></span></p>
        <h1 class="mb-0 bread">Plan Details</h1>
-       <div id="accomid" style="display:none;" th:text="${accomid}"></div><div id="planid" style="display:none;" th:text="${planid}"></div>
+       <div id="accomid" style="display:none;" th:text="${accomid}"></div>
      </div>
    </div>
  </div>

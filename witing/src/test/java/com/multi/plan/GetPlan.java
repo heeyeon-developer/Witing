@@ -17,7 +17,7 @@ class GetPlan {
 	void contextLoads() {
 		PlanDTO plan = null;
 		try {
-			plan = service.get(1);
+			plan = service.get(3);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

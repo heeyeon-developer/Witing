@@ -1,5 +1,6 @@
 package com.multi.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class PlanController {
 		try {
 			list = service.plandetail(accomid);
 			xy = service.xy(accomid);
+			
 			model.addAttribute("xy", xy);
 			model.addAttribute("list", list);
 			model.addAttribute("center", "plan");
@@ -45,7 +47,6 @@ public class PlanController {
 			model.addAttribute("birth", list.get(0).getBirth());
 			model.addAttribute("accomtext", list.get(0).getAccomtext());
 			model.addAttribute("accomid",accomid);
-			model.addAttribute("planid",planid);
 			
 			/*
 			model.addAttribute("planname", list.get(0).getPlanname());
