@@ -16,9 +16,14 @@ public class AboutController {
 	@Value("${custdir}")
 	String custdir;
 	
-	@GetMapping("/about")
-	public String main(Model model) {
+	@RequestMapping("/index")
+	public String index(Model model) {
 		model.addAttribute("about","about");
+		return "index";
+	}
+	
+	@RequestMapping("/about")
+	public String about() {
 		return "about";
 	}
 }
