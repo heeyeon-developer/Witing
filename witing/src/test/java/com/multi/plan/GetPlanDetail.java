@@ -19,7 +19,7 @@ class GetPlanDetail {
 	void contextLoads() {
 		List<PlanDTO> list = null;
 		try {
-			list = service.plandetail(2);
+			list = service.plandetail(3);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

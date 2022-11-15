@@ -1,6 +1,7 @@
 package com.multi.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,15 @@ public class AccompanyController {
 	}
 	
 	@RequestMapping("/deleteaccom")
-	public String deleteplan(Model model, Integer planid, Integer accomid) {
+	public String deleteplan(Model model, Integer accomid) {
 		try {
-			plan_service.remove(planid);
-			System.out.println(planid);
-			System.out.println(accomid);
+			List<Integer> deplan = new ArrayList<>();
+			for(PlanDTO a : plan_service.plandetail(accomid)) {
+				deplan.add(a.getPlanid());
+			}
+			for(Integer i : deplan)
+				plan_service.remove(i);
 			service.remove(accomid);
-			System.out.println(2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,7 +66,8 @@ public class AccompanyController {
 
 	
 	@RequestMapping("/accomimpl")
-	public String accomimpl(Model model, String custid,String title,int cnt,String traveltime, int idx,String planname,String todo,String accomtext) {
+	public String accomimpl(Model model, String custid,String title,int cnt,String traveltime, int idx,String planname,String todo,String accomtext,
+			float planx, float plany) {
 		Integer accomid = 0;
 		try {
 			List<CustDTO> clist = cust_service.custget(custid);
@@ -73,7 +77,7 @@ public class AccompanyController {
 			accomid = ac.getAccomid();
 			System.out.println(accomid);
 			for(CustDTO c : clist) {
-				PlanDTO pl = new PlanDTO(0, ac.getAccomid(), planname, 0.0f, 0.0f, 0, todo,
+				PlanDTO pl = new PlanDTO(0, ac.getAccomid(), planname, planx, plany, 0, todo,
 						custid, title, accomtext, Date.valueOf(traveltime), cnt,
 						ac.getLocationx(), ac.getLocationy(), c.getCountry(), c.getGender(), c.getBirth());
 				System.out.println(c);
