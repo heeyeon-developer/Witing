@@ -7,6 +7,81 @@
  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet"> -->
   
+  
+<script>
+$(document).ready(function(){
+	$("#sendMail").click(function() {// 메일 입력 유효성 검사
+		var mail = $("#mail").val(); //사용자의 이메일 입력값. 
+		
+		if (mail == "") {
+			alert("메일 주소가 입력되지 않았습니다.");
+		} else {
+			mail = mail+$("#domain").val(); //셀렉트 박스에 @뒤 값들을 더함.
+			$.ajax({
+				type : 'post',
+				url : '/CheckMail',
+				data : {
+					mail:mail
+					},
+				/* dataType :'json', */
+				/* success : function(key){
+					alert(key);
+				} */
+			});
+			/* alert(key); */
+			alert(mail);
+			alert("인증번호가 전송되었습니다.") 
+			alert(key)
+		}
+	});
+	
+	
+	$("#compare_ok").hide();
+	$("#compare_wrong").hide();
+	$("#compare").on("propertychange change keyup paste input", function() {
+		if ($("#compare").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+			$("#compare_ok").show();
+			$("#compare_wrong").hide();
+		} else {
+			$("#compare_ok").hide();
+			$("#compare_wrong").show();
+		}
+	});
+	
+	
+	/* 
+	$('#compare').keyup(function(){
+		var compare = $('#compare').val();
+		if(compare == key){
+			
+		}else{
+			
+		}
+	}); */
+})
+/*
+	// 인증번호 비교 
+	// blur -> focus가 벗어나는 경우 발생
+	$('.mail-check-input').blur(function () {
+		var inputCode = $(this).val();
+		var $resultMsg = $('#mail-check-warn');
+		
+		if(inputCode === code){
+			$resultMsg.html('인증번호가 일치합니다.');
+			$resultMsg.css('color','green');
+			$('#mail-Check-Btn').attr('disabled',true);
+			$('#userEamil1').attr('readonly',true);
+			$('#userEamil2').attr('readonly',true);
+			$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+	         $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
+		}else{
+			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+			$resultMsg.css('color','red');
+		}
+	});
+}); */
+
+</script>
 <style>
 	#mypage_info > h2 {
 		font-family: 'Quicksand', sans-serif;
@@ -17,23 +92,69 @@
 	
 </style>
 
-<!-- 개인정보 눌렀을 때 비밀번호 입력 모달 -->
-<!-- <div class="modal fade" id="myModal" role="dialog">
+<div class="form-group email-form">
+	 <label for="email">이메일</label>
+	 <div class="input-group">
+	<input type="text" class="form-control" name="mail" id="mail" placeholder="이메일" >
+	<select class="form-control" name="domain" id="domain" >
+	<option>@naver.com</option>
+	<option>@daum.net</option>
+	<option>@gmail.com</option>
+	<option>@hanmail.com</option>
+	 <option>@yahoo.co.kr</option>
+	</select>
+	</div>   
+<div class="input-group-addon">
+	<button type="button" class="btn btn-primary" id="sendMail">본인인증</button>
+</div>
+	<div class="mail-check-box">
+<input class="form-control mail-check-input" id="compare" placeholder="인증번호를 입력해주세요!" maxlength="7">
+<span id="compare_ok" style="padding-left: 30px"><img src="images/check.png" style="width: 20px; height: 20px"></span>
+<span id="compare_wrong"  style="padding-left: 30px"><img src="images/wrong.png" style="width: 20px; height: 20px"></span>
+</div>
+	<span id="mail-check-warn"></span>
+</div>
+<!-- <div class="modal fade" id="emailModal" role="dialog">
     <div class="modal-dialog modal-2sm">
       <div class="modal-content">
         <div class="modal-header">
-          <div>비밀번호를 입력해주세요 : )</div>
+          <div>이메일 본인인증 : )</div>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title"></h4>
         </div>
+        
         <div class="modal-body">
-        <form id="infoenter_form">
+        <div class="form-group email-form">
+			<label for="email">이메일</label>
+			<div class="input-group">
+				<input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="이메일" >
+				<select class="form-control" name="userEmail2" id="userEmail2" >
+					<option>@naver.com</option>
+					<option>@daum.net</option>
+					<option>@gmail.com</option>
+					<option>@hanmail.com</option>
+					<option>@yahoo.co.kr</option>
+				</select>
+			</div>   
+			<div class="input-group-addon">
+				<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
+			</div>
+			<div class="mail-check-box">
+				<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요" disabled="disabled" maxlength="6">
+			</div>
+			<span id="mail-check-warn"></span>
+		</div>
+        </div>
+        
+        <div class="modal-body">
+        <form id="infoenter_form" name="formname">
           <div class="form-group">
             <input id="custpwd" type="password" class="form-control" placeholder="Password" name="custpwd">
           </div>
           </form>
           <p></p>
         </div>
+        
         <div class="modal-footer">
 		<a th:href="@{/custdetail(custid=${session.logincust.custid})}">
 		<a href=#>
@@ -42,84 +163,8 @@
         </div>
       </div>
     </div>
-</div> -->
-<!-- 모달 끝 -->
-
-<!-- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/mypagepic1.jpg')">
-  <div class="container">
-    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
-      <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span>My Page <i class="fa fa-chevron-right"></i></span></p>
-       <h1 class="mb-0 bread">My Page</h1>
-     </div>
-   </div>
- </div>
-</section>
-
-<section class="ftco-section ftco-no-pb contact-section mb-4">
-  <div class="container">
-    <div class="row d-flex contact-info">
-      <div data-toggle="modal" data-target="#myModal" class="col-md-2 d-flex" style="cursor:pointer;">
-        <div class="align-self-stretch box p-4 text-center" style="background : white"> 
-        <div class="icon d-flex align-items-center justify-content-center">
-         <span class="fa fa-user"></span>
-       </div>
-       <h3 class="mb-2">Information</h3>
-     </div> 
-   </div>
-   
-   <div class="col-md-2 d-flex" th:onclick="|location.href='@{/coupon(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
-     <div class="align-self-stretch box p-4 text-center" style="background : white">
-      <div class="icon d-flex align-items-center justify-content-center">
-       <span class="fa fa-ticket"></span>
-     </div>
-     <h3 class="mb-2">Coupon</h3>
-   </div>
- </div>
- 
- 
- <div class="col-md-2 d-flex" th:onclick="|location.href='@{/like(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
-   <div class="align-self-stretch box p-4 text-center" style="background : white">
-    <div class="icon d-flex align-items-center justify-content-center">
-     <span class="fa fa-heart"></span>
-   </div>
-   <h3 class="mb-2">Wishlist </h3>
- </div>
-</div>
-
-
-<div class="col-md-2 d-flex" th:onclick="|location.href='@{/reservationlist(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center" style="background : white">
-  <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-bed"></span>
- </div>
- <h3 class="mb-2">Reservation</h3>
-</div>
-</div>
-
-
-<div class="col-md-2 d-flex" th:onclick="|location.href='@{/review(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center" style="background : white">
-  <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-comment"></span>
- </div>
- <h3 class="mb-2">Review</h3>
-</div>
-</div>
-
-
-<div class="col-md-2 d-flex" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center" style="background : white">
-  <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-question"></span>
- </div>
- <h3 class="mb-2">Q&A</h3>
-</div>
-</div>
-
-</div>
-</div>
-</section> -->
+</div>   -->
+  
 
 <section class="ftco-section contact-section ftco-no-pt">
   <div class="container">
@@ -129,7 +174,10 @@
           
           <div id="mypage_info" class="form-group">
             <h2>안녕하세요 : )</h2>
-            <h2 th:text = "${cust.custname}+' 님'"></h2>
+            <h2 th:text = "${cust.custname}+' 님'" style="display: inline-block"></h2>
+            
+            <button type="button" class="btn" data-toggle="modal" data-target="#emailModal" style="margin-left:3%; margin-bottom: 9px; width: 10%; display: inline-block; background-color: lightgray; "> 본인인증</button>
+          
             <h4 th:text = "'보유포인트 : '+${cust.point}+'P'"></h4>
             <h4 th:text = "'가입날짜 : '+${cust.rdate}"></h4>
             
