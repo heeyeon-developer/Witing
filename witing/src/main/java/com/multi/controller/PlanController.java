@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.dto.CustDTO;
 import com.multi.dto.PlanDTO;
 import com.multi.dto.PostDTO;
+import com.multi.dto.ReplyDTO;
 import com.multi.service.CustService;
 import com.multi.service.PlanService;
+import com.multi.service.ReplyService;
 
 @Controller
 public class PlanController {
@@ -26,15 +28,21 @@ public class PlanController {
 	@Autowired
 	CustService cust_service;
 	
+	@Autowired
+	ReplyService reply_service;
+	
 	@RequestMapping("/plan")
 	public String main(Model model, int accomid, String title, Date traveltime, Integer cnt, String gender,
 			String country, String custid, Date birth, String accomtext, String planname, String todo, Integer planid) {
 		List<PlanDTO> list = null;
 		List<PlanDTO> xy = null;
+		List<ReplyDTO> reply = null;
 		try {
 			list = service.plandetail(accomid);
 			xy = service.xy(accomid);
+			reply = reply_service.accomreply(accomid);
 			
+			model.addAttribute("reply", reply);
 			model.addAttribute("xy", xy);
 			model.addAttribute("list", list);
 			model.addAttribute("center", "plan");

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.mapper.ReplyMapper">
+	
+	<select id="select" parameterType="Integer" resultType="ReplyDTO">
+		SELECT * FROM reply WHERE replyid=#{replyid}
+	</select>
+	<select id="selectall" resultType="ReplyDTO">
+		SELECT * FROM reply
+	</select>
+	<insert id="insert" parameterType="ReplyDTO">
+		INSERT INTO reply VALUES (NULL,#{accomid},#{custid},#{comment},NOW(),#{topid})
+	</insert>
+	<update id="update" parameterType="ReplyDTO">
+		UPDATE reply SET comment=#{comment} WHERE replyid=#{replyid}
+	</update>
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM reply WHERE replyid=#{replyid}
+	</delete>
+	<select id="accomreply" parameterType="Integer" resultType="ReplyDTO">
+		SELECT * FROM reply WHERE accomid=#{accomid}
+	</select>
+	 
+</mapper>
