@@ -37,7 +37,7 @@
 	padding-top: 10px;
 }
 
-#sample4_roadAddress{
+#sample4_roadAddress, #sample4_roadAddress2{
 	width: 300px;
 	display:inline-block
 }
@@ -46,7 +46,7 @@
 	width: 450px;
 	display:inline-block
 }
-#addr_btn{
+#addr_btn, #addr_btn2{ 
 	width:102px;
 	display:inline-block;
 	margin-left: -4px;
@@ -194,7 +194,6 @@ var callback = function(result, status) {
 				<div class="col-9 mb-3">
 					<div class="form-field">
 						<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명 주소">
-						<span id="guide" style="color:#999;display:none"></span>
 						<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname">
 						<input type="button" class="form-control" onclick="sample4_execDaumPostcode()" value="장소 찾기" id="addr_btn"><br>
                     </div>
@@ -206,6 +205,27 @@ var callback = function(result, status) {
 					</div>
 					<div class="col-lg d-flex"></div>
 				</div>
+				
+				<!-- 2 -->
+				<div class="col-2 mb-3">
+					<input type="number" class="form-control" id="idx" value="2" readonly="readonly" name="idx">
+					<div class="col-lg d-flex"></div>
+				</div>
+				<div class="col-9 mb-3">
+					<div class="form-field">
+						<input type="text" class="form-control" id="sample4_roadAddress2" placeholder="도로명 주소">
+						<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname">
+						<input type="button" class="form-control" onclick="sample4_execDaumPostcode()" value="장소 찾기" id="addr_btn2"><br>
+                    </div>
+					<div class="col-lg d-flex"></div>
+				</div>
+				<div class="col-11 mb-3">
+					<div class="form-field3">
+						<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo">
+					</div>
+					<div class="col-lg d-flex"></div>
+				</div>
+				
                    
                   <a href="#"><i class="fa fa-plus-circle" id="add_icon"></i></a>
              <!-- </div> -->
@@ -255,8 +275,12 @@ var callback = function(result, status) {
 	            </div>
 	            
 	            <div class="col-2 mb-3">
-					<input type="number" name="planx" value="planx">
-					<input type="number" name="plany" value="plany">
+					<input type="text" name="planx" value="planx" id="planx1">
+					<input type="text" name="plany" value="plany" id="plany1">
+	            </div>
+	            <div class="col-2 mb-3" style="margin-left: 100px;">
+					<input type="text" name="planx" value="planx" id="planx2">
+					<input type="text" name="plany" value="plany" id="plany2">
 	            </div>
 			</div>
           </form>
@@ -281,11 +305,23 @@ $("#addr_btn").click(function(){
     }).open()
 });
 
+$("#addr_btn2").click(function(){
+    new daum.Postcode({
+        oncomplete: function(data) {
+            $("#sample4_roadAddress2").val(data.address);
+            $("#sample4_roadAddress2").prop("readonly",true);
+            var addr =  $("#sample4_roadAddress2").val();
+        	geocoder.addressSearch(addr, callback2);  
+        }
+    }).open()
+});
+
 var callback = function(result, status) {
 	if (status === kakao.maps.services.Status.OK) {
 		$("input[name=planx]").val(result[0].y);
 		$("input[name=plany]").val(result[0].x);
 	}
 };
+
 
 </script>

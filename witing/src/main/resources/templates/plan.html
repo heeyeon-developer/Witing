@@ -21,7 +21,7 @@
 	width: 350px;
 	height: 400px;
 	overflow: auto;
-	border: 2px solid #f15d30;;
+	border: 2px solid #f15d30;
 }
 
 #target{
@@ -167,6 +167,18 @@ function sendTo() {
 }
 
 $(document).ready(function(){
+	$('#reply_btn').click(function(){
+		var c = confirm('등록하시겠습니까?');
+		if(c == true){
+			var custid = '[[${session.logincust.custid}]]';
+			var accomid = $('#accomid').text();
+			var comment = $('#comment').val();
+			location.href="[[@{/replyimpl?custid=}]]"+custid+"&[[@{accomid=}]]"+accomid+"&[[@{comment=}]]"+comment;
+			alert(comment)
+			alert("정상적으로 등록되었습니다");
+		}
+	})
+	
 	$('#del_btn').click(function(){
 		var c = confirm('삭제하시겠습니까?');
 		if(c == true){
@@ -231,8 +243,6 @@ $(document).ready(function(){
 		
 		<div id="map" style="width:100%;height:350px;"></div>
 		
-        
-        
       </div> <!-- .col-md-8 -->
       
       
@@ -258,7 +268,7 @@ $(document).ready(function(){
         
         <div>
         
-        <H5 th:text="${session.logincust.custid}">ID</H5>
+        <!-- <H5 th:text="${session.logincust.custid}">ID</H5>
 		<H5 id="status">Status</H5>
 		<button id="connect">Connect</button>
 		<button id="disconnect">Disconnect</button>
@@ -266,13 +276,46 @@ $(document).ready(function(){
 		<div id="to"></div>
 		<input type="text" id="target">
 		<input type="text" id="totext"><button id="sendto">Send</button>
-        </div>
+        </div> -->
         
         <div id="donglechat"><iframe src="https://service.dongledongle.com/bdb97" frameborder="0" width="100%" height="500"></iframe></div>
         
       </div>
 
     </div>
+    
+    <!-- Comments section-->
+               <section class="col-md-11">
+                   <div class="card bg-light">
+                       <div class="card-body">
+                           <!-- Comment form-->
+                           <form class="mb-4"><textarea class="form-control" rows="3" placeholder="동행하고 싶다면 댓글을 남겨주세요 :)" name="comment" id="comment" style="width: 89%; display: inline-block;"></textarea></form>
+                           <button type="button" class="btn btn-primary" id="reply_btn" style="width: 100px; height: 95px; float: right; display: inline-block; margin-top: -13%;">작성하기</button>
+                           <!-- Comment with nested comments-->
+                           <div class="d-flex mb-4" th:each="reply:${reply}">
+                               <!-- Parent comment-->
+                               <br>
+                               <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                               <div class="ms-3">
+                                   <div class="fw-bold" th:text="${reply.custid}" style="margin-left: 15px; margin-right:2%; font-size: 18px; font-weight: bold; color: #f15d30;"></div>
+	                                   <p th:text="${reply.cdate}" style="display: inline-block; margin-left:2%;"></p>
+	                                   <a href="#">수정</a>
+	                                   <a href="#">삭제<a>
+                                   <p th:text="${reply.comment}" style="margin-left: 15px; color: black"></p>
+                                   <!-- Child comment 1-->
+                                   <!-- <div class="d-flex mt-4">
+                                       <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                       <div class="ms-3">
+                                           <div class="fw-bold">Commenter Name</div>
+                                           And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+                                       </div>
+                                  </div> -->
+                              </div>
+                           </div>
+                       </div>
+                   </div>
+               </section>
+    
   </div>
 </section> <!-- .section -->
 </body>

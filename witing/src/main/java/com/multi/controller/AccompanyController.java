@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.dto.AccompanyDTO;
 import com.multi.dto.CustDTO;
 import com.multi.dto.PlanDTO;
+import com.multi.dto.ReplyDTO;
 import com.multi.service.AccompanyService;
 import com.multi.service.CustService;
 import com.multi.service.PlanService;
+import com.multi.service.ReplyService;
 
 @Controller
 public class AccompanyController {
@@ -27,6 +29,9 @@ public class AccompanyController {
 	
 	@Autowired
 	CustService cust_service;
+	
+	@Autowired
+	ReplyService reply_service;
 	
 	@RequestMapping("/accompany")
 	public String main(Model model) {
@@ -62,6 +67,24 @@ public class AccompanyController {
 		model.addAttribute("custid", custid);
 		model.addAttribute("center", "writeaccom");
 		return "index";
+	}
+	
+	@RequestMapping("/writereply")
+	public String writereply(Model model, String custid, int accomid) {
+		model.addAttribute("accomid", accomid);
+		model.addAttribute("custid", custid);
+		return "index";
+	}
+	
+	@RequestMapping("/replyimpl")
+	public String replyimpl(Model model, String custid, int accomid, String comment) {
+		ReplyDTO reply = new ReplyDTO(0, accomid, custid, comment, null, 0);
+		try {
+			reply_service.register(reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:plan?accomid="+reply.getAccomid();
 	}
 
 	
