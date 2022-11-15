@@ -22,7 +22,7 @@ class UpdateCust {
 	@Test
 	void contextLoads() {
 		
-		CustDTO cust = new CustDTO("ddd", "aaa", "qqq", null, "111-111-111", "qqq@qqq", "qqq", "qqq", 111, null, "qq", 111, "QQQ");
+		CustDTO cust = new CustDTO("ddd", "aaa", "qqq", null, "111-111-111", "qqq@qqq", "qqq", "qqq", 111, null, "qq", 111, "QQQ", null);
 		try {
 			service.modify(cust);
 		} catch (Exception e) {

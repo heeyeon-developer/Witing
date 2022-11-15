@@ -73,7 +73,7 @@ public class LoginController {
 	
 	@RequestMapping("/registerimpl")
 	public String registerimpl(Model model, String custid, String custpwd, String custname, String birth, String phone, String email, String addr, String addrdetail, Integer zipcode, String gender, String country) {
-		CustDTO cust = new CustDTO(custid, custpwd, custname, Date.valueOf(birth),phone,email,addr,addrdetail,zipcode,null,gender,1000,country);
+		CustDTO cust = new CustDTO(custid, custpwd, custname, Date.valueOf(birth),phone,email,addr,addrdetail,zipcode,null,gender,1000,country, null);
 		try {
 			custservice.register(cust);
 			model.addAttribute("name",cust.getCustname());
@@ -96,7 +96,7 @@ public class LoginController {
 //			System.out.println("exist"+existcust);
 //			System.out.println("??!?");
 			if(existcust == null) {//최초 카카오 로그인시 DBd에 데이터 저장
-				CustDTO cust = new CustDTO("k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), "k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), userInfo.get("name"), Date.valueOf("2022-"+userInfo.get("birthday")), "010-1234-1234", userInfo.get("email"), "", "", 12345, null, userInfo.get("gender"), 1000, "Korea");
+				CustDTO cust = new CustDTO("k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), "k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), userInfo.get("name"), Date.valueOf("2022-"+userInfo.get("birthday")), "010-1234-1234", userInfo.get("email"), "", "", 12345, null, userInfo.get("gender"), 1000, "Korea", null);
 				custservice.register(cust);
 //				System.out.println("??"+cust);
 				session.setAttribute("logincust", cust);
@@ -121,7 +121,7 @@ public class LoginController {
 		try {
 			CustDTO existcust = custservice.get("n_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")));
 			if(existcust == null) {//최초 네이버 로그인시 DB에 데이터 저장
-				CustDTO cust = new CustDTO("n_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), "n_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), userInfo.get("name"), Date.valueOf(userInfo.get("birth")), "010-1234-1234", userInfo.get("email"), "", "", 12345, null, userInfo.get("gender"), 1000, "Korea");
+				CustDTO cust = new CustDTO("n_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), "n_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), userInfo.get("name"), Date.valueOf(userInfo.get("birth")), "010-1234-1234", userInfo.get("email"), "", "", 12345, null, userInfo.get("gender"), 1000, "Korea", null);
 				custservice.register(cust);
 				session.setAttribute("logincust", cust);
 			}else {//최초 네이버 로그인이 아닐경우 기존 데이터 조회하여 session에 추

@@ -31,4 +31,5 @@ public class CustDTO {
 	private String gender;
 	private Integer point;
 	private String country;
+	private String certification;
 }

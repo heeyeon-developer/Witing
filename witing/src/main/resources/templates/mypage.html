@@ -10,13 +10,14 @@
   
 <script>
 $(document).ready(function(){
+	$("#compare_ok").hide();
+	$("#compare_wrong").hide();
 	$("#sendMail").click(function() {// 메일 입력 유효성 검사
 		var mail = $("#mail").val(); //사용자의 이메일 입력값. 
 		
 		if (mail == "") {
-			alert("메일 주소가 입력되지 않았습니다.");
+			alert("이메일 주소가 입력되지 않았습니다.");
 		} else {
-			mail = mail+$("#domain").val(); //셀렉트 박스에 @뒤 값들을 더함.
 			$.ajax({
 				type : 'post',
 				url : '/CheckMail',
@@ -24,62 +25,40 @@ $(document).ready(function(){
 					mail:mail
 					},
 				/* dataType :'json', */
-				/* success : function(key){
-					alert(key);
-				} */
-			});
-			/* alert(key); */
+			 	success : function(key){
+			 		$('#ok_btn').click(function(){
+				 			if ($("#compare").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+				 				alert("본인인증이 정상적으로 되었습니다.")
+				 				
+				 				$('#email_form').attr({
+				 					'data' : {
+				 						'certification' : '1'
+				 					},
+					 				'method':'post',
+									'action':'[[@{/mypage(custid=${cust.custid})}]]'
+					 			});
+					 			$('#email_form').submit();
+				 			} else {
+				 				alert("인증번호가 일치하지 않습니다.")
+				 				
+				 				$('#email_form').attr({
+					 				'method':'post',
+									'action':'[[@{/mypage(custid=${cust.custid})}]]'
+					 			});
+					 			$('#email_form').submit();
+				 			}
+			 		})
+				}
+		});
 			alert(mail);
 			alert("인증번호가 전송되었습니다.") 
-			alert(key)
+			
 		}
 	});
 	
 	
-	$("#compare_ok").hide();
-	$("#compare_wrong").hide();
-	$("#compare").on("propertychange change keyup paste input", function() {
-		if ($("#compare").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
-			$("#compare_ok").show();
-			$("#compare_wrong").hide();
-		} else {
-			$("#compare_ok").hide();
-			$("#compare_wrong").show();
-		}
-	});
 	
-	
-	/* 
-	$('#compare').keyup(function(){
-		var compare = $('#compare').val();
-		if(compare == key){
-			
-		}else{
-			
-		}
-	}); */
 })
-/*
-	// 인증번호 비교 
-	// blur -> focus가 벗어나는 경우 발생
-	$('.mail-check-input').blur(function () {
-		var inputCode = $(this).val();
-		var $resultMsg = $('#mail-check-warn');
-		
-		if(inputCode === code){
-			$resultMsg.html('인증번호가 일치합니다.');
-			$resultMsg.css('color','green');
-			$('#mail-Check-Btn').attr('disabled',true);
-			$('#userEamil1').attr('readonly',true);
-			$('#userEamil2').attr('readonly',true);
-			$('#userEmail2').attr('onFocus', 'this.initialSelect = this.selectedIndex');
-	         $('#userEmail2').attr('onChange', 'this.selectedIndex = this.initialSelect');
-		}else{
-			$resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
-			$resultMsg.css('color','red');
-		}
-	});
-}); */
 
 </script>
 <style>
@@ -92,29 +71,8 @@ $(document).ready(function(){
 	
 </style>
 
-<div class="form-group email-form">
-	 <label for="email">이메일</label>
-	 <div class="input-group">
-	<input type="text" class="form-control" name="mail" id="mail" placeholder="이메일" >
-	<select class="form-control" name="domain" id="domain" >
-	<option>@naver.com</option>
-	<option>@daum.net</option>
-	<option>@gmail.com</option>
-	<option>@hanmail.com</option>
-	 <option>@yahoo.co.kr</option>
-	</select>
-	</div>   
-<div class="input-group-addon">
-	<button type="button" class="btn btn-primary" id="sendMail">본인인증</button>
-</div>
-	<div class="mail-check-box">
-<input class="form-control mail-check-input" id="compare" placeholder="인증번호를 입력해주세요!" maxlength="7">
-<span id="compare_ok" style="padding-left: 30px"><img src="images/check.png" style="width: 20px; height: 20px"></span>
-<span id="compare_wrong"  style="padding-left: 30px"><img src="images/wrong.png" style="width: 20px; height: 20px"></span>
-</div>
-	<span id="mail-check-warn"></span>
-</div>
-<!-- <div class="modal fade" id="emailModal" role="dialog">
+
+<div class="modal fade" id="emailModal" role="dialog">
     <div class="modal-dialog modal-2sm">
       <div class="modal-content">
         <div class="modal-header">
@@ -124,46 +82,34 @@ $(document).ready(function(){
         </div>
         
         <div class="modal-body">
+        <form id="email_form"> 
         <div class="form-group email-form">
-			<label for="email">이메일</label>
-			<div class="input-group">
-				<input type="text" class="form-control" name="userEmail1" id="userEmail1" placeholder="이메일" >
-				<select class="form-control" name="userEmail2" id="userEmail2" >
-					<option>@naver.com</option>
-					<option>@daum.net</option>
-					<option>@gmail.com</option>
-					<option>@hanmail.com</option>
-					<option>@yahoo.co.kr</option>
-				</select>
+			
+			<div style="display: inline-block">
+				<input type="text" class="form-control" name="mail" id="mail" placeholder="이메일" th:value="${cust.email}" readonly="readonly">
 			</div>   
-			<div class="input-group-addon">
-				<button type="button" class="btn btn-primary" id="mail-Check-Btn">본인인증</button>
+			<span class="input-group-addon">
+				<button type="button" class="btn btn-primary" id="sendMail">인증번호 요청</button>
+			</span>
+			<div class="mail-check-box" style="display: inline-block">
+				<input type="text" id="compare" class="form-control mail-check-input" placeholder="인증번호를 입력해주세요" maxlength="7">
+				<!-- <span id="compare_ok" style="padding-left: 30px"><img src="images/check.png" style="width: 20px; height: 20px"></span>
+				<span id="compare_wrong"  style="padding-left: 30px"><img src="images/wrong.png" style="width: 20px; height: 20px"></span> -->
+				
 			</div>
-			<div class="mail-check-box">
-				<input class="form-control mail-check-input" placeholder="인증번호 6자리를 입력해주세요" disabled="disabled" maxlength="6">
-			</div>
-			<span id="mail-check-warn"></span>
+				<button type="button" class="btn btn-primary" id="check_btn">인증번호 확인</button>
 		</div>
+		</form>
         </div>
-        
-        <div class="modal-body">
-        <form id="infoenter_form" name="formname">
-          <div class="form-group">
-            <input id="custpwd" type="password" class="form-control" placeholder="Password" name="custpwd">
-          </div>
-          </form>
-          <p></p>
-        </div>
-        
         <div class="modal-footer">
 		<a th:href="@{/custdetail(custid=${session.logincust.custid})}">
 		<a href=#>
-          <button id="infoenter_btn" type="button" class="btn btn-default" style="background-color: #f15d30; color: white">Submit</button>
+          <button id="ok_btn" type="button" class="btn btn-default" style="background-color: #f15d30; color: white">확인</button>
         </a>
         </div>
       </div>
     </div>
-</div>   -->
+</div>  
   
 
 <section class="ftco-section contact-section ftco-no-pt">
@@ -176,7 +122,7 @@ $(document).ready(function(){
             <h2>안녕하세요 : )</h2>
             <h2 th:text = "${cust.custname}+' 님'" style="display: inline-block"></h2>
             
-            <button type="button" class="btn" data-toggle="modal" data-target="#emailModal" style="margin-left:3%; margin-bottom: 9px; width: 10%; display: inline-block; background-color: lightgray; "> 본인인증</button>
+            <button type="button" class="btn" data-toggle="modal" data-target="#emailModal" style="margin-left:3%; margin-bottom: 9px; width: 15%; display: inline-block; background-color: lightgray; "> 본인인증하기</button>
           
             <h4 th:text = "'보유포인트 : '+${cust.point}+'P'"></h4>
             <h4 th:text = "'가입날짜 : '+${cust.rdate}"></h4>
