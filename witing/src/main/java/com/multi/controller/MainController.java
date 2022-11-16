@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -50,15 +51,22 @@ public class MainController {
 	
 	@RequestMapping("/mypage")
 	public String mypage(Model model, String custid, String certification) {
-		
+		CustDTO cust = null;
 		try {
-			System.out.println(certification);
-			CustDTO cust = custservice.get(custid);
 			model.addAttribute("imgpath", "/images/mypageimg.jpg");
 			model.addAttribute("pagename", "My Page");
-			model.addAttribute("cust", cust);
-			model.addAttribute("mpcenter", "mypage");
-			model.addAttribute("center","mypageindex");
+			if(certification == null) {
+				cust = custservice.get(custid);
+				model.addAttribute("cust", cust);
+				model.addAttribute("mpcenter", "mypage");
+				model.addAttribute("center","mypageindex");
+			} else {
+				cust = custservice.certifi_update(certification, custid);
+				cust = custservice.get(custid);
+				model.addAttribute("cust", cust);
+				model.addAttribute("mpcenter", "mypage");
+				model.addAttribute("center","mypageindex");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -123,20 +131,17 @@ public class MainController {
 			}
 			int numIndex=random.nextInt(8999)+1000; //4자리 랜덤 정수를 생성
 			key+=numIndex;
+			System.out.println("1");
 			message.setSubject("Witing 본인인증을 위한 인증번호 메일");
+			System.out.println("2");
 			message.setText("인증 번호 : "+key);
+			System.out.println("3");
 			sender.send(message);
+			System.out.println("4");
 			System.out.println("key : " + key);
+			System.out.println("5");
 	       
 			return key;
 		}
-	
-	//이메일 인증
-//	@GetMapping("/mailCheck")
-//	@ResponseBody
-//	public String mailCheck(String email) {
-//		System.out.println("이메일 인증 요청이 들어옴!");
-//		System.out.println("이메일 인증 이메일 : " + email);
-//		return mailService.joinEmail(email);
-//	}
+
 }
