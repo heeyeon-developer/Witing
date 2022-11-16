@@ -116,55 +116,52 @@ function mapmarker(){
 	})
 }
 
-/* Websocket Start */
-var stompClient = null;
-var id = '[[${session.logincust.custid}]]';
-// 서버소켓에 연결
-function connect() {
-	var socket = new SockJS('http://127.0.0.1/ws');
-	stompClient = Stomp.over(socket);
+function re_delete_btn(){
+	var c = confirm('삭제하시겠습니까?');
+	if(c == true){
+		var replyid = $('#replyid').text();
+		var accomid = $('#accomid').text();
+		location.href="[[@{/delreply?replyid=}]]"+replyid+'&'+"[[@{accomid=}]]"+accomid;
+		alert('정상적으로 삭제되었습니다.');
+	}else{
+		alert('취소되었습니다.');
+	}
+}
 
-	stompClient.connect({}, function(frame) { 
-		setConnected(true);
-		console.log('Connected: ' + frame);
+function update_btn(){
+	var comment = $('#comment').val();
+	alert(comment);
+}
 
-		stompClient.subscribe('/send/to/'+id, function(msg) { 
-			$("#to").prepend(
-					"<p>" + JSON.parse(msg.body).sendid +":"+
-					JSON.parse(msg.body).content1
-							+ "</p>");
+function re_update_btn(){
+	var c = confirm('수정하시겠습니까?');
+	if(c == true){
+		$('#replyupdate_form').attr({
+			'method':'post',
+			'action':'[[@{/updatereply}]]'
 		});
-	});
-}
-
-
-// 연결 끊기
-function disconnect() {
-	if (stompClient !== null) {
-		stompClient.disconnect();
+		$('#replyupdate_form').submit();
+		alert(comment);
+		alert('수정되었습니다.');
+	}else{
+		alert('취소되었습니다.');
 	}
-	setConnected(false);
-	console.log("Disconnected");
 }
 
-// connect&disconnect버튼 활성화/비활성화
-function setConnected(connected) {
-	if (connected) {
-		$("#status").text("Connected");
-	} else {
-		$("#status").text("Disconnected");
+/* function re_update_btn(){
+	var c = confirm('수정하시겠습니까?');
+	if(c == true){
+		$('#replyupdate_form').attr({
+			'method':'post',
+			'action':'[[@{/updatereply}]]'
+		});
+		$('#replyupdate_form').submit();
+		alert(comment);
+		alert('수정되었습니다.');
+	}else{
+		alert('취소되었습니다.');
 	}
-	
-}
-
-function sendTo() {
-	var msg = JSON.stringify({
-		'sendid' : id,
-		'receiveid' : $('#target').val(),
-		'content1' : $('#totext').val()
-	});
-	stompClient.send('/receiveto', {}, msg);
-}
+} */
 
 $(document).ready(function(){
 	$('#reply_btn').click(function(){
@@ -176,16 +173,47 @@ $(document).ready(function(){
 			location.href="[[@{/replyimpl?custid=}]]"+custid+"&[[@{accomid=}]]"+accomid+"&[[@{comment=}]]"+comment;
 			alert(comment)
 			alert("정상적으로 등록되었습니다");
+		}else{
+			alert('취소되었습니다.');
 		}
 	})
+	
+	/* $('#delete_btn').click(function(){
+		var c = confirm('삭제하시겠습니까?');
+		if(c == true){
+			var replyid = $('#replyid').text();
+			var accomid = $('#accomid').text();
+			location.href="[[@{/delreply?replyid=}]]"+replyid+'&'+"[[@{accomid=}]]"+accomid;
+			alert('정상적으로 삭제되었습니다.');
+		}else{
+			alert('취소되었습니다.');
+		}
+	}); */
+	
+	/* $('#modal_update').click(function(){
+		var c = confirm('수정하시겠습니까?');
+		if(c == true){
+			$('#replyupdate_form').attr({
+				'method':'post',
+				'action':'[[@{/updatereply}]]'
+			});
+			$('#replyupdate_form').submit();
+			alert(comment);
+			alert('수정되었습니다.');
+		}else{
+			alert('취소되었습니다.');
+		}
+	}); */
 	
 	$('#del_btn').click(function(){
 		var c = confirm('삭제하시겠습니까?');
 		if(c == true){
 			var accomid = $('#accomid').text();
 			location.href="[[@{/deleteaccom?accomid=}]]"+accomid;
+			alert('정상적으로 삭제되었습니다.');
+		}else{
+			alert('취소되었습니다.');
 		}
-		alert('정상적으로 삭제되었습니다.');
 	});
 	
 	$('#donglechat').hide();
@@ -197,15 +225,6 @@ $(document).ready(function(){
 	})
 	mapmarker();
 	
-	$("#connect").click(function() {
-		connect();
-	});
-	$("#disconnect").click(function() {
-		disconnect();
-	});
-	$("#sendto").click(function() {
-		sendTo();
-	});
 });
 
 </script>
@@ -286,22 +305,28 @@ $(document).ready(function(){
     
     <!-- Comments section-->
                <section class="col-md-11">
+               <h3 style="font-weight: bold; margin-left: 1%;">Comment</h3>
                    <div class="card bg-light">
                        <div class="card-body">
                            <!-- Comment form-->
-                           <form class="mb-4"><textarea class="form-control" rows="3" placeholder="동행하고 싶다면 댓글을 남겨주세요 :)" name="comment" id="comment" style="width: 89%; display: inline-block;"></textarea></form>
-                           <button type="button" class="btn btn-primary" id="reply_btn" style="width: 100px; height: 95px; float: right; display: inline-block; margin-top: -13%;">작성하기</button>
+                           <div>
+                           <form class="col-md-11" style="margin-bottom: 2%;"><textarea class="form-control" rows="3" placeholder="동행하고 싶다면 댓글을 남겨주세요 :)" name="comment" id="comment" style="display: inline-block;"></textarea></form>
+                           <button type="button" class="btn btn-primary" id="reply_btn" style="width: 90px; height: 95px; float: right; margin-top: -122px;">작성하기</button>
+                           </div>
                            <!-- Comment with nested comments-->
-                           <div class="d-flex mb-4" th:each="reply:${reply}">
+                           <div class="d-flex mb-4" th:each="reply:${reply}"><div id="replyid" hidden="hidden" th:text="${reply.replyid}"></div>
                                <!-- Parent comment-->
-                               <br>
-                               <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                               <div class="ms-3">
+                               <div class="flex-shrink-0"><img class="rounded-circle" src="images/hotel/usericon6.png" style="width: 50px;" alt="..." /></div>
+                               <div class="col-md-8">
                                    <div class="fw-bold" th:text="${reply.custid}" style="margin-left: 15px; margin-right:2%; font-size: 18px; font-weight: bold; color: #f15d30;"></div>
-	                                   <p th:text="${reply.cdate}" style="display: inline-block; margin-left:2%;"></p>
-	                                   <a href="#">수정</a>
-	                                   <a href="#">삭제<a>
-                                   <p th:text="${reply.comment}" style="margin-left: 15px; color: black"></p>
+	                                   <div style="font-size: 13px; margin-left:2.5%; margin-top: 3px;">
+	                                   <p th:text="${#dates.format(reply.cdate, 'yyyy-MM-dd HH:mm')}" style="display: inline-block; margin-right: 1%;"></p>
+	                                   <button type="button" id="update_btn" th:onclick="update_btn()" th:if="${session.logincust.custid} == ${custid}" data-toggle='modal' data-target='#modifyModal' style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">수정</button>
+	                                   <button type="button" id="delete_btn" th:onclick="re_delete_btn()" th:if="${session.logincust.custid} == ${custid}" style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">삭제</button>
+	                                   </div>
+                                   <p th:text="${reply.comment}" style="margin-left: 15px; color: black"></p><div id="replylid" style="display: none;" th:text="${replylid}"></div>
+                                   
+                                   
                                    <!-- Child comment 1-->
                                    <!-- <div class="d-flex mt-4">
                                        <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
@@ -311,9 +336,34 @@ $(document).ready(function(){
                                        </div>
                                   </div> -->
                               </div>
+                              
+                              <div class="modal fade" id="modifyModal" role="dialog">
+								  <div class="modal-dialog">
+								      <div class="modal-content">
+								          <div class="modal-header">
+								              <h5 class="modal-title">댓글 수정하기</h5><div id="replyid" hidden="hidden" th:text="${reply.replyid}"></div>
+								              <button type="button" class="close" data-dismiss="modal">&times;</button>
+								          </div>
+									          <div class="modal-body">
+									          <form id="replyupdate_form">
+									              <div class="form-group">
+									                  <label for="replyText">댓글 내용</label>
+									                  <textarea class="form-control" rows="4" id="comment_reply" th:value="${reply.comment}" th:text="${reply.comment}" name="comment"></textarea>
+									              </div>
+									          </form>
+									          </div>
+								          <div class="modal-footer">
+								              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+								              <button type="button" class="btn btn-primary modalModBtn" id="modal_update" onclick="re_update_btn()">수정</button>
+								          </div>
+								      </div>
+								  </div>
+								</div>
+                              
                            </div>
                        </div>
                    </div>
+                   
                </section>
     
   </div>
