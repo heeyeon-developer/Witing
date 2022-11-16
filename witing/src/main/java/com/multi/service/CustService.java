@@ -43,5 +43,9 @@ public class CustService implements MyService<String, CustDTO>{
 	public List<CustDTO> custget(String custid) throws Exception {
 		return mapper.custget(custid);
 	}
+	
+	public CustDTO certifi_update(String certification, String custid) throws Exception{
+		return mapper.certifi_update(certification, custid);
+	}
 
 }

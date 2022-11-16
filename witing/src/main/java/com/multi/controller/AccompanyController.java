@@ -88,11 +88,25 @@ public class AccompanyController {
 	}
 	
 	
+//	@RequestMapping("/updatereply")
+//	public String updatereply(Model model, ReplyDTO reply) {
+//		try {
+//			reply_service.modify(reply);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "redirect:accompany";
+//	}
+	
 	@RequestMapping("/updatereply")
-	public String updatereply(Model model, ReplyDTO reply,int replyid, int accomid, String comment) {
+	public String updatereply(Model model, Integer replyid, Integer accomid, String comment, String custid) {
+		ReplyDTO reply = new ReplyDTO(replyid, accomid, custid, comment, null, 0);
 		try {
-			reply_service.modify(reply);
+			System.out.println(replyid);
+			System.out.println(accomid);
 			System.out.println(comment);
+			reply_service.modify(reply);
+			model.addAttribute("reply", reply);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

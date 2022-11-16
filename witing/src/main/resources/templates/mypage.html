@@ -32,12 +32,17 @@ $(document).ready(function(){
 				 				
 				 				$('#email_form').attr({
 				 					'data' : {
-				 						'certification' : '1'
+				 						'certification' : "1"
 				 					},
+					 				'method':'post',
+									'action':'[[@{/mypage?custid=}]]'+'[[@{${cust.custid}}]]'+'&'+'[[@{certification=1}]]'
+					 			});
+					 			$('#email_form').submit();
+					 			/* $('#certification').attr({
 					 				'method':'post',
 									'action':'[[@{/mypage(custid=${cust.custid})}]]'
 					 			});
-					 			$('#email_form').submit();
+					 			$('#certification').submit(); */
 				 			} else {
 				 				alert("인증번호가 일치하지 않습니다.")
 				 				
@@ -82,6 +87,11 @@ $(document).ready(function(){
         </div>
         
         <div class="modal-body">
+        <form id="certification">
+        	<div>
+        		<input type="hidden" name="certification" id="certification" value="1">
+        	</div>
+        </form>
         <form id="email_form"> 
         <div class="form-group email-form">
 			
@@ -97,7 +107,7 @@ $(document).ready(function(){
 				<span id="compare_wrong"  style="padding-left: 30px"><img src="images/wrong.png" style="width: 20px; height: 20px"></span> -->
 				
 			</div>
-				<button type="button" class="btn btn-primary" id="check_btn">인증번호 확인</button>
+				<!-- <button type="button" class="btn btn-primary" id="check_btn">인증번호 확인</button> -->
 		</div>
 		</form>
         </div>
@@ -116,14 +126,15 @@ $(document).ready(function(){
   <div class="container">
     <div class="row block-9">
       <div class="col-md-12 order-md-last d-flex">
-       <form action="#" class="bg-light p-5 contact-form">
+       <form class="bg-light p-5 contact-form">
           
           <div id="mypage_info" class="form-group">
             <h2>안녕하세요 : )</h2>
-            <h2 th:text = "${cust.custname}+' 님'" style="display: inline-block"></h2>
+            <h2 th:text = "${cust.custname}+' 님'" style="display: inline-block; margin-bottom: 0;  vertical-align: bottom"></h2>
             
-            <button type="button" class="btn" data-toggle="modal" data-target="#emailModal" style="margin-left:3%; margin-bottom: 9px; width: 15%; display: inline-block; background-color: lightgray; "> 본인인증하기</button>
-          
+            <button type="button" class="btn" data-toggle="modal" data-target="#emailModal" style="margin-left:3%; margin-bottom: 9px; width: 13%; display: inline-block; background-color: lightgray;" th:if="${cust.certification == null}"> 본인인증하기</button>
+            <!-- <button type="button" class="btn" data-toggle="modal"  style="margin-left:3%; margin-bottom: 9px; width: 13%; display: inline-block; background-color: #00D8FF;" th:if="${cust.certification != null}">본인인증완료 </button> -->
+          	<div style="display: inline-block;vertical-align: bottom;"><button  type="button" data-toggle="modal"  style="width: 8%;height:48px; display: inline-block; background-color: #F8F9FA; border: none" th:if="${cust.certification != null}" ><img src="images/certifi_check.png" th:if="${cust.certification != null}" style="width: 48px ;"> </button></div>
             <h4 th:text = "'보유포인트 : '+${cust.point}+'P'"></h4>
             <h4 th:text = "'가입날짜 : '+${cust.rdate}"></h4>
             
