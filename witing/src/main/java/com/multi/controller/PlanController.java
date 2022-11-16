@@ -33,7 +33,8 @@ public class PlanController {
 	
 	@RequestMapping("/plan")
 	public String main(Model model, int accomid, String title, Date traveltime, Integer cnt, String gender,
-			String country, String custid, Date birth, String accomtext, String planname, String todo, Integer planid) {
+			String country, String custid, Date birth, String accomtext, String planname, String todo, Integer planid,
+			Integer replyid) {
 		List<PlanDTO> list = null;
 		List<PlanDTO> xy = null;
 		List<ReplyDTO> reply = null;
@@ -55,6 +56,7 @@ public class PlanController {
 			model.addAttribute("birth", list.get(0).getBirth());
 			model.addAttribute("accomtext", list.get(0).getAccomtext());
 			model.addAttribute("accomid",accomid);
+			model.addAttribute("replyid",replyid);
 			
 			/*
 			model.addAttribute("planname", list.get(0).getPlanname());
@@ -77,32 +79,5 @@ public class PlanController {
 		return "index";
 	}
 
-	@RequestMapping("/getmarker")
-	public Object getmarker() {
-		JSONArray ja = new JSONArray();
-		
-		JSONObject jo1 = new JSONObject();
-		jo1.put("title", "국밥집");
-		jo1.put("target", "http://www.naver.com");
-		jo1.put("lat", 37.5286891);
-		jo1.put("lng", 127.061432);
-		ja.add(jo1);
-		
-		JSONObject jo2 = new JSONObject();
-		jo2.put("title", "짬뽕집");
-		jo2.put("target", "http://www.daum.net");
-		jo2.put("lat", 37.5386891);
-		jo2.put("lng", 127.021432);
-		ja.add(jo2);
-		
-		JSONObject jo3 = new JSONObject();
-		jo3.put("title", "닭발집");
-		jo3.put("target", "http://www.google.com");
-		jo3.put("lat", 37.5186891);
-		jo3.put("lng", 127.031432);
-		ja.add(jo3);
-		
-		return ja;
-	}
 
 }

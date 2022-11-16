@@ -86,7 +86,47 @@ public class AccompanyController {
 		}
 		return "redirect:plan?accomid="+reply.getAccomid();
 	}
+	
+	
+//	@RequestMapping("/updatereply")
+//	public String updatereply(Model model, ReplyDTO reply) {
+//		try {
+//			reply_service.modify(reply);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "redirect:accompany";
+//	}
+	
+	@RequestMapping("/updatereply")
+	public String updatereply(Model model, Integer replyid, Integer accomid, String comment, String custid) {
+		ReplyDTO reply = new ReplyDTO(replyid, accomid, custid, comment, null, 0);
+		try {
+			System.out.println(replyid);
+			System.out.println(accomid);
+			System.out.println(comment);
+			reply_service.modify(reply);
+			model.addAttribute("reply", reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:plan?accomid="+accomid;
+	}
 
+	@RequestMapping("/delreply")
+	public String delreply(Model model, int replyid, int accomid) {
+		ReplyDTO reply = new ReplyDTO();
+		try {
+			System.out.println(replyid);
+			System.out.println(accomid);
+			reply_service.remove(replyid);
+			model.addAttribute("reply", reply);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:plan?accomid="+accomid;
+		
+	}
 	
 	@RequestMapping("/accomimpl")
 	public String accomimpl(Model model, String custid,String title,int cnt,String traveltime, int idx,String planname,String todo,String accomtext,
