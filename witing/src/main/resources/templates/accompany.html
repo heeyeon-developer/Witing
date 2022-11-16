@@ -32,6 +32,12 @@
 </style>
 
 <script>
+var images = ['image_1.jpg', 'image_2.jpg', 'image_3.jpg', 'image_4.jpg', 'image_5.jpg', 'image_6.jpg'];
+
+$(document).ready(function(){
+	$('#thum_img').css({"background-image":"url(/images/" + images[Math.floor(Math.random() * images.length)]+ ")", 'background-position': 'center center', 'background-size' : '100%'});
+});
+
 /* $(document).ready(function(){
 	$('#photo_list').hide();
 });
@@ -118,7 +124,7 @@ $(document).ready(function(){
     <div class="row d-flex">
       <div class="col-md-4 d-flex ftco-animate" th:each=li:${list}>
        <div class="blog-entry justify-content-end">
-        <a th:href="@{/plan(accomid=${li.accomid})}" class="block-20" th:style="|background-image: url('images/image_${li.accomid}.jpg');|">
+        <a th:href="@{/plan(accomid=${li.accomid})}" class="block-20" id="thum_img" th:style="|background-image: url('images/image_${li.accomid}.jpg');|">
         </a>
         <div class="text">
          <div class="d-flex align-items-center mb-4 topp">
