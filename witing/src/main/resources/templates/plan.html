@@ -321,7 +321,7 @@ $(document).ready(function(){
                                    <div class="fw-bold" th:text="${reply.custid}" style="margin-left: 15px; margin-right:2%; font-size: 18px; font-weight: bold; color: #f15d30;"></div>
 	                                   <div style="font-size: 13px; margin-left:2.5%; margin-top: 3px;">
 	                                   <p th:text="${#dates.format(reply.cdate, 'yyyy-MM-dd HH:mm')}" style="display: inline-block; margin-right: 1%;"></p>
-	                                   <button type="button" id="update_btn" th:onclick="update_btn()" th:if="${session.logincust.custid} == ${custid}" data-toggle='modal' data-target='#modifyModal' style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">수정</button>
+	                                   <button type="button" id="update_btn" onclick="update_btn()" th:if="${session.logincust.custid} == ${custid}" data-toggle='modal' th:data-target='|#modifyModal${reply.replyid}|' style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">수정</button>
 	                                   <button type="button" id="delete_btn" th:onclick="re_delete_btn()" th:if="${session.logincust.custid} == ${custid}" style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">삭제</button>
 	                                   </div>
                                    <p th:text="${reply.comment}" style="margin-left: 15px; color: black"></p><div id="replylid" style="display: none;" th:text="${replylid}"></div>
@@ -337,7 +337,7 @@ $(document).ready(function(){
                                   </div> -->
                               </div>
                               
-                              <div class="modal fade" id="modifyModal" role="dialog">
+                              <div class="modal fade" th:id="|modifyModal${reply.replyid}|" role="dialog">
 								  <div class="modal-dialog">
 								      <div class="modal-content">
 								          <div class="modal-header">
