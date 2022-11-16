@@ -146,6 +146,8 @@ function changeToday(e){
     	if(sdate.getFullYear() <= today.getFullYear() && sdate.getMonth() <= today.getMonth() && sdate.getDate() < today.getDate()){
     	  paintDate();
     	  $('#edate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
+    	  var calcprice = parseInt($('#basicprice').text())*parseInt(today.getDate()-sdate.getDate());
+    	  $('#totalprice').val(calcprice*(parseInt($('#cnt').val())-parseInt($("#cnt option:eq(0)").val())+1));
     	}else{ 
     	  $('#sdate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
     	}
@@ -158,14 +160,5 @@ function changeToday(e){
 }
 
 $(document).ready(function(){
-
 	clickStart();
-	$('#prev').click(function(){
-		prev();
-	});
-	
-	$('#next').click(function(){
-		next();
-	});
-	
 })

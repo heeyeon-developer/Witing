@@ -1,39 +1,52 @@
 <head>
 <link rel="stylesheet" href="/css/calender.css"> 
  <!-- jQuery 결제 API 연동-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-    <!-- iamport.payment.js -->
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+ <!-- iamport.payment.js -->
+ <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	
-	<script>
-	 var IMP = window.IMP; 
-	 IMP.init("imp83780347"); 
-	
-	 function requestPay() {
-	     IMP.request_pay({
-	         pg : 'kcp',
-	         pay_method : 'card',
-	         merchant_uid: "w-"+Math.floor(Math.random()*100000,0)+ "-"+Math.floor(Math.random()*100000,0),
-	         name : $('#roominfo').val(),
-	         amount : $('#totalprice').val(),
-	         buyer_name : $('#custname').val()
-	     }, function (rsp) { // callback
-	    	 alert($('#custname').val());
-	         if (rsp.success) {
-	        	 //성공하면 결제 완료 페이지 보여주기
-	             console.log(rsp);
-	             $('#reservform').attr({
-	            	 method:'post',
-	            	 action:'/reservimpl'
-	             });
-	             $('#reservform').submit();
-	         } else {
-	             console.log(rsp);
-	        	 alert("결제가 실패하였습니다. 다시 결제를 진행해 주세요.");
-	         }
-	     });
-	 }
-	</script>
+<script>
+ var IMP = window.IMP; 
+ IMP.init("imp83780347"); 
+
+ function requestPay() {
+     IMP.request_pay({
+         pg : 'kcp',
+         pay_method : 'card',
+         merchant_uid: "w-"+Math.floor(Math.random()*100000,0)+ "-"+Math.floor(Math.random()*100000,0),
+         name : $('#roominfo').val(),
+         amount : $('#totalprice').val(),
+         buyer_name : $('#custname').val()
+     }, function (rsp) { // callback
+    	 alert($('#custname').val());
+         if (rsp.success) {
+        	 //성공하면 결제 완료 페이지 보여주기
+             console.log(rsp);
+             $('#reservform').attr({
+            	 method:'post',
+            	 action:'/reservimpl'
+             });
+             $('#reservform').submit();
+         } else {
+             console.log(rsp);
+        	 alert("결제가 실패하였습니다. 다시 결제를 진행해 주세요.");
+         }
+     });
+ };
+ 
+const changeCnt = (target) => {
+	if(target.value > $("#cnt option:eq(0)").val()){
+		var bf = $('#basicprice').text();
+		var addprice = $('#addprice').text();
+		var dif = parseInt(target.value) - parseInt($('#cnt option:eq(0)').val());
+		var af = (parseInt(bf)+(parseInt(dif)*parseInt(addprice)));
+		$('#totalprice').val(af);
+	}else{
+		$('#totalprice').val($('#basicprice').text());
+	}
+}
+
+</script>	
  </head>
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/ReservationBackground.jpeg');">
   <div class="container">
@@ -105,14 +118,12 @@
           <span>인원수</span>
             <div class="form-field">
 				<div class="select-wrap">
-					<select name="cnt" id="cnt" class="form-control">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
+					<div id="addprice" th:text="${addprice}" style="display:none"></div>
+					<div id="basicprice" th:text="${totalprice}" style="display:none;"></div>
+					<select name="cnt" id="cnt" class="form-control" onchange="changeCnt(this)">
+					<div th:each="li:${people}">
+						<option  th:value="${li}" th:text="${li}"></option>
+					</div>
 					</select>
 				</div> 
 			</div>

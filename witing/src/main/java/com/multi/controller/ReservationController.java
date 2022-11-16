@@ -44,11 +44,17 @@ public class ReservationController {
 			CustDTO cust = custservice.get(custid);
 			RoomDTO room = roomservice.get(roomid);
 			HotelDTO hotel = hotelservice.get(room.getHotelid());
+			List<Integer> people = new ArrayList<>();
+			for(int i=room.getStandard(); i<=room.getMax(); i++) {
+				people.add(i);
+			}
 			model.addAttribute("custid",custid);
 			model.addAttribute("roomid",roomid);
 			model.addAttribute("custname",cust.getCustname());
 			model.addAttribute("roominfo",hotel.getHotelname()+"-"+room.getRoomtype());
 			model.addAttribute("totalprice",room.getPrice());
+			model.addAttribute("addprice",room.getAddprice());
+			model.addAttribute("people",people);
 			model.addAttribute("center","reservation");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
