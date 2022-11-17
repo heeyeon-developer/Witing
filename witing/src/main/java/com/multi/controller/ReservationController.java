@@ -23,6 +23,7 @@ import com.multi.service.RoomService;
 
 @Controller
 public class ReservationController {
+	String mypagedir = "mypage/";
 	
 	@Autowired
 	RoomService roomservice;
@@ -68,7 +69,7 @@ public class ReservationController {
 			model.addAttribute("pagename","Reservation");
 			model.addAttribute("list",list);
 			model.addAttribute("mpcenter", "reservationlist");
-			model.addAttribute("center","mypageindex");
+			model.addAttribute("center",mypagedir+"mypageindex");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -20,6 +20,9 @@ import com.multi.service.RoomService;
 
 @Controller
 public class ReviewController {
+	String reviewdir = "review/";
+	String mypagedir = "mypage/";
+	
 	@Autowired
 	CustService custservice;
 	@Autowired
@@ -45,8 +48,8 @@ public class ReviewController {
 			model.addAttribute("pagename", "Review");
 			model.addAttribute("cust", cust);
 			model.addAttribute("list", list);
-			model.addAttribute("mpcenter", "review");
-			model.addAttribute("center", "mypageindex");
+			model.addAttribute("mpcenter", reviewdir+"review");
+			model.addAttribute("center", mypagedir+"mypageindex");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,8 +66,8 @@ public class ReviewController {
 			model.addAttribute("pagename", "Review");
 			model.addAttribute("cust", post); /* mypageindex와 파라미터를 맞추기 위함 */
 			model.addAttribute("reviewdetail", post);
-			model.addAttribute("mpcenter", "reviewdetail");
-			model.addAttribute("center", "mypageindex");
+			model.addAttribute("mpcenter", reviewdir+"reviewdetail");
+			model.addAttribute("center", mypagedir+"mypageindex");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -82,8 +85,8 @@ public class ReviewController {
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
 			model.addAttribute("pagename", "Review"); 
 			model.addAttribute("cust", cust);
-			model.addAttribute("mpcenter", "review");
-			model.addAttribute("center", "mypageindex");
+			model.addAttribute("mpcenter", reviewdir+"review");
+			model.addAttribute("center", mypagedir+"mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,7 +112,7 @@ public class ReviewController {
 			model.addAttribute("roomtype2", list.get(1).getRoomtype());
 			model.addAttribute("roomid", roomid);
 			model.addAttribute("list", list);
-			model.addAttribute("center", "writereview");
+			model.addAttribute("center", reviewdir+"writereview");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -134,7 +137,7 @@ public class ReviewController {
 			list = postservice.hotelreviewall(hotelid);
 			
 			model.addAttribute("list", list);
-			model.addAttribute("center", "reviewmore");
+			model.addAttribute("center", reviewdir+"reviewmore");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -147,7 +150,7 @@ public class ReviewController {
 		try {
 			post = postservice.reviewdetail(postid);
 			model.addAttribute("reviewdetail",post);
-			model.addAttribute("center", "reviewmoredetail");
+			model.addAttribute("center", reviewdir+"reviewmoredetail");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

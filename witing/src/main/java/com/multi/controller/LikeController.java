@@ -14,6 +14,7 @@ import com.multi.service.LikeService;
 
 @Controller
 public class LikeController {
+	String mypagedir = "mypage/";
 	
 	@Autowired
 	LikeService service;
@@ -33,7 +34,7 @@ public class LikeController {
 			model.addAttribute("like", cust);
 			model.addAttribute("list", list);
 			model.addAttribute("mpcenter", "like");
-			model.addAttribute("center", "mypageindex");
+			model.addAttribute("center", mypagedir+"mypageindex");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -6,14 +6,7 @@
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
   
 <script>
-function del(postid){
-	var custid = '[[${session.logincust.custid}]]';	// 사용자의 id
-	var c = confirm('삭제 하시겠습니까?');
-	if(c == true){
-	location.href='/deleteqna?postid='+postid+'&custid='+custid;	// delete에게 삭제하고자 하는 카트의 id와 사용자의 id를 보낸다.  
 
-	}
-}
 </script>
 
 <style>
@@ -27,12 +20,26 @@ function del(postid){
 	
 </style>
 
-<section class="ftco-section contact-section ftco-no-pt">
+
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg')">
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+      <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/hotel">Hotel <i class="fa fa-chevron-right"></i></a></span> <span><a href="#">Q&A <i class="fa fa-chevron-right"></i></a></span></p>
+       <h1 class="mb-0 bread">Hotel Q&A </h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+
+
+<section class="ftco-section contact-section" >
   <div class="container">
     <div class="row block-9">
-    
 <!-- 질문 -->
-      <div class="col-md-12 order-md-last"  style="background-color: #F6F6F6; padding: 40px">
+      <div class="col-md-12 order-md-last" style=" background-color: #F6F6F6; padding: 40px">
        <div class=" p-6">
        	<table class="container">
        		<thead>
@@ -57,19 +64,15 @@ function del(postid){
        	
        		<tbody style="background-color: #EAEAEA; height: 100px">
        			<tr>
-       				<td id="td_text" colspan="2" th:text="${qnadetail.text}" ></td>
+       				<td id="td_text" colspan="2" th:text="'&nbsp&nbsp&nbsp&nbsp'+${qnadetail.text}" style="color: black"></td>
        			</tr>
        		</tbody>
        	
        	</table>
-       	<div>
-       		<button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|"> 목록</button>
-       		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px" th:onclick="del([[${qnadetail.postid}]]);"> 삭제</button>
-       	</div>
        </div>
       </div>
 <!-- 질문 끝 -->
-      
+
 <!-- 답변 -->
       <div class="col-md-12 order-md-last "  style="background-color: #F6F6F6; padding: 40px" th:if="${answer != null}">
        <div class=" p-6">
@@ -96,18 +99,18 @@ function del(postid){
        	
        		<tbody style="background-color: #EAEAEA; height: 100px">
        			<tr>
-       				<td id="td_text" colspan="2" th:text="${answer.text}" ></td>
+       				<td id="td_text" colspan="2" th:text="'&nbsp&nbsp&nbsp&nbsp'+${answer.text}" style="color: black"></td>
        			</tr>
        		</tbody>
        	
        	</table>
-       	<div>
-       		<!-- <button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|"> 목록</button>
-       		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px" th:onclick="del([[${qnadetail.postid}]]);"> 삭제</button> -->
-       	</div>
        </div>
       </div>
 <!-- 답변 끝 -->
+		<div class="col-md-12 order-md-last ">
+       		<button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px"> <a th:href="@{/qnamore(hotelid=${qnadetail.hotelid})}" style="color:white">목록</a></button>
+       		<!-- <button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px"> 삭제</button>  -->
+       	</div>
    </div>
  </div>
 </section>

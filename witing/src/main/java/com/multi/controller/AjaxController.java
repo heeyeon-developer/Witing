@@ -3,12 +3,16 @@ package com.multi.controller;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.multi.dto.CityDTO;
@@ -31,6 +35,8 @@ public class AjaxController {
 	CityService city_service;
 	@Autowired
 	PlanService plan_service;
+	@Autowired
+	MailSender sender;
 	
 	@RequestMapping("/idcheck")
 	public Object idcheck(String id) {
@@ -111,4 +117,32 @@ public class AjaxController {
 		
 		return data;
 	}
+	@RequestMapping("/CheckMail") // AJAX와 URL을 매핑시켜줌 
+	@ResponseBody  //AJAX후 값을 리턴하기위해 작성
+	public String SendMail(String mail) {
+			Random random = new Random();  //난수 생성을 위한 랜덤 클래스
+			String key="";  //인증번호 
+
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(mail); //스크립트에서 보낸 메일을 받을 사용자 이메일 주소 
+			
+			//입력 키를 위한 코드
+			for(int i = 0; i < 3; i++) {
+				int index=random.nextInt(25)+65; //A~Z까지 랜덤 알파벳 생성
+				key+=(char)index;
+			}
+			int numIndex=random.nextInt(8999)+1000; //4자리 랜덤 정수를 생성
+			key+=numIndex;
+			System.out.println("1");
+			message.setSubject("Witing 본인인증을 위한 인증번호 메일");
+			System.out.println("2");
+			message.setText("인증 번호 : "+key);
+			System.out.println("3");
+			sender.send(message);
+			System.out.println("4");
+			System.out.println("key : " + key);
+			System.out.println("5");
+	       
+			return key;
+		}
 }

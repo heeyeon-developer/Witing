@@ -18,6 +18,9 @@ import com.multi.service.RoomService;
 
 @Controller
 public class QnAController {
+	String qnadir = "qna/";
+	String mypagedir = "mypage/";
+	
 	@Autowired
 	CustService custservice;
 	@Autowired
@@ -31,7 +34,6 @@ public class QnAController {
 	
 	@RequestMapping("/qna")
 	public String qna(Model model, String custid) {
-		System.out.println(custid);
 		try {
 			CustDTO cust = custservice.get(custid);
 			List<PostDTO> list = postservice.myqna(custid);
@@ -50,8 +52,8 @@ public class QnAController {
 			model.addAttribute("pagename", "Q&A");
 			model.addAttribute("cust", cust);
 			model.addAttribute("list", list);
-			model.addAttribute("mpcenter", "qna");
-			model.addAttribute("center", "mypageindex");
+			model.addAttribute("mpcenter", qnadir+"qna");
+			model.addAttribute("center", mypagedir+"mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,8 +74,8 @@ public class QnAController {
 			model.addAttribute("cust", post);  /* mypageindex와 파라미터 맞춰주기 위한 것 */ 
 			model.addAttribute("qnadetail", post);
 			model.addAttribute("answer", answer);
-			model.addAttribute("mpcenter", "qnadetail");
-			model.addAttribute("center", "mypageindex");
+			model.addAttribute("mpcenter", qnadir+"qnadetail");
+			model.addAttribute("center", mypagedir+"mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,8 +92,8 @@ public class QnAController {
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
 			model.addAttribute("pagename", "Q&A"); 
 			model.addAttribute("cust", cust);
-			model.addAttribute("mpcenter", "qna");
-			model.addAttribute("center", "mypageindex");
+			model.addAttribute("mpcenter", qnadir+"qna");
+			model.addAttribute("center", mypagedir+"mypageindex");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -117,7 +119,7 @@ public class QnAController {
 			model.addAttribute("roomtype2", list.get(1).getRoomtype());
 			model.addAttribute("roomid", roomid);
 			model.addAttribute("list", list);
-			model.addAttribute("center", "writeqna");
+			model.addAttribute("center", qnadir+"writeqna");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -127,11 +129,6 @@ public class QnAController {
 	
 	@RequestMapping("/qnasendimpl")
 	public String qnasendimpl(Model model, PostDTO qna) {
-		System.out.println("postid : "+qna.getPostid());
-		System.out.println("custid : "+qna.getCustid());
-		System.out.println("title : "+qna.getTitle());
-		System.out.println("text : "+qna.getText());
-		System.out.println(qna);
 		try {
 			postservice.qnainsert(qna);
 		} catch (Exception e) {
@@ -153,7 +150,7 @@ public class QnAController {
 				}
 			}
 			model.addAttribute("list", list);
-			model.addAttribute("center", "qnamore");
+			model.addAttribute("center", qnadir+"qnamore");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -172,7 +169,7 @@ public class QnAController {
 			System.out.println(post);
 			model.addAttribute("qnadetail",post);
 			model.addAttribute("answer", answer);
-			model.addAttribute("center", "qnamoredetail");
+			model.addAttribute("center", qnadir+"qnamoredetail");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
