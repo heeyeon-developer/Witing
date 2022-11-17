@@ -116,10 +116,12 @@ function mapmarker(){
 	})
 }
 
-function re_delete_btn(){
+function re_delete_btn(replyid){
+	alert(replyid)
 	var c = confirm('삭제하시겠습니까?');
 	if(c == true){
-		var replyid = $('#replyid').text();
+		alert(replyid);
+		var replyid = replyid;
 		var accomid = $('#accomid').text();
 		location.href="[[@{/delreply?replyid=}]]"+replyid+'&'+"[[@{accomid=}]]"+accomid;
 		alert('정상적으로 삭제되었습니다.');
@@ -129,19 +131,21 @@ function re_delete_btn(){
 }
 
 function update_btn(data){
-	var replyid = $('#replyid').text();
-	alert(replyid);
+	/* alert(data); */
 }
 
-function re_update_btn(){
+function re_update_btn(data){
+	/* alert(data); */
 	var c = confirm('수정하시겠습니까?');
 	if(c == true){
-		var replyid = $('#replyid').text();
+		var replyid = data;
+		var commentid = 'comment_reply'+data;
 		var accomid = $('#accomid').text();
-		var comment = $('#comment_reply').val();
+		var comment = $('#'+commentid).val();
 		location.href="[[@{/updatereply?replyid=}]]"+replyid+"&[[@{accomid=}]]"+accomid+"&[[@{comment=}]]"+comment;
+		/* alert(commentid)
 		alert(replyid);
-		alert(comment);
+		alert(comment); */
 		alert('수정되었습니다.');
 	}else{
 		alert('취소되었습니다.');
@@ -171,39 +175,12 @@ $(document).ready(function(){
 			var accomid = $('#accomid').text();
 			var comment = $('#comment').val();
 			location.href="[[@{/replyimpl?custid=}]]"+custid+"&[[@{accomid=}]]"+accomid+"&[[@{comment=}]]"+comment;
-			alert(comment)
+			/* alert(comment) */
 			alert("정상적으로 등록되었습니다");
 		}else{
 			alert('취소되었습니다.');
 		}
 	})
-	
-	/* $('#delete_btn').click(function(){
-		var c = confirm('삭제하시겠습니까?');
-		if(c == true){
-			var replyid = $('#replyid').text();
-			var accomid = $('#accomid').text();
-			location.href="[[@{/delreply?replyid=}]]"+replyid+'&'+"[[@{accomid=}]]"+accomid;
-			alert('정상적으로 삭제되었습니다.');
-		}else{
-			alert('취소되었습니다.');
-		}
-	}); */
-	
-	/* $('#modal_update').click(function(){
-		var c = confirm('수정하시겠습니까?');
-		if(c == true){
-			$('#replyupdate_form').attr({
-				'method':'post',
-				'action':'[[@{/updatereply}]]'
-			});
-			$('#replyupdate_form').submit();
-			alert(comment);
-			alert('수정되었습니다.');
-		}else{
-			alert('취소되었습니다.');
-		}
-	}); */
 	
 	$('#del_btn').click(function(){
 		var c = confirm('삭제하시겠습니까?');
@@ -217,11 +194,10 @@ $(document).ready(function(){
 	});
 	
 	$('#donglechat').hide();
-	/* $('#websoket').hide(); */
 	
 	$('#accom_btn').click(function(){
 		$('#donglechat').show();
-		/* $('#websoket').show(); */
+		
 	})
 	mapmarker();
 	
@@ -231,11 +207,11 @@ $(document).ready(function(){
 
 
 <body>
- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_4.jpg');">
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_4.jpg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a href="/accompany">Accompany <i class="fa fa-chevron-right"></i></a></span> <span><a href="#">Plan Details <i class="fa fa-chevron-right"></i></a></span></p>
+       <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/main}">Home <i class="fa fa-chevron-right"></i></a></span> <span class="mr-2"><a th:href="@{/accompany}">Accompany <i class="fa fa-chevron-right"></i></a></span> <span><a th:href="@{#}">Plan Details <i class="fa fa-chevron-right"></i></a></span></p>
        <h1 class="mb-0 bread">Plan Details</h1>
        <div id="accomid" style="display:none;" th:text="${accomid}"></div>
      </div>
@@ -270,9 +246,17 @@ $(document).ready(function(){
 		<div class="sidebar-box ftco-animate">
           <h3>User</h3>
           <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" style="background-image: url('images/hotel/usercat2.png');"></a>
+            <a class="blog-img mr-4" style="background-image: url('/images/hotel/usercat2.png');"></a>
             <div class="text">
-              <h3 class="heading"><a href="#" th:text="${custid}"></a></h3>
+              <h3 class="heading"><a th:href="@{#}" th:text="${custid}"></a>
+              
+              <img src="/images/hotel/aaa.png" style="width: 20px;">
+              <img src="/images/hotel/aaa1.jpg" style="width: 20px;">
+              <img src="/images/hotel/aaa2.jpg" style="width: 20px;">
+              <img src="/images/hotel/aaa3.jpg" style="width: 20px;">
+              <img src="/images/hotel/aaa4.jpg" style="width: 20px;">
+              <img src="/images/hotel/aaa5.jpg" style="width: 20px;">
+              </h3>
               <p>MBTI 자리</p>
               <div class="meta">
                 <div><span class="fa fa-calendar"><span th:text="| ${#dates.format(birth, 'yyyy')}년생|"></span></span></div>
@@ -281,8 +265,7 @@ $(document).ready(function(){
               </div>
             </div>
           </div>
-          <a href="#" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">동행 신청하기</a><br><br>
-          <a href="/chat" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">Chatting</a><br><br>
+          <a th:href="@{#}" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">채팅하기</a><br><br>
         </div>
         
         <div>
@@ -314,15 +297,15 @@ $(document).ready(function(){
                            <button type="button" class="btn btn-primary" id="reply_btn" style="width: 90px; height: 95px; float: right; margin-top: -122px;">작성하기</button>
                            </div>
                            <!-- Comment with nested comments-->
-                           <div class="d-flex mb-4" th:each="reply:${reply}"><div id="replyid" th:text="${reply.replyid}"></div>
+                           <div class="d-flex mb-4" th:each="reply:${reply}"><div id="replyid" hidden="hidden" th:text="${reply.replyid}"></div>
                                <!-- Parent comment-->
-                               <div class="flex-shrink-0"><img class="rounded-circle" src="images/hotel/usericon6.png" style="width: 50px;" alt="..." /></div>
+                               <div class="flex-shrink-0"><img class="rounded-circle" src="/images/hotel/usericon6.png" style="width: 50px;" alt="..." /></div>
                                <div class="col-md-8">
                                    <div class="fw-bold" th:text="${reply.custid}" style="margin-left: 15px; margin-right:2%; font-size: 18px; font-weight: bold; color: #f15d30;"></div>
 	                                   <div style="font-size: 13px; margin-left:2.5%; margin-top: 3px;">
-	                                   <p th:text="${#dates.format(reply.cdate, 'yyyy-MM-dd HH:mm')}" style="display: inline-block; margin-right: 1%;"></p>
-	                                   <button type="button" id="update_btn" th:onclick="|update_btn(${reply.replyid})|" th:if="${session.logincust.custid} == ${reply.custid}" data-toggle='modal' th:data-target='|#modifyModal${reply.replyid}|' style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">수정</button>
-	                                   <button type="button" id="delete_btn" th:onclick="re_delete_btn()" th:if="${session.logincust.custid} == ${reply.custid}" style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">삭제</button>
+	                                   <p th:text="${#dates.format(reply.cdate, 'yyyy-MM-dd HH:mm:ss')}" style="display: inline-block; margin-right: 1%;"></p>
+	                                   <button type="button" id="update_btn" th:onclick="|update_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}" data-toggle='modal' th:data-target='|#modifyModal${reply.replyid}|' style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">수정</button>
+	                                   <button type="button" id="delete_btn" th:onclick="|re_delete_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}" style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">삭제</button>
 	                                   </div>
                                    <p th:text="${reply.comment}" style="margin-left: 15px; color: black"></p><div id="replylid" style="display: none;" th:text="${replylid}"></div>
                                    
@@ -348,13 +331,13 @@ $(document).ready(function(){
 									          <form id="replyupdate_form">
 									              <div class="form-group">
 									                  <label for="replyText">댓글 내용</label>
-									                  <textarea class="form-control" rows="4" id="comment_reply" th:value="${reply.comment}" th:text="${reply.comment}" name="comment"></textarea>
+									                  <textarea class="form-control" rows="4" th:id="|comment_reply${reply.replyid}|" th:value="${reply.comment}" th:text="${reply.comment}" name="comment"></textarea>
 									              </div>
 									          </form>
 									          </div>
 								          <div class="modal-footer">
 								              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-								              <button type="button" class="btn btn-primary modalModBtn" th:id="|modal_update${reply.replyid}|" th:onclick="re_update_btn()">수정</button>
+								              <button type="button" class="btn btn-primary modalModBtn" th:id="|modal_update${reply.replyid}|" th:onclick="|re_update_btn([[${reply.replyid}]])|">수정</button>
 								          </div>
 								      </div>
 								  </div>

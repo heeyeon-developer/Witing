@@ -144,11 +144,11 @@ var callback = function(result, status) {
 </script>
 
 
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_2.jpg');">
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_2.jpg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="/accompany">Accompany <i class="fa fa-chevron-right"></i></a></span></p>
+       <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/}">Home <i class="fa fa-chevron-right"></i></a></span> <span><a th:href="@{/accompany}">Accompany <i class="fa fa-chevron-right"></i></a></span></p>
        <h1 class="mb-0 bread">Write Accompany</h1>
      </div>
    </div>
@@ -207,7 +207,7 @@ var callback = function(result, status) {
 				</div>
 				
 				<!-- 2 -->
-				<div class="col-2 mb-3">
+				<!-- <div class="col-2 mb-3">
 					<input type="number" class="form-control" id="idx" value="2" readonly="readonly" name="idx">
 					<div class="col-lg d-flex"></div>
 				</div>
@@ -224,33 +224,13 @@ var callback = function(result, status) {
 						<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo">
 					</div>
 					<div class="col-lg d-flex"></div>
-				</div>
+				</div> -->
 				
                    
-                  <a href="#"><i class="fa fa-plus-circle" id="add_icon"></i></a>
+                  <a th:href="@{#}"><i class="fa fa-plus-circle" id="add_icon"></i></a>
              <!-- </div> -->
                     
                 <!--     
-				<div class="col-2 mb-3">
-					<input type="number" class="form-control" id="idx2" value="2" readonly="readonly">
-					<div class="col-lg d-flex"></div>
-				</div>
-				<div class="col-4 mb-3">
-					<div class="form-field2">
-					<input type="text" class="form-control" id="planname2" placeholder="장소">
- 					</div>
-					<div class="col-lg d-flex"></div>
-				</div>
-				<div class="col-5 mb-3">
-  					<div class="form-field3">
-					<input type="text" class="form-control" id="todo2" placeholder="일정">
-					</div>
-					<div class="col-lg d-flex"></div>
-				</div> 
-
-					<i class="fa fa-minus-circle" id="minus_icon"></i>
-
-
 				<div class="col-2 mb-3">
 					<input type="number" class="form-control" id="idx3" value="3" readonly="readonly">
 					<div class="col-lg d-flex"></div>
@@ -275,13 +255,10 @@ var callback = function(result, status) {
 	            </div>
 	            
 	            <div class="col-2 mb-3">
-					<input type="text" name="planx" value="planx" id="planx1">
-					<input type="text" name="plany" value="plany" id="plany1">
+					<input type="text" name="planx" value="planx" id="planx">
+					<input type="text" name="plany" value="plany" id="plany">
 	            </div>
-	            <div class="col-2 mb-3" style="margin-left: 100px;">
-					<input type="text" name="planx" value="planx" id="planx2">
-					<input type="text" name="plany" value="plany" id="plany2">
-	            </div>
+	            
 			</div>
           </form>
           <button id="writeaccom_btn" type="button" class="btn btn-primary">등록하기</button>
@@ -305,7 +282,7 @@ $("#addr_btn").click(function(){
     }).open()
 });
 
-$("#addr_btn2").click(function(){
+/* $("#addr_btn2").click(function(){
     new daum.Postcode({
         oncomplete: function(data) {
             $("#sample4_roadAddress2").val(data.address);
@@ -314,7 +291,7 @@ $("#addr_btn2").click(function(){
         	geocoder.addressSearch(addr, callback2);  
         }
     }).open()
-});
+}); */
 
 var callback = function(result, status) {
 	if (status === kakao.maps.services.Status.OK) {

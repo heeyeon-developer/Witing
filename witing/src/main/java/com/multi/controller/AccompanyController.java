@@ -19,7 +19,10 @@ import com.multi.service.PlanService;
 import com.multi.service.ReplyService;
 
 @Controller
+
 public class AccompanyController {
+	
+	String dir = "accompany/";
 	
 	@Autowired
 	AccompanyService service;
@@ -39,7 +42,7 @@ public class AccompanyController {
 		try {
 			list = service.getall();
 			model.addAttribute("list", list);
-			model.addAttribute("center", "accompany");
+			model.addAttribute("center", dir+"accompany");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,7 +68,7 @@ public class AccompanyController {
 	@RequestMapping("/writeaccom")
 	public String writeaccom(Model model, String custid) {
 		model.addAttribute("custid", custid);
-		model.addAttribute("center", "writeaccom");
+		model.addAttribute("center", dir+"writeaccom");
 		return "index";
 	}
 	

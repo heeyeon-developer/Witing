@@ -20,7 +20,10 @@ import com.multi.service.PostService;
 import com.multi.service.RoomService;
 
 @Controller
+
 public class HotelController {
+	
+	String dir = "hotel/";
 	
 	@Autowired
 	HotelService service;
@@ -53,7 +56,7 @@ public class HotelController {
 			model.addAttribute("city", city);
 			model.addAttribute("list", list);
 			model.addAttribute("cate", cate);
-			model.addAttribute("center", "hotel");
+			model.addAttribute("center", dir+"hotel");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -66,7 +69,7 @@ public class HotelController {
 		try {
 			List<HotelDTO> list = service.cityshotel(cityid);
 			model.addAttribute("list", list);
-			model.addAttribute("center", "hotel");
+			model.addAttribute("center", dir+"hotel");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,7 +89,7 @@ public class HotelController {
 			model.addAttribute("city", city);
 			model.addAttribute("cate", cate);
 			model.addAttribute("search", search);
-			model.addAttribute("center", "searchimpl");
+			model.addAttribute("center", dir+"searchimpl");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -121,7 +124,7 @@ public class HotelController {
 			model.addAttribute("list", list);
 			model.addAttribute("qnalist5", post);
 			model.addAttribute("reviewlist5", post2);
-			model.addAttribute("center", "room");
+			model.addAttribute("center", dir+"room");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

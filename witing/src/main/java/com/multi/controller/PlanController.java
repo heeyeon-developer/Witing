@@ -20,7 +20,10 @@ import com.multi.service.PlanService;
 import com.multi.service.ReplyService;
 
 @Controller
+
 public class PlanController {
+	
+	String dir = "accompany/";
 	
 	@Autowired
 	PlanService service;
@@ -38,15 +41,19 @@ public class PlanController {
 		List<PlanDTO> list = null;
 		List<PlanDTO> xy = null;
 		List<ReplyDTO> reply = null;
+		List<CustDTO> cust = null;
 		try {
 			list = service.plandetail(accomid);
 			xy = service.xy(accomid);
 			reply = reply_service.accomreply(accomid);
+			cust = cust_service.custget(custid);
+			model.addAttribute("cust", cust);
 			
 			model.addAttribute("reply", reply);
 			model.addAttribute("xy", xy);
 			model.addAttribute("list", list);
-			model.addAttribute("center", "plan");
+			model.addAttribute("center", dir+"plan");
+			
 			model.addAttribute("title", list.get(0).getTitle());
 			model.addAttribute("traveltime", list.get(0).getTraveltime());
 			model.addAttribute("cnt", list.get(0).getCnt());
@@ -73,11 +80,4 @@ public class PlanController {
 		return "index";
 	}
 	
-	@RequestMapping("/chat")
-	public String chat(Model model) {
-		model.addAttribute("center", "chat");
-		return "index";
-	}
-
-
 }
