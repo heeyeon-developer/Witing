@@ -25,6 +25,8 @@ import com.multi.service.RoomService;
 public class ReservationController {
 	String mypagedir = "mypage/";
 	
+	String dir = "reservation/";
+	
 	@Autowired
 	RoomService roomservice;
 	@Autowired
@@ -56,7 +58,7 @@ public class ReservationController {
 			model.addAttribute("totalprice",room.getPrice());
 			model.addAttribute("addprice",room.getAddprice());
 			model.addAttribute("people",people);
-			model.addAttribute("center","reservation");
+			model.addAttribute("center",dir+"reservation");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,7 +76,7 @@ public class ReservationController {
 			model.addAttribute("imgpath", "images/hotel/gyeongju2.jpg");
 			model.addAttribute("pagename","Reservation");
 			model.addAttribute("list",list);
-			model.addAttribute("mpcenter", "reservationlist");
+			model.addAttribute("mpcenter", dir+"reservationlist");
 			model.addAttribute("center",mypagedir+"mypageindex");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -109,7 +111,7 @@ public class ReservationController {
 			model.addAttribute("roominfo",hotel.getHotelname()+"-"+room.getRoomtype());
 			model.addAttribute("name",custservice.get(order.getCustid()).getCustname());
 			model.addAttribute("order", order);
-			model.addAttribute("center","reservationok");
+			model.addAttribute("center",dir+"reservationok");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

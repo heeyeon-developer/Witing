@@ -3,11 +3,11 @@
 .calender-main{
 	margin-top:10%;
 	width: 50%;
-	height:500px;
+	height: 100%;
 }
 .calender-wrap{
   width: 110%;
-  height: 50%;
+  height: 60%;
   margin:0 auto;
   overflow: hidden;
 }
@@ -47,6 +47,11 @@
   color: orange;
   text-align: center;
 }
+.reserved{
+  	text-decoration: line-through;
+  	color: #4169E1;
+  	pointer-events : none;
+  }
 
 tr{
 	text-align: center;
@@ -170,6 +175,11 @@ tr{
     border-radius: 50%;
     color: orange;
     text-align: center;
+  }
+  .reserved{
+  	text-decoration: line-through;
+  	color: #4169E1;
+  	pointer-events : none;
   }
   tr{
 	text-align: center;

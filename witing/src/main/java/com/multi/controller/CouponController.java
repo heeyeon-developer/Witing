@@ -16,6 +16,8 @@ import com.multi.service.CustService;
 public class CouponController {
 	String mypagedir = "mypage/";
 	
+	String dir = "coupon/";
+	
 	@Autowired
 	CouponService service;
 	@Autowired
@@ -31,7 +33,7 @@ public class CouponController {
 			model.addAttribute("cust", cust);
 			model.addAttribute("custid",custid);
 			model.addAttribute("list",list);
-			model.addAttribute("mpcenter", "coupon");
+			model.addAttribute("mpcenter", dir+"coupon");
 			model.addAttribute("center",mypagedir+"mypageindex");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -1,9 +1,9 @@
 <head>
 <link rel="stylesheet" href="/css/calender.css"> 
- <!-- jQuery 결제 API 연동-->
- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
- <!-- iamport.payment.js -->
- <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<!-- jQuery 결제 API 연동-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	
 <script>
  var IMP = window.IMP; 
@@ -18,7 +18,6 @@
          amount : $('#totalprice').val(),
          buyer_name : $('#custname').val()
      }, function (rsp) { // callback
-    	 alert($('#custname').val());
          if (rsp.success) {
         	 //성공하면 결제 완료 페이지 보여주기
              console.log(rsp);
@@ -33,18 +32,6 @@
          }
      });
  };
- 
-const changeCnt = (target) => {
-	if(target.value > $("#cnt option:eq(0)").val()){
-		var bf = $('#basicprice').text();
-		var addprice = $('#addprice').text();
-		var dif = parseInt(target.value) - parseInt($('#cnt option:eq(0)').val());
-		var af = (parseInt(bf)+(parseInt(dif)*parseInt(addprice)));
-		$('#totalprice').val(af);
-	}else{
-		$('#totalprice').val($('#basicprice').text());
-	}
-}
 
 </script>	
  </head>
@@ -93,11 +80,11 @@ const changeCnt = (target) => {
 		                <td class= "sat" align="center">Sat</td>
 		              </tr>
 		          </thead>
-		          <tbody id="calendar-body" class="calendar-body"></tbody>
-		        </table>
-		      </div>
+		        <tbody id="calendar-body" class="calendar-body"></tbody>
+		      </table>
 		    </div>
 		  </div>
+		</div>
 		<div>
         <form id="reservform" class="p-5 contact-form">
           <div class="form-group">
@@ -105,21 +92,19 @@ const changeCnt = (target) => {
             <input id="custid" th:value="${custid}" style="display:none" name="custid">
           </div>
           <div class="form-group">
-            <input id="roominfo" type="text" class="form-control" th:value="${roominfo}">
-          	<input id="roomid" th:value="${roomid}" style="display:none" name="roomid">
+            <input id="roominfo" type="text" class="form-control" th:value="${roominfo}" readonly="readonly">
+          	<input th:value="${roomid}" style="display:none" name="roomid"><div id="roomid" th:text="${roomid}" style="display:none"></div>
           </div>
           <div class="form-group">
-            <div class="form-field">
-				<input id="sdate" type="text" class="form-control checkin_date col-md-5" placeholder="예약 시작일" name="sdate" style="display:inline-block">
-				<input id="edate" type="text" class="form-control checkin_date col-md-5" placeholder="예약 마지막일" name="edate" style="display:inline-block">
-		  	</div>
+			<input id="sdate" type="text" class="form-control col-md-5" placeholder="예약 시작일" name="sdate" style="display:inline-block" readonly="readonly">
+			<input id="edate" type="text" class="form-control col-md-5" placeholder="예약 마지막일" name="edate" style="display:inline-block" readonly="readonly">
           </div>
           <div class="form-group">
           <span>인원수</span>
             <div class="form-field">
 				<div class="select-wrap">
 					<div id="addprice" th:text="${addprice}" style="display:none"></div>
-					<div id="basicprice" th:text="${totalprice}" style="display:none;"></div>
+					<div id="basicprice" th:text="${totalprice}" style="display:none"></div>
 					<select name="cnt" id="cnt" class="form-control" onchange="changeCnt(this)">
 					<div th:each="li:${people}">
 						<option  th:value="${li}" th:text="${li}"></option>
