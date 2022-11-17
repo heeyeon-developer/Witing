@@ -19,6 +19,9 @@ import com.multi.service.NaverAPI;
 @Controller
 public class LoginController {
 	
+	String logindir = "login/";
+	String regidir = "register/";
+	
 	@Autowired
 	CustService custservice;
 	@Autowired
@@ -31,7 +34,7 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	public String login(Model model) {
-		model.addAttribute("center","login");
+		model.addAttribute("center",logindir+"login");
 		return "index";
 	}
 	
@@ -40,13 +43,13 @@ public class LoginController {
 		try {
 			CustDTO cust = custservice.get(id);
 			if(!pwd.equals(cust.getCustpwd())) {
-				model.addAttribute("center","loginfail");
+				model.addAttribute("center",logindir+"loginfail");
 			}else {
 				session.setAttribute("logincust", cust);
 				model.addAttribute("center","maincenter");
 			}
 		} catch (Exception e) {
-			model.addAttribute("center","loginfail");
+			model.addAttribute("center",logindir+"loginfail");
 		}
 		
 		return "redirect:";
@@ -54,7 +57,7 @@ public class LoginController {
 	
 	@RequestMapping("/loginfail")
 	public String loginfail(Model model) {
-		model.addAttribute("center","loginfail");
+		model.addAttribute("center",logindir+"loginfail");
 		return "index";
 	}
 	
@@ -67,7 +70,7 @@ public class LoginController {
 	 
 	@RequestMapping("/register")
 	public String register(Model model) {
-		model.addAttribute("center","register");
+		model.addAttribute("center",regidir+"register");
 		return "index";
 	}
 	
@@ -77,7 +80,7 @@ public class LoginController {
 		try {
 			custservice.register(cust);
 			model.addAttribute("name",cust.getCustname());
-			model.addAttribute("center","registerok");
+			model.addAttribute("center",regidir+"registerok");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

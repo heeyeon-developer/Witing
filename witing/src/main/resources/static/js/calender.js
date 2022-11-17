@@ -136,20 +136,21 @@ function changeToday(e){
     clickedDate1.classList.add('active');
     today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
     if($('#edate').val() == '' && $('#sdate').val() == ''){
-    	$('#sdate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
+    	$('#sdate').val(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+clickedDate1.id);
     }
     else if($('#edate').val() != '' && $('#sdate').val() != ''){
     	$('#edate').val('');
-    	$('#sdate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
+    	$('#sdate').val(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+clickedDate1.id);
     }else{
     	sdate = new Date($('#sdate').val());
     	if(sdate.getFullYear() <= today.getFullYear() && sdate.getMonth() <= today.getMonth() && sdate.getDate() < today.getDate()){
     	  paintDate();
-    	  $('#edate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
-    	  var calcprice = parseInt($('#basicprice').text())*parseInt(today.getDate()-sdate.getDate());
-    	  $('#totalprice').val(calcprice*(parseInt($('#cnt').val())-parseInt($("#cnt option:eq(0)").val())+1));
+    	  $('#edate').val(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+clickedDate1.id);
+    	  var addprice = ((parseInt($('#cnt').val())-parseInt($("#cnt option:eq(0)").val())))*parseInt($('#addprice').text());
+    	  var calcprice = (parseInt($('#basicprice').text())+parseInt(addprice))*parseInt(today.getDate()-sdate.getDate());
+    	  $('#totalprice').val(calcprice);
     	}else{ 
-    	  $('#sdate').val(today.getFullYear()+'-'+today.getMonth()+'-'+clickedDate1.id);
+    	  $('#sdate').val(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+clickedDate1.id);
     	}
     }
     	
@@ -159,6 +160,76 @@ function changeToday(e){
     reshowingList();    
 }
 
+const changeCnt = (target) => {
+	var bf = $('#basicprice').text();
+	if(target.value > $("#cnt option:eq(0)").val()){
+		
+		var addprice = $('#addprice').text();
+		var dif = parseInt(target.value) - parseInt($('#cnt option:eq(0)').val());
+		var af = (parseInt(bf)+(parseInt(dif)*parseInt(addprice)))*parseInt(today.getDate()-sdate.getDate());
+		$('#totalprice').val(af);
+	}else{
+		$('#totalprice').val(bf*parseInt(today.getDate()-sdate.getDate()));
+	}
+}
+
+var stompClient = null;
+
+function wsconnect() {
+	var socket = new SockJS('http://127.0.0.1:8080/admin/wss');
+	stompClient = Stomp.over(socket);
+
+	stompClient.connect({}, function(frame) {
+		console.log('Connected: ' + frame);
+		stompClient.subscribe('/reserved', function(list) {
+			alert(JSON.parse(list.body).length);
+			
+			for(var i=0; i<JSON.parse(list.body).length; i++){
+				var start = JSON.parse(list.body)[i].sdate;
+				var end = JSON.parse(list.body)[i].edate;
+				for(let i = parseInt(start.substr(8,10))+1; i <= parseInt(end.substr(8,10))+1; i++){
+					tdGroup[i].classList.add('reserved');
+					tdGroup[i].removeEventListener('click',changeToday);
+	    		}
+			}
+		});
+
+	});
+};
+
+function connect() {
+	var socket = new SockJS('http://127.0.0.1:8080/admin/ws');
+	stompClient = Stomp.over(socket);//연결하기
+
+	stompClient.connect({}, function(frame) { 
+		console.log('Connected: ' + frame);
+		var check = JSON.stringify({
+		    'year' : today.getYear()-100+2000,
+			'month' : today.getMonth()+1,
+			'roomid' : $('#roomid').text()
+		});//요청할 달, 방 데이터 생성
+		
+		stompClient.send("/reservedcheck", {}, check);//컨트롤러에 데이터 요청
+		
+		stompClient.subscribe('/reservedresult', function(list) { 
+			for(var i=0; i<JSON.parse(list.body).length; i++){
+				var start = JSON.parse(list.body)[i].sdate;
+				var end = JSON.parse(list.body)[i].edate;
+				for(let i = parseInt(start.substr(8,10))+1; i <= parseInt(end.substr(8,10))+1; i++){
+					tdGroup[i].classList.add('reserved');
+	    		}
+			}
+		});
+	});
+}
+
 $(document).ready(function(){
 	clickStart();
+	connect();
+	$('#prev').click(function(){
+		connect();
+	});
+	$('#next').click(function(){
+		connect();
+	})
 })
