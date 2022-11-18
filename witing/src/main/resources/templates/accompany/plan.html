@@ -47,6 +47,24 @@
 </style>
 
 <script>
+function clip(){
+
+	var url = 'http://localhost/accompany';
+	var textarea = document.createElement("textarea");
+	document.body.appendChild(textarea);
+	url = window.document.location.href;
+	textarea.value = url;
+	textarea.select();
+	document.execCommand("copy");
+	document.body.removeChild(textarea);
+	alert("URL이 복사되었습니다.")
+}
+
+function shareTwitter() {
+	var title = $('#plan_title').val;
+    window.open("http://twitter.com/share?url=" + encodeURIComponent(location.href) +"&text=" + document.title);
+}
+
 
 function displaymap(data){
 	// 마커를 표시할 위치와 title 객체 배열입니다 , 지도의 가운데 위치를 가져올 변수계산도 추가
@@ -251,7 +269,7 @@ $(document).ready(function(){
               <h3 class="heading"><a th:href="@{#}" th:text="${custid}"></a>
               <span th:if="${certification != null}"><img src="/images/hotel/aaa2.jpg" th:if="${certification != null}" style="height: 20px; margin-left: 1%; margin-top: -1%"></span>
               </h3>
-              <!-- <p>MBTI 자리</p> -->
+               <p>MBTI 자리</p>
               <div class="meta">
                 <div><span class="fa fa-calendar"><span th:text="| ${#dates.format(birth, 'yyyy')}년생|"></span></span></div>
                 <div><span class="fa fa-venus-mars"><span th:text="| ${gender}|"></span></span></div>
@@ -260,6 +278,14 @@ $(document).ready(function(){
             </div>
           </div>
           <a th:href="@{#}" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">채팅하기</a><br><br>
+          
+          <div id="snslist" style="text-align: center;">
+	          <button type="button" onclick="clip(); return false;" style="border: none; background-color: transparent; margin-top: 15px;"><i class="fa fa-link" style="font-size: 25px; color: black; margin-bottom: -10px;"></i></button>
+	          <button type="button" onclick="shareTwitter();" style="border: none; background-color: transparent;"><img src="/images/hotel/twitter.png" style="height: 30px; margin-left: -5%;"></button>
+	          <button type="button" style="border: none; background-color: transparent;"><img src="/images/hotel/pngegg.png" style="height: 30px; margin-left: -5%;"></button>
+	          <button type="button" id="shareKt" style="border: none; background-color: transparent;"><img src="/images/hotel/kakao.png" style="height: 30px; margin-left: -5%;"></button>
+          </div>
+          
         </div>
         
         <div>
