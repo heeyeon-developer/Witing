@@ -112,7 +112,10 @@ $(document).ready(function(){
 		<tr>
 			<td th:text="${li.accomid}"></td>
 			<td th:text="${li.custid}"></td>
-			<td><a th:href="@{/plan(accomid=${li.accomid})}" th:text="${li.title}" style="color: black;"></a></td>
+			<td>
+				<a th:if="${session.logincust != null}" th:href="@{/plan(accomid=${li.accomid})}" th:text="${li.title}" style="color: black;"></a>
+				<a th:if="${session.logincust == null}" th:href="@{/login}" th:text="${li.title}" style="color: black;"></a>
+			</td>
 			<td th:text="${#dates.format(li.traveltime, 'yyyy-MM-dd')}"></td>
 		</tr>
 		</tbody>

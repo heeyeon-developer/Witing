@@ -134,7 +134,7 @@ $(document).ready(function(){
             
             <button type="button" class="btn" data-toggle="modal" data-target="#emailModal" style="margin-left:3%; margin-bottom: 9px; width: 13%; display: inline-block; background-color: lightgray;" th:if="${cust.certification == null}"> 본인인증하기</button>
             <!-- <button type="button" class="btn" data-toggle="modal"  style="margin-left:3%; margin-bottom: 9px; width: 13%; display: inline-block; background-color: #00D8FF;" th:if="${cust.certification != null}">본인인증완료 </button> -->
-          	<div style="display: inline-block;vertical-align: bottom;"><button  type="button" data-toggle="modal"  style="width: 8%;height:48px; display: inline-block; background-color: white; border: none" th:if="${cust.certification != null}" ><img src="images/hotel/aaa2.jpg" th:if="${cust.certification != null}" style="width: 48px ;"> </button></div>
+          	<div style="display: inline-block;vertical-align: bottom;margin-bottom:5px"><button  type="button" data-toggle="modal"  style="width: 8%;height:48px; display: inline-block; background-color: white; border: none" th:if="${cust.certification != null}" ><img src="/images/hotel/aaa2.jpg" th:if="${cust.certification != null}" style="width: 48px ;"> </button></div>
             <h4 th:text = "'보유포인트 : '+${cust.point}+'P'"></h4>
             <h4 th:text = "'가입날짜 : '+${cust.rdate}"></h4>
             
