@@ -37,7 +37,7 @@ public class PlanController {
 	@RequestMapping("/plan")
 	public String main(Model model, int accomid, String title, Date traveltime, Integer cnt, String gender,
 			String country, String custid, Date birth, String accomtext, String planname, String todo, Integer planid,
-			Integer replyid) {
+			Integer replyid, String certification) {
 		List<PlanDTO> list = null;
 		List<PlanDTO> xy = null;
 		List<ReplyDTO> reply = null;
@@ -49,6 +49,7 @@ public class PlanController {
 			cust = cust_service.custget(custid);
 			model.addAttribute("cust", cust);
 			
+			model.addAttribute("certification", list.get(0).getCertification());
 			model.addAttribute("reply", reply);
 			model.addAttribute("xy", xy);
 			model.addAttribute("list", list);

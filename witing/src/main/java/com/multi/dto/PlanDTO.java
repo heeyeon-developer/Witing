@@ -36,5 +36,6 @@ public class PlanDTO {
 	private String country;
 	private String gender;
 	private Date birth;
+	private String certification;
  
 }

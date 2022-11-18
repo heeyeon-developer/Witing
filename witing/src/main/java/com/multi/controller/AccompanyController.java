@@ -145,7 +145,7 @@ public class AccompanyController {
 			for(CustDTO c : clist) {
 				PlanDTO pl = new PlanDTO(0, ac.getAccomid(), planname, planx, plany, 0, todo,
 						custid, title, accomtext, Date.valueOf(traveltime), cnt,
-						ac.getLocationx(), ac.getLocationy(), c.getCountry(), c.getGender(), c.getBirth());
+						ac.getLocationx(), ac.getLocationy(), c.getCountry(), c.getGender(), c.getBirth(), c.getCertification());
 				System.out.println(c);
 				plan_service.register(pl);
 			}

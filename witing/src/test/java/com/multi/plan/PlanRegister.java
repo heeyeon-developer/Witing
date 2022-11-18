@@ -16,7 +16,7 @@ class PlanRegister {
 	@Test
 	void contextLoads() {
 		PlanDTO pl = new PlanDTO(null, 25, "장소", 33.542639f, 126.668572f, 1,
-				"할일", "dbb", "제목", "내용", null, 0, 0, 0, null, null, null);
+				"할일", "dbb", "제목", "내용", null, 0, 0, 0, null, null, null,null);
 		try {
 			service.register(pl);
 			System.out.println(pl);

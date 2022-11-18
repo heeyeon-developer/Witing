@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.dto.AccompanyDTO;
+import com.multi.dto.Criteria;
 import com.multi.frame.MyService;
 import com.multi.mapper.AccompanyMapper;
 
@@ -42,6 +43,10 @@ public class AccompanyService implements MyService<Integer, AccompanyDTO>{
 	
 	public void accomdel(int accomid) throws Exception {
 		mapper.accomdel(accomid);
+	}
+	
+	public List<AccompanyDTO> selectpaging(Criteria criteria) throws Exception {
+		return mapper.selectpaging(criteria);
 	}
 
 }
