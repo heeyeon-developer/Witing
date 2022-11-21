@@ -3,9 +3,11 @@ package com.multi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.multi.dto.AccompanyDTO;
+import com.multi.dto.Criteria;
 import com.multi.frame.MyService;
 import com.multi.mapper.AccompanyMapper;
 
@@ -42,5 +44,13 @@ public class AccompanyService implements MyService<Integer, AccompanyDTO>{
 	
 	public void accomdel(int accomid) throws Exception {
 		mapper.accomdel(accomid);
+	}
+	
+	public List<AccompanyDTO> accompage(Criteria cri) throws Exception {
+		return mapper.accompage(cri);
+	}
+	
+	public int accomcnt(Criteria cri) throws Exception {
+		return mapper.accomcnt(cri);
 	}
 }

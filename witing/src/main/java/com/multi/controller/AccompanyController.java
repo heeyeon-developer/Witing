@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.AccompanyDTO;
+import com.multi.dto.Criteria;
 import com.multi.dto.CustDTO;
+import com.multi.dto.PageDTO;
 import com.multi.dto.PlanDTO;
 import com.multi.dto.ReplyDTO;
 import com.multi.service.AccompanyService;
@@ -37,12 +39,16 @@ public class AccompanyController {
 	ReplyService reply_service;
 	
 	@RequestMapping("/accompany")
-	public String main(Model model) {
+	public String main(Model model, Criteria cri) {
 		List<AccompanyDTO> list = null;
 		try {
-			list = service.getall();
+			list = service.accompage(cri);
 			model.addAttribute("list", list);
 			model.addAttribute("center", dir+"accompany");
+			
+			int total = service.accomcnt(cri);
+			PageDTO pageMaker = new PageDTO(total, cri);
+			model.addAttribute("pageMaker", pageMaker);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

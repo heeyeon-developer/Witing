@@ -17,38 +17,39 @@
 
 #plan{color: black;}
 
-#to {
-	width: 350px;
-	height: 400px;
-	overflow: auto;
-	border: 2px solid #f15d30;
-}
-
-#target{
-	width: 100px;
-	height: 35px;
-}
-#totext{
-	margin-left: -5px;
-	width: 190px;
-	height: 35px;
-}
-
-#to_title{
-	margin-bottom: -20px;
-}
-
-#disconnect, #connect{
-	float: right;
-	margin-top: -20px;
-}
-
+#linkbtn, #twitbtn, #blogbtn, #instabtn, #kakaobtn,
+#linkbtn:active, #twitbtn:active, #blogbtn:active, #instabtn:active, #kakaobtn:active,
+#linkbtn:focus, #twitbtn:focus, #blogbtn:focus, #instabtn:focus, #kakaobtn:focus,
+#update_btn:active, #update_btn:focus, #delete_btn:active, #delete_btn:focus
+{background-color: transparent; border: none !important; box-shadow: none !important; outline:none;}
 
 </style>
 
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-function clip(){
+        Kakao.init('e1b32cf5d525af8ff59d5b3400b60ce4');
+        Kakao.isInitialized();  
+</script>
+<script>
+var images = ["bear2.png", "usercat.png", "usericon12.png", "usericon13.png", "usericon14.png", "usericon15.png", "usericon16.png", "usericon17.png", "usericon18.png", "usericon19.png"];
 
+
+$('#comimg').attr({src: "url(/images/user/" + images[Math.floor(Math.random() * images.length)] + ")"});
+
+
+function kakaotemp(){
+	Kakao.Share.sendCustom({
+		  templateId: 86107,
+		});
+}
+
+function kakaos(){
+	Kakao.Share.sendScrap({
+		  requestUrl: 'https://localhost/accompany',
+		});
+};
+
+function clip(){
 	var url = 'http://localhost/accompany';
 	var textarea = document.createElement("textarea");
 	document.body.appendChild(textarea);
@@ -57,12 +58,17 @@ function clip(){
 	textarea.select();
 	document.execCommand("copy");
 	document.body.removeChild(textarea);
-	alert("URL이 복사되었습니다.")
+	alert("주소가 복사되었습니다.")
 }
 
 function shareTwitter() {
 	var title = $('#plan_title').val;
-    window.open("http://twitter.com/share?url=" + encodeURIComponent(location.href) +"&text=" + document.title);
+    window.open("http://twitter.com/share?url=" + encodeURIComponent(location.href) +"&text=" + document.title + ', ' + encodeURIComponent($("#plan_title").text()));
+}
+
+function shareNaverBlog() {
+	var title = $('#plan_title').val;
+	 window.open("https://share.naver.com/web/shareView.nhn?url=" + encodeURIComponent(location.href) + "&title=" + document.title + ", " + encodeURIComponent($("#plan_title").text()));
 }
 
 
@@ -170,21 +176,6 @@ function re_update_btn(data){
 	}
 }
 
-/* function re_update_btn(){
-	var c = confirm('수정하시겠습니까?');
-	if(c == true){
-		$('#replyupdate_form').attr({
-			'method':'post',
-			'action':'[[@{/updatereply}]]'
-		});
-		$('#replyupdate_form').submit();
-		alert('수정되었습니다.');
-	}else{
-		alert('취소되었습니다.');
-	}
-}
- */
-
 $(document).ready(function(){
 	$('#reply_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
@@ -277,17 +268,17 @@ $(document).ready(function(){
               </div>
             </div>
           </div>
-          <a th:href="@{#}" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">채팅하기</a><br><br>
-          
           <div id="snslist" style="text-align: center;">
-	          <button type="button" onclick="clip(); return false;" style="border: none; background-color: transparent; margin-top: 15px;"><i class="fa fa-link" style="font-size: 25px; color: black; margin-bottom: -10px;"></i></button>
-	          <button type="button" onclick="shareTwitter();" style="border: none; background-color: transparent;"><img src="/images/hotel/twitter.png" style="height: 30px; margin-left: -5%;"></button>
-	          <button type="button" style="border: none; background-color: transparent;"><img src="/images/hotel/pngegg.png" style="height: 30px; margin-left: -5%;"></button>
-	          <button type="button" id="shareKt" style="border: none; background-color: transparent;"><img src="/images/hotel/kakao.png" style="height: 30px; margin-left: -5%;"></button>
+	          <button type="button" onclick="clip(); return false;" id="linkbtn" style="margin-top: 15px;"><img src="/images/hotel/link.png" style="height: 35px;"></button>
+	          <button type="button" onclick="shareTwitter();" id="twitbtn"><img src="/images/hotel/twit.png" style="height: 40px; margin-left: -5%;"></button>
+	          <button type="button" onclick="shareNaverBlog();" id="blogbtn"><img src="/images/hotel/nblog.png" style="height: 40px; margin-left: -5%;"></button>
+	          <button type="button" id="instabtn"><img src="/images/hotel/insta.png" style="height: 40px; margin-left: -5%;"></button>
+	          <button type="button" onclick="kakaotemp()" id="kakaobtn"><img src="/images/hotel/katalk.png" style="height: 40px; margin-left: -5%;"></button>
           </div>
-          
+          <br>
+          <a th:href="@{#}" th:if="${session.logincust != null}" class="btn btn-primary" id="accom_btn">채팅하기</a><br><br>
+	        <div id="donglechat"><iframe src="https://service.dongledongle.com/bdb97" frameborder="0" width="100%" height="500"></iframe></div>
         </div>
-        
         <div>
         
         <!-- <H5 th:text="${session.logincust.custid}">ID</H5>
@@ -299,75 +290,70 @@ $(document).ready(function(){
 		<input type="text" id="target">
 		<input type="text" id="totext"><button id="sendto">Send</button>
         </div> -->
-        
-        <div id="donglechat"><iframe src="https://service.dongledongle.com/bdb97" frameborder="0" width="100%" height="500"></iframe></div>
-        
       </div>
-
     </div>
     
     <!-- Comments section-->
-               <section class="col-md-11">
-               <h3 style="font-weight: bold; margin-left: 1%;">Comment</h3>
-                   <div class="card bg-light">
-                       <div class="card-body">
-                           <!-- Comment form-->
-                           <div>
-                           <form class="col-md-11" style="margin-bottom: 2%;"><textarea class="form-control" rows="3" placeholder="동행하고 싶다면 댓글을 남겨주세요 :)" name="comment" id="comment" style="display: inline-block;"></textarea></form>
-                           <button type="button" class="btn btn-primary" id="reply_btn" style="width: 90px; height: 95px; float: right; margin-top: -122px;">작성하기</button>
-                           </div>
-                           <!-- Comment with nested comments-->
-                           <div class="d-flex mb-4" th:each="reply:${reply}"><div id="replyid" hidden="hidden" th:text="${reply.replyid}"></div>
-                               <!-- Parent comment-->
-                               <div class="flex-shrink-0"><img class="rounded-circle" src="/images/hotel/usericon6.png" style="width: 50px;" alt="..." /></div>
-                               <div class="col-md-8">
-                                   <div class="fw-bold" th:text="${reply.custid}" style="margin-left: 15px; margin-right:2%; font-size: 18px; font-weight: bold; color: #f15d30;"></div>
-	                                   <div style="font-size: 13px; margin-left:2.5%; margin-top: 3px;">
-	                                   <p th:text="${#dates.format(reply.cdate, 'yyyy-MM-dd HH:mm:ss')}" style="display: inline-block; margin-right: 1%;"></p>
-	                                   <button type="button" id="update_btn" th:onclick="|update_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}" data-toggle='modal' th:data-target='|#modifyModal${reply.replyid}|' style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">수정</button>
-	                                   <button type="button" id="delete_btn" th:onclick="|re_delete_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}" style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">삭제</button>
-	                                   </div>
-                                   <p th:text="${reply.comment}" style="margin-left: 15px; color: black"></p><div id="replylid" style="display: none;" th:text="${replylid}"></div>
-                                   
-                                   
-                                   <!-- Child comment 1-->
-                                   <!-- <div class="d-flex mt-4">
-                                       <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                       <div class="ms-3">
-                                           <div class="fw-bold">Commenter Name</div>
-                                           And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                       </div>
-                                  </div> -->
-                              </div>
-                              
-                              <div class="modal fade" th:id="|modifyModal${reply.replyid}|" role="dialog">
-								  <div class="modal-dialog">
-								      <div class="modal-content">
-								          <div class="modal-header">
-								              <h5 class="modal-title">댓글 수정하기</h5><div th:id="replyid" hidden="hidden" th:text="${reply.replyid}"></div>
-								              <button type="button" class="close" data-dismiss="modal">&times;</button>
-								          </div>
-									          <div class="modal-body">
-									          <form id="replyupdate_form">
-									              <div class="form-group">
-									                  <label for="replyText">댓글 내용</label>
-									                  <textarea class="form-control" rows="4" th:id="|comment_reply${reply.replyid}|" th:value="${reply.comment}" th:text="${reply.comment}" name="comment"></textarea>
-									              </div>
-									          </form>
-									          </div>
-								          <div class="modal-footer">
-								              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
-								              <button type="button" class="btn btn-primary modalModBtn" th:id="|modal_update${reply.replyid}|" th:onclick="|re_update_btn([[${reply.replyid}]])|">수정</button>
-								          </div>
-								      </div>
-								  </div>
-								</div>
-                              
-                           </div>
-                       </div>
-                   </div>
+<section class="col-md-11">
+<h3 style="font-weight: bold; margin-left: 1%;">Comment</h3>
+   <div class="card bg-light">
+       <div class="card-body">
+           <!-- Comment form-->
+           <div>
+           <form class="col-md-11" style="margin-bottom: 2%;"><textarea class="form-control" rows="3" placeholder="동행하고 싶다면 댓글을 남겨주세요 :)" name="comment" id="comment" style="display: inline-block;"></textarea></form>
+           <button type="button" class="btn btn-primary" id="reply_btn" style="width: 90px; height: 95px; float: right; margin-top: -122px;">작성하기</button>
+           </div>
+           <!-- Comment with nested comments-->
+           <div class="d-flex mb-4" th:each="reply:${reply}"><div id="replyid" hidden="hidden" th:text="${reply.replyid}"></div>
+               <!-- Parent comment-->
+               <div class="flex-shrink-0"><img class="rounded-circle" id="comimg" src="/images/user/bear2.png" style="width: 50px;" alt="..." /></div>
+               <div class="col-md-8">
+                   <div class="fw-bold" th:text="${reply.custid}" style="margin-left: 15px; margin-right:2%; font-size: 18px; font-weight: bold; color: #f15d30;"></div>
+                    <div style="font-size: 13px; margin-left:2.5%; margin-top: 3px;">
+                    <p th:text="${#dates.format(reply.cdate, 'yyyy-MM-dd HH:mm:ss')}" style="display: inline-block; margin-right: 1%;"></p>
+                    <button type="button" id="update_btn" th:onclick="|update_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}" data-toggle='modal' th:data-target='|#modifyModal${reply.replyid}|' style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">수정</button>
+                    <button type="button" id="delete_btn" th:onclick="|re_delete_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}" style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">삭제</button>
+                    </div>
+                   <p th:text="${reply.comment}" style="margin-left: 15px; color: black"></p><div id="replylid" style="display: none;" th:text="${replylid}"></div>
                    
-               </section>
+                   
+                   <!-- Child comment 1-->
+                   <!-- <div class="d-flex mt-4">
+                       <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                       <div class="ms-3">
+                           <div class="fw-bold">Commenter Name</div>
+                           And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
+                       </div>
+                  </div> -->
+               </div>
+               
+               <div class="modal fade" th:id="|modifyModal${reply.replyid}|" role="dialog">
+				  <div class="modal-dialog">
+				      <div class="modal-content">
+				          <div class="modal-header">
+				              <h5 class="modal-title">댓글 수정하기</h5><div th:id="replyid" hidden="hidden" th:text="${reply.replyid}"></div>
+				              <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          </div>
+					          <div class="modal-body">
+					          <form id="replyupdate_form">
+					              <div class="form-group">
+					                  <label for="replyText">댓글 내용</label>
+					                  <textarea class="form-control" rows="4" th:id="|comment_reply${reply.replyid}|" th:value="${reply.comment}" th:text="${reply.comment}" name="comment"></textarea>
+					              </div>
+					          </form>
+					          </div>
+				          <div class="modal-footer">
+				              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+				              <button type="button" class="btn btn-primary modalModBtn" th:id="|modal_update${reply.replyid}|" th:onclick="|re_update_btn([[${reply.replyid}]])|">수정</button>
+				          </div>
+				      </div>
+				  </div>
+				</div>
+            </div>
+        </div>
+    </div>
+    
+</section>
     
   </div>
 </section> <!-- .section -->
