@@ -32,6 +32,13 @@
 </style>
 
 <script>
+function movePage(uri, queryString) {
+    console.log(uri);
+    console.log(queryString);
+
+    location.href = uri + queryString;
+}
+
 /* var images = ['image_1.jpg', 'image_2.jpg', 'image_3.jpg', 'image_4.jpg', 'image_5.jpg', 'image_6.jpg'];
 
 $(document).ready(function(){
@@ -150,7 +157,7 @@ $(document).ready(function(){
 </form>
 <div class="row mt-5">
   <div class="col text-center">
-    <div class="block-27">
+    <!-- <div class="block-27">
       <ul>
         <li><a th:href="@{#}">&lt;</a></li>
         <li class="active"><span>1</span></li>
@@ -160,9 +167,35 @@ $(document).ready(function(){
         <li><a th:href="@{#}">5</a></li>
         <li><a th:href="@{#}">&gt;</a></li>
       </ul>
+    </div> -->
+    
+    <div class="block-27">
+      <ul>
+		<th:block th:if="${pageMaker.prev}">
+        	<li class="pageMaker_btn prev">
+        		<a href="javascript:void(0)" th:onclick="movePage([[${#request.requestURI}]], [[${pageMaker.cri.makeQueryString(pageMaker.pageStart - 1)}]])">&lt;</a>
+        	</li>
+        </th:block>
+        
+        <th:block th:with="pageMaker = ${pageMaker}">
+		    <th:block th:each="num : *{#numbers.sequence(pageMaker.pageStart, pageMaker.pageEnd)}">
+		        <li class="pageMaker_btn" th:classappend="${pageMaker.cri.pageNum == num} ? 'active' : ''">
+		            <a href="javascript:void(0)"  th:text="${num}" th:onclick="movePage([[${#request.requestURI}]],[[${pageMaker.cri.makeQueryString(num)}]])">1</a>
+		        </li>
+		    </th:block>
+		</th:block>
+		
+		<th:block th:if="${pageMaker.next}">
+		    <li class="pageMaker_btn next">
+		        <a href="javascript:void(0)" th:onclick="movePage([[${#request.requestURI}]], [[${pageMaker.cri.makeQueryString(pageMaker.pageEnd + 1)}]])">&gt;</a>
+		    </li>
+		</th:block>
+      </ul>
     </div>
   </div>
 </div>
+
+
 </div>
 </section>	
 
