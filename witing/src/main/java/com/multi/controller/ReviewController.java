@@ -2,6 +2,9 @@ package com.multi.controller;
 
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,8 @@ import com.multi.dto.CityDTO;
 import com.multi.dto.CustDTO;
 import com.multi.dto.PostDTO;
 import com.multi.dto.RoomDTO;
+import com.multi.frame.OCRUtil;
+import com.multi.frame.Util;
 import com.multi.service.CustService;
 import com.multi.service.HotelService;
 import com.multi.service.PostService;
@@ -93,7 +98,46 @@ public class ReviewController {
 		return "index";
 	}
 	
-	@RequestMapping("writereview")
+	@RequestMapping("/ocrimpl")
+	public String ocrimpl(Model model, CityDTO obj) {
+		
+		String imgname = obj.getImgname().getOriginalFilename();	// 파일덩어리 안에있는 파일이름을 꺼낸다. 
+		obj.setImg(imgname);
+		
+		try {
+			Util.saveFile(obj.getImgname(), admindir, custdir);
+			Util.saveFile(obj.getImgname(), admindir, custdir);		// 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장 (상단에 경로를 @Value 써줌)
+			String result = OCRUtil.getText(imgname);	// 결과받기
+			System.out.println(result);
+			
+			JSONParser jsonparser = new JSONParser();
+			JSONObject jo = (JSONObject)jsonparser.parse(result.toString());
+//			System.out.println(jo.toString());
+			JSONArray ja1 = (JSONArray) jo.get("images");	// images라는 배열을 가져온다.
+			JSONObject jo1 = (JSONObject) ja1.get(0); // 배열에서 첫번째 object를 꺼냄
+			JSONArray ja2 = (JSONArray) jo1.get("fields"); // jo1에서 fields라는 배열을 꺼냄
+			
+			JSONObject f1 = (JSONObject) ja2.get(0);	// fields라는 배열에서 첫번째 
+			JSONObject f2 = (JSONObject) ja2.get(1);	// fields라는 배열에서 두번째
+			JSONObject f3 = (JSONObject) ja2.get(2);	// fields라는 배열에서 세번째 
+			
+			String custname = (String) f1.get("inferText");
+			String hotelname = (String) f2.get("inferText");
+			
+			model.addAttribute("custname",custname);
+			model.addAttribute("hotelname",hotelname);
+			
+			System.out.println("custname : " + custname);
+			System.out.println("hotelname : " + hotelname);
+			model.addAttribute("center","writereview");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
+	
+	@RequestMapping("/writereview")
 	public String writereview(Model model,Integer hotelid,Integer roomid,String hotelname,
 			String roomimg1,String roomimg2,String roomimg3,String roomimg4,String hotelimg1,
 			String roomtype1,String roomtype2) {

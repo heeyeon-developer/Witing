@@ -1,6 +1,15 @@
 <link href="/assets/css/star.css" rel="stylesheet"/>
 <script>
 $(document).ready(function(){
+	$('#register_btn').click(function(){
+		$('#register_form').attr({
+			'enctype':'multipart/form-data',
+			'method':'post',
+			'action':'/ocrimpl'
+		});
+		$('#register_form').submit()
+	});
+	
 	$('#send_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		if(c == true){
@@ -109,6 +118,22 @@ $(document).ready(function(){
 		  </a>
 		</div>
    </div>
+	<!-- ocr -->
+		<div class="card shadow mb-4">
+		    <div class="card-header py-3">
+		        <h6 class="m-0 font-weight-bold text-primary">Reservation Certification</h6>
+		    </div>
+		    <div class="card-body">
+				<form id="register_form">
+					<div class="form-group">
+						<label for="img">Reservation Detail Image:</label> 
+						<input type="file" class="form-control" id="img" name="img">
+					</div>
+				</form>
+				<button id="register_btn" class="btn btn-default">REGISTER</button>
+			</div>
+		</div>
+	<!-- ocr -->
      <div class="col-md-6">
     
         <form id="reviewform" class=" contact-form" style="padding-top: 0">

@@ -1,5 +1,7 @@
 package com.multi.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +17,7 @@ public class CityDTO {
 	private int cityid;
 	private String name;
 	private String img;
+	
+	private MultipartFile imgname;
  
 }
