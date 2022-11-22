@@ -51,10 +51,29 @@
 	display:inline-block;
 	margin-left: -4px;
 }
+
 </style>
 
 <script>
+
 $(document).ready(function(){
+	
+	function add_plan(){
+	    var div = document.createElement('div');
+	    div.innerHTML = document.getElementById('basicplan').innerHTML;  
+	    
+	    $(document).on('click', '#addr_btn', function(){
+	    	new daum.Postcode({
+	            oncomplete: function(data) {
+	                $("#sample4_roadAddress").val(data.address);
+	                $("#sample4_roadAddress").prop("readonly",true);
+	                var addr =  $("#sample4_roadAddress").val();
+	            	geocoder.addressSearch(addr, callback);  
+	            }
+	        }).open();
+	    });
+	    document.getElementById('addplan').appendChild(div);
+	}
 	$('#writeaccom_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		if(c == true){
@@ -78,6 +97,13 @@ $(document).ready(function(){
 	});
 	
 	/* $('#writeaccom_btn').click(function(){
+		var str = $form.serialize();
+		alert(str);
+	}); */
+	
+	
+	
+	/* $('#writeaccom_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		if(c == true){
 			$('#accom_form').attr({
@@ -88,6 +114,12 @@ $(document).ready(function(){
 			alert("정상적으로 등록되었습니다 : )");
 		}
 	}); */
+	var $form = $("#accom_form");
+	$('#add_icon').click(function(){
+		add_plan();
+		
+	});
+	
 });
 
 /* var geocoder = new kakao.maps.services.Geocoder();
@@ -163,8 +195,7 @@ var callback = function(result, status) {
        </div>
 
           <form id="accom_form" method="post">
-              <div class="row">
-              
+              <div class="row" id="formhy">
               	<!-- <input type="hidden" name="place"> -->
                 <div class="col-2 mb-3">
                   	<input type="text" class="form-control" id="custid" th:value="${session.logincust.custid}" readonly="readonly" name="custid">
@@ -187,25 +218,30 @@ var callback = function(result, status) {
 					<input type="text" class="form-control checkin_date" placeholder="Check In Date" id="traveltime" name="traveltime">
 					</div>
 				</div>
-				<div class="col-2 mb-3">
-					<input type="number" class="form-control" id="idx" value="1" readonly="readonly" name="idx">
-					<div class="col-lg d-flex"></div>
-				</div>
-				<div class="col-9 mb-3">
-					<div class="form-field">
-						<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명 주소">
-						<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname">
-						<input type="button" class="form-control" onclick="sample4_execDaumPostcode()" value="장소 찾기" id="addr_btn"><br>
-                    </div>
-					<div class="col-lg d-flex"></div>
-				</div>
-				<div class="col-11 mb-3">
-					<div class="form-field3">
-						<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo">
-					</div>
-					<div class="col-lg d-flex"></div>
-				</div>
 				
+				<div id="basicplan" style="display:inline-block;">
+					<div class="col-2 mb-3" style="display:inline-block;">
+						<input type="number" class="form-control hyidx" id="idx" value="1" readonly="readonly" name="idx">
+						<div class="col-lg d-flex"></div>
+					</div>
+					<div class="col-9 mb-3" style="display:inline-block;">
+						<div class="form-field" style="display:inline-block;">
+							<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명 주소">
+							<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname">
+							<input type="button" class="form-control" th:onclick="sample4_execDaumPostcode()" value="장소 찾기" th:id="addr_btn"><br>
+	                    </div>
+						<div class="col-lg d-flex"></div>
+					</div>
+					<div class="col-11 mb-3" style="display:inline-block;">
+						<div class="form-field3">
+							<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo">
+						</div>
+						<div class="col-lg d-flex"></div>
+					</div>
+					
+				</div>
+				<div id="addplan"></div>
+				<a th:href="@{#}"><i class="fa fa-plus-circle" id="add_icon"></i></a>
 				<!-- 2 -->
 				<!-- <div class="col-2 mb-3">
 					<input type="number" class="form-control" id="idx" value="2" readonly="readonly" name="idx">
@@ -227,7 +263,7 @@ var callback = function(result, status) {
 				</div> -->
 				
                    
-                  <a th:href="@{#}"><i class="fa fa-plus-circle" id="add_icon"></i></a>
+                  
              <!-- </div> -->
                     
                 <!--     
@@ -282,23 +318,11 @@ $("#addr_btn").click(function(){
     }).open()
 });
 
-/* $("#addr_btn2").click(function(){
-    new daum.Postcode({
-        oncomplete: function(data) {
-            $("#sample4_roadAddress2").val(data.address);
-            $("#sample4_roadAddress2").prop("readonly",true);
-            var addr =  $("#sample4_roadAddress2").val();
-        	geocoder.addressSearch(addr, callback2);  
-        }
-    }).open()
-}); */
-
 var callback = function(result, status) {
 	if (status === kakao.maps.services.Status.OK) {
 		$("input[name=planx]").val(result[0].y);
 		$("input[name=plany]").val(result[0].x);
 	}
 };
-
 
 </script>
