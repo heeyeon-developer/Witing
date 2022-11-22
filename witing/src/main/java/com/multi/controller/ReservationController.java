@@ -71,7 +71,7 @@ public class ReservationController {
 	public String reservationlist(Model model, String custid) {
 		try {
 			CustDTO cust = custservice.get(custid);
-			List<ReservationDTO> list = reservationservice.custreserv(custid);
+			List<OrderlistDTO> list = orderlistservice.custorder(custid);
 			model.addAttribute("cust", cust);
 			model.addAttribute("imgpath", "images/hotel/gyeongju2.jpg");
 			model.addAttribute("pagename","Reservation");
@@ -111,7 +111,25 @@ public class ReservationController {
 			model.addAttribute("roominfo",hotel.getHotelname()+"-"+room.getRoomtype());
 			model.addAttribute("name",custservice.get(order.getCustid()).getCustname());
 			model.addAttribute("order", order);
-			model.addAttribute("center",dir+"reservationok");
+			model.addAttribute("center",dir+"reservationdetail");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "index";
+	}
+	
+	@RequestMapping("/reservdetail")
+	public String reservdetail(Model model, Integer orderid) {
+		try {
+			OrderlistDTO order = orderlistservice.get(orderid);
+			RoomDTO room = roomservice.get(order.getRoomid());
+			HotelDTO hotel = hotelservice.get(room.getHotelid());
+			model.addAttribute("roominfo",hotel.getHotelname()+"-"+room.getRoomtype());
+			model.addAttribute("name",custservice.get(order.getCustid()).getCustname());
+			model.addAttribute("order", order);
+			model.addAttribute("center",dir+"reservationdetail");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

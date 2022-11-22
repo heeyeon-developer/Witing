@@ -26,4 +26,8 @@ public class OrderlistDTO {
 	private Date sdate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date edate;
+	
+	private Integer hotelid;
+	private String info;
+	private String roomimg;
 }

@@ -1,0 +1,76 @@
+<style>
+h2{
+	margin-top:5%;
+}
+ul, li{
+	margin-top:20%;
+	list-style:none;
+	text-align:center;
+	margin:auto;
+}
+
+#reservdetail{
+	margin-top : 5%;
+}
+
+.reservmargin{
+	margin: 2%;
+}
+
+</style>
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/ReservationBackground.jpeg');">
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+      <div class="col-md-9 ftco-animate pb-5 text-center">
+       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Reservation</span><i class="fa fa-chevron-right"></i></a></span> <span>Reservation Detail</span></p>
+       <h1 class="mb-0 bread">Detail</h1>
+     </div>
+   </div>
+ </div>
+</section>
+
+<section class="ftco-section contact-section ftco-no-pt">
+<div class="container">
+    <div class="row block-9 justify-content-center">
+    	<ul>
+    		<ul id="reservdetail" class="reservmargin">
+    			<li>
+	    			<img style="width:auto;height:auto;max-width:60%;max-height:40%;overfolw:hidden;object-fit:cover;" th:src="@{|images/hotel/${order.roomimg}|}">
+    			</li>
+    			<li style="width:50%" class="justify-content-center">
+    			<table id="reservdetail" class="table" style="margin-bottom:5%; border:2px solid lightgray;" >
+    				<tr>
+						<td>주문번호</td>
+						<td th:text="${order.orderid}"></td>
+					</tr>
+					<tr>
+						<td>예약자 성함</td>
+						<td th:text="${name}"></td>
+					</tr>
+					<tr>
+						<td>숙박 정보</td>
+						<td th:text="${roominfo}"></td>
+					</tr>
+					<tr>
+						<td>결제 가격</td>
+						<td th:text="${order.totalprice}"></td>
+					</tr>
+					<tr>
+						<td>숙박 인원</td>
+						<td th:text="${order.cnt}"></td>
+					</tr>
+					<tr>
+						<td>숙박 날짜</td>
+						<td th:text="|${#dates.format(order.sdate, 'yyyy.MM.dd')} ~ ${#dates.format(order.edate, 'yyyy.MM.dd')}|"></td>
+					</tr>
+				</table>
+    			</li>
+    		</ul>
+    		<li><a type:"button" th:href="@{/reservationlist(custid=${order.custid})}" class="btn btn-primary">목록</a></li>
+    	</ul>
+    	
+      </div>
+      
+ </div>
+
+</section>

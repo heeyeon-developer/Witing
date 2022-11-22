@@ -5,7 +5,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 <mapper namespace="com.multi.mapper.OrderlistMapper">
 	
 	<select id="select" parameterType="Integer" resultType="OrderlistDTO">
-		SELECT * FROM orderlist WHERE orderid=#{orderid}
+		SELECT * , ro.roomimg1 AS roomimg
+		  FROM orderlist ol
+		       INNER JOIN room ro ON ro.roomid = ol.roomid
+		 WHERE orderid=#{orderid}
+		       
 	</select>
 	<select id="selectall" resultType="OrderlistDTO">
 		SELECT * FROM orderlist
@@ -23,5 +27,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM orderlist WHERE orderid=#{orderid}
 	</delete>
+	<select id="custorder" parameterType="String" resultType="OrderlistDTO">
+		SELECT ol.orderid, ol.roomid, ol.custid, ol.totalprice, ol.cnt, h.hotelid, 
+		       concat(h.hotelname,concat('-',ro.roomtype)) AS info, ol.sdate, ol.edate,
+		       ro.roomimg1 AS roomimg
+		  FROM orderlist ol
+			   INNER JOIN room ro ON ro.roomid = ol.roomid
+		       INNER JOIN hotel h ON h.hotelid = ro.hotelid
+		 WHERE ol.custid=#{custid}
+	</select>
 	 
 </mapper>
