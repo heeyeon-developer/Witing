@@ -40,5 +40,9 @@ public class OrderlistService implements MyService<Integer, OrderlistDTO> {
 	public List<OrderlistDTO> getall() throws Exception {
 		return mapper.selectall();
 	}
+	
+	public List<OrderlistDTO> custorder(String k) throws Exception {
+		return mapper.custorder(k);
+	}
 
 }

@@ -13,7 +13,7 @@ import com.multi.service.OrderlistService;
 import com.multi.service.ReservationService;
 
 @SpringBootTest
-class RegisterOrderlist {
+class GetCustorder {
 
 	@Autowired
 	OrderlistService service;
@@ -21,8 +21,7 @@ class RegisterOrderlist {
 	@Test
 	void contextLoads() {
 		try {
-			service.register(new OrderlistDTO(null,"hyk",2,200000,null,2, Date.valueOf("2022-11-08"),Date.valueOf("2022-11-10"),0,"",""));
-			List<OrderlistDTO> list = service.getall();
+			List<OrderlistDTO> list = service.custorder("hyk");
 			for(OrderlistDTO o : list)
 				System.out.println(o);
 			

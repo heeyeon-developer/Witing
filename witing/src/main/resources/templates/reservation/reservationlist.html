@@ -20,10 +20,10 @@
 		</tr>
 		</thead>
 		<tbody th:each="li:${list}">
-		<tr th:onclick="|location.href='@{/room(hotelid=${li.hotelid})}'|" style="cursor:pointer">
-			<td th:text="${li.reservid}"></td>
+		<tr th:onclick="|location.href='@{/reservdetail(orderid=${li.orderid})}'|" style="cursor:pointer">
+			<td th:text="${li.orderid}"></td>
 			<td th:text="${li.info}"></td>
-			<td th:text="${li.people}"></td>
+			<td th:text="${li.cnt}"></td>
 			<td th:text="|${#dates.format(li.sdate, 'yyyy-MM-dd')} ~ ${#dates.format(li.edate, 'yyyy-MM-dd')}|"></td>
 		</tr>
 		</tbody>
