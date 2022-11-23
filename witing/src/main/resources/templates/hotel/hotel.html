@@ -186,7 +186,7 @@ $(document).ready(function(){
   
    <div class="col-md-4 ftco-animate" th:each="li:${list}">
     <div class="project-wrap hotel">
-     <a th:href="@{/room(hotelid=${li.hotelid})}" class="img" th:style="'background-image:url('+ @{'/images/hotel/'+${li.hotelimg1}} +');'">
+     <a th:href="@{/room(hotelid=${li.hotelid})}" class="img" th:style="|background-image:url(/images/hotel/${li.hotelimg1});|">
       <span class="price" th:text="${li.name}"></span>
     </a>
     <div class="text p-4">

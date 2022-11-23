@@ -4,36 +4,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-	
-<script>
- var IMP = window.IMP; 
- IMP.init("imp83780347"); 
-
- function requestPay() {
-     IMP.request_pay({
-         pg : 'kcp',
-         pay_method : 'card',
-         merchant_uid: "w-"+Math.floor(Math.random()*100000,0)+ "-"+Math.floor(Math.random()*100000,0),
-         name : $('#roominfo').val(),
-         amount : $('#totalprice').val(),
-         buyer_name : $('#custname').val()
-     }, function (rsp) { // callback
-         if (rsp.success) {
-        	 //성공하면 결제 완료 페이지 보여주기
-             console.log(rsp);
-             $('#reservform').attr({
-            	 method:'post',
-            	 action:'/reservimpl'
-             });
-             $('#reservform').submit();
-         } else {
-             console.log(rsp);
-        	 alert("결제가 실패하였습니다. 다시 결제를 진행해 주세요.");
-         }
-     });
- };
-
-</script>	
  </head>
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/ReservationBackground.jpeg');">
   <div class="container">

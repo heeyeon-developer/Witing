@@ -76,6 +76,12 @@ $(document).ready(function(){
 	}
 	$('#writeaccom_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
+		var arr = [];
+		
+		$.each($("input[name='planname[]']"),function(k,v){
+			arr[arr.length] = $(v).val();
+		})
+		alert(arr)
 		if(c == true){
 			var custid = '[[${session.logincust.custid}]]';
 			var title = $('#title').val();
@@ -143,36 +149,6 @@ var callback = function(result, status) {
     }
 }; */
 
- 
-/* $(document).ready(function(){
-	$('#idx2').hide();
-	$('#planname2').hide();
-	$('#todo2').hide();
-	$('#minus_icon').hide();
-	
-	$('#idx3').hide();
-	$('#planname3').hide();
-	$('#todo3').hide();
-	$('#minus_icon3').hide();
-
-	
- 	$('#add_icon').click(function(){
-		$('#idx2').show();
-		$('#planname2').show();
-		$('#todo2').show();
-		$('#minus_icon').show();
-	})
-	$('#minus_icon').click(function(){
-		$('#idx2').hide();
-		$('#planname2').hide();
-		$('#todo2').hide();
-		$('#minus_icon').hide();
-	})  
-	
-	
-}); */
-
-
 </script>
 
 
@@ -221,22 +197,26 @@ var callback = function(result, status) {
 				
 				<div id="basicplan" style="display:inline-block;">
 					<div class="col-2 mb-3" style="display:inline-block;">
-						<input type="number" class="form-control hyidx" id="idx" value="1" readonly="readonly" name="idx">
+						<input type="number" class="form-control hyidx" id="idx" placeholder="여행 순서" name="idx">
 						<div class="col-lg d-flex"></div>
 					</div>
 					<div class="col-9 mb-3" style="display:inline-block;">
 						<div class="form-field" style="display:inline-block;">
 							<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명 주소">
-							<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname">
+							<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname[]">
 							<input type="button" class="form-control" th:onclick="sample4_execDaumPostcode()" value="장소 찾기" th:id="addr_btn"><br>
 	                    </div>
 						<div class="col-lg d-flex"></div>
 					</div>
 					<div class="col-11 mb-3" style="display:inline-block;">
 						<div class="form-field3">
-							<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo">
+							<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo[]">
 						</div>
 						<div class="col-lg d-flex"></div>
+					</div>
+					<div>
+						<input type="text" name="planx" value="planx" id="planx">
+						<input type="text" name="plany" value="plany" id="plany">
 					</div>
 					
 				</div>
@@ -261,9 +241,6 @@ var callback = function(result, status) {
 					</div>
 					<div class="col-lg d-flex"></div>
 				</div> -->
-				
-                   
-                  
              <!-- </div> -->
                     
                 <!--     
@@ -290,10 +267,12 @@ var callback = function(result, status) {
 					<textarea id="accomtext" class="form-control w-100" cols="30" rows="10" placeholder="내용을 입력해주세요." name="accomtext"></textarea>
 	            </div>
 	            
-	            <div class="col-2 mb-3">
-					<input type="text" name="planx" value="planx" id="planx">
-					<input type="text" name="plany" value="plany" id="plany">
-	            </div>
+	            <!-- <div class="col-2 mb-3">
+					<input type="text" name="planx2" value="planx" id="planx2">
+					<input type="text" name="plany2" value="plany" id="plany2">
+					<input type="text" name="planx3" value="planx" id="planx3">
+					<input type="text" name="plany3" value="plany" id="plany3">
+	            </div> -->
 	            
 			</div>
           </form>

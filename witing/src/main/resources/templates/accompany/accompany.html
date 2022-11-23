@@ -38,29 +38,8 @@ function movePage(uri, queryString) {
 
     location.href = uri + queryString;
 }
-
-/* var images = ['image_1.jpg', 'image_2.jpg', 'image_3.jpg', 'image_4.jpg', 'image_5.jpg', 'image_6.jpg'];
-
-$(document).ready(function(){
-	$('#thum_img').css({"background-image":"url(/images/" + images[Math.floor(Math.random() * images.length)]+ ")", 'background-position': 'center center', 'background-size' : '100%'});
-}); */
-
+ 
 /* $(document).ready(function(){
-	$('#photo_list').hide();
-});
-
-
-function tablelist(){
-	$('#list_table').show();
-	$('#photo_list').hide();
-}
-
-function photolist(){
-	$('#photo_list').show();
-	$('#list_table').hide();
-} */
-
-$(document).ready(function(){
 	$('#photo_list').hide();
 	
 	$('#tablelist').click(function(){
@@ -71,9 +50,7 @@ $(document).ready(function(){
 		$('#photo_list').show();
 		$('#list_table').hide();
 	})
-	
-	
-});
+});*/
 
 </script>
 
@@ -94,10 +71,10 @@ $(document).ready(function(){
 
 <section class="ftco-section">
   <div class="container">
-  	<div id="list_icon" onclick="listicon">
+  	<!-- <div id="list_icon" onclick="listicon">
 	  	<span><a th:href="@{#}" class="fa fa-list" id="tablelist"></a></span>
 	  	<span><a th:href="@{#}" class="fa fa-file-image-o" id="photolist"></a></span>
-  	</div>
+  	</div> -->
 	<h2 id="a_title">Accompany List</h2>
 	<table class="table table-hover" id="list_table">
 		<colgroup>
@@ -130,7 +107,7 @@ $(document).ready(function(){
 	</table>
 	
 	
-<form id="photo_list">
+<!-- <form id="photo_list">
     <div class="row d-flex">
       <div class="col-md-4 d-flex ftco-animate" th:each=li:${list}>
        <div class="blog-entry justify-content-end">
@@ -154,7 +131,7 @@ $(document).ready(function(){
    </div>
  </div>
 </div>
-</form>
+</form> -->
 <div class="row mt-5">
   <div class="col text-center">
     <!-- <div class="block-27">

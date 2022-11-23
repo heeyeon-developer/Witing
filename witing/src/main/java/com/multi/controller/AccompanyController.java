@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -138,29 +140,44 @@ public class AccompanyController {
 	}
 	
 	@RequestMapping("/accomimpl")
-	public String accomimpl(Model model, String custid,String title,int cnt,String traveltime, int idx,String planname,String todo,String accomtext,
-			float planx, float plany) {
+	public String accomimpl(Model model, String custid,String title,int cnt,String traveltime, int idx,String accomtext,
+			float planx, float plany, HttpServletRequest request) {
 		Integer accomid = 0;
-		try {
-			List<CustDTO> clist = cust_service.custget(custid);
-			System.out.println(traveltime);
-			AccompanyDTO ac = new AccompanyDTO(0, custid, title, accomtext, Date.valueOf(traveltime), cnt, 0.0f, 0.0f);
-			service.register(ac);
-			accomid = ac.getAccomid();
-			System.out.println(accomid);
-			for(CustDTO c : clist) {
-				PlanDTO pl = new PlanDTO(0, ac.getAccomid(), planname, planx, plany, 0, todo,
-						custid, title, accomtext, Date.valueOf(traveltime), cnt,
-						ac.getLocationx(), ac.getLocationy(), c.getCountry(), c.getGender(), c.getBirth(), c.getCertification());
-				System.out.println(c);
-				plan_service.register(pl);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		String[] planname = request.getParameterValues("planname");
+		String[] todo = request.getParameterValues("todo");
+		for(int i=0; i<2; i++) {
+			System.out.println(i);
+			System.out.println(planname[i]);
+			System.out.println(todo[i]);
 		}
+		
+//		try {
+//			List<CustDTO> clist = cust_service.custget(custid);
+//			System.out.println(traveltime);
+//			AccompanyDTO ac = new AccompanyDTO(0, custid, title, accomtext, Date.valueOf(traveltime), cnt, 0.0f, 0.0f);
+//			service.register(ac);
+//			accomid = ac.getAccomid();
+//			System.out.println(accomid);
+//			for(CustDTO c : clist) {
+//				PlanDTO pl = new PlanDTO(0, ac.getAccomid(), planname, planx, plany, 0, todo,
+//						custid, title, accomtext, Date.valueOf(traveltime), cnt,
+//						ac.getLocationx(), ac.getLocationy(), c.getCountry(), c.getGender(), c.getBirth(), c.getCertification());
+//				System.out.println(c);
+//				plan_service.register(pl);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
 		return "redirect:plan?accomid="+accomid;
 	}
+	
+	
+//	String[] planname = request.getParameterValues("planname");
+//	String[] todo = request.getParameterValues("todo");
+	
+//	float[] planx = Float.parseFloat(request.getParameterValues("plnax"));
+//	float[] plany = Float.parseFloat(request.getParameterValues("plnay"));
 	
 
 }
