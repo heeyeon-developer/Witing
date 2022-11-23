@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.multi.dto.CityDTO;
 import com.multi.service.CityService;
 
-@CrossOrigin(origins="*", allowedHeaders = "*")
 @Controller
 public class MainController {
 
@@ -32,6 +31,4 @@ public class MainController {
 		return "index";
 	}
 	
-	
-
 }
