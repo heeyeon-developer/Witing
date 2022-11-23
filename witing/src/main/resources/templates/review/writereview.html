@@ -1,6 +1,7 @@
 <link href="/assets/css/star.css" rel="stylesheet"/>
 <script>
 $(document).ready(function(){
+	/* ocr */
 	$('#register_btn').click(function(){
 		$('#register_form').attr({
 			'enctype':'multipart/form-data',
@@ -9,6 +10,7 @@ $(document).ready(function(){
 		});
 		$('#register_form').submit()
 	});
+	/* ocr */
 	
 	$('#send_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
@@ -80,15 +82,15 @@ $(document).ready(function(){
   <div class="container">
     <div class="row">
       <div class="col-lg-12 ftco-animate py-md-5 mt-md-5">
-        <h3 class="mb-3" th:text="${hotelname}+' - '+${roomtype1}+', '+${roomtype2}" id="roomdetail">RoomType</h3>
+        <h3 class="mb-3" th:text="${hotelname}+' - '+${roomtype1}+', '+${roomtype2}" id="roomdetail" style="text-align: center">RoomType</h3>
         
        
 <section class="ftco-section contact-section ftco-no-pt">
-  <div class="container">
     <div class="row block-9">
-    <div class="col-md-6 d-flex">
+    <div class="col-md-2 d-flex"></div>
+    <div class="col-md-8 d-flex">
        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-		  <ol class="carousel-indicators" style="margin-bottom: 90px" >
+		  <ol class="carousel-indicators" style="margin-bottom: 20px" >
 		    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 		    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 		    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
@@ -118,6 +120,7 @@ $(document).ready(function(){
 		  </a>
 		</div>
    </div>
+   <div class="col-md-2 d-flex"></div>
 	<!-- ocr -->
 		<div class="card shadow mb-4">
 		    <div class="card-header py-3">
@@ -126,16 +129,16 @@ $(document).ready(function(){
 		    <div class="card-body">
 				<form id="register_form">
 					<div class="form-group">
-						<label for="img">Reservation Detail Image:</label> 
-						<input type="file" class="form-control" id="img" name="img">
+						<label for="imgname">Reservation Detail Image:</label> 
+						<input type="file" class="form-control" id="imgname" name="imgname">
 					</div>
 				</form>
 				<button id="register_btn" class="btn btn-default">REGISTER</button>
 			</div>
-		</div>
+		</div> 
 	<!-- ocr -->
-     <div class="col-md-6">
-    
+	 <div class="col-md-2"></div>
+     <div class="col-md-8">
         <form id="reviewform" class=" contact-form" style="padding-top: 0">
 	      <fieldset>
 	        <input type="radio" name="star" value=5 id="rate1"><label for="rate1">⭐</label>
@@ -154,6 +157,9 @@ $(document).ready(function(){
             <input id="custid" type="text" class="form-control" th:value="${session.logincust.custid}" readonly="readonly" name="custid">
           </div>
           <div class="form-group">
+				<input type="file" class="form-control" id="imgname" name="imgname">
+			</div>
+          <div class="form-group">
             <textarea id="text" cols="30" rows="7" class="form-control" placeholder="내용을 입력하세요." name="text"></textarea>
           </div>
           <div class="form-group">
@@ -168,7 +174,7 @@ $(document).ready(function(){
         </form>
         <a href="#"><button id="send_btn" class="btn btn-primary py-3 px-5" style="float: right">등록하기</button></a>
       </div>
-
+	  <div class="col-md-2"></div>
       
  </div>
 </section>

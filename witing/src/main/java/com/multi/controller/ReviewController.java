@@ -99,20 +99,19 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/ocrimpl")
-	public String ocrimpl(Model model, CityDTO obj) {
-		
-		String imgname = obj.getImgname().getOriginalFilename();	// 파일덩어리 안에있는 파일이름을 꺼낸다. 
-		obj.setImg(imgname);
-		
+	public String ocrimpl(Model model, PostDTO obj) {
+		String img = obj.getImgname().getOriginalFilename();	// 파일덩어리 안에있는 파일이름을 꺼낸다. 
+		obj.setImg(img);
+		System.out.println("0-0-0-:"+obj.getImg());
 		try {
-			Util.saveFile(obj.getImgname(), admindir, custdir);
 			Util.saveFile(obj.getImgname(), admindir, custdir);		// 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장 (상단에 경로를 @Value 써줌)
-			String result = OCRUtil.getText(imgname);	// 결과받기
-			System.out.println(result);
+			String result = OCRUtil.getText(img);	// 결과받기
+			System.out.println("RESULT: "+result);
+			
 			
 			JSONParser jsonparser = new JSONParser();
 			JSONObject jo = (JSONObject)jsonparser.parse(result.toString());
-//			System.out.println(jo.toString());
+			System.out.println(jo.toString());
 			JSONArray ja1 = (JSONArray) jo.get("images");	// images라는 배열을 가져온다.
 			JSONObject jo1 = (JSONObject) ja1.get(0); // 배열에서 첫번째 object를 꺼냄
 			JSONArray ja2 = (JSONArray) jo1.get("fields"); // jo1에서 fields라는 배열을 꺼냄
@@ -121,15 +120,15 @@ public class ReviewController {
 			JSONObject f2 = (JSONObject) ja2.get(1);	// fields라는 배열에서 두번째
 			JSONObject f3 = (JSONObject) ja2.get(2);	// fields라는 배열에서 세번째 
 			
-			String custname = (String) f1.get("inferText");
-			String hotelname = (String) f2.get("inferText");
+			String name1 = (String) f1.get("inferText");
+			String name2 = (String) f2.get("inferText");
+			String no = (String) f3.get("inferText");
 			
-			model.addAttribute("custname",custname);
-			model.addAttribute("hotelname",hotelname);
+			model.addAttribute("name1",name1);
+			model.addAttribute("name2",name2);
+			model.addAttribute("no",no);
 			
-			System.out.println("custname : " + custname);
-			System.out.println("hotelname : " + hotelname);
-			model.addAttribute("center","writereview");
+			model.addAttribute("center","ocrresult");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -165,8 +164,10 @@ public class ReviewController {
 	}
 	@RequestMapping("/reviewsendimpl")
 	public String reviewsendimpl(Model model, PostDTO review) {
-		
+		String img = review.getImgname().getOriginalFilename();
+		review.setImg(img);
 		try {
+			Util.saveFile(review.getImgname(), admindir, custdir);
 			postservice.reviewinsert(review);
 		} catch (Exception e) {
 			e.printStackTrace();
