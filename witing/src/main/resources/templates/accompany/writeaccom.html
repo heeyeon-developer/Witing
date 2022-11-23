@@ -76,6 +76,12 @@ $(document).ready(function(){
 	}
 	$('#writeaccom_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
+		var arr = [];
+		
+		$.each($("input[name='planname[]']"),function(k,v){
+			arr[arr.length] = $(v).val();
+		})
+		alert(arr)
 		if(c == true){
 			var custid = '[[${session.logincust.custid}]]';
 			var title = $('#title').val();
@@ -197,14 +203,14 @@ var callback = function(result, status) {
 					<div class="col-9 mb-3" style="display:inline-block;">
 						<div class="form-field" style="display:inline-block;">
 							<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명 주소">
-							<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname">
+							<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname[]">
 							<input type="button" class="form-control" th:onclick="sample4_execDaumPostcode()" value="장소 찾기" th:id="addr_btn"><br>
 	                    </div>
 						<div class="col-lg d-flex"></div>
 					</div>
 					<div class="col-11 mb-3" style="display:inline-block;">
 						<div class="form-field3">
-							<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo">
+							<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo[]">
 						</div>
 						<div class="col-lg d-flex"></div>
 					</div>
