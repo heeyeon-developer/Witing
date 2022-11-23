@@ -143,36 +143,6 @@ var callback = function(result, status) {
     }
 }; */
 
- 
-/* $(document).ready(function(){
-	$('#idx2').hide();
-	$('#planname2').hide();
-	$('#todo2').hide();
-	$('#minus_icon').hide();
-	
-	$('#idx3').hide();
-	$('#planname3').hide();
-	$('#todo3').hide();
-	$('#minus_icon3').hide();
-
-	
- 	$('#add_icon').click(function(){
-		$('#idx2').show();
-		$('#planname2').show();
-		$('#todo2').show();
-		$('#minus_icon').show();
-	})
-	$('#minus_icon').click(function(){
-		$('#idx2').hide();
-		$('#planname2').hide();
-		$('#todo2').hide();
-		$('#minus_icon').hide();
-	})  
-	
-	
-}); */
-
-
 </script>
 
 
@@ -221,7 +191,7 @@ var callback = function(result, status) {
 				
 				<div id="basicplan" style="display:inline-block;">
 					<div class="col-2 mb-3" style="display:inline-block;">
-						<input type="number" class="form-control hyidx" id="idx" value="1" readonly="readonly" name="idx">
+						<input type="number" class="form-control hyidx" id="idx" placeholder="여행 순서" name="idx">
 						<div class="col-lg d-flex"></div>
 					</div>
 					<div class="col-9 mb-3" style="display:inline-block;">
@@ -237,6 +207,10 @@ var callback = function(result, status) {
 							<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo">
 						</div>
 						<div class="col-lg d-flex"></div>
+					</div>
+					<div>
+						<input type="text" name="planx" value="planx" id="planx">
+						<input type="text" name="plany" value="plany" id="plany">
 					</div>
 					
 				</div>
@@ -261,9 +235,6 @@ var callback = function(result, status) {
 					</div>
 					<div class="col-lg d-flex"></div>
 				</div> -->
-				
-                   
-                  
              <!-- </div> -->
                     
                 <!--     
@@ -290,10 +261,12 @@ var callback = function(result, status) {
 					<textarea id="accomtext" class="form-control w-100" cols="30" rows="10" placeholder="내용을 입력해주세요." name="accomtext"></textarea>
 	            </div>
 	            
-	            <div class="col-2 mb-3">
-					<input type="text" name="planx" value="planx" id="planx">
-					<input type="text" name="plany" value="plany" id="plany">
-	            </div>
+	            <!-- <div class="col-2 mb-3">
+					<input type="text" name="planx2" value="planx" id="planx2">
+					<input type="text" name="plany2" value="plany" id="plany2">
+					<input type="text" name="planx3" value="planx" id="planx3">
+					<input type="text" name="plany3" value="plany" id="plany3">
+	            </div> -->
 	            
 			</div>
           </form>
