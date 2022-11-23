@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Witing</title>
-	<link href="/images/logo.png" rel="shortcut icon" type="image/x-icon">
+	<link th:href="@{/images/logo.png}" rel="shortcut icon" th:type="@{/image/x-icon}">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
@@ -11,28 +11,28 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<link rel="stylesheet" href="/css/animate.css">
+	<link rel="stylesheet" th:href="@{/css/animate.css}">
 	
-	<link rel="stylesheet" href="/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="/css/owl.theme.default.min.css">
-	<link rel="stylesheet" href="/css/magnific-popup.css">
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+	<link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+	<link rel="stylesheet" th:href="@{/css/magnific-popup.css}">
 
-	<link rel="stylesheet" href="/css/bootstrap-datepicker.css">
-	<link rel="stylesheet" href="/css/jquery.timepicker.css">
+	<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.css}">
+	<link rel="stylesheet" th:href="@{/css/jquery.timepicker.css}">
 
 	
-	<link rel="stylesheet" href="/css/flaticon.css">
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" th:href="@{/css/flaticon.css}">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 	
 	<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
     <script th:src="@{/js/jquery/jquery-2.2.4.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     
     <!-- KaKao Map -->
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e1b32cf5d525af8ff59d5b3400b60ce4&libraries=services"></script>
+	<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+    <script th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=e1b32cf5d525af8ff59d5b3400b60ce4&libraries=services}"></script>
     
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=345c28e4fdf06df048870a40b7ff94ed"></script>
+	<script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=345c28e4fdf06df048870a40b7ff94ed}"></script>
 	
     <!-- Naver Login -->
 	<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
@@ -41,6 +41,19 @@
 	<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
 	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
 
+	<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+	<script th:src="@{/js/popper.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery.easing.1.3.js}"></script>
+	<script th:src="@{/js/jquery.waypoints.min.js}"></script>
+	<script th:src="@{/js/jquery.stellar.min.js}"></script>
+	<script th:src="@{/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+	<script th:src="@{/js/jquery.animateNumber.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.js}"></script>
+	<script th:src="@{/js/scrollax.min.js}"></script>
+	
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -72,35 +85,19 @@
 	<div class="hero-wrap" th:insert="${center} ? ${center} : maincenter">
 	</div>
 	
-	<footer class=" bg-bottom ftco-no-pt" style="background-color: white;"> 
+	<footer class="bg-bottom ftco-no-pt" style="background-color: white;"> 
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 text-center"><br>
 					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 						Copyright &copy;<script>document.write(new Date().getFullYear());</script></a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-					</div>
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+					</p>
 				</div>
 			</div>
-		</footer>
+		</div>
+	</footer>
 			
-	<!-- loader -->
-	<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-
-
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="/js/popper.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/jquery.easing.1.3.js"></script>
-	<script src="/js/jquery.waypoints.min.js"></script>
-	<script src="/js/jquery.stellar.min.js"></script>
-	<script src="/js/owl.carousel.min.js"></script>
-	<script src="/js/jquery.magnific-popup.min.js"></script>
-	<script src="/js/jquery.animateNumber.min.js"></script>
-	<script src="/js/bootstrap-datepicker.js"></script>
-	<script src="/js/scrollax.min.js"></script>
-	<script src="/js/main.js"></script>
-			
+	<script th:src="@{/js/main.js}"></script>			
 </body>
 </html>

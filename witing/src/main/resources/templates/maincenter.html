@@ -181,7 +181,7 @@
 			<div class="row">
 				<div class="col-md-4 ftco-animate" th:each="city:${citylist}">
 					<div class="project-wrap">
-						<a th:href="@{/cityshotel(cityid=${city.cityid})}" class="img" th:style="|background-image: url(images/${city.img});|">
+						<a th:href="@{/cityshotel(cityid=${city.cityid})}" class="img" th:style="|background-image: url(images/${city.img})|">
 							<span class="price" th:text="${city.name}"></span>
 						</a>
 					</div>
@@ -190,7 +190,7 @@
 		</div>
 	</section>
 
-	<section class="ftco-section testimony-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
+	<section class="ftco-section testimony-section bg-bottom" style="background-image: url(/images/bg_1.jpg);">
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row justify-content-center pb-4">
