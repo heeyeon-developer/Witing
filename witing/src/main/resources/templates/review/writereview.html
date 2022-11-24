@@ -1,17 +1,7 @@
 <link href="/assets/css/star.css" rel="stylesheet"/>
 <script>
 $(document).ready(function(){
-	/* ocr */
-	$('#register_btn').click(function(){
-		$('#register_form').attr({
-			'enctype':'multipart/form-data',
-			'method':'post',
-			'action':'/ocrimpl'
-		});
-		$('#register_form').submit()
-	});
-	/* ocr */
-	
+	alert("인증이 완료되었습니다.")
 	$('#send_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		if(c == true){
@@ -24,6 +14,15 @@ $(document).ready(function(){
 			alert("정상적으로 등록되었습니다 : )");
 		}
 	});
+	
+	var status = "[[${status}]]";
+	
+	if(status=="1"){
+		alert("예약인증 성공");
+	}
+	if(status=="0"){
+		alert("예약인증 실패. 정보가 일치하지 않습니다");
+	}
 });
 
 </script>
@@ -121,22 +120,6 @@ $(document).ready(function(){
 		</div>
    </div>
    <div class="col-md-2 d-flex"></div>
-	<!-- ocr -->
-		<div class="card shadow mb-4">
-		    <div class="card-header py-3">
-		        <h6 class="m-0 font-weight-bold text-primary">Reservation Certification</h6>
-		    </div>
-		    <div class="card-body">
-				<form id="register_form">
-					<div class="form-group">
-						<label for="imgname">Reservation Detail Image:</label> 
-						<input type="file" class="form-control" id="imgname" name="imgname">
-					</div>
-				</form>
-				<button id="register_btn" class="btn btn-default">REGISTER</button>
-			</div>
-		</div> 
-	<!-- ocr -->
 	 <div class="col-md-2"></div>
      <div class="col-md-8">
         <form id="reviewform" class=" contact-form" style="padding-top: 0">

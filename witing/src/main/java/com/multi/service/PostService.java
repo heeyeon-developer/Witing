@@ -72,4 +72,7 @@ public class PostService implements MyService<Integer, PostDTO>{
 	public List<PostDTO> hotelreviewall(int hotelid) throws Exception {
 		return mapper.hotelreviewall(hotelid);
 	}
+	public PostDTO reviewocr(int orderid) throws Exception{
+		return mapper.reviewocr(orderid);
+	}
 }

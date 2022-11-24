@@ -67,5 +67,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM post WHERE kind='review' AND hotelid = #{hotelid}
 		ORDER BY rdate DESC
 	</select>
-	
+	<select id="reviewocr" parameterType="Integer" resultType="PostDTO">
+		select o.orderid, c.custname, h.hotelname, r.roomtype, o.totalprice, o.cnt, o.sdate, o.edate, h.hotelid AS ocrhotelid from cust c
+		inner join orderlist o on c.custid = o.custid
+		inner join room r on o.roomid = r.roomid
+		inner join hotel h on h.hotelid = r.hotelid
+		where o.orderid = #{orderid}
+	</select>
 </mapper>

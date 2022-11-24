@@ -1,4 +1,17 @@
+<script>
+$(document).ready(function(){
+	var status = "[[${status}]]";
+	
+	if(status=="1"){
+		alert("예약인증 성공");
+	}
+	if(status=="0"){
+		alert("예약인증 실패. 정보가 일치하지 않습니다");
+	}
+})
 
+
+</script>
 <style>
 #writebtn{
 	margin-top: -15px;
@@ -77,7 +90,7 @@
 		</tr>
 		</tbody>
 	</table>
-	<button id="send_btn" class="btn btn-primary py-2 px-3" style="float: right" th:onclick="|location.href='@{/writereview(hotelid=${list[0].hotelid})}'|">작성하기</button>
+	<button id="send_btn" class="btn btn-primary py-2 px-3" style="float: right" th:onclick="|location.href='@{/reviewocr(hotelid=${list[0].hotelid})}'|">작성하기</button>
 	
 <div class="row mt-5">
   <div class="col text-center" style="padding-top: 15px;">
