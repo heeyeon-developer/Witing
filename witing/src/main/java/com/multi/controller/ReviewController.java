@@ -1,6 +1,9 @@
 package com.multi.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -9,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CityDTO;
 import com.multi.dto.CustDTO;
+import com.multi.dto.OrderlistDTO;
 import com.multi.dto.PostDTO;
 import com.multi.dto.RoomDTO;
 import com.multi.frame.OCRUtil;
@@ -97,21 +102,46 @@ public class ReviewController {
 		}
 		return "index";
 	}
+	@RequestMapping("reviewocr")
+	public String reviewocr(Model model,Integer hotelid,Integer roomid,String hotelname,
+			String roomimg1,String roomimg2,String roomimg3,String roomimg4,String hotelimg1,
+			String roomtype1,String roomtype2) {
+		List<RoomDTO> list = null;
+		List<CityDTO> city = null;
+		try {
+			list = roomservice.roomall(hotelid);
+			model.addAttribute("citylist", city);
+			model.addAttribute("hotelname", list.get(0).getHotelname());
+			model.addAttribute("hotelimg1", list.get(0).getHotelimg1());
+			model.addAttribute("roomimg1", list.get(0).getRoomimg1());
+			model.addAttribute("roomimg2", list.get(0).getRoomimg2());
+			model.addAttribute("roomimg3", list.get(1).getRoomimg1());
+			model.addAttribute("roomimg4", list.get(1).getRoomimg2());
+			model.addAttribute("roomtype1", list.get(0).getRoomtype());
+			model.addAttribute("roomtype2", list.get(1).getRoomtype());
+			model.addAttribute("roomid", roomid);
+			model.addAttribute("list", list);
+			model.addAttribute("center", reviewdir+"reviewocr");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "index";
+	}
 	
 	@RequestMapping("/ocrimpl")
-	public String ocrimpl(Model model, PostDTO obj) {
+	public String ocrimpl(Model model, PostDTO obj, HttpSession session, int hotelid) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
 		String img = obj.getImgname().getOriginalFilename();	// 파일덩어리 안에있는 파일이름을 꺼낸다. 
 		obj.setImg(img);
-		System.out.println("0-0-0-:"+obj.getImg());
 		try {
 			Util.saveFile(obj.getImgname(), admindir, custdir);		// 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장 (상단에 경로를 @Value 써줌)
 			String result = OCRUtil.getText(img);	// 결과받기
 			System.out.println("RESULT: "+result);
 			
-			
 			JSONParser jsonparser = new JSONParser();
 			JSONObject jo = (JSONObject)jsonparser.parse(result.toString());
-			System.out.println(jo.toString());
+			// System.out.println(jo.toString());
 			JSONArray ja1 = (JSONArray) jo.get("images");	// images라는 배열을 가져온다.
 			JSONObject jo1 = (JSONObject) ja1.get(0); // 배열에서 첫번째 object를 꺼냄
 			JSONArray ja2 = (JSONArray) jo1.get("fields"); // jo1에서 fields라는 배열을 꺼냄
@@ -119,21 +149,128 @@ public class ReviewController {
 			JSONObject f1 = (JSONObject) ja2.get(0);	// fields라는 배열에서 첫번째 
 			JSONObject f2 = (JSONObject) ja2.get(1);	// fields라는 배열에서 두번째
 			JSONObject f3 = (JSONObject) ja2.get(2);	// fields라는 배열에서 세번째 
+			JSONObject f4 = (JSONObject) ja2.get(3);	// fields라는 배열에서 네번째 
+			JSONObject f5 = (JSONObject) ja2.get(4);	// fields라는 배열에서 디섯번째 
+			JSONObject f6 = (JSONObject) ja2.get(5);	// fields라는 배열에서 여섯번째 
 			
-			String name1 = (String) f1.get("inferText");
-			String name2 = (String) f2.get("inferText");
-			String no = (String) f3.get("inferText");
+			String orderid = (String) f1.get("inferText");
+			String custname = (String) f2.get("inferText");
+			String hotel = (String) f3.get("inferText");
+			String totalprice = (String) f4.get("inferText");
+			String cnt = (String) f5.get("inferText");
+			String date = (String) f6.get("inferText");
 			
-			model.addAttribute("name1",name1);
-			model.addAttribute("name2",name2);
-			model.addAttribute("no",no);
+			// hotelname , roomtype 분리
+			String replacehotel = hotel.replace(" ", "");
+			int idx1 = replacehotel.indexOf("-");
+			String hotelname = replacehotel.substring(0, idx1);
+			String roomtype = replacehotel.substring(idx1 + 1);
 			
-			model.addAttribute("center","ocrresult");
+			// sdate, edate 분리
+			String replacedate = date.replace(" ", "");
+			int idx2 = replacedate.indexOf("~");
+			String sdate = replacedate.substring(0, idx2);
+			String edate = replacedate.substring(idx2 + 1);
 			
-		} catch (Exception e) {
+			int intOrderid = Integer.parseInt(orderid);			// ocr orderid 형변환
+			int intTotalprice = Integer.parseInt(totalprice);	// ocr totalprice 형변환
+			int intCnt = Integer.parseInt(cnt);					// ocr cnt 형변환
+			
+			// ocr로 추출한 데이터
+			System.out.println("-------------------ocr 데이터-------------");
+			System.out.println(custname);
+			System.out.println(hotelname);
+			System.out.println(roomtype);
+			System.out.println(totalprice);
+			System.out.println(cnt);
+			System.out.println(date);
+			System.out.println(replacedate);
+			System.out.println(sdate);
+			System.out.println(edate);
+			
+			CustDTO cust = (CustDTO) session.getAttribute("logincust");
+			System.out.println("cust : "+cust);
+			String name = cust.getCustname();	// session의 custname
+			System.out.println("session의 custname : "+ name);
+			
+			PostDTO orderdetail = postservice.reviewocr(intOrderid);	// orderlist 데이터 조회
+			
+			String od_custname = orderdetail.getCustname();
+			String od_hotelname = (orderdetail.getHotelname()).replace(" ", "");
+			String od_roomtype = orderdetail.getRoomtype();
+			int od_totalprice = orderdetail.getTotalprice();
+			int od_cnt = orderdetail.getCnt();
+			String od_sdate = (String)format.format(orderdetail.getSdate());
+			String od_edate = (String)format.format(orderdetail.getEdate());
+			int od_hotelid = orderdetail.getOcrhotelid();
+			System.out.println("넘어온 것"+hotelid);
+			System.out.println("첨부한 것"+od_hotelid);
+			System.out.println("--------------------------조회한 데이터--------------------");
+			System.out.println(od_custname);
+			System.out.println(od_hotelname);
+			System.out.println(od_roomtype);
+			System.out.println(od_totalprice);
+			System.out.println(od_cnt);
+			System.out.println(od_sdate);
+			System.out.println(od_edate);
+
+//			model.addAttribute("orderid", intOrderid);	
+//			model.addAttribute("custname", custname);
+//			model.addAttribute("hotelname", hotelname);
+//			model.addAttribute("totalprice", intTotalprice);
+//			model.addAttribute("cnt", cnt);
+//			model.addAttribute("date", date);
+			
+			
+			if(name.equals(od_custname)) {
+				System.out.println("이름 일치");
+			}
+			if(hotelname.equals(od_hotelname)) {
+				System.out.println("호텔이름 일치");
+			}
+			if(roomtype.equals(od_roomtype)) {
+				System.out.println("룸타입 일치");
+			}
+			if(intTotalprice == od_totalprice) {
+				System.out.println("가격일치");
+			}
+			if(intCnt == od_cnt) {
+				System.out.println("인원일치");
+			}
+			if(sdate.equals(od_sdate)) {
+				System.out.println("체크인일치");
+			}
+			if(edate.equals(od_edate)) {
+				System.out.println("체크아웃일치");
+			}
+			
+			
+			
+			if(hotelid == od_hotelid) {
+				if(name.equals(od_custname) && hotelname.equals(od_hotelname) && roomtype.equals(od_roomtype) 
+						&& intTotalprice == od_totalprice && intCnt == od_cnt && sdate.equals(od_sdate) && edate.equals(od_edate)) {
+					System.out.println("일치합니다.");
+					model.addAttribute("status", "1");
+//					 "redirect:writereview?hotelid="+hotelid;
+					
+				}else {
+					System.out.println("일치하지않습니다.");
+					model.addAttribute("status", "0");
+//					return "redirect:reviewmore?hotelid="+hotelid; 
+				}
+					
+			}else {
+				System.out.println("일치하지않습니다.");
+				model.addAttribute("status", "0");
+//				return "redirect:reviewmore?hotelid="+hotelid;
+				
+			}
+				
+			
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "index";
+		return "redirect:reviewocr?hotelid="+hotelid;
 	}
 	
 	@RequestMapping("/writereview")

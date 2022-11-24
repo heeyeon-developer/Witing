@@ -33,7 +33,14 @@ public class PostDTO {
 	
 	private String answer;
 	
+	private String custname;
 	private String hotelname;
+	private String roomtype;
+	private int totalprice;
+	private int cnt;
+	private Date sdate;
+	private Date edate;
+	private int ocrhotelid;
 	
 	private MultipartFile imgname;
 }

@@ -22,4 +22,5 @@ public interface PostMapper extends MyMapper<Integer, PostDTO> {
 	public PostDTO reviewdetail(int postid) throws Exception;
 	public List<PostDTO> reviewlist5(int hotelid) throws Exception;
 	public List<PostDTO> hotelreviewall(int hotelid) throws Exception;
+	public PostDTO reviewocr(int orderid) throws Exception;
 }
