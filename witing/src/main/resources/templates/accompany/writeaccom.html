@@ -62,15 +62,16 @@
 <script>
 
 $(document).ready(function(){
-	var num = 1;
+	var num = 2;
 	function add_plan(){
 	    var div = document.createElement('div');
 	    div.innerHTML = document.getElementById('basicplan').innerHTML; 
 		//새롭게 추가한 주소입력 부분의 주소,장소의 id 변
+		div.querySelector('#idx').setAttribute("value", num);
 		div.querySelector('#sample4_roadAddress').setAttribute("id", "sample4_roadAddress"+num);
 		div.querySelector('#plany').setAttribute("id","plany"+num);
-		div.querySelector('#planx').setAttribute("id","planx"+num);	  
-		alert(num);
+		div.querySelector('#planx').setAttribute("id","planx"+num);	
+		
 	    $(div).on('click', '#addr_btn', function(){
 	    	//현재 변경된 id의 숫자를 가져오
 	    	var roadid = div.querySelector('.roadname').getAttribute("id");
@@ -97,6 +98,7 @@ $(document).ready(function(){
 	    document.getElementById('addplan').appendChild(div);
 	    num++;
 	}
+	
 	$('#writeaccom_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		var arr = [];
@@ -110,28 +112,40 @@ $(document).ready(function(){
 			var title = $('#title').val();
 			var cnt = $('#cnt').val();
 			var traveltime = $('#traveltime').val();
-			var idx = $('#idx').val();
-			var planname = $('#planname').val();
-			var todo = $('#todo').val();
 			var accomtext = $('#accomtext').val();
-			var planx = $('#planx').val();
-			var plany = $('#plany').val();
+			//동적으로 데이터 추가되는 부분 -> idx, roadname, planname, todo, planx,plany
+			var idx = [];
+			$.each($("input[name='idx[]']"),function(k,v){
+				idx[idx.length] = $(v).val();
+			})
+			var roadname = [];
+			$.each($("input[name='roadname[]']"),function(k,v){
+				roadname[roadname.length] = $(v).val();
+			})
+			var planname = [];
+			$.each($("input[name='planname[]']"),function(k,v){
+				planname[planname.length] = $(v).val();
+			})
+			var todo = [];	
+			$.each($("input[name='todo[]']"),function(k,v){
+				todo[todo.length] = $(v).val();
+			});
+			var planx = [];
+			$.each($("input[name='planx[]']"),function(k,v){
+				planx[planx.length] = $(v).val();
+			});
+			var plany = [];
+			$.each($("input[name='plany[]']"),function(k,v){
+				plany[plany.length] = $(v).val();
+			})
+			
 			location.href="[[@{/accomimpl?custid=}]]"+custid+"&[[@{title=}]]"+title+"&[[@{cnt=}]]"+cnt+"&[[@{traveltime=}]]"+traveltime
-			+"&[[@{idx=}]]"+idx+"&[[@{planname=}]]"+planname+"&[[@{todo=}]]"+todo+"&[[@{accomtext=}]]"+accomtext
+			+"&[[@{idx=}]]"+idx+"&[[@{roadname=}]]"+roadname+"&[[@{planname=}]]"+planname+"&[[@{todo=}]]"+todo+"&[[@{accomtext=}]]"+accomtext
 			+"&[[@{planx=}]]"+planx+"&[[@{plany=}]]"+plany;
 		};
-		alert(planx);
-		alert(plany);
 		alert("정상적으로 등록되었습니다 : )");
 	});
-	
-	/* $('#writeaccom_btn').click(function(){
-		var str = $form.serialize();
-		alert(str);
-	}); */
-	
-	
-	
+		
 	/* $('#writeaccom_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		if(c == true){
@@ -220,12 +234,12 @@ var callback = function(result, status) {
 				<a th:href="@{#}"><i class="fa fa-plus-circle" id="add_icon"></i></a>
 				<div id="basicplan" style="display:inline-block;">
 					<div class="col-2 mb-3" style="display:inline-block;">
-						<input type="number" class="form-control hyidx" id="idx" placeholder="여행 순서" name="idx">
+						<input type="number" class="form-control hyidx" value="1" id="idx" placeholder="여행 순서" name="idx[]" readonly="readonly">
 						<div class="col-lg d-flex"></div>
 					</div>
 					<div class="col-9 mb-3" style="display:inline-block;">
 						<div class="form-field" style="display:inline-block;">
-							<input type="text" class="form-control roadname" id="sample4_roadAddress" placeholder="도로명 주소">
+							<input type="text" class="form-control roadname" id="sample4_roadAddress" placeholder="도로명 주소" name="roadname[]" readonly="readonly">
 							<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname[]">
 							<input type="button" class="form-control" th:onclick="sample4_execDaumPostcode()" value="장소 찾기" th:id="addr_btn"><br>
 	                    </div>
@@ -237,9 +251,9 @@ var callback = function(result, status) {
 						</div>
 						<div class="col-lg d-flex"></div>
 					</div>
-					<div>
-						<input type="text" name="planx" value="planx" id="planx">
-						<input type="text" name="plany" value="plany" id="plany">
+					<div style="display:none;">
+						<input type="text" name="planx[]" value="planx" id="planx">
+						<input type="text" name="plany[]" value="plany" id="plany">
 					</div>
 					
 				</div>

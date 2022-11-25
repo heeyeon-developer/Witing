@@ -140,34 +140,23 @@ public class AccompanyController {
 	}
 	
 	@RequestMapping("/accomimpl")
-	public String accomimpl(Model model, String custid,String title,int cnt,String traveltime, int idx,String accomtext,
-			float planx, float plany, HttpServletRequest request) {
-		Integer accomid = 0;
-		String[] planname = request.getParameterValues("planname");
-		String[] todo = request.getParameterValues("todo");
-		for(int i=0; i<2; i++) {
-			System.out.println(i);
-			System.out.println(planname[i]);
-			System.out.println(todo[i]);
+	public String accomimpl(Model model, String custid,String title,int cnt,String traveltime, String accomtext,
+			int[] idx, String[] roadname, String[] planname, String[] todo, float[] planx, float[] plany) {
+		int accomid = 0;
+		try {
+			CustDTO clist = cust_service.get(custid);
+			AccompanyDTO ac = new AccompanyDTO(0, custid, title, accomtext, Date.valueOf(traveltime), cnt, 0.0f, 0.0f);
+			service.register(ac);
+			accomid = ac.getAccomid();
+			System.out.println(accomid);
+			for(int i=0; i<idx.length; i++) {
+				PlanDTO pl = new PlanDTO(0, ac.getAccomid(), planname[i], planx[i], plany[i], idx[i], todo[i],
+						"", "", "", Date.valueOf(traveltime), 0, 0.0f, 0.0f, "", "",Date.valueOf(traveltime), "");
+				plan_service.register(pl);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-//		try {
-//			List<CustDTO> clist = cust_service.custget(custid);
-//			System.out.println(traveltime);
-//			AccompanyDTO ac = new AccompanyDTO(0, custid, title, accomtext, Date.valueOf(traveltime), cnt, 0.0f, 0.0f);
-//			service.register(ac);
-//			accomid = ac.getAccomid();
-//			System.out.println(accomid);
-//			for(CustDTO c : clist) {
-//				PlanDTO pl = new PlanDTO(0, ac.getAccomid(), planname, planx, plany, 0, todo,
-//						custid, title, accomtext, Date.valueOf(traveltime), cnt,
-//						ac.getLocationx(), ac.getLocationy(), c.getCountry(), c.getGender(), c.getBirth(), c.getCertification());
-//				System.out.println(c);
-//				plan_service.register(pl);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
 		
 		return "redirect:plan?accomid="+accomid;
 	}
