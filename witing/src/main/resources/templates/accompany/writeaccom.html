@@ -102,46 +102,55 @@ $(document).ready(function(){
 	$('#writeaccom_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		var arr = [];
-		
-		$.each($("input[name='planname[]']"),function(k,v){
-			arr[arr.length] = $(v).val();
-		})
-		alert(arr)
+		var title = document.getElementById("title");
+		var cnt = document.getElementById("cnt");
+		var traveltime = document.getElementById("traveltime");
+		var accomtext = document.getElementById("accomtext");
+		var planname = document.getElementById("planname");
+		var todo = document.getElementById("todo");
+
 		if(c == true){
-			var custid = '[[${session.logincust.custid}]]';
-			var title = $('#title').val();
-			var cnt = $('#cnt').val();
-			var traveltime = $('#traveltime').val();
-			var accomtext = $('#accomtext').val();
-			//동적으로 데이터 추가되는 부분 -> idx, roadname, planname, todo, planx,plany
-			var idx = [];
-			$.each($("input[name='idx[]']"),function(k,v){
-				idx[idx.length] = $(v).val();
-			})
-			var roadname = [];
-			$.each($("input[name='roadname[]']"),function(k,v){
-				roadname[roadname.length] = $(v).val();
-			})
-			var planname = [];
-			$.each($("input[name='planname[]']"),function(k,v){
-				planname[planname.length] = $(v).val();
-			})
-			var todo = [];	
-			$.each($("input[name='todo[]']"),function(k,v){
-				todo[todo.length] = $(v).val();
-			});
-			var planx = [];
-			$.each($("input[name='planx[]']"),function(k,v){
-				planx[planx.length] = $(v).val();
-			});
-			var plany = [];
-			$.each($("input[name='plany[]']"),function(k,v){
-				plany[plany.length] = $(v).val();
-			})
+			if(title.value == "" || cnt.value == "" || traveltime.value == "" || accomtext.value == ""
+					|| planname.value == "" || todo.value == ""){
+				alert('내용을 입력해주세요.')
+				return false;
+			}else{
+				var custid = '[[${session.logincust.custid}]]';
+				var title = $('#title').val();
+				var cnt = $('#cnt').val();
+				var traveltime = $('#traveltime').val();
+				var accomtext = $('#accomtext').val();
+				//동적으로 데이터 추가되는 부분 -> idx, roadname, planname, todo, planx,plany
+				var idx = [];
+				$.each($("input[name='idx[]']"),function(k,v){
+					idx[idx.length] = $(v).val();
+				})
+				var roadname = [];
+				$.each($("input[name='roadname[]']"),function(k,v){
+					roadname[roadname.length] = $(v).val();
+				})
+				var planname = [];
+				$.each($("input[name='planname[]']"),function(k,v){
+					planname[planname.length] = $(v).val();
+				})
+				var todo = [];	
+				$.each($("input[name='todo[]']"),function(k,v){
+					todo[todo.length] = $(v).val();
+				});
+				var planx = [];
+				$.each($("input[name='planx[]']"),function(k,v){
+					planx[planx.length] = $(v).val();
+				});
+				var plany = [];
+				$.each($("input[name='plany[]']"),function(k,v){
+					plany[plany.length] = $(v).val();
+				})
+				
+				location.href="[[@{/accomimpl?custid=}]]"+custid+"&[[@{title=}]]"+title+"&[[@{cnt=}]]"+cnt+"&[[@{traveltime=}]]"+traveltime
+				+"&[[@{idx=}]]"+idx+"&[[@{roadname=}]]"+roadname+"&[[@{planname=}]]"+planname+"&[[@{todo=}]]"+todo+"&[[@{accomtext=}]]"+accomtext
+				+"&[[@{planx=}]]"+planx+"&[[@{plany=}]]"+plany;
+			}
 			
-			location.href="[[@{/accomimpl?custid=}]]"+custid+"&[[@{title=}]]"+title+"&[[@{cnt=}]]"+cnt+"&[[@{traveltime=}]]"+traveltime
-			+"&[[@{idx=}]]"+idx+"&[[@{roadname=}]]"+roadname+"&[[@{planname=}]]"+planname+"&[[@{todo=}]]"+todo+"&[[@{accomtext=}]]"+accomtext
-			+"&[[@{planx=}]]"+planx+"&[[@{plany=}]]"+plany;
 		};
 		alert("정상적으로 등록되었습니다 : )");
 	});
@@ -221,7 +230,7 @@ var callback = function(result, status) {
                 </div>
                 <div class="col-2 mb-3">
 					<div class="form-field">
-					<input type="number" class="form-control" id="cnt" placeholder="동행 모집 인원" name="cnt">
+					<input type="number" min="1" class="form-control" id="cnt" placeholder="동행 모집 인원" name="cnt">
                    	<div class="col-lg d-flex"></div>
 					</div>
                 </div>

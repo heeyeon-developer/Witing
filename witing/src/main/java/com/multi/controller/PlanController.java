@@ -41,12 +41,12 @@ public class PlanController {
 		List<PlanDTO> list = null;
 		List<PlanDTO> xy = null;
 		List<ReplyDTO> reply = null;
-		List<CustDTO> cust = null;
+		CustDTO cust = null;
 		try {
 			list = service.plandetail(accomid);
 			xy = service.xy(accomid);
 			reply = reply_service.accomreply(accomid);
-			cust = cust_service.custget(custid);
+			cust = cust_service.get(custid);
 			model.addAttribute("cust", cust);
 			
 			model.addAttribute("certification", list.get(0).getCertification());
@@ -80,5 +80,15 @@ public class PlanController {
 		
 		return "index";
 	}
-	
+//	
+//	@RequestMapping("/mbti")
+//	public String mbti(Model model) {
+//		model.addAttribute("center", dir+"mbti");
+//		return "index";
+//	}
+//	@RequestMapping("/result")
+//	public String result(Model model) {
+//		model.addAttribute("center", dir+"result");
+//		return "index";
+//	}
 }
