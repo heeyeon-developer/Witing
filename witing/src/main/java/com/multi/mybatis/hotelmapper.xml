@@ -25,11 +25,19 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM hotel h
 		INNER JOIN city c ON h.cityid = c.cityid;
 	</select>
-	<select id="searchhotel" parameterType="Integer" resultType="HotelDTO">
-		SELECT * FROM hotel ho
+	<select id="searchhotel" resultType="HotelDTO">
+		<!-- SELECT * FROM hotel ho
 		INNER JOIN cate ca ON ho.cateid = ca.cateid
 		INNER JOIN city ci ON ho.cityid = ci.cityid
-		WHERE ho.cityid = #{cityid} AND ho.cateid = #{cateid}
+		WHERE ho.cityid = #{cityid} AND ho.cateid = #{cateid} -->
+		SELECT DISTINCT ho.hotelid, ci.cityid, ca.cateid, ho.hotelname, ho.detail, ho.hotelimg1, ho.hotelimg2,
+		ho.feature, ca.catename, ci.name, ci.img FROM hotel ho
+		INNER JOIN cate ca ON ho.cateid = ca.cateid
+		INNER JOIN city ci ON ho.cityid = ci.cityid
+		INNER JOIN room ro ON ho.hotelid = ro.hotelid
+		INNER JOIN orderlist ol ON ro.roomid = ol.roomid
+		WHERE ho.cityid NOT IN (#{cityid}) AND ho.cateid NOT IN (#{cateid})
+		AND ol.roomid NOT IN (SELECT roomid FROM orderlist WHERE sdate BETWEEN #{sdate} AND #{edate});
 	</select>
 	
 	<select id="cityshotel" parameterType="Integer" resultType="HotelDTO">

@@ -1,5 +1,6 @@
 package com.multi.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +49,8 @@ public class HotelService implements MyService<Integer, HotelDTO>{
 		return mapper.cityshotel(cityid);
 	}
 	
-	public List<HotelDTO> searchhotel(Integer cityid, Integer cateid) throws Exception {
-		return mapper.searchhotel(cityid, cateid);
+	public List<HotelDTO> searchhotel(Integer cityid, Integer cateid, Date sdate, Date edate) throws Exception {
+		return mapper.searchhotel(cityid, cateid,sdate,edate);
 	}
 	
 }

@@ -1,5 +1,9 @@
 package com.multi.dto;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +28,10 @@ public class HotelDTO {
 	private String name;
 	private String img;
 	private String catename;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date sdate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date edate;
  
 }
