@@ -18,6 +18,39 @@ ul, li{
 }
 
 </style>
+<script>
+var stompClient = null;
+
+function connect() {
+	var socket = new SockJS('http://127.0.0.1:8080/admin/ws');
+	stompClient = Stomp.over(socket);//연결하기
+
+	stompClient.connect({}, function(frame) { 
+		console.log('Connected: ' + frame);
+		var check = JSON.stringify({
+		    'year' : $('#reservdate').text().substring(0,4),
+			'month' :$('#reservdate').text().substring(5,7),
+			'roomid' : $('#roomid').text()
+		});//요청할 달, 방 데이터 생성
+		
+		stompClient.send("/reservedcheck", {}, check);//컨트롤러에 데이터 요청
+		
+		stompClient.subscribe('/reservedresult', function(list) { 
+			for(var i=0; i<JSON.parse(list.body).length; i++){
+				var start = JSON.parse(list.body)[i].sdate;
+				var end = JSON.parse(list.body)[i].edate;
+				for(var j = parseInt(start.substr(8,10))+1; j <= parseInt(end.substr(8,10))+1; j++){
+					tdGroup[j].classList.add('reserved');
+	    		}
+			}
+		});
+	});
+}
+$(document).ready(function(){
+	connect();
+});
+
+</script>
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/ReservationBackground.jpeg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -61,8 +94,8 @@ ul, li{
 					</tr>
 					<tr>
 						<td>숙박 날짜</td>
-						<td th:text="|${#dates.format(order.sdate, 'yyyy.MM.dd')} ~ ${#dates.format(order.edate, 'yyyy.MM.dd')}|"></td>
-					</tr>
+						<td id="reservdate" th:text="|${#dates.format(order.sdate, 'yyyy.MM.dd')} ~ ${#dates.format(order.edate, 'yyyy.MM.dd')}|"></td>
+					</tr><div id="roomid" th:text="${order.roomid}" style="display:none;"></div>
 				</table>
     			</li>
     		</ul>

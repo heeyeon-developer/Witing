@@ -87,7 +87,7 @@
         <div class="sidebar-box ftco-animate">
           <h3 style="display: inline-block; margin-bottom: 5px">Review</h3><span class="fa fa-pencil-square-o" style="margin-left: 20px; color: black; cursor: pointer;" th:onclick="|location.href='@{/reviewocr(hotelid=${list[0].hotelid})}'|"></span>
           <div class="block-21 mb-4 d-flex">
-            <a class="blog-img mr-4" th:style="'background-image:url('+ @{'/images/hotel/'+${hotelimg1}} +');'"></a>
+            <a class="blog-img mr-4" th:style="|background-image:url(@{/images/hotel/}${hotelimg1});|"></a>
             <div class="text">
             	
               <table>

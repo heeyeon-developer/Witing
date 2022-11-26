@@ -52,7 +52,7 @@ public class LoginController {
 			model.addAttribute("center",logindir+"loginfail");
 		}
 		
-		return "redirect:";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/loginfail")
@@ -65,7 +65,7 @@ public class LoginController {
 	public String logout(HttpSession session) {
 		if(session != null)
 			session.invalidate();
-		return "redirect:";
+		return "redirect:/";
 	}
 	 
 	@RequestMapping("/register")
