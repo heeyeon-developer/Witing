@@ -1,4 +1,3 @@
-
 var currentTitle = document.getElementById('current-year-month');
 var calendarBody = document.getElementById('calendar-body');
 var today = new Date();
@@ -124,15 +123,6 @@ function paintDate(){
     }
 }
 
-function checkDate(){
-	for(let i = sdate.getDate(); i < today.getDate(); i++){
-		if(tdGroup[i].classList.contains('reserved')){
-			return false;
-		}
-    }
-    return true;
-}
-
 
 function changeToday(e){
     for(let i = 1; i <= pageYear[first.getMonth()]; i++){
@@ -152,7 +142,7 @@ function changeToday(e){
     	$('#sdate').val(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+clickedDate1.id);
     }else{
     	sdate = new Date($('#sdate').val());
-    	if(checkDate() && sdate.getFullYear() <= today.getFullYear() && sdate.getMonth() <= today.getMonth() && sdate.getDate() < today.getDate()){
+    	if(sdate.getFullYear() <= today.getFullYear() && sdate.getMonth() <= today.getMonth() && sdate.getDate() < today.getDate()){
     	  paintDate();
     	  $('#edate').val(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+clickedDate1.id);
     	  var addprice = ((parseInt($('#cnt').val())-parseInt($("#cnt option:eq(0)").val())))*parseInt($('#addprice').text());
@@ -181,6 +171,7 @@ const changeCnt = (target) => {
 		$('#totalprice').val(bf*parseInt(today.getDate()-sdate.getDate()));
 	}
 }
+
 var stompClient = null;
 
 function connect() {
@@ -194,14 +185,15 @@ function connect() {
 			'month' : today.getMonth()+1,
 			'roomid' : $('#roomid').text()
 		});//요청할 달, 방 데이터 생성
+		
 		stompClient.send("/reservedcheck", {}, check);//컨트롤러에 데이터 요청
 		
 		stompClient.subscribe('/reservedresult', function(list) { 
 			for(var i=0; i<JSON.parse(list.body).length; i++){
 				var start = JSON.parse(list.body)[i].sdate;
 				var end = JSON.parse(list.body)[i].edate;
-				for(let i = parseInt(start.substr(8,10))+1; i <= parseInt(end.substr(8,10))+1; i++){
-					tdGroup[i].classList.add('reserved');
+				for(var j = parseInt(start.substr(8,10))+1; j <= parseInt(end.substr(8,10))+1; j++){
+					tdGroup[j].classList.add('reserved');
 	    		}
 			}
 		});
@@ -209,35 +201,33 @@ function connect() {
 }
 
 var IMP = window.IMP; 
-IMP.init("imp83780347"); 
+ IMP.init("imp83780347"); 
 
-function requestPay() {
-	if($('#sdate').val() == '' || $('#edate').val() == ''){
-		alert("예약 날짜를 입력 후 결제를 진행해주세요.");
-		return;
-	}
-	IMP.request_pay({
-		pg : 'kcp',
-        pay_method : 'card',
-        merchant_uid: "w-"+Math.floor(Math.random()*100000,0)+ "-"+Math.floor(Math.random()*100000,0),
-        name : $('#roominfo').val(),
-        amount : $('#totalprice').val(),
-        buyer_name : $('#custname').val()
-	}, function (rsp) { // callback
-		if (rsp.success) {
-        	//성공하면 결제 완료 페이지 보여주기
-            $('#reservform').attr({
-            	method:'post',
-            	action:'/reservimpl'
-            });
-            $('#reservform').submit();
-            //결제 성공하면 현재 결제한 방을 예약하는 모든 사람에게 데이터 보내기            
-             connect();
-		}else {        
-        	alert("결제가 실패하였습니다. 다시 결제를 진행해 주세요.");
-        }
-	});
-};
+ function requestPay() {
+     IMP.request_pay({
+         pg : 'kcp',
+         pay_method : 'card',
+         merchant_uid: "w-"+Math.floor(Math.random()*100000,0)+ "-"+Math.floor(Math.random()*100000,0),
+         name : $('#roominfo').val(),
+         amount : $('#totalprice').val(),
+         buyer_name : $('#custname').val()
+     }, function (rsp) { // callback
+         if (rsp.success) {
+        	 //성공하면 결제 완료 페이지 보여주기
+             console.log(rsp);
+             $('#reservform').attr({
+            	 method:'post',
+            	 action:'/reservimpl'
+             });
+             $('#reservform').submit();
+         } else {
+             console.log(rsp);
+        	 alert("결제가 실패하였습니다. 다시 결제를 진행해 주세요.");
+         }
+     });
+     alert("??");
+ };
+ 
 
 $(document).ready(function(){
 	clickStart();
