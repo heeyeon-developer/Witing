@@ -80,15 +80,15 @@ public class PlanController {
 		
 		return "index";
 	}
-//	
-//	@RequestMapping("/mbti")
-//	public String mbti(Model model) {
-//		model.addAttribute("center", dir+"mbti");
-//		return "index";
-//	}
-//	@RequestMapping("/result")
-//	public String result(Model model) {
-//		model.addAttribute("center", dir+"result");
-//		return "index";
-//	}
+	
+	@RequestMapping("/mbti")
+	public String mbti(Model model) {
+		model.addAttribute("center", dir+"mbti");
+		return "index";
+	}
+	@RequestMapping("/result")
+	public String result(Model model) {
+		model.addAttribute("center", dir+"result");
+		return "index";
+	}
 }
