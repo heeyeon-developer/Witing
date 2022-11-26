@@ -2,9 +2,13 @@ package com.multi.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.multi.dto.AccompanyDTO;
+import com.multi.dto.Criteria;
 import com.multi.dto.PostDTO;
 import com.multi.frame.MyService;
 import com.multi.mapper.PostMapper;
@@ -74,5 +78,17 @@ public class PostService implements MyService<Integer, PostDTO>{
 	}
 	public PostDTO reviewocr(int orderid) throws Exception{
 		return mapper.reviewocr(orderid);
+	}
+	public List<PostDTO> myreviewpage(Criteria cri) throws Exception {
+		return mapper.myreviewpage(cri);
+	}
+	public int myreviewcnt(Criteria cri) throws Exception {
+		return mapper.myreviewcnt(cri);
+	}
+	public List<PostDTO> myqnapage(Criteria cri) throws Exception {
+		return mapper.myqnapage(cri);
+	}
+	public int myqnacnt(Criteria cri) throws Exception {
+		return mapper.myqnacnt(cri);
 	}
 }

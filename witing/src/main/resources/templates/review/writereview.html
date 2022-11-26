@@ -1,7 +1,6 @@
 <link href="/assets/css/star.css" rel="stylesheet"/>
 <script>
 $(document).ready(function(){
-	alert("인증이 완료되었습니다.")
 	$('#send_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		if(c == true){
@@ -14,15 +13,6 @@ $(document).ready(function(){
 			alert("정상적으로 등록되었습니다 : )");
 		}
 	});
-	
-	var status = "[[${status}]]";
-	
-	if(status=="1"){
-		alert("예약인증 성공");
-	}
-	if(status=="0"){
-		alert("예약인증 실패. 정보가 일치하지 않습니다");
-	}
 });
 
 </script>

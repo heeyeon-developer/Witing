@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,10 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.multi.dto.CityDTO;
+import com.multi.dto.Criteria;
 import com.multi.dto.CustDTO;
+import com.multi.dto.HotelDTO;
 import com.multi.dto.OrderlistDTO;
+import com.multi.dto.PageDTO;
 import com.multi.dto.PostDTO;
 import com.multi.dto.RoomDTO;
 import com.multi.frame.OCRUtil;
@@ -26,6 +31,8 @@ import com.multi.service.CustService;
 import com.multi.service.HotelService;
 import com.multi.service.PostService;
 import com.multi.service.RoomService;
+
+
 
 
 @Controller
@@ -48,12 +55,16 @@ public class ReviewController {
 	String custdir;
 	
 	@RequestMapping("/review")
-	public String review(Model model, String custid) {
+	public String review(Model model, String custid, Criteria cri) {
 		CustDTO cust = null;
 		List<PostDTO> list = null;
 		try {
 			cust = custservice.get(custid);
-			list = postservice.myreview(custid);
+//			list = postservice.myreview(custid);
+			list = postservice.myreviewpage(cri);
+			int total = postservice.myreviewcnt(cri);
+			PageDTO pageMaker = new PageDTO(total, cri);
+			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
 			model.addAttribute("pagename", "Review");
 			model.addAttribute("cust", cust);
@@ -106,10 +117,13 @@ public class ReviewController {
 	public String reviewocr(Model model,Integer hotelid,Integer roomid,String hotelname,
 			String roomimg1,String roomimg2,String roomimg3,String roomimg4,String hotelimg1,
 			String roomtype1,String roomtype2) {
+		HotelDTO hotel = null;
 		List<RoomDTO> list = null;
 		List<CityDTO> city = null;
 		try {
+			hotel = hotelservice.get(hotelid);
 			list = roomservice.roomall(hotelid);
+			model.addAttribute("hotel", hotel);
 			model.addAttribute("citylist", city);
 			model.addAttribute("hotelname", list.get(0).getHotelname());
 			model.addAttribute("hotelimg1", list.get(0).getHotelimg1());
@@ -134,7 +148,29 @@ public class ReviewController {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd");
 		String img = obj.getImgname().getOriginalFilename();	// 파일덩어리 안에있는 파일이름을 꺼낸다. 
 		obj.setImg(img);
+		List<RoomDTO> list = null;
+		List<CityDTO> city = null;
 		try {
+			list = roomservice.roomall(hotelid);
+			model.addAttribute("citylist", city);
+			model.addAttribute("hotelname", list.get(0).getHotelname());
+			model.addAttribute("hotelimg1", list.get(0).getHotelimg1());
+			model.addAttribute("roomimg1", list.get(0).getRoomimg1());
+			model.addAttribute("roomimg2", list.get(0).getRoomimg2());
+			model.addAttribute("roomimg3", list.get(1).getRoomimg1());
+			model.addAttribute("roomimg4", list.get(1).getRoomimg2());
+			model.addAttribute("roomtype1", list.get(0).getRoomtype());
+			model.addAttribute("roomtype2", list.get(1).getRoomtype());
+			model.addAttribute("roomid", list.get(0).getRoomid());
+			model.addAttribute("list", list);
+			model.addAttribute("center", reviewdir+"reviewocr");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			list = roomservice.roomall(hotelid);
+			model.addAttribute("list", list);
 			Util.saveFile(obj.getImgname(), admindir, custdir);		// 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장 (상단에 경로를 @Value 써줌)
 			String result = OCRUtil.getText(img);	// 결과받기
 			System.out.println("RESULT: "+result);
@@ -244,24 +280,26 @@ public class ReviewController {
 				System.out.println("체크아웃일치");
 			}
 			
-			
-			
+			String dir = "review/";
 			if(hotelid == od_hotelid) {
 				if(name.equals(od_custname) && hotelname.equals(od_hotelname) && roomtype.equals(od_roomtype) 
 						&& intTotalprice == od_totalprice && intCnt == od_cnt && sdate.equals(od_sdate) && edate.equals(od_edate)) {
 					System.out.println("일치합니다.");
 					model.addAttribute("status", "1");
+					model.addAttribute("center", dir+"reviewocr");
 //					 "redirect:writereview?hotelid="+hotelid;
 					
 				}else {
 					System.out.println("일치하지않습니다.");
 					model.addAttribute("status", "0");
+					model.addAttribute("center", dir+"reviewocr");
 //					return "redirect:reviewmore?hotelid="+hotelid; 
 				}
 					
 			}else {
 				System.out.println("일치하지않습니다.");
 				model.addAttribute("status", "0");
+				model.addAttribute("center", dir+"reviewocr");
 //				return "redirect:reviewmore?hotelid="+hotelid;
 				
 			}
@@ -270,7 +308,7 @@ public class ReviewController {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:reviewocr?hotelid="+hotelid;
+		return "index";
 	}
 	
 	@RequestMapping("/writereview")

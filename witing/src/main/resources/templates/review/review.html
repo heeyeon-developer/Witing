@@ -1,10 +1,27 @@
 <meta charset="utf-8">
 <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+
+
+<script>
+function movePage(uri, queryString) {
+    console.log(uri);
+    console.log(queryString);
+
+    location.href = uri + queryString;
+}
+</script>
+
 <style>
+.paging-div {
+  padding: 15px 0 5px 10px;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 </style>
 
 <section class="ftco-section contact-section ftco-no-pt">
@@ -20,28 +37,60 @@
 			
 		</colgroup>
 		
-		<thead>
-		<tr id="tablehead">
-			<th>No</th>
-			<th style="text-align: center">Title</th>
-			<th style="text-align: center">Poster ID</th>
-			<th style="text-align: center">Post Date</th>
+			<thead>
+			<tr id="tablehead">
+				<th>No</th>
+				<th style="text-align: center">Title</th>
+				<th style="text-align: center">Poster ID</th>
+				<th style="text-align: center">Post Date</th>
+				
+			</tr>
+			</thead>
+			<tbody th:each="li,pStat:${list}" th:if="${pStat.index < 5}">
+			<tr th:onclick="|location.href='@{/reviewdetail(postid=${li.postid})}'|" style="cursor: pointer">
+				<td th:text="${li.postid}" ></td>
+				<td th:text="${li.title}" style="text-align: center"></td>
+				<td th:text="${li.custid}" style="text-align: center"></td>
+				<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: center"></td>
+			</tr>
+			</tbody>
+			<!-- <h1 th:text="${list.size}" id="list_size" ></h1> -->
 			
-		</tr>
-		</thead>
-		<tbody th:each=li:${list}>
-		<tr th:onclick="|location.href='@{/reviewdetail(postid=${li.postid})}'|" style="cursor: pointer">
-			<td th:text="${li.postid}" ></td>
-			<td th:text="${li.title}" style="text-align: center"></td>
-			<td th:text="${li.custid}" style="text-align: center"></td>
-			<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: center"></td>
-			
-		</tr>
-		</tbody>
-	</table>
-        
+		</table>
+		
+		<div th:text="${list[0].custid}" hidden="hidden" id="custid"> </div>
+
       </div>
    </div>
+   <!-- 페이징 처리 -->
+   <div class="row mt-5">
+	  <div class="col text-center">
+	    <div class="block-27">
+	      <ul>
+			<th:block th:if="${pageMaker.prev}">
+	        	<li class="pageMaker_btn prev">
+	        		<a href="javascript:void(0)" th:onclick="movePage([[${#request.requestURI}]], [[${pageMaker.cri.makeQueryString(pageMaker.pageStart - 1)}]])">&lt;</a>
+	        	</li>
+	        </th:block>
+	        
+	        <th:block th:with="pageMaker = ${pageMaker}">
+			    <th:block th:each="num : *{#numbers.sequence(pageMaker.pageStart, pageMaker.pageEnd)}">
+			        <li class="pageMaker_btn" th:classappend="${pageMaker.cri.pageNum == num} ? 'active' : ''">
+			            <a href="javascript:void(0)"  th:text="${num}" th:onclick="movePage([[${#request.requestURI}]],[[${pageMaker.cri.makeQueryString(num)}]])">1</a>
+			        </li>
+			    </th:block>
+			</th:block>
+			
+			<th:block th:if="${pageMaker.next}">
+			    <li class="pageMaker_btn next">
+			        <a href="javascript:void(0)" th:onclick="movePage([[${#request.requestURI}]], [[${pageMaker.cri.makeQueryString(pageMaker.pageEnd + 1)}]])">&gt;</a>
+			    </li>
+			</th:block>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
+   <!-- 페이징 처리 끝 -->
  </div>
 </section>
 
