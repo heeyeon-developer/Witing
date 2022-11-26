@@ -1,7 +1,7 @@
 
 <script>
 $(document).ready(function(){
-	
+	var status = $('#status').text();
 	/* ocr */
 	$('#register_btn').click(function(){
 		$('#register_form').attr({
@@ -13,18 +13,16 @@ $(document).ready(function(){
 	});
 	/* ocr */
 	
-	var status = $('#status').text();
-	alert(status);
+	
+	
 	if(status=="1"){
 		alert("예약인증 성공");
-	
-		location.href='/writereview?hotelid='+hotelid;
+		location.href='/writereview?hotelid='+$('#hotelid').val();
 	}
 	if(status=="0"){
 		alert("예약인증 실패 정보가 일치하지 않습니다");
-		location.href='/reviewmore?hotelid='+hotelid;
+		location.href='/reviewmore?hotelid='+$('#hotelid').val();
 	}	
-	
 	
 
 	
@@ -32,6 +30,12 @@ $(document).ready(function(){
 });
 
 </script>
+<style>
+.mb-3{
+	font-weight: bold;
+}
+</style>
+
 
 <body>
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/hotel/seoul.jpg');">
@@ -92,7 +96,7 @@ $(document).ready(function(){
 	<!-- ocr -->
 		<div class="col-md-8">
 		    <div class="card-header py-3">
-		        <h6 class="m-0 font-weight-bold text-primary">리뷰 작성을 위해 예약인증을 해주세요 : )</h6>
+		        <h6 class="m-0 font-weight-bold text-primary">예약내역 인증을 진행해주세요 : )</h6><div th:text="${status}" id="status">??</div>
 		    </div>
 		    <div class="card-body">
 				<form id="register_form">
@@ -105,6 +109,7 @@ $(document).ready(function(){
           			</div>
 				</form>
 				<button id="register_btn" class="btn btn-primary" style="float: right">REGISTER</button>
+				<!-- <a th:href="@{/room(hotelid=${hotel.hotelid})}"><button id="cancel_btn" class="btn btn-primary" style="float: right; margin-right: 5px">Cancel</button></a> -->
 			</div>
 		</div> 
 	<!-- ocr -->

@@ -10,6 +10,7 @@ public class Criteria {
 	private int pageNum;	// 현재 페이지 번호
 	private int amount;		// 페이지 표시 개수
 	private int skip;		// 페이지 skip
+	private String custid;
 	
 	public Criteria(int pageNum, int amount) {
 		this.pageNum = 1;
@@ -33,6 +34,7 @@ public class Criteria {
 	
 	public String makeQueryString(int pageNum) {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("custid", custid)
 				.queryParam("pageNum", pageNum)
 				.queryParam("amount", amount)
 				.build()

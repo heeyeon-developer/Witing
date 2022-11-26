@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CityDTO;
+import com.multi.dto.Criteria;
 import com.multi.dto.CustDTO;
+import com.multi.dto.PageDTO;
 import com.multi.dto.PostDTO;
 import com.multi.dto.RoomDTO;
 import com.multi.service.CustService;
@@ -33,13 +35,15 @@ public class QnAController {
 	
 	
 	@RequestMapping("/qna")
-	public String qna(Model model, String custid) {
+	public String qna(Model model, String custid, Criteria cri) {
+		CustDTO cust = null;
+		List<PostDTO> list = null;
 		try {
-			CustDTO cust = custservice.get(custid);
-			List<PostDTO> list = postservice.myqna(custid);
-//			int toppostid = list.get(0).getPostid();
-//			PostDTO post = postservice.answercheck(toppostid);
-			
+			cust = custservice.get(custid);
+			list = postservice.myqnapage(cri);
+			int total = postservice.myqnacnt(cri);
+			PageDTO pageMaker = new PageDTO(total, cri);
+
 			for(int i=0; i<list.size(); i++) {
 				if(postservice.answercheck(list.get(i).getPostid()) != null) {
 					list.get(i).setAnswer("답변완료");
@@ -47,7 +51,7 @@ public class QnAController {
 					list.get(i).setAnswer("미완료");
 				}
 			}
-//			model.addAttribute("answer", post);
+			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
 			model.addAttribute("pagename", "Q&A");
 			model.addAttribute("cust", cust);
