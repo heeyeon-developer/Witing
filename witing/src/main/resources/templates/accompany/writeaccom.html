@@ -37,6 +37,11 @@
 	padding-top: 10px;
 }
 
+.roadname{
+	width: 300px;
+	display:inline-block
+}
+
 #sample4_roadAddress, #sample4_roadAddress2{
 	width: 300px;
 	display:inline-block
@@ -57,58 +62,99 @@
 <script>
 
 $(document).ready(function(){
-	
+	var num = 2;
 	function add_plan(){
 	    var div = document.createElement('div');
-	    div.innerHTML = document.getElementById('basicplan').innerHTML;  
-	    
-	    $(document).on('click', '#addr_btn', function(){
+	    div.innerHTML = document.getElementById('basicplan').innerHTML; 
+		//새롭게 추가한 주소입력 부분의 주소,장소의 id 변
+		div.querySelector('#idx').setAttribute("value", num);
+		div.querySelector('#sample4_roadAddress').setAttribute("id", "sample4_roadAddress"+num);
+		div.querySelector('#plany').setAttribute("id","plany"+num);
+		div.querySelector('#planx').setAttribute("id","planx"+num);	
+		
+	    $(div).on('click', '#addr_btn', function(){
+	    	//현재 변경된 id의 숫자를 가져오
+	    	var roadid = div.querySelector('.roadname').getAttribute("id");
+        	var roadidx = roadid.charAt(roadid.length-1);
+    		//sample4_roadAddress1,2,3,
 	    	new daum.Postcode({
-	            oncomplete: function(data) {
-	                $("#sample4_roadAddress").val(data.address);
-	                $("#sample4_roadAddress").prop("readonly",true);
-	                var addr =  $("#sample4_roadAddress").val();
-	            	geocoder.addressSearch(addr, callback);  
-	            }
+	            oncomplete: function(data) {		        		        	
+	                $("#sample4_roadAddress"+roadidx).val(data.address);
+	                $("#sample4_roadAddress"+roadidx).prop("readonly",true);	
+	                var addr =  $("#sample4_roadAddress"+roadidx).val();
+	            	geocoder.addressSearch(addr, callback);
+	            }    	
+		    	
 	        }).open();
+	    	
+	    	var callback = function(result, status) {
+	    		if (status === kakao.maps.services.Status.OK) {
+	    			$("input[id=planx"+roadidx+"]").val(result[0].y);
+	    			$("input[id=plany"+roadidx+"]").val(result[0].x);
+	    		}
+	    	};
 	    });
+	    
 	    document.getElementById('addplan').appendChild(div);
+	    num++;
 	}
+	
 	$('#writeaccom_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		var arr = [];
-		
-		$.each($("input[name='planname[]']"),function(k,v){
-			arr[arr.length] = $(v).val();
-		})
-		alert(arr)
+		var title = document.getElementById("title");
+		var cnt = document.getElementById("cnt");
+		var traveltime = document.getElementById("traveltime");
+		var accomtext = document.getElementById("accomtext");
+		var planname = document.getElementById("planname");
+		var todo = document.getElementById("todo");
+
 		if(c == true){
-			var custid = '[[${session.logincust.custid}]]';
-			var title = $('#title').val();
-			var cnt = $('#cnt').val();
-			var traveltime = $('#traveltime').val();
-			var idx = $('#idx').val();
-			var planname = $('#planname').val();
-			var todo = $('#todo').val();
-			var accomtext = $('#accomtext').val();
-			var planx = $('#planx').val();
-			var plany = $('#plany').val();
-			location.href="[[@{/accomimpl?custid=}]]"+custid+"&[[@{title=}]]"+title+"&[[@{cnt=}]]"+cnt+"&[[@{traveltime=}]]"+traveltime
-			+"&[[@{idx=}]]"+idx+"&[[@{planname=}]]"+planname+"&[[@{todo=}]]"+todo+"&[[@{accomtext=}]]"+accomtext
-			+"&[[@{planx=}]]"+planx+"&[[@{plany=}]]"+plany;
+			if(title.value == "" || cnt.value == "" || traveltime.value == "" || accomtext.value == ""
+					|| planname.value == "" || todo.value == ""){
+				alert('내용을 입력해주세요.')
+				return false;
+			}else{
+				var custid = '[[${session.logincust.custid}]]';
+				var title = $('#title').val();
+				var cnt = $('#cnt').val();
+				var traveltime = $('#traveltime').val();
+				var accomtext = $('#accomtext').val();
+				//동적으로 데이터 추가되는 부분 -> idx, roadname, planname, todo, planx,plany
+				var idx = [];
+				$.each($("input[name='idx[]']"),function(k,v){
+					idx[idx.length] = $(v).val();
+				})
+				var roadname = [];
+				$.each($("input[name='roadname[]']"),function(k,v){
+					roadname[roadname.length] = $(v).val();
+				})
+				var planname = [];
+				$.each($("input[name='planname[]']"),function(k,v){
+					planname[planname.length] = $(v).val();
+				})
+				var todo = [];	
+				$.each($("input[name='todo[]']"),function(k,v){
+					todo[todo.length] = $(v).val();
+				});
+				var planx = [];
+				$.each($("input[name='planx[]']"),function(k,v){
+					planx[planx.length] = $(v).val();
+				});
+				var plany = [];
+				$.each($("input[name='plany[]']"),function(k,v){
+					plany[plany.length] = $(v).val();
+				})
+				
+				location.href="[[@{/accomimpl?custid=}]]"+custid+"&[[@{title=}]]"+title+"&[[@{cnt=}]]"+cnt+"&[[@{traveltime=}]]"+traveltime
+				+"&[[@{idx=}]]"+idx+"&[[@{roadname=}]]"+roadname+"&[[@{planname=}]]"+planname+"&[[@{todo=}]]"+todo+"&[[@{accomtext=}]]"+accomtext
+				+"&[[@{planx=}]]"+planx+"&[[@{plany=}]]"+plany;
+			}
+			
 		};
-		alert(planx);
-		alert(plany);
 		alert("정상적으로 등록되었습니다 : )");
 	});
-	
-	/* $('#writeaccom_btn').click(function(){
-		var str = $form.serialize();
-		alert(str);
-	}); */
-	
-	
-	
+		
 	/* $('#writeaccom_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
 		if(c == true){
@@ -184,7 +230,7 @@ var callback = function(result, status) {
                 </div>
                 <div class="col-2 mb-3">
 					<div class="form-field">
-					<input type="number" class="form-control" id="cnt" placeholder="동행 모집 인원" name="cnt">
+					<input type="number" min="1" class="form-control" id="cnt" placeholder="동행 모집 인원" name="cnt">
                    	<div class="col-lg d-flex"></div>
 					</div>
                 </div>
@@ -194,15 +240,15 @@ var callback = function(result, status) {
 					<input type="text" class="form-control checkin_date" placeholder="Check In Date" id="traveltime" name="traveltime">
 					</div>
 				</div>
-				
+				<a th:href="@{#}"><i class="fa fa-plus-circle" id="add_icon"></i></a>
 				<div id="basicplan" style="display:inline-block;">
 					<div class="col-2 mb-3" style="display:inline-block;">
-						<input type="number" class="form-control hyidx" id="idx" placeholder="여행 순서" name="idx">
+						<input type="number" class="form-control hyidx" value="1" id="idx" placeholder="여행 순서" name="idx[]" readonly="readonly">
 						<div class="col-lg d-flex"></div>
 					</div>
 					<div class="col-9 mb-3" style="display:inline-block;">
 						<div class="form-field" style="display:inline-block;">
-							<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명 주소">
+							<input type="text" class="form-control roadname" id="sample4_roadAddress" placeholder="도로명 주소" name="roadname[]" readonly="readonly">
 							<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname[]">
 							<input type="button" class="form-control" th:onclick="sample4_execDaumPostcode()" value="장소 찾기" th:id="addr_btn"><br>
 	                    </div>
@@ -214,65 +260,17 @@ var callback = function(result, status) {
 						</div>
 						<div class="col-lg d-flex"></div>
 					</div>
-					<div>
-						<input type="text" name="planx" value="planx" id="planx">
-						<input type="text" name="plany" value="plany" id="plany">
+					<div style="display:none;">
+						<input type="text" name="planx[]" value="planx" id="planx">
+						<input type="text" name="plany[]" value="plany" id="plany">
 					</div>
 					
 				</div>
 				<div id="addplan"></div>
-				<a th:href="@{#}"><i class="fa fa-plus-circle" id="add_icon"></i></a>
-				<!-- 2 -->
-				<!-- <div class="col-2 mb-3">
-					<input type="number" class="form-control" id="idx" value="2" readonly="readonly" name="idx">
-					<div class="col-lg d-flex"></div>
-				</div>
-				<div class="col-9 mb-3">
-					<div class="form-field">
-						<input type="text" class="form-control" id="sample4_roadAddress2" placeholder="도로명 주소">
-						<input type="text" class="form-control" id="planname" placeholder="상세 주소" name="planname">
-						<input type="button" class="form-control" onclick="sample4_execDaumPostcode()" value="장소 찾기" id="addr_btn2"><br>
-                    </div>
-					<div class="col-lg d-flex"></div>
-				</div>
-				<div class="col-11 mb-3">
-					<div class="form-field3">
-						<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo">
-					</div>
-					<div class="col-lg d-flex"></div>
-				</div> -->
-             <!-- </div> -->
-                    
-                <!--     
-				<div class="col-2 mb-3">
-					<input type="number" class="form-control" id="idx3" value="3" readonly="readonly">
-					<div class="col-lg d-flex"></div>
-				</div>
-				<div class="col-4 mb-3">
-					<div class="form-field2">
-					<input type="text" class="form-control" id="planname3" placeholder="장소">
-					</div>
-					<div class="col-lg d-flex"></div>
-				</div>
-  				<div class="col-5 mb-3">
-					<div class="form-field3">
-					<input type="text" class="form-control" id="todo3" placeholder="일정">
-					</div>
-					<div class="col-lg d-flex"></div>
-				</div>
-				 -->
-				<!-- <i class="fa fa-minus-circle" id="minus_icon3"></i> -->
-                    
+			
 				<div class="col-11 mb-3">
 					<textarea id="accomtext" class="form-control w-100" cols="30" rows="10" placeholder="내용을 입력해주세요." name="accomtext"></textarea>
 	            </div>
-	            
-	            <!-- <div class="col-2 mb-3">
-					<input type="text" name="planx2" value="planx" id="planx2">
-					<input type="text" name="plany2" value="plany" id="plany2">
-					<input type="text" name="planx3" value="planx" id="planx3">
-					<input type="text" name="plany3" value="plany" id="plany3">
-	            </div> -->
 	            
 			</div>
           </form>
@@ -299,8 +297,8 @@ $("#addr_btn").click(function(){
 
 var callback = function(result, status) {
 	if (status === kakao.maps.services.Status.OK) {
-		$("input[name=planx]").val(result[0].y);
-		$("input[name=plany]").val(result[0].x);
+		$("input[id=planx]").val(result[0].y);
+		$("input[id=plany]").val(result[0].x);
 	}
 };
 

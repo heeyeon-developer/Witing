@@ -1,5 +1,6 @@
 package com.multi.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,18 +79,27 @@ public class HotelController {
 	}
 	 
 	@RequestMapping("/searchimpl")
-	public String searchimpl(Model model, Integer cityid, Integer cateid) {
+	public String searchimpl(Model model, Integer cityid, Integer cateid, Date sdate, Date edate) {
 		List<HotelDTO> search = null;
 		List<CateDTO> cate = null;
 		List<CityDTO> city = null;
+		System.out.println(edate);
+		System.out.println(sdate);
 		try {
-			search = service.searchhotel(cityid, cateid);
+//			if(cityid == null) {
+//				cityid = 0;
+//			}
+//			if(cateid == null) {
+//				cateid = 0;
+//			}
+			search = service.searchhotel(cityid, cateid , Date.valueOf(sdate.toString()), Date.valueOf(edate.toString()));
 			cate = cate_service.getcate();
 			city = city_service.getall();
 			model.addAttribute("city", city);
 			model.addAttribute("cate", cate);
 			model.addAttribute("search", search);
 			model.addAttribute("center", dir+"searchimpl");
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

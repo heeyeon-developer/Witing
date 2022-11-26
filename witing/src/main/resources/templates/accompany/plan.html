@@ -31,10 +31,10 @@
         Kakao.isInitialized();  
 </script>
 <script>
-var images = ["bear2.png", "usercat.png", "usericon12.png", "usericon13.png", "usericon14.png", "usericon15.png", "usericon16.png", "usericon17.png", "usericon18.png", "usericon19.png"];
+/* var images = ["bear2.png", "usercat.png", "usericon12.png", "usericon13.png", "usericon14.png", "usericon15.png", "usericon16.png", "usericon17.png", "usericon18.png", "usericon19.png"];
 
 
-$('#comimg').attr({src: "url(/images/user/" + images[Math.floor(Math.random() * images.length)] + ")"});
+$('#comimg').attr({src: "url(/images/user/" + images[Math.floor(Math.random() * images.length)] + ")"}); */
 
 
 function kakaotemp(){
@@ -93,21 +93,10 @@ function displaymap(data){
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(centerx, centery), // 지도의 중심좌표
-	        level: 4 // 지도의 확대 레벨
+	        level: 5 // 지도의 확대 레벨
 	    };
 
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다	
-	
-	/* var positions = [
-	    {
-	        title: '교촌', 
-	        latlng: new kakao.maps.LatLng(data[0]['planx'], data[0]['plany'])
-	    },
-	    {
-	        title: '스타벅스', 
-	        latlng: new kakao.maps.LatLng(33.542495, 126.667400)
-	    }
-	]; */
 
 	// 마커 이미지의 이미지 주소입니다
 	var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
@@ -141,10 +130,10 @@ function mapmarker(){
 }
 
 function re_delete_btn(replyid){
-	alert(replyid)
+	/* alert(replyid) */
 	var c = confirm('삭제하시겠습니까?');
 	if(c == true){
-		alert(replyid);
+		/* alert(replyid); */
 		var replyid = replyid;
 		var accomid = $('#accomid').text();
 		location.href="[[@{/delreply?replyid=}]]"+replyid+'&'+"[[@{accomid=}]]"+accomid;
@@ -176,6 +165,31 @@ function re_update_btn(data){
 	}
 }
 
+/* var stompClient = null;
+
+function connect(){
+	var socket = new SockJS('http://127.0.0.1:8080/admin/ws');
+	stompClient = Stomp.over(socket);
+	
+	stompClient.connect({}, function(frame) {
+		console.log('Connected: ' + frame);
+		var custid = $('#custid').text();
+		var comment = $('#comment').val();
+		});
+		stompClient.send("/writereply", {}, check); 
+		
+	stompClient.subscribe('/replyresult', function(list) { 
+		for(var i=0; i<JSON.parse(list.body).length; i++){
+			var start = JSON.parse(list.body)[i].sdate;
+			var end = JSON.parse(list.body)[i].edate;
+			for(let i = parseInt(start.substr(8,10))+1; i <= parseInt(end.substr(8,10))+1; i++){
+				tdGroup[i].classList.add('reserved');
+    		}
+		}
+	});
+}
+ */
+
 $(document).ready(function(){
 	$('#reply_btn').click(function(){
 		var c = confirm('등록하시겠습니까?');
@@ -186,6 +200,7 @@ $(document).ready(function(){
 			location.href="[[@{/replyimpl?custid=}]]"+custid+"&[[@{accomid=}]]"+accomid+"&[[@{comment=}]]"+comment;
 			/* alert(comment) */
 			alert("정상적으로 등록되었습니다");
+			connect();
 		}else{
 			alert('취소되었습니다.');
 		}
@@ -236,7 +251,7 @@ $(document).ready(function(){
            <button th:if="${session.logincust.custid} == ${custid}" type="button" class="btn btn-primary" id="del_btn" style="float: right; margin-top: -50px; margin-right: 65px; color:white;">삭제</button>
            <button type="button" class="btn btn-primary" style="float: right; margin-top: -50px"><a th:href="@{/accompany}" style="color:white">목록</a></button>
         <div id="planinfo">
-        	<i class="fa fa-calendar" id="dateicon"><p th:text="| ${#dates.format(traveltime, 'yyyy-MM-dd HH:mm')}|" id="date"></p></i><br>
+        	<i class="fa fa-calendar" id="dateicon"><p th:text="| ${#dates.format(traveltime, 'yyyy-MM-dd')}|" id="date"></p></i><br>
         	<i class="fa fa-users" id="user"> <p th:text="|모집인원 : ${cnt}명|" id="cnt"></p></i>
         	<p></p>
         </div>
@@ -245,10 +260,9 @@ $(document).ready(function(){
         </div>
         <br><p th:text="${accomtext}" style="color:black;"></p>
 		
-		<div id="map" style="width:100%;height:350px;"></div>
+		<div id="map" style="width:100%;height:400px;"></div>
 		
       </div> <!-- .col-md-8 -->
-      
       
       <div class="col-lg-4 sidebar ftco-animate bg-light py-md-5">
   
@@ -261,6 +275,7 @@ $(document).ready(function(){
               <span th:if="${certification != null}"><img src="/images/hotel/aaa2.jpg" th:if="${certification != null}" style="height: 20px; margin-left: 1%; margin-top: -1%"></span>
               </h3>
                <p>MBTI 자리</p>
+               <a th:href="@{/mbti}" th:if="${session.logincust != null}" class="btn btn-primary" id="mbti_btn">MBTI</a>
               <div class="meta">
                 <div><span class="fa fa-calendar"><span th:text="| ${#dates.format(birth, 'yyyy')}년생|"></span></span></div>
                 <div><span class="fa fa-venus-mars"><span th:text="| ${gender}|"></span></span></div>
@@ -272,7 +287,7 @@ $(document).ready(function(){
 	          <button type="button" onclick="clip(); return false;" id="linkbtn" style="margin-top: 15px;"><img src="/images/hotel/link.png" style="height: 35px;"></button>
 	          <button type="button" onclick="shareTwitter();" id="twitbtn"><img src="/images/hotel/twit.png" style="height: 40px; margin-left: -5%;"></button>
 	          <button type="button" onclick="shareNaverBlog();" id="blogbtn"><img src="/images/hotel/nblog.png" style="height: 40px; margin-left: -5%;"></button>
-	          <button type="button" id="instabtn"><img src="/images/hotel/insta.png" style="height: 40px; margin-left: -5%;"></button>
+	          <!-- <button type="button" id="instabtn"><img src="/images/hotel/insta.png" style="height: 40px; margin-left: -5%;"></button> -->
 	          <button type="button" onclick="kakaotemp()" id="kakaobtn"><img src="/images/hotel/katalk.png" style="height: 40px; margin-left: -5%;"></button>
           </div>
           <br>
@@ -280,20 +295,10 @@ $(document).ready(function(){
 	        <div id="donglechat"><iframe src="https://service.dongledongle.com/bdb97" frameborder="0" width="100%" height="500"></iframe></div>
         </div>
         <div>
-        
-        <!-- <H5 th:text="${session.logincust.custid}">ID</H5>
-		<H5 id="status">Status</H5>
-		<button id="connect">Connect</button>
-		<button id="disconnect">Disconnect</button>
-        <h3>To</h3>
-		<div id="to"></div>
-		<input type="text" id="target">
-		<input type="text" id="totext"><button id="sendto">Send</button>
-        </div> -->
       </div>
     </div>
     
-    <!-- Comments section-->
+<!-- Comments section-->
 <section class="col-md-11">
 <h3 style="font-weight: bold; margin-left: 1%;">Comment</h3>
    <div class="card bg-light">

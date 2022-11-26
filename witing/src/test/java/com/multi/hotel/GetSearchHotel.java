@@ -1,5 +1,6 @@
 package com.multi.hotel;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import com.multi.dto.HotelDTO;
 import com.multi.service.HotelService;
 
 @SpringBootTest
-class GetCityCate {
+class GetSearchHotel {
 
 	@Autowired
 	HotelService service;
@@ -19,7 +20,7 @@ class GetCityCate {
 	void contextLoads() {
 		List<HotelDTO> list = null;
 		try {
-			list = service.searchhotel(1, 101);
+			list = service.searchhotel(1, 101, Date.valueOf("2022-11-24"), Date.valueOf("2022-11-25"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
