@@ -87,7 +87,9 @@ public class PlanController {
 		return "index";
 	}
 	@RequestMapping("/result")
-	public String result(Model model) {
+	public String result(Model model, String type) {
+		model.addAttribute("mbtiType", type);
+		System.out.println(type);
 		model.addAttribute("center", dir+"result");
 		return "index";
 	}
