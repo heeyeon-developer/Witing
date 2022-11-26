@@ -11,6 +11,5 @@ import com.multi.frame.MyMapper;
 @Mapper
 @Repository
 public interface CustMapper extends MyMapper<String,CustDTO>{
-	public List<CustDTO> custget(String custid) throws Exception;
 	public CustDTO certifi_update(String certification, String custid) throws Exception;
 }
