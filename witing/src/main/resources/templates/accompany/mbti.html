@@ -26,7 +26,7 @@ body {font-family:'Noto Sans KR', sans-serif;color:#000;}
 .question-main .txt {font-size:3em;font-weight:bold;text-align:center;text-shadow:-2px -2px 0 #fff8d6,2px -2px 0 #fff8d6,-2px 2px 0 #fff8d6,2px 2px 0 #fff8d6;}
 .question-main .btn {text-align:center;position:absolute;bottom:20%;width:250px;margin-left:-120px;left:50%;border:3px solid #000;border-radius:10px;background:#fff;padding:10px 20px;font-size:18px}
 
-.question {text-align:center;position:absolute;left:100%;z-index:10;width:100%;bottom:35%;transition:all .3s ease}
+.question {text-align:center;position:fixed;top:65%;left:100%;z-index:10;width:100%;bottom:35%;transition:all .3s ease;}
 .question.on {left:0;}
 .question .in {position:absolute;top:50%;left:0;right:0;margin-top:-133px;}
 .question .num {margin-top:16px;font-size:3em;display:block;font-weight:bold;text-align:center;color:#fd7e14}
@@ -242,7 +242,7 @@ function typeResult(idx){
 			<span class="num">Q 05.</span>
 			<div class="name">여행을 다녀온 후 나의 모습은?</div>
 			<label><input type="radio" name="que5" value="S" onclick="nextStep(this);"><b>여행은 끝, 다시 일상으로 복귀한다</b></label>
-			<label><input type="radio" name="que5" value="N" onclick="nextStep(this);"><b>여행 후유증을 앍고 다음 여행을 상상한다</b></label>
+			<label><input type="radio" name="que5" value="N" onclick="nextStep(this);"><b>여행 후유증을 앓고 다음 여행을 상상한다</b></label>
 		</div>
 	</div>
 	<div class="question">

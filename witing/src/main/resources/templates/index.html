@@ -40,7 +40,19 @@
 	<!-- Websocket -->
 	<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
 	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
-
+	<script>
+	$(document).ready(function(){
+		$('#mbti').click(function(){
+			if('[[${session.logincust}]]' == ''){
+				alert("로그인 후 MBTI 테스트를 진행해주세요 :)");
+				location.href="/login";
+			}
+			else
+				location.href="/mbti";
+		});
+	});
+	
+	</script>
 	
 	
 </head>
@@ -58,6 +70,7 @@
 					<li class="nav-item"><a th:href="@{/about}" class="nav-link">About</a></li>
 					<li class="nav-item"><a th:href="@{/hotel}" class="nav-link">Hotel</a></li>
 					<li class="nav-item"><a th:href="@{/accompany}" class="nav-link">Accompany</a></li>
+					<li class="nav-item"><a id="mbti" class="nav-link" style="cursor:pointer;">MBTI</a></li>
 					<li th:if="${session.logincust != null}" class="nav-item"><a th:href="@{/mypage(custid=${session.logincust.custid})}" class="nav-link">MyPage</a></li>
 				</ul>
 			</div>
