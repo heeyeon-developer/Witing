@@ -101,7 +101,7 @@ function del(postid){
        </div>
       </div>
 <!-- 답변 끝 -->
-       	<div class="col-md-12 order-md-last ">
+       	<div class="col-md-12 order-md-last " style="padding-right : 0;">
        		<button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|"> 목록</button>
        		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px" th:onclick="del([[${qnadetail.postid}]]);"> 삭제</button>
        	</div>

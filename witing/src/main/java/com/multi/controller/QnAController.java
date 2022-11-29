@@ -142,10 +142,13 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/qnamore")
-	public String qnamore(Model model, Integer hotelid) {
+	public String qnamore(Model model, Integer hotelid, Criteria cri) {
 		List<PostDTO> list = null;
 		try {
-			list = postservice.hotelqnaall(hotelid);
+			list = postservice.qnamorepage(cri);
+			int total = postservice.qnamorecnt(cri);
+			PageDTO pageMaker = new PageDTO(total, cri);
+			
 			for(int i=0; i<list.size();i++) {
 				if(postservice.answercheck(list.get(i).getPostid()) != null) {
 					list.get(i).setAnswer("답변완료");
@@ -153,6 +156,7 @@ public class QnAController {
 					list.get(i).setAnswer("미완료");
 				}
 			}
+			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("list", list);
 			model.addAttribute("center", qnadir+"qnamore");
 		} catch (Exception e) {

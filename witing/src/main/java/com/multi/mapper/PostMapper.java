@@ -29,6 +29,10 @@ public interface PostMapper extends MyMapper<Integer, PostDTO> {
 	public PostDTO reviewocr(int orderid) throws Exception;
 	public List<PostDTO> myreviewpage(Criteria cri) throws Exception;
 	public int myreviewcnt(Criteria cri) throws Exception;
+	public List<PostDTO> reviewmorepage(Criteria cri) throws Exception;
+	public int reviewmorecnt(Criteria cri) throws Exception;
 	public List<PostDTO> myqnapage(Criteria cri) throws Exception;
 	public int myqnacnt(Criteria cri) throws Exception;
+	public List<PostDTO> qnamorepage(Criteria cri) throws Exception;
+	public int qnamorecnt(Criteria cri) throws Exception;
 }

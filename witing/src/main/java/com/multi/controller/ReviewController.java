@@ -1,6 +1,7 @@
 package com.multi.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -224,6 +225,18 @@ public class ReviewController {
 			System.out.println(sdate);
 			System.out.println(edate);
 			
+			Date currenttime = new Date();
+			String today = format.format(currenttime);
+			System.out.println("today : " +today);
+			System.out.println("checkin : " +sdate);
+			int compare = edate.compareTo(today);
+			System.out.println("비교 : "+compare);
+			if(compare <= 0) {
+				
+			}else {
+				
+			}
+			
 			CustDTO cust = (CustDTO) session.getAttribute("logincust");
 			System.out.println("cust : "+cust);
 			String name = cust.getCustname();	// session의 custname
@@ -281,30 +294,31 @@ public class ReviewController {
 			}
 			
 			String dir = "review/";
+			
 			if(hotelid == od_hotelid) {
 				if(name.equals(od_custname) && hotelname.equals(od_hotelname) && roomtype.equals(od_roomtype) 
 						&& intTotalprice == od_totalprice && intCnt == od_cnt && sdate.equals(od_sdate) && edate.equals(od_edate)) {
-					System.out.println("일치합니다.");
-					model.addAttribute("status", "1");
-					model.addAttribute("center", dir+"reviewocr");
-//					 "redirect:writereview?hotelid="+hotelid;
-					
-				}else {
+					if(compare <= 0) {	// 
+						System.out.println("일치합니다.");
+						model.addAttribute("status", "1");
+						model.addAttribute("center", dir+"reviewocr");
+	//					 "redirect:writereview?hotelid="+hotelid;
+					}else {	// 체크아웃 전 일 경우
+						model.addAttribute("status", "2");
+						model.addAttribute("center", dir+"reviewocr");
+					}
+				}else {	// 호텔은 일치하지만 다른 세부사항이 일치하지 않는 경우
 					System.out.println("일치하지않습니다.");
 					model.addAttribute("status", "0");
 					model.addAttribute("center", dir+"reviewocr");
 //					return "redirect:reviewmore?hotelid="+hotelid; 
 				}
-					
-			}else {
+			}else {	// 호텔 자체가 다른 호텔 일 경우
 				System.out.println("일치하지않습니다.");
 				model.addAttribute("status", "0");
 				model.addAttribute("center", dir+"reviewocr");
 //				return "redirect:reviewmore?hotelid="+hotelid;
-				
 			}
-				
-			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -351,11 +365,14 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/reviewmore")
-	public String reviewmore(Model model, Integer hotelid) {
+	public String reviewmore(Model model, Integer hotelid, Criteria cri) {
 		List<PostDTO> list = null;
 		try {
-			list = postservice.hotelreviewall(hotelid);
-			
+			list = postservice.reviewmorepage(cri);
+			int total = postservice.reviewmorecnt(cri);
+			PageDTO pageMaker = new PageDTO(total, cri);
+			model.addAttribute("pageMaker", pageMaker);
+			model.addAttribute("hotelid", hotelid);
 			model.addAttribute("list", list);
 			model.addAttribute("center", reviewdir+"reviewmore");
 		} catch (Exception e) {
