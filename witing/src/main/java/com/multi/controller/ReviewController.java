@@ -66,7 +66,7 @@ public class ReviewController {
 			int total = postservice.myreviewcnt(cri);
 			PageDTO pageMaker = new PageDTO(total, cri);
 			model.addAttribute("pageMaker", pageMaker);
-			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
+			model.addAttribute("imgpath", "/images/myreviewimg.jpg");
 			model.addAttribute("pagename", "Review");
 			model.addAttribute("cust", cust);
 			model.addAttribute("list", list);
