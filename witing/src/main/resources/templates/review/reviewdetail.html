@@ -37,7 +37,7 @@ function del(postid){
     <div class="row block-9">
     
 <!-- 리뷰내용 -->
-      <div class="col-md-12 order-md-last"  style="border: solid lightgray 0.5px; padding: 40px">
+      <div class="col-md-12 order-md-last"  style="background-color: #F6F6F6; padding: 40px; margin-bottom:10px">
        <div class=" p-6">
        	<table class="container">
        		<thead>
@@ -67,18 +67,18 @@ function del(postid){
         				<img th:src="'/images/' + ${reviewdetail.img}" style="width: 200px; height: 150px">
         			</td>
        			</tr>
-       			<tr style="background-color: #F6F6F6 ; height: 100px">
-       				<td id="td_text" colspan="2" th:text="${reviewdetail.text}" ></td>
+       			<tr style="background-color: #EAEAEA ; height: 100px">
+       				<td id="td_text" colspan="2" th:text="'&nbsp&nbsp&nbsp&nbsp'+${reviewdetail.text}" style="color: black"></td>
        			</tr>
        		</tbody>
        	
        	</table>
-       	<div>
+       </div>
+      </div>
+       	<div class="col-md-12 order-md-last " style="padding-right : 0;">
        		<button type="button"  class="btn btn-primary" style="float: right; margin-top: 20px" th:onclick="|location.href='@{/review(custid=${session.logincust.custid})}'|"> 목록</button>
        		<button type="button"  class="btn btn-primary" style="float: right; margin-right: 10px; margin-top: 20px" th:onclick="del([[${reviewdetail.postid}]]);"> 삭제</button>
        	</div>
-       </div>
-      </div>
 <!-- 리뷰내용 끝 -->
    </div>
  </div>

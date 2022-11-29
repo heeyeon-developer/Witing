@@ -85,10 +85,22 @@ public class PostService implements MyService<Integer, PostDTO>{
 	public int myreviewcnt(Criteria cri) throws Exception {
 		return mapper.myreviewcnt(cri);
 	}
+	public List<PostDTO> reviewmorepage(Criteria cri) throws Exception {
+		return mapper.reviewmorepage(cri);
+	}
+	public int reviewmorecnt(Criteria cri) throws Exception {
+		return mapper.reviewmorecnt(cri);
+	}
 	public List<PostDTO> myqnapage(Criteria cri) throws Exception {
 		return mapper.myqnapage(cri);
 	}
 	public int myqnacnt(Criteria cri) throws Exception {
 		return mapper.myqnacnt(cri);
+	}
+	public List<PostDTO> qnamorepage(Criteria cri) throws Exception {
+		return mapper.qnamorepage(cri);
+	}
+	public int qnamorecnt(Criteria cri) throws Exception {
+		return mapper.qnamorecnt(cri);
 	}
 }

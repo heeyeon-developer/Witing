@@ -82,6 +82,14 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
         SELECT count(*) FROM post 
         WHERE kind='review' AND custid=#{custid}
     </select>
+<!-- 호텔 리뷰 페이징 처리 -->
+    <select id="reviewmorepage" resultType="PostDTO">
+        SELECT * FROM post WHERE kind='review' AND hotelid=#{hotelid} ORDER BY postid DESC LIMIT #{skip}, #{amount}
+    </select>
+    <select id="reviewmorecnt" resultType="Integer">
+        SELECT count(*) FROM post 
+        WHERE kind='review' AND hotelid=#{hotelid}
+    </select>
 <!-- 마이페이지 QnA 페이징처리 -->
     <select id="myqnapage" resultType="PostDTO">
         SELECT * FROM post WHERE kind='quest' AND custid=#{custid} ORDER BY postid DESC LIMIT #{skip}, #{amount}
@@ -90,4 +98,13 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
         SELECT count(*) FROM post 
         WHERE kind='quest' AND custid=#{custid}
     </select>
+<!-- 호텔 QnA 페이징처리 -->    
+    <select id="qnamorepage" resultType="PostDTO">
+        SELECT * FROM post WHERE kind='quest' AND hotelid=#{hotelid} ORDER BY postid DESC LIMIT #{skip}, #{amount}
+    </select>
+    <select id="qnamorecnt" resultType="Integer">
+        SELECT count(*) FROM post 
+        WHERE kind='quest' AND hotelid=#{hotelid}
+    </select>
+    
 </mapper>

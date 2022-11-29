@@ -10,6 +10,10 @@
   
 <script>
 $(document).ready(function(){
+	var time = 10;
+	var min = "";
+	var sec = "";
+	
 	$("#compare_ok").hide();
 	$("#compare_wrong").hide();
 	$("#sendMail").click(function() {// 메일 입력 유효성 검사
@@ -38,11 +42,6 @@ $(document).ready(function(){
 									'action':'[[@{/mypage?custid=}]]'+'[[@{${cust.custid}}]]'+'&'+'[[@{certification=1}]]'
 					 			});
 					 			$('#email_form').submit();
-					 			/* $('#certification').attr({
-					 				'method':'post',
-									'action':'[[@{/mypage(custid=${cust.custid})}]]'
-					 			});
-					 			$('#certification').submit(); */
 				 			} else {
 				 				alert("인증번호가 일치하지 않습니다.")
 				 				
@@ -55,14 +54,24 @@ $(document).ready(function(){
 			 		})
 				}
 		});
-			alert(mail);
 			alert("인증번호가 전송되었습니다.") 
-			
 		}
+		/* 유효시간 타이머 */
+		var x = setInterval(function(){
+			min = parseInt(time/60);
+			sec = time % 60;
+			document.getElementById("time").innerHTML = "유효시간 : " + min + "분" + sec + "초";
+			time--;
+			
+			if(time < 0){
+				clearInterval(x);
+				document.getElementById("time").innerHTML = "시간초과";
+				document.getElementById("sendMail").innerHTML = "인증번호 재요청";
+				document.getElementById("compare").disabled = true;	// 유효시간 지나면 입력못하게 비활성화
+			}
+		}, 1000);
+		
 	});
-	
-	
-	
 })
 
 </script>
@@ -103,11 +112,8 @@ $(document).ready(function(){
 			</span>
 			<div class="mail-check-box" style="display: inline-block">
 				<input type="text" id="compare" class="form-control mail-check-input" placeholder="인증번호를 입력해주세요" maxlength="7">
-				<!-- <span id="compare_ok" style="padding-left: 30px"><img src="images/check.png" style="width: 20px; height: 20px"></span>
-				<span id="compare_wrong"  style="padding-left: 30px"><img src="images/wrong.png" style="width: 20px; height: 20px"></span> -->
-				
 			</div>
-				<!-- <button type="button" class="btn btn-primary" id="check_btn">인증번호 확인</button> -->
+			<span id="time"></span>
 		</div>
 		</form>
         </div>
