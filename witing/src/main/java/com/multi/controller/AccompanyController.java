@@ -151,7 +151,7 @@ public class AccompanyController {
 			System.out.println(accomid);
 			for(int i=0; i<idx.length; i++) {
 				PlanDTO pl = new PlanDTO(0, ac.getAccomid(), planname[i], planx[i], plany[i], idx[i], todo[i],
-						"", "", "", Date.valueOf(traveltime), 0, 0.0f, 0.0f, "", "",Date.valueOf(traveltime), "");
+						"", "", "", Date.valueOf(traveltime), 0, 0.0f, 0.0f, "", "",Date.valueOf(traveltime), "","");
 				plan_service.register(pl);
 			}
 		} catch (Exception e) {

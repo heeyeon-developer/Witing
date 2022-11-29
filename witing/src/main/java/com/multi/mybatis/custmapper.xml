@@ -24,5 +24,9 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="certifi_update" parameterType="String">
 		UPDATE cust SET certification=#{certification} WHERE custid=#{custid}
 	</select>
+	<select id="mbti" parameterType="String">
+		UPDATE cust SET type=#{type} WHERE custid=#{custid}
+	</select>
+
 	
 </mapper>

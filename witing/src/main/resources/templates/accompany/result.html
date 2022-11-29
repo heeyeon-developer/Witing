@@ -18,8 +18,8 @@ input[type=text]::-ms-clear {display:none;}
 body {font-family:'Noto Sans KR', sans-serif;color:#000;}
 .question-main {position:fixed;z-index:1;top:0;left:0;right:0;bottom:0;}
 .question-main * {position:relative;z-index:5;}
-.question-main:before {z-index:0;content:'';display:block;width:50%;height:100%;max-width:320px;position:absolute;left:0;top:0;background:url(/Gevent/mbti/img/bg_main1.png) no-repeat 0 0;background-size:cover;}
-.question-main:after {z-index:0;content:'';display:block;width:50%;height:100%;max-width:320px;position:absolute;right:0;top:0;background:url(/Gevent/mbti/img/bg_main2.png) no-repeat 100% 0;background-size:cover;}
+.question-main:before {z-index:0;content:'';display:block;width:50%;height:100%;max-width:320px;position:absolute;left:0;top:0;background:url(/mbti/img/bg_main1.png) no-repeat 0 0;background-size:cover;}
+.question-main:after {z-index:0;content:'';display:block;width:50%;height:100%;max-width:320px;position:absolute;right:0;top:0;background:url(/mbti/img/bg_main2.png) no-repeat 100% 0;background-size:cover;}
 .question-main .title {font-size:65px;line-height:73px;font-weight:bold;text-align:center;margin-top:30%;margin-bottom:5%;color:#ffcb00;text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;}
 .question-main .txt {font-size:30px;font-weight:bold;text-align:center;text-shadow:-2px -2px 0 #fff8d6,2px -2px 0 #fff8d6,-2px 2px 0 #fff8d6,2px 2px 0 #fff8d6;}
 .question-main .btn {text-align:center;position:absolute;bottom:20%;width:250px;margin-left:-120px;left:50%;border:3px solid #000;border-radius:10px;background:#fff;padding:10px 20px;font-size:18px}
@@ -44,16 +44,16 @@ body {font-family:'Noto Sans KR', sans-serif;color:#000;}
 .question.result {padding-top:20px;}
 
 .result-wrap {position:relative;text-align:center;padding:72px 0;background: url(/Gevent/mbti/img/bg_loader.png);background-size:524px 304px;}
-.result-wrap:before {position:absolute;top:0;left:0;z-index:0;content:'';display:block;width:98.5px;height:122.5px;background:url(/Gevent/mbti/img/ico_r01.png) no-repeat;background-size:98.5px 122.5px;}
-.result-wrap .type {font-size:111px;letter-spacing:0.05em;font-weight:bold;text-align:center;color:#ffcb00;text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;}
-.result-wrap .type-text {margin:0 15px;border:3px solid #4c4a40;border-radius:10px;background:#fff;font-size:16px;padding:15px 25px;}
-.result-wrap .type-city {position:relative;font-weight:bold;margin:0 15px;margin-bottom:70px;border:3px solid #4c4a40;border-radius:30px;background:#fff;font-size:22px;padding:4px 25px;}
-.result-wrap .type-city:after {position:absolute;bottom:-10px;right:-10px;z-index:0;content:'';display:block;width:48px;height:37.5px;background:url(/Gevent/mbti/img/ico_r02.png) no-repeat;background-size:48px 37.5px;}
+.result-wrap:before {position:absolute;top:0;left:0;z-index:0;content:'';display:block;width:98.5px;height:122.5px;background:url(/mbti/img/ico_r01.png) no-repeat;background-size:98.5px 122.5px;}
+.result-wrap .type {font-size:80px;letter-spacing:0.05em;font-weight:bold;text-align:center;color:#ffcb00;text-shadow:-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000,2px 2px 0 #000;margin-top: -20px; margin-bottom:20px;}
+.result-wrap .type-text {margin:0 15px;border:1px solid #4c4a40;border-radius:10px;background:#fff;font-size:15px;padding:15px 25px;margin-bottom: 70px;}
+.result-wrap .type-city {position:relative;font-weight:bold;margin:0 15px;margin-bottom:30px;margin-top:30px;border:1px solid #4c4a40;border-radius:15px;background:#fff;font-size:15px;padding:4px 25px;}
+.result-wrap .type-city:after {position:absolute;bottom:-10px;right:-10px;z-index:0;content:'';display:block;width:48px;height:37.5px;background:url(/mbti/img/ico_r02.png) no-repeat;background-size:48px 37.5px;}
 .result-wrap .type-img img {width:100%;}
-.result-wrap .btn-reset {display:block;margin:0 auto;width:60%;margin-bottom:70px;border:3px solid #4c4a40;border-radius:30px;background:#fff;font-size:20px;padding:3px 25px;}
-.result-wrap .sns {font-size:22px;margin-bottom:70px;}
+.result-wrap .btn-reset {display:block;margin:0 auto;width:45%;margin-bottom:40px;border:3px solid #f15d30;;border-radius:15px;background:#f15d30;color:white; font-size:15px;padding:3px 25px;font-weight:bold;}
+.result-wrap .sns {font-size:15px;margin-bottom:70px;}
 .result-wrap .sns .btns {padding-top:20px;}
-.result-wrap .sns .btns a {display:inline-block;margin:0 5px;width:33px;height:33px;background:url(/Gevent/mbti/img/ico_sns.png) no-repeat;background-size:99px 33px;}
+.result-wrap .sns .btns a {display:inline-block;margin:0 5px;width:33px;height:33px;background:url(mbti/img/ico_sns.png) no-repeat;background-size:99px 33px;}
 .result-wrap .sns .btns a.fb {overflow:hidden;background-position:-33px 0;position:static !important;left:auto !important;}
 .result-wrap .sns .btns a.fb span {background:none !important;box-shadow:none !important;margin:0 !important;width:100% !important;height:100% !important;}
 .result-wrap .sns .btns a.url {background-position:-66px 0;}
@@ -67,7 +67,7 @@ body {font-family:'Noto Sans KR', sans-serif;color:#000;}
 .app-down a {top:100px;display:block;height:150px;width:183px;position:absolute;left:50%;margin-left:-91.5px;}
 .app-down a span {animation:gradientBtn 3s linear 0s infinite;overflow:hidden;display:block;height:42px;line-height:42px;color:#fff;text-align:center;background:#000;position:relative;color:#fff;font-size:20px;font-weight:bold;border-radius:8px;}
 .app-down a span:after {animation:gradientBtnAfter 3s linear 0s infinite;content:'';height:100%;display:block;width:60px;opacity:0;background:linear-gradient(to right, #222, #fff 30%, #fff 70%, #222 100%);position:absolute;left:-20%;top:0;}
-.app-down a b {display:block;margin:0 auto;background:url(/Gevent/mbti/img/ico_appdown.png) no-repeat;width:182.5px;height:110px;background-size:182.5px 110px;}
+.app-down a b {display:block;margin:0 auto;background:url(/mbti/img/ico_appdown.png) no-repeat;width:182.5px;height:110px;background-size:182.5px 110px;}
 .orange {color:#ff0000;}
 
 @keyframes myfirst {
@@ -99,10 +99,10 @@ body {font-family:'Noto Sans KR', sans-serif;color:#000;}
 	.question label b {font-size:32px;}
 	.question.loader .ico b {width:54px;height:80px;background-size:54px 60px;}
 	.question.loader .name {font-size:60px;}
-	.result-wrap .type-text {width:640px;margin:0 auto;font-size:26px;}
-	.result-wrap .type-city {width:590px;margin:0 auto;margin-bottom:90px;font-size:39px;}
-	.result-wrap .type-img {width:640px;margin:0 auto;margin-bottom:20px;}
-	.result-wrap .btn-reset {width:300px;font-size:26px;margin-bottom:100px;}
+	.result-wrap .type-text {width:750px;margin:0 auto;font-size:15px;margin-bottom: 80px;}
+	.result-wrap .type-city {width:300px;margin:0 auto;margin-bottom:10px;margin-top:30px;font-size:17px;}
+	.result-wrap .type-img {width:690px;margin:40px auto;margin-bottom:15px;}
+	.result-wrap .btn-reset {width:230px;font-size:15px;margin-bottom:10px;font-weight:bold;}
 	.result-wrap .sns {font-size:30px;}
 	.result-wrap .sns .btns a {margin:0 10px;width:66px;height:66px;background-size:198px 66px;}
 	.result-wrap .sns .btns a.fb {background-position:-66px 0}
@@ -128,6 +128,7 @@ body {font-family:'Noto Sans KR', sans-serif;color:#000;}
 	}
 
 }
+
 </style>
 <!-- Google Tag Manager -->
 	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -230,188 +231,196 @@ function iosCopyToClipboard(el) {
 
  <!-- END nav -->
  
- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_2.jpg');">
+ <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/mbti_bg.jpeg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/}">Home <i class="fa fa-chevron-right"></i></a></span> <span><a th:href="@{/mbti}">MBTI <i class="fa fa-chevron-right"></i></a></span></p>
-       <h1 class="mb-0 bread">Accompany</h1>
+       <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/}">Home <i class="fa fa-chevron-right"></i></a></span> <span><a th:href="@{/mbti}">MBTI <i class="fa fa-chevron-right"></i></a></span><span> <a th:href="@{/#}" th:text="${mbtiType}"> <i class="fa fa-chevron-right"></i></a></span></p>
+       <h1 class="mb-0 bread">Witing-MBTI</h1>
      </div>
    </div>
  </div>
 </section>
 
-<section class="ftco-section">
-  <div class="container">
-	<h2 id="a_title">Witing-MBTI</h2>
-	
+
 	<div class="result-wrap">
-	  <div id="mbti_type" th:text="${mbtiType}" hidden="hidden"></div> 
+	  <div id="mbti_type" th:text="${mbtiType}" hidden="hidden"></div>
+	  <div th:text="${session.logincust.custid}" hidden="hidden"></div>
 		<div id="ENFJ" class="result-box">
-			<div class="type">ENFJ</div>
-			<div class="type-text">당신은 겉보기와 달리 마음이 여린 타입입니다.
-당신의 깨진 멘탈을 치유해줄
-<br>[대한민국 <strong>여수</strong> / 크로아티아 <strong>두브로브니크</strong>]를
-추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/enfj.png" alt=""></div>
-			<div class="type-city">대한민국 여수 / 크로아티아 두브로브니크</div>
+			<div class="type" style="color:#4CAF50"><img src="/images/mbti_img/enfj.png" alt="" style="width: 70px;margin-top: -10px;">ENFJ<img src="/images/mbti_img/enfj.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			책임감이 강하면서 배려를 잘해주는 <strong>ENFJ</strong>는 상대가 즐거워야 자신도 즐거워지는 타입입니다. 이타적인 성향이 강한 <strong>ENFJ</strong>는 모두가 만족할 수 있는 여행을 선호하는 편입니다.<br><br>
+			이런 성향을 가진 <strong>ENFJ</strong>에게 깊고 푸른 바다를 보면서 특별한 추억을 쌓을 수 있는 <strong>속초</strong>와 여유롭고 도시가 주는 따뜻한 울림을 느낄 수 있는 호주의 <strong>멜버른</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=5}">강원</a> 속초 / 호주 멜버른</div>
+			<div class="type-img"><img src="/images/mbti_img/enfj_img.jpg" alt=""></div>
+			</div>
+			
 		</div>
 
 		<div id="ESFJ" class="result-box">
-			<div class="type">ESFJ</div>
-			<div class="type-text">당신은 주변에 사랑을 퍼주는 타입입니다.
-없던 사랑도 생겨날 만큼 로맨틱한
-<br>[대한민국 <strong>군산</strong> / 이탈리아 <strong>로마</strong>]를 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/esfj.png" alt=""></div>
-			<div class="type-city">대한민국 군산 / 이탈리아 로마</div>
+			<div class="type" style="color:#50BCDF"><img src="/images/mbti_img/esfj.png" alt="" style="width: 70px;margin-top: -10px;margin-right: 10px;">ESFJ<img src="/images/mbti_img/esfj.png" alt="" style="width: 70px;margin-top: -10px;margin-left: 10px;"></div>
+			<div class="type-text">
+			외향적이면서 여러 사람과 어울리는 것을 좋아하는 <strong>ESFJ</strong>는 혼자 여행하는 것보다는 일행이 있는 여행을 가는 것이 적합합니다. 혼자 여행을 가도 워낙 사교성이 좋아 금방 동행을 만들 수 있습니다.<br><br>
+			이런 성향을 가진 <strong></strong>에게 다양한 체험과 아름다운 풍경을 느낄 수 있는 <strong>제주도</strong>와 넘치는 에너지를 통해 놀라운 경험을 할 수 있는 태국의 <strong>방콕</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=9}">제주도</a> / 태국 방콕</div>
+			<div class="type-img"><img src="/images//mbti_img/esfj_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ESTJ" class="result-box">
-			<div class="type">ESTJ</div>
-			<div class="type-text">당신은 호불호가 확실하며
-애매모호한 것을 싫어하는 타입입니다.
-모든 여행자들에게 사랑받는
-<br>[ 대한민국 <strong>통영</strong> / 미국 <strong>뉴욕</strong>]을 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/estj.png" alt=""></div>
-			<div class="type-city">대한민국 통영 / 미국 뉴욕</div>
+			<div class="type" style="color:#50BCDF"><img src="/images/mbti_img/estj.png" alt="" style="width: 70px;margin-top: -10px;">ESTJ<img src="/images/mbti_img/estj.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			추진력이 강하고 리더십이 있는 <strong>ESTJ</strong>는 외향적이면서 계획적인 성격입니다. 또한 호불호도 크기 때문에 자신의 취향에 맞는 여행지만 쭈욱 고집하는 경향이 있습니다.<br><br>
+			이런 성향을 가진 <strong>ESTJ</strong>에게 바다가 가까이 있고 즐길 거리도 많은 <strong>부산</strong>과 다양성과 짜릿함이 공존하는 미국의 <strong>뉴욕</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=8}">부산</a> / 미국 뉴욕</div>
+			<div class="type-img"><img src="/images//mbti_img/estj_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ENTP" class="result-box">
-			<div class="type">ENTP</div>
-			<div class="type-text">당신은 아이디어가 넘치는 타입입니다.
-무엇을 상상하든 그 이상을 보여주는
-<br>[대한민국 <strong>춘천</strong> / 대만 <strong>가오슝</strong>]을 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/entp.png" alt=""></div>
-			<div class="type-city">대한민국 춘천 / 대만 가오슝</div>
+			<div class="type" style="color:#BC8AC2"><img src="/images/mbti_img/entp.png" alt="" style="width: 70px;margin-top: -10px;">ENTP<img src="/images/mbti_img/entp.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			상상력이 풍부하면서 다방면에 관심을 가지고 있는 <strong>ENTP</strong>는 박식하면서 팔방미인인 성격입니다. 가만히 있는 것보다 여기저기 떠나는 것을 좋아하는데,<br><br>
+			이런 성향을 가진 <strong>ENTP</strong>에게 다양한 섬으로 떠날 수 있는 <strong>통영</strong>과 빠르게 움직이는 도시의 속도를 느낄 수 있는 일본의 <strong>도쿄</strong>를 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=7}">경남</a> 통영 / 일본 도쿄</div>
+			<div class="type-img"><img src="/images//mbti_img/entp_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ENFP" class="result-box">
-			<div class="type">ENFP</div>
-			<div class="type-text">당신은 언제나 열정적인 타입입니다.
-열정을 마음껏 발산할 수 있는
-<br>[대한민국 <strong>강릉</strong> / 아르헨티나 <strong>부에노스아이레스</strong>]를
-추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/enfp.png" alt=""></div>
-			<div class="type-city">대한민국 강릉 / 아르헨티나 부에노스아이레스</div>
+			<div class="type" style="color:#4CAF50"><img src="/images/mbti_img/enfp.png" alt="" style="width: 70px;margin-top: -10px;">ENFP<img src="/images/mbti_img/enfp.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			정열적이면서 활기가 넘치면서 감수성이 풍부한 <strong>ENFP</strong>는 새로운 곳으로 가서 경험하는 것을 좋아합니다. 이런 <strong>ENFP</strong>는 그냥 가만히 둬도 알아서 잘 노는 성격인데, <br><br>
+			이런 성향을 가진 <strong>ENFP</strong>에게 감성을 자극하는 밤바다를 볼 수 있는 <strong>여수</strong>와 새로운 모험과 글로벌 시민이 될 수 있는 필리핀의 <strong>보라카이</strong>를 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=6}">전남</a> 여수 / 필리핀 보라카이</div>
+			<div class="type-img"><img src="/images/mbti_img/enfp_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ESFP" class="result-box">
-			<div class="type">ESFP</div>
-			<div class="type-text">당신은 인싸기질과 낙천적인 사고를
-타고난 타입입니다.
-밝은 햇살과 낙천적인 기운이 가득한
-<br>[ 대한민국 <strong>양양</strong> / 스페인 <strong>바르셀로나</strong>]를 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/esfp.png" alt=""></div>
-			<div class="type-city">대한민국 양양 / 스페인 바르셀로나</div>
+			<div class="type"><img src="/images/mbti_img/esfp.png" alt="" style="width: 70px;margin-top: -10px;">ESFP<img src="/images/mbti_img/esfp.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			자유로운 영혼을 가지고 있으면서 사교적이고 유행에 민감한 <strong>ESFP</strong>는 눈에 띄는 것을 좋아합니다. <br><br>
+			이런 성향을 가진 <strong>ESFP</strong>에게 언제든지 떠날 수 있는 공항이 있는 <strong>인천</strong>과 땅, 바다, 공중 어디에든 모두 할 수 있는 것이 넘치는 홍콩의 <strong>마카오</strong>를 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=3}">인천</a> / 홍콩 마카오</div>
+			<div class="type-img"><img src="/images/mbti_img/esfp_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ESTP" class="result-box">
-			<div class="type">ESTP</div>
-			<div class="type-text">당신은 활동적이고 에너지가 넘치는 타입입니다.
-가지고 있는 에너지를 두 배로 올려줄
-<br>[대한민국 <strong>속초</strong> / 스페인 <strong>세비야</strong>]를 추천합니다</div>
-			<div class="type-img"><img src="/images/mbti/estp.png" alt=""></div>
-			<div class="type-city">대한민국 속초 / 스페인 세비야</div>
+			<div class="type"><img src="/images/mbti_img/estp.png" alt="" style="width: 70px;margin-top: -10px;">ESTP<img src="/images/mbti_img/estp.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			개방적이면서 모르는 사람들과도 스스럼없이 친해지는 <strong>ESTP</strong>는 스릴 있는 모험을 좋아합니다. 또한, 대담하고 용감하고 즉흥적인 동시에 자극적인 것을 좋아합니다.<br><br>
+			이런 성향을 가진 <strong>ESTP</strong>에게 파도를 온 몸으로 느낄 수 있는 서핑을 할 수 있는 <strong>양양</strong>과 태양과 모래, 해변을 즐길 수 있는 인도네시아의 <strong>발리</strong>를 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=5}">강원</a> 양양 / 인도네시아 발리</div>
+			<div class="type-img"><img src="/images/mbti_img/estp_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="INTP" class="result-box">
-			<div class="type">INTP</div>
-			<div class="type-text">당신은 독창적인 세계관이 있으며
-반복되는 일상에 무료함을 느끼는 타입입니다.
-항상 새로운 에너지로 가득한
-<br>[대한민국 <strong>부산</strong> / 이탈리아 <strong>피렌체</strong>]를 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/intp.png" alt=""></div>
-			<div class="type-city">대한민국 부산 / 이탈리아 피렌체</div>
+			<div class="type" style="color:#BC8AC2"><img src="/images/mbti_img/intp.png" alt="" style="width: 70px;margin-top: -10px;">INTP<img src="/images/mbti_img/intp.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			조용하고 과묵하면서 논리적인 성격을 가지고 있는 <strong>INTP</strong>는 지적 호기심이 많은 편입니다. 남들과 어울리는 것보다는 혼자서 성찰하는 것을 좋아하므로 <strong>INTP</strong>는 혼자 여행을 가는 것을 선호합니다.<br><br>
+			이런 성향을 가진 <strong>INTP</strong>에게 백제의 역사가 살아 숨쉬고, 유유자적한 시간을 보낼 수 있는 <strong>부여</strong>와 평화와 고요함이 균형을 이루는 대만의 <strong>가오슝</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=4}">충남</a> 부여 / 대만 가오슝</div>
+			<div class="type-img"><img src="/images/mbti_img/intp_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="INFP" class="result-box">
-			<div class="type">INFP</div>
-			<div class="type-text">당신은 화려한 풍경 속의 고독을 즐기는 타입입니다.
-혼자만의 시간을 즐길 수 있는
-<br>[대한민국 <strong>해남</strong> / 포르투갈 <strong>리스본</strong>]을 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/infp.png" alt=""></div>
-			<div class="type-city">대한민국 해남 / 포르투갈 리스본</div>
+			<div class="type" style="color:#4CAF50"><img src="/images/mbti_img/infp.png" alt="" style="width: 70px;margin-top: -10px;">INFP<img src="/images/mbti_img/infp.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			세심하면서 감수성이 풍부한 <strong>INFP</strong>는 영화나 책에 나오는 인물에게 쉽게 매료가 되는 성격입니다.<br><br>
+			이런 성향을 가진 <strong>INFP</strong>에게 멜로영화 '8월의 크리스마스'의 촬영지인 <strong>군산</strong>과 파스텔 톤의 주택이 늘어서 있는 굴곡진 자갈길을 즐길 수 있는 포르투갈의 <strong>리스본</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=6}">전북</a> 군산 / 포르투갈 리스본</div>
+			<div class="type-img"><img src="/images/mbti_img/infp_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ISFP" class="result-box">
-			<div class="type">ISFP</div>
-			<div class="type-text">당신은 감성적이고 따뜻한 타입입니다.
-여린 감성이 피어날 수 있는
-<br>[대한민국 <strong>순천</strong> / 프랑스 <strong>파리</strong>] 를 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/isfp.png" alt=""></div>
-			<div class="type-city">대한민국 순천 / 프랑스 파리</div>
+			<div class="type"><img src="/images/mbti_img/isfp.png" alt="" style="width: 70px;margin-top: -10px;">ISFP<img src="/images/mbti_img/isfp.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			온화하면서 친절하고 혼자만의 시간을 보내는 것을 좋아하는 <strong>ISFP</strong>는 다양한 흥밋거리가 있는 곳을 선호합니다.<br><br>
+			이런 성향을 가진 <strong>ISFP</strong>에게 한옥마을의 고즈넉한 분위기를 느낄 수 있는 <strong>전주</strong>와 미적인 자연이 주는 아름다움을 느낄 수 있는 캄보디아의 <strong>시엠립</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=6}">전북</a> 전주 / 캄보디아 시엠립</div>
+			<div class="type-img"><img src="/images/mbti_img/isfp_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ISTP" class="result-box">
-			<div class="type">ISTP</div>
-			<div class="type-text">당신은 현실에 구애 받지 않는 자유로운 타입입니다.
-도시 속에서도 다양한 명소를 즐길 수 있는
-<br>[대한민국 <strong>서울</strong> / 영국 <strong>런던</strong>] 을 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/istp.png" alt=""></div>
-			<div class="type-city">대한민국 서울 / 영국 런던</div>
+			<div class="type"><img src="/images/mbti_img/istp.png" alt="" style="width: 70px;margin-top: -10px;">ISTP<img src="/images/mbti_img/istp.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			호기심이 강하면서 이성적인 <strong>ISTP</strong>는 조금만 움직여도 금방 피로를 느끼는 스타일이기 때문에 동선이 너무 복잡하지 않은 여행을 떠나는 것이 좋습니다.<br><br>
+			이런 성향을 가진 <strong>ISTP</strong>에게 역사와 행궁동 카페거리를 동시에 느낄 수 있는 <strong>수원</strong>과 과거와 현재가 공존해 다양함을 느낄 수 있는 영국의 <strong>런던</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=2}">경기</a> 수원 / 영국 런던</div>
+			<div class="type-img"><img src="/images/mbti_img/istp_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="INTJ" class="result-box">
-			<div class="type">INTJ</div>
-			<div class="type-text">당신은 빠른 판단력을 가진 타입입니다.
-예측 불가능한 여행의 기쁨이 기다리는
-<br>[대한민국 <strong>울릉도</strong> / 브라질 <strong>리우데자네이루</strong>] 를
-추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/intj.png" alt=""></div>
-			<div class="type-city">대한민국 울릉도 / 브라질 리우데자네이루</div>
+			<div class="type" style="color:#BC8AC2"><img src="/images/mbti_img/intj.png" alt="" style="width: 70px;margin-top: -10px;">INTJ<img src="/images/mbti_img/intj.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			논리적이면서 이성적인 <strong>INTJ</strong>는 신중한 성격입니다. 그러면서 합리적인 것을 추구하는 성격과 약간의 즉흥적인 것을 수용합니다.<br><br>
+			이런 성향을 가진 <strong>INTJ</strong>에게 상쾌한 공기를 쐴 수 있는 소나무 숲과 봄에는 산수유와 매화를 즐길 수 있는 <strong>구례</strong>와 다양한 인종을 통해 많은 영감을 불러 일으킬 수 있는 <strong>싱가포르</strong>를 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=6}">전남</a> 구례 / 싱가포르</div>
+			<div class="type-img"><img src="/images/mbti_img/intj_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="INFJ" class="result-box">
-			<div class="type">INFJ</div>
-			<div class="type-text">당신은 안정감 있는 상황을 좋아하는 타입입니다.
-마음의 평화를 얻을 수 있는
-<br>[대한민국 <strong>전주</strong> / 터키 <strong>이스탄불</strong>]을 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/infj.png" alt=""></div>
-			<div class="type-city">대한민국 전주 / 터키 이스탄불</div>
+			<div class="type" style="color:#4CAF50"><img src="/images/mbti_img/infj.png" alt="" style="width: 70px;margin-top: -10px;">INFJ<img src="/images/mbti_img/infj.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			온화하면서 몽환적인 느낌을 가진 <strong>INFJ</strong>는 갈등이 생기는 것을 좋아하지 않는 평화주의자입니다. 그렇기 때문에 여러 상황변수가 생기는 것을 좋아하지 않습니다.<br><br>
+			이런 성향을 가진 <strong>INFJ</strong>에게 분주한 마음을 달랠 수 있는 고요한 대나무 숲이 있는 <strong>담양</strong>과 넓은 도로망이 펄쳐져 20년에 걸쳐 완성된 계획도시인 인도의 <strong>뉴델리</strong>를 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=6}">전남</a> 담양 / 인도 뉴델리</div>
+			<div class="type-img"><img src="/images/mbti_img/infj_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ISFJ" class="result-box">
-			<div class="type">ISFJ</div>
-			<div class="type-text">당신은 성실하고 다정한 타입입니다.
-따뜻한 감성을 채워줄
-<br>[ 대한민국 <strong>경주</strong> / 프랑스 <strong>루앙</strong>]을 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/isfj.png" alt=""></div>
-			<div class="type-city">대한민국 경주 / 프랑스 루앙</div>
+			<div class="type" style="color:#50BCDF"><img src="/images/mbti_img/isfj.png" alt="" style="width: 70px;margin-top: -10px;">ISFJ<img src="/images/mbti_img/isfj.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			섬세하면서 계획적인 <strong>ISFJ</strong>는 차분하면서 조용한 성격입니다. 너무 활기찬 곳보다는 조용한 곳에서 휴식을 하는 것을 더 좋아하는 성격을 가지고 있습니다.<br><br>
+			이런 성향을 가진 <strong>ISFJ</strong>에게 신라의 천년의 밤을 만날 수 있는 동궁과 월지가 있는 <strong>경주</strong>와 알록달록하고 오래된 중세 시대의 반목조 건물을 그대로 간직하고 있는 프랑스의 <strong>루앙</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=7}">경북</a> 경주 / 프랑스 루앙</div>
+			<div class="type-img"><img src="/images/mbti_img/isfj_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ISTJ" class="result-box">
-			<div class="type">ISTJ</div>
-			<div class="type-text">당신은 끈기가 넘치고 의지가 강한 타입입니다.
-잠시 내려놓고 휴식을 취할 수 있는
-<br>[ 대한민국 <strong>제주도</strong> / <strong>사이판</strong> ] 을 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/istj.png" alt=""></div>
-			<div class="type-city">대한민국 제주도 / 사이판</div>
+			<div class="type" style="color:#50BCDF"><img src="/images/mbti_img/istj.png" alt="" style="width: 70px;margin-top: -10px;">ISTJ<img src="/images/mbti_img/istj.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			신중하면서 현실적인 감각을 지닌 <strong>ISTJ</strong> 타입은 내향적이지만 규칙을 잘 준수하는 모범적인 성격입니다. 여행을 할 때 ISTJ는 동행이나 자신을 지킬 수 있는 곳에서 편안함을 느낍니다.<br><br>
+			이런 성향을 가진 <strong>ISTJ</strong>에게 울창한 소나무 숲과 아름다운 동해 바다를 동시에 느낄 수 있는 <strong>강릉</strong>과 일년 내내 여름과 바다를 즐길 수 있는 <strong>사이판</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=5}">강원</a> 강릉 / 사이판</div>
+			<div class="type-img"><img src="/images/mbti_img/istj_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<div id="ENTJ" class="result-box">
-			<div class="type">ENTJ</div>
-			<div class="type-text">당신은 활력이 넘치는 타입입니다.
-액티비티가 기다리고 있는
-<br>[대한민국 <strong>담양</strong> / 터키 <strong>카파도키아</strong> ] 를 추천합니다.</div>
-			<div class="type-img"><img src="/images/mbti/entj.png" alt=""></div> 
-			<div class="type-city">대한민국 담양 / 터키 카파도키아</div>
+			<div class="type" style="color:#BC8AC2"><img src="/images/mbti_img/entj.png" alt="" style="width: 70px;margin-top: -10px;">ENTJ<img src="/images/mbti_img/entj.png" alt="" style="width: 70px;margin-top: -10px;"></div>
+			<div class="type-text">
+			열정적인 <strong>ENTJ</strong>는 겉으로 봤을 때는 다소 이기적인 면모가 보일 수 있지만 의외로 상대를 잘 배려해 주는 의리 있는 성격입니다. 여행을 주도하는 편인 <strong>ENTJ</strong>는 여행 메이트로 좋은 타입입니다.<br><br>
+			이런 성향을 가진 <strong>ENTJ</strong>에게 짜릿한 스릴을 느낄 수 있는 빠지와 번지점프, 캠핑이 가능한 <strong>가평</strong>과 휴양과 액티비티를 동시에 즐길 수 있는 베트남의 <strong>다낭</strong>을 추천합니다.
+			<div class="type-city"><a th:href="@{/cityshotel?cityid=2}">경기</a> 가평 / 베트남 다낭</div>
+			<div class="type-img"><img src="/images/mbti_img/entj_img.jpg" alt=""></div>
+			</div>
 		</div>
 
 		<a th:href="@{/mbti}" class="btn-reset">테스트 다시하기 ></a>
 
-		<div class="sns">
+		<!-- <div class="sns">
 			<div class="tit">▶ 친구에게 테스트 공유하기 ◀</div>
 			<div class="btns">
-				<!-- <a class="kt" onclick="sendLink();"></a>
-				<a class="fb" onclick="facebookShare();"></a> -->
+				<a class="kt" onclick="sendLink();"></a>
+				<a class="fb" onclick="facebookShare();"></a>
 				<a class="url" onclick="alert('복사되었습니다.')" data-clipboard-text=""></a>
 			</div>
-		</div>
+		</div> -->
 	</div>
 <input type="hidden" id="clipboard" value="http://localhost/mbti/">
 
-</div>
-</section>	
+
 
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PB6ZMD7"

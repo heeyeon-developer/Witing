@@ -161,13 +161,14 @@ function nextStep(obj){
 }
 
 var ei,ft,sn,pj;
+var custid = '[[${session.logincust.custid}]]';
 function mbtiResult(){
 	ei =	typeResult(10);
 	sn =	typeResult(4);
 	ft =	typeResult(7);
 	pj =	typeResult(1);
 	setTimeout(function(){
-		location.href = "/result?type="+ei+sn+ft+pj;
+		location.href = "/result?type="+ei+sn+ft+pj+'&custid='+custid;
 	},3000);
 	
 }

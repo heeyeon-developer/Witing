@@ -32,4 +32,5 @@ public class CustDTO {
 	private Integer point;
 	private String country;
 	private String certification;
+	private String type;
 }
