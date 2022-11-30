@@ -37,7 +37,7 @@ public class PlanController {
 	@RequestMapping("/plan")
 	public String main(Model model, int accomid, String title, Date traveltime, Integer cnt, String gender,
 			String country, String custid, Date birth, String accomtext, String planname, String todo, Integer planid,
-			Integer replyid, String certification) {
+			Integer replyid, String certification,String type) {
 		List<PlanDTO> list = null;
 		List<PlanDTO> xy = null;
 		List<ReplyDTO> reply = null;
@@ -49,6 +49,7 @@ public class PlanController {
 			cust = cust_service.get(custid);
 			model.addAttribute("cust", cust);
 			
+			model.addAttribute("type", list.get(0).getType());
 			model.addAttribute("certification", list.get(0).getCertification());
 			model.addAttribute("reply", reply);
 			model.addAttribute("xy", xy);
@@ -87,7 +88,14 @@ public class PlanController {
 		return "index";
 	}
 	@RequestMapping("/result")
-	public String result(Model model, String type) {
+	public String result(Model model, String type, String custid) {
+		CustDTO cust = null;
+		try {
+			cust = cust_service.mbti(type, custid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		model.addAttribute("mbtiType", type);
 		System.out.println(type);
 		model.addAttribute("center", dir+"result");

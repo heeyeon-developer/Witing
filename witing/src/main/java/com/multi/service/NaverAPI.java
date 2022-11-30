@@ -34,9 +34,9 @@ public class NaverAPI {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=ZE3hNmeMKJrWvZZM3mFA");
-			sb.append("&client_secret=l5Lu3L2P_u");
-			sb.append("&redirect_uri=http://localhost/naverlogin");
+			sb.append("&client_id=uSbKwYxSTze1CYVn_tDV");
+			sb.append("&client_secret=vd1LAj7XV1");
+			sb.append("&redirect_uri=http://101.101.219.167/naverlogin");
 			sb.append("&code="+authorize_code);
 			sb.append("&state=STATE");
 			bw.write(sb.toString());

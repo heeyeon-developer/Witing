@@ -186,15 +186,17 @@ function connect() {
 			'roomid' : $('#roomid').text()
 		});//요청할 달, 방 데이터 생성
 		
-		stompClient.send("/reservedcheck", {}, check);//컨트롤러에 데이터 요청
-		
+	stompClient.send("/reservedcheck", {}, check);//컨트롤러에 데이터 요청
 		stompClient.subscribe('/reservedresult', function(list) { 
 			for(var i=0; i<JSON.parse(list.body).length; i++){
 				var start = JSON.parse(list.body)[i].sdate;
 				var end = JSON.parse(list.body)[i].edate;
-				for(var j = parseInt(start.substr(8,10))+1; j <= parseInt(end.substr(8,10))+1; j++){
-					tdGroup[j].classList.add('reserved');
-	    		}
+				if($('#roomid').text() == JSON.parse(list.body)[i].roomid){
+					for(var j = parseInt(start.substr(8,10))+1; j <= parseInt(end.substr(8,10))+1; j++){
+						if(parseInt(start.substr(5,7)) == (today.getMonth()+1))
+							tdGroup[j].classList.add('reserved');
+	    			}
+				}
 			}
 		});
 	});
@@ -225,7 +227,6 @@ var IMP = window.IMP;
         	 alert("결제가 실패하였습니다. 다시 결제를 진행해 주세요.");
          }
      });
-     alert("??");
  };
  
 

@@ -38,10 +38,13 @@ function connect() {
 		stompClient.subscribe('/reservedresult', function(list) { 
 			for(var i=0; i<JSON.parse(list.body).length; i++){
 				var start = JSON.parse(list.body)[i].sdate;
-				var end = JSON.parse(list.body)[i].edate;
-				for(var j = parseInt(start.substr(8,10))+1; j <= parseInt(end.substr(8,10))+1; j++){
-					tdGroup[j].classList.add('reserved');
-	    		}
+				var end = JSON.parse(list.body)[i].edate;			
+				if($('#roomid').text() == JSON.parse(list.body)[i].roomid){
+					for(var j = parseInt(start.substr(8,10))+1; j <= parseInt(end.substr(8,10))+1; j++){
+						if(parseInt(start.substr(5,7)) == $('#reservdate').text().substring(5,7))
+							tdGroup[j].classList.add('reserved');
+		    		}
+				}
 			}
 		});
 	});
