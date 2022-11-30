@@ -87,11 +87,14 @@ public class QnAController {
 	}
 	
 	@RequestMapping("/deleteqna")
-	public String qnadelete(Model model, int postid, String custid) {
+	public String qnadelete(Model model, Integer postid, String custid, Criteria cri) {
 		try {
 			postservice.remove(postid);
 			CustDTO cust = custservice.get(custid);
-			List<PostDTO> list = postservice.myqna(custid);
+			List<PostDTO> list = postservice.myqnapage(cri);
+			int total = postservice.myqnacnt(cri);
+			PageDTO pageMaker = new PageDTO(total, cri);
+			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("list", list);
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
 			model.addAttribute("pagename", "Q&A"); 

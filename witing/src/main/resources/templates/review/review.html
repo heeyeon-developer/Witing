@@ -23,7 +23,6 @@ function movePage(uri, queryString) {
   text-align: center;
 }
 </style>
-
 <section class="ftco-section contact-section ftco-no-pt">
   <div class="container">
    <div class="row block-9">
@@ -58,7 +57,7 @@ function movePage(uri, queryString) {
 			
 		</table>
 		
-		<div th:text="${list[0].custid}" hidden="hidden" id="custid"> </div>
+		<!-- <div th:text="${list[0].custid}" hidden="hidden" id="custid"> </div> -->
 
       </div>
    </div>
@@ -67,24 +66,12 @@ function movePage(uri, queryString) {
 	  <div class="col text-center">
 	    <div class="block-27">
 	      <ul>
-			<th:block th:if="${pageMaker.prev}">
-	        	<li class="pageMaker_btn prev">
-	        		<a href="javascript:void(0)" th:onclick="movePage([[${#request.requestURI}]], [[${pageMaker.cri.makeQueryString(pageMaker.pageStart - 1)}]])">&lt;</a>
-	        	</li>
-	        </th:block>
-	        
 	        <th:block th:with="pageMaker = ${pageMaker}">
 			    <th:block th:each="num : *{#numbers.sequence(pageMaker.pageStart, pageMaker.pageEnd)}">
 			        <li class="pageMaker_btn" th:classappend="${pageMaker.cri.pageNum == num} ? 'active' : ''">
 			            <a href="javascript:void(0)"  th:text="${num}" th:onclick="movePage([[${#request.requestURI}]],[[${pageMaker.cri.makeQueryString(num)}]])">1</a>
 			        </li>
 			    </th:block>
-			</th:block>
-			
-			<th:block th:if="${pageMaker.next}">
-			    <li class="pageMaker_btn next">
-			        <a href="javascript:void(0)" th:onclick="movePage([[${#request.requestURI}]], [[${pageMaker.cri.makeQueryString(pageMaker.pageEnd + 1)}]])">&gt;</a>
-			    </li>
 			</th:block>
 	      </ul>
 	    </div>

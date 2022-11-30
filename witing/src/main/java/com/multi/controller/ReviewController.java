@@ -98,11 +98,14 @@ public class ReviewController {
 		return "index";
 	}
 	@RequestMapping("/deletereview")
-	public String qnadelete(Model model, int postid, String custid) {
+	public String qnadelete(Model model, Integer postid, String custid, Criteria cri) {
 		try {
 			postservice.remove(postid);
 			CustDTO cust = custservice.get(custid);
-			List<PostDTO> list = postservice.myreview(custid);
+			List<PostDTO> list = postservice.myreviewpage(cri);
+			int total = postservice.myreviewcnt(cri);
+			PageDTO pageMaker = new PageDTO(total, cri);
+			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("list", list);
 			model.addAttribute("imgpath", "/images/myqnaimg.jpg");
 			model.addAttribute("pagename", "Review"); 
