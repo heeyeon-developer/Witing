@@ -62,9 +62,9 @@ function del(postid){
        		</thead>
        	
        		<tbody>
-       			<tr th:if="${reviewdetail.img != null}">
+       			<tr>
        				<td>
-        				<img th:src="'/images/' + ${reviewdetail.img}" style="width: 200px; height: 150px">
+        				<img th:src="'/images/' + ${reviewdetail.img}" style="width: 200px; height: 150px" th:if="${reviewdetail.img !=''}">
         			</td>
        			</tr>
        			<tr style="background-color: #EAEAEA ; height: 100px">
