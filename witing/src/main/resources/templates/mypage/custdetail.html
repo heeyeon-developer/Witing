@@ -88,9 +88,11 @@ function sample6_execDaumPostcode() {
 </script>
 <style>
 	#custupdate_form > div > input{
-		width: 80%;
+		width: 100%;
 	}
-
+	@media (max-width: 1200px){
+		#custupdate_btn_a {padding-right: 40px}
+	}
 </style>
 
 <section class="ftco-section contact-section ftco-no-pt">
@@ -157,8 +159,10 @@ function sample6_execDaumPostcode() {
         </form>
       </div>
    </div>
-  <div class="justify-content-center">
-  <a href="#"><button id="custupdate_btn" class="btn btn-primary py-3 px-5 justify-content-center" style="margin-left: 48px; float:right; margin-right:400px">UPDATE</button></a>
+  <div class="row block-9 justify-content-center" >
+  <div class="col-md-7 order-md-last d-flex">
+  <a href="#" id="custupdate_btn_a"><button id="custupdate_btn" class="btn btn-primary py-3 px-5 " style="margin-left: 48px; float:right; ">UPDATE</button></a>
+  </div>
   </div>
  </div>
 </section>
