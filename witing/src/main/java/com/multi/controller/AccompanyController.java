@@ -110,8 +110,8 @@ public class AccompanyController {
 //	}
 	
 	@RequestMapping("/updatereply")
-	public String updatereply(Model model, Integer replyid, Integer accomid, String comment, String custid) {
-		ReplyDTO reply = new ReplyDTO(replyid, accomid, custid, comment, null, 0, null);
+	public String updatereply(Model model, Integer replyid, Integer accomid, String comment, String custid, String secret) {
+		ReplyDTO reply = new ReplyDTO(replyid, accomid, custid, comment, null, 0, secret);
 		try {
 			System.out.println(replyid);
 			System.out.println(accomid);

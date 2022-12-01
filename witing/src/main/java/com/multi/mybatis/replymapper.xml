@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INSERT INTO reply VALUES (NULL,#{accomid},#{custid},#{comment},NOW(),#{topid},#{secret})
 	</insert>
 	<update id="update" parameterType="ReplyDTO">
-		UPDATE reply SET comment=#{comment} WHERE replyid=#{replyid}
+		UPDATE reply SET comment=#{comment}, secret=#{secret} WHERE replyid=#{replyid}
 	</update>
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM reply WHERE replyid=#{replyid}
