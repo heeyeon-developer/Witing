@@ -133,16 +133,10 @@ public class AjaxController {
 			}
 			int numIndex=random.nextInt(8999)+1000; //4자리 랜덤 정수를 생성
 			key+=numIndex;
-			System.out.println("1");
 			message.setSubject("Witing 본인인증을 위한 인증번호 메일");
-			System.out.println("2");
 			message.setText("인증 번호 : "+key);
-			System.out.println("3");
 			sender.send(message);
-			System.out.println("4");
-			System.out.println("key : " + key);
-			System.out.println("5");
-			
+			System.out.println(key);
 			return key;
 		}
 }
