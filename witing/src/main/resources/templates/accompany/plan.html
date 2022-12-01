@@ -163,7 +163,9 @@ function re_update_btn(data){
 		var commentid = 'comment_reply'+data;
 		var accomid = $('#accomid').text();
 		var comment = $('#'+commentid).val();
-		location.href="[[@{/updatereply?replyid=}]]"+replyid+"&[[@{accomid=}]]"+accomid+"&[[@{comment=}]]"+comment;
+		var secret = $('input[name=up_secret]:checked').val(); 
+		alert(secret);
+		location.href="[[@{/updatereply?replyid=}]]"+replyid+"&[[@{accomid=}]]"+accomid+"&[[@{comment=}]]"+comment+"&[[@{secret=}]]"+secret;
 		/* alert(commentid)
 		alert(replyid);
 		alert(comment); */
@@ -369,6 +371,10 @@ $(document).ready(function(){
 					                  <label for="replyText">댓글 내용</label>
 					                  <textarea class="form-control" rows="4" th:id="|comment_reply${reply.replyid}|" th:value="${reply.comment}" th:text="${reply.comment}" name="comment"></textarea>
 					              </div>
+					              <div class="select" id="update_sc" style="float: right;">
+							           <input type="radio" name="up_secret" id="update_y" value="y" th:checked="${reply.secret eq 'y'}"> 비밀
+							           <input type="radio" name="up_secret" id="update_n" value="n" th:checked="${reply.secret eq 'n'}"> 공개
+						          </div>
 					          </form>
 					          </div>
 				          <div class="modal-footer">

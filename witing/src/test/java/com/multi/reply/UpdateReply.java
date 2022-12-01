@@ -24,7 +24,7 @@ class UpdateReply {
 	
 	@Test
 	void contextLoads() {
-		ReplyDTO reply = new ReplyDTO(3, 3, "k_bdb97", "저도 가고싶어용가리", null, 0, null);
+		ReplyDTO reply = new ReplyDTO(54, 52, "dbb", "비밀댓글로 수정 부탁", null, 0, "y");
 		try {
 			service.modify(reply);
 			List<ReplyDTO> list = service.getall();
