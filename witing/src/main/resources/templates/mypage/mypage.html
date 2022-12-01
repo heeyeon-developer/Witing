@@ -10,52 +10,49 @@
   
 <script>
 $(document).ready(function(){
-	var time = 10;
+
+	var time = 60;
 	var min = "";
-	var sec = ""; 
+	var sec = "";
 	
 	$("#compare_ok").hide();
 	$("#compare_wrong").hide();
 	$("#sendMail").click(function() {// 메일 입력 유효성 검사
 		var mail = $("#mail").val(); //사용자의 이메일 입력값. 
-		
-		if (mail == "") {
-			alert("이메일 주소가 입력되지 않았습니다.");
-		} else {
-			$.ajax({
-				type : 'post',
-				url : '/CheckMail',
-				data : {
-					mail : mail
-					},
-				/* dataType :'json', */
-			 	success : function(key){
-			 		$('#ok_btn').click(function(){
-				 			if ($("#compare").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
-				 				alert("본인인증이 정상적으로 되었습니다.")
-				 				
-				 				$('#email_form').attr({
-				 					'data' : {
-				 						'certification' : "1"
-				 					},
-					 				'method':'post',
-									'action':'[[@{/mypage?custid=}]]'+'[[@{${cust.custid}}]]'+'&'+'[[@{certification=1}]]'
-					 			});
-					 			$('#email_form').submit();
-				 			} else {
-				 				alert("인증번호가 일치하지 않습니다.")
-				 				
-				 				$('#email_form').attr({
-					 				'method':'post',
-									'action':'[[@{/mypage(custid=${cust.custid})}]]'
-					 			});
-					 			$('#email_form').submit();
-				 			}
-			 		})
-				}
+		$.ajax({
+			type : 'post',
+			url : '/CheckMail',
+			data : {
+				mail : mail
+				},
+			dataType :'json',
+		 	success : function(key){
+		 		$('#ok_btn').click(function(){
+			 			if ($("#compare").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+			 				alert("본인인증이 정상적으로 되었습니다.")
+			 				
+			 				$('#email_form').attr({
+			 					'data' : {
+			 						'certification' : "1"
+			 					},
+				 				'method':'post',
+								'action':'[[@{/mypage?custid=}]]'+'[[@{${cust.custid}}]]'+'&'+'[[@{certification=1}]]'
+				 			});
+				 			$('#email_form').submit();
+			 			} else {
+			 				alert("인증번호가 일치하지 않습니다.")
+			 				
+			 				$('#email_form').attr({
+				 				'method':'post',
+								'action':'[[@{/mypage(custid=${cust.custid})}]]'
+				 			});
+				 			$('#email_form').submit();
+			 			}
+		 		})
+			}
 		});
-			alert("인증번호가 전송되었습니다.") 
-		}
+		alert("인증번호가 전송되었습니다.") 
+		
 		/* 유효시간 타이머 */
 		var x = setInterval(function(){
 			min = parseInt(time/60);
@@ -65,12 +62,15 @@ $(document).ready(function(){
 			
 			if(time < 0){
 				clearInterval(x);
-				document.getElementById("time").innerHTML = "시간초과";
+				document.getElementById("time").innerHTML = "시간초과"; 
 				document.getElementById("sendMail").innerHTML = "인증번호 재요청";
 				document.getElementById("compare").disabled = true;	// 유효시간 지나면 입력못하게 비활성화
-				alert("유효시간이 초과되었습니다.")
+				alert("유효시간이 초과되었습니다.");
+				/* $('#sendMail').attr("disabled","disabled"); */
+				time = 60;
 			}
-		}, 1000); 
+		}, 1000);
+		
 		
 	});
 })

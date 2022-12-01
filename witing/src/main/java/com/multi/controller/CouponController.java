@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CouponDTO;
+import com.multi.dto.Criteria;
 import com.multi.dto.CustDTO;
+import com.multi.dto.PageDTO;
 import com.multi.service.CouponService;
 import com.multi.service.CustService;
 
@@ -24,10 +27,13 @@ public class CouponController {
 	CustService custservice;
 	
 	@RequestMapping("/coupon")
-	public String coupon(Model model, String custid) {
+	public String coupon(Model model, String custid, Criteria cri) {
 		try {
 			CustDTO cust = custservice.get(custid);
-			List<CouponDTO> list = service.getcustcoupon(custid);
+			List<CouponDTO> list = service.couponpage(cri);
+			int total = service.couponcnt(cri);
+			PageDTO pageMaker = new PageDTO(total, cri);
+			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("imgpath", "images/hotel/gyeongju2.jpg");
 			model.addAttribute("pagename", "Coupon");
 			model.addAttribute("cust", cust);
