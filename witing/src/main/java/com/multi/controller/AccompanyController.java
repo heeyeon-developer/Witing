@@ -88,8 +88,8 @@ public class AccompanyController {
 	}
 	
 	@RequestMapping("/replyimpl")
-	public String replyimpl(Model model, String custid, int accomid, String comment) {
-		ReplyDTO reply = new ReplyDTO(0, accomid, custid, comment, null, 0);
+	public String replyimpl(Model model, String custid, int accomid, String comment, String secret) {
+		ReplyDTO reply = new ReplyDTO(0, accomid, custid, comment, null, 0, secret);
 		try {
 			reply_service.register(reply);
 		} catch (Exception e) {
@@ -111,7 +111,7 @@ public class AccompanyController {
 	
 	@RequestMapping("/updatereply")
 	public String updatereply(Model model, Integer replyid, Integer accomid, String comment, String custid) {
-		ReplyDTO reply = new ReplyDTO(replyid, accomid, custid, comment, null, 0);
+		ReplyDTO reply = new ReplyDTO(replyid, accomid, custid, comment, null, 0, null);
 		try {
 			System.out.println(replyid);
 			System.out.println(accomid);

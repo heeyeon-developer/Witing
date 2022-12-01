@@ -24,5 +24,6 @@ public class ReplyDTO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date cdate;
 	private int topid;
+	private String secret;
  
 }
