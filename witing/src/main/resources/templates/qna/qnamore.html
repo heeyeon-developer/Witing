@@ -72,17 +72,37 @@ function movePage(uri, queryString) {
 			<th style="text-align: center">Poster ID</th>
 			<th style="text-align: center">Post Date</th>
 			<th style="text-align: center">Answer</th>
-			<!-- <th>&nbsp&nbsp&nbsp&nbsp</th> --> <!-- 비밀글 기능 표시 열 -->
+			<th>&nbsp&nbsp&nbsp&nbsp</th> <!-- 비밀글 기능 표시 열 -->
 		</tr>
 		</thead>
 		<tbody th:each=li:${list}>
-		<tr th:onclick="|location.href='@{/qnamoredetail(postid=${li.postid})}'|" style="cursor: pointer">
+		
+		
+		<tr th:onclick="|location.href='@{/qnamoredetail(postid=${li.postid})}'|" style="cursor: pointer" th:if="${li.secret == 'n'} or ${li.secret == '0'}"> 
+		<td th:text="${li.postid}"></td>
+			<td th:text="${li.title}" style="text-align: center" th:if="${li.secret == 'n'} or ${li.secret == '0'}"></td>
+			<td th:text="${li.custid}" style="text-align: center"></td>
+			<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: center"></td>
+			<td th:text="${li.answer}" style="text-align: center">답변완료</td>
+			<td></td>	<!-- 비밀글 기능 표시 열 -->
+		</tr>
+		
+		<tr th:onclick="|location.href='#'|" style="cursor: pointer" th:if="${li.secret == 'y'} and ${session.logincust.custid} != ${li.custid}">
 			<td th:text="${li.postid}"></td>
+			<td th:text="${'비밀글입니다.'}" style="text-align: center" th:if="${li.secret == 'y'}"></td>
+			<td th:text="${li.custid}" style="text-align: center"></td>
+			<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: center"></td>
+			<td th:text="${li.answer}" style="text-align: center">답변완료</td>
+			<td class="fa fa-lock" style="border : none; margin-top: 7px" ></td>	<!-- 비밀글 기능 표시 열 -->
+		</tr>
+		
+		<tr th:onclick="|location.href='@{/qnamoredetail(postid=${li.postid})}'|" style="cursor: pointer" th:if="${li.secret == 'y'} and ${session.logincust.custid} == ${li.custid}"> 
+		<td th:text="${li.postid}"></td>
 			<td th:text="${li.title}" style="text-align: center"></td>
 			<td th:text="${li.custid}" style="text-align: center"></td>
 			<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: center"></td>
 			<td th:text="${li.answer}" style="text-align: center">답변완료</td>
-			<!-- <td class="fa fa-lock"></td> -->	<!-- 비밀글 기능 표시 열 -->
+			<td class="fa fa-lock" style="border : none; margin-top: 7px"></td>	<!-- 비밀글 기능 표시 열 -->
 		</tr>
 		</tbody>
 	</table>

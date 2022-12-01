@@ -90,8 +90,7 @@ function movePage(uri, queryString) {
 			<td th:text="${li.title}" style="text-align: center"></td>
 			<td th:text="${li.custid}" style="text-align: center"></td>
 			<td th:text="${#dates.format(li.rdate, 'yyyy-MM-dd')}" style="text-align: center"></td>
-			<td th:text="${li.answer}" style="text-align: center">답변완료</td>
-			<!-- <td class="fa fa-lock"></td> -->	<!-- 비밀글 기능 표시 열 -->
+			
 		</tr>
 		</tbody>
 	</table>

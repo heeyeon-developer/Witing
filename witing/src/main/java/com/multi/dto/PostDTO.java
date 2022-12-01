@@ -28,7 +28,7 @@ public class PostDTO {
 	private Date rdate;
 	private String kind;
 	private int star;
-	private boolean secret;
+	private String secret;
 	private int toppostid;
 	
 	private String answer;
