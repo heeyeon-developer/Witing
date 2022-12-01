@@ -17,6 +17,7 @@
 
 #plan{color: black;}
 
+
 #linkbtn, #twitbtn, #blogbtn, #instabtn, #kakaobtn,
 #linkbtn:active, #twitbtn:active, #blogbtn:active, #instabtn:active, #kakaobtn:active,
 #linkbtn:focus, #twitbtn:focus, #blogbtn:focus, #instabtn:focus, #kakaobtn:focus,
@@ -303,9 +304,15 @@ $(document).ready(function(){
    <div class="card bg-light">
        <div class="card-body">
            <!-- Comment form-->
-           <div>
-           <form class="col-md-11" style="margin-bottom: 2%;"><textarea class="form-control" rows="3" placeholder="동행하고 싶다면 댓글을 남겨주세요 :)" name="comment" id="comment" style="display: inline-block;"></textarea></form>
-           <button type="button" class="btn btn-primary" id="reply_btn" style="width: 90px; height: 95px; float: right; margin-top: -122px;">작성하기</button>
+           <div class="comment_form">
+           <form class="col-md-11" style="margin-bottom: 2%;">
+	           <textarea class="form-control" rows="3" placeholder="동행하고 싶다면 댓글을 남겨주세요 :)" name="comment" id="comment" style="display: inline-block;"></textarea>
+	           <div class="select" style="float: right;">
+	           <input type="radio" name="secret" id="secret_y" value="y"> 비밀
+	           <input type="radio" name="secret" id="secret_n" value="n"> 공개
+	           </div>
+           </form>
+           <button type="button" class="btn btn-primary" id="reply_btn" style="width: 90px; height: 90px; float: right; margin-top: -130px; margin-left: 80%;">작성하기</button>
            </div>
            <!-- Comment with nested comments-->
            <div class="d-flex mb-4" th:each="reply:${reply}"><div id="replyid" hidden="hidden" th:text="${reply.replyid}"></div>

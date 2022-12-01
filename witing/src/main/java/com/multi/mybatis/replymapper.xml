@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM reply
 	</select>
 	<insert id="insert" parameterType="ReplyDTO">
-		INSERT INTO reply VALUES (NULL,#{accomid},#{custid},#{comment},NOW(),#{topid})
+		INSERT INTO reply VALUES (NULL,#{accomid},#{custid},#{comment},NOW(),#{topid},#{secret})
 	</insert>
 	<update id="update" parameterType="ReplyDTO">
 		UPDATE reply SET comment=#{comment} WHERE replyid=#{replyid}

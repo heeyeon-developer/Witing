@@ -25,7 +25,7 @@ class RegisterReply {
 	@Test
 	void contextLoads() {
 		try {
-			service.register(new ReplyDTO(0, 3, "k_bdb97", "저도 가고싶어요~", null, 0));
+			service.register(new ReplyDTO(0, 3, "k_bdb97", "저도 가고싶어요~", null, 0, "n"));
 			List<ReplyDTO> list = service.getall();
 			for(ReplyDTO r : list)
 				System.out.println(r);
