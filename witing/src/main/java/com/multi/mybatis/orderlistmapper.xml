@@ -36,5 +36,18 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		       INNER JOIN hotel h ON h.hotelid = ro.hotelid
 		 WHERE ol.custid=#{custid}
 	</select>
-	 
+	<select id="custorderpage" resultType="OrderlistDTO">
+		SELECT ol.orderid, ol.roomid, ol.custid, ol.totalprice, ol.cnt, h.hotelid, 
+		       concat(h.hotelname,concat('-',ro.roomtype)) AS info, ol.sdate, ol.edate,
+		       ro.roomimg1 AS roomimg
+		  FROM orderlist ol
+			   INNER JOIN room ro ON ro.roomid = ol.roomid
+		       INNER JOIN hotel h ON h.hotelid = ro.hotelid
+		 WHERE ol.custid=#{custid}
+		 LIMIT #{skip}, #{amount}
+	</select>
+	<select id="custordercnt" resultType="Integer">
+        SELECT count(*) FROM orderlist
+        WHERE custid=#{custid}
+    </select>
 </mapper>

@@ -23,5 +23,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	<select id="getcustcoupon" parameterType="String" resultType="CouponDTO">
 		SELECT * FROM coupon WHERE custid=#{custid}
 	</select>
-	 
+	<select id="couponpage" resultType="CouponDTO">
+		SELECT * FROM coupon WHERE custid=#{custid}
+		LIMIT #{skip}, #{amount}
+	</select>
+	<select id="couponcnt" resultType="Integer">
+        SELECT count(*) FROM coupon 
+        WHERE custid=#{custid}
+    </select>
 </mapper>

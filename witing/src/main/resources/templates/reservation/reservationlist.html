@@ -1,50 +1,61 @@
 <meta charset="utf-8">
 
+<script>
+	function movePage(uri, queryString) {
+	    console.log(uri);
+	    console.log(queryString);
+	
+	    location.href = uri + queryString;
+	}
+</script>
+
+
 <section class="ftco-section contact-section ftco-no-pt">
   <div class="container">
-  <form action="#" class="bg-light p-5 contact-form">
-	<h2 id="a_title">List</h2>
+  <div class="row block-9">
+   <div class="col-md-12 order-md-last d-flex">
+	
 	<table class="table table-hover">
 		<colgroup>
-			<col style="width:10%">
-			<col style="width:40%">
+			<col style="width:12%">
+			<col style="width:50%">
 			<col style="width:15%">
-			<col style="width:35%">
+			<col style="width:23%">
 		</colgroup>
 		<thead>
 		<tr id="tablehead">
 			<th>No</th>
-			<th>숙박 시설 정보</th>
-			<th>숙박인원</th>
-			<th>일정</th>
+			<th style="text-align: center">Reservation Info.</th>
+			<th style="text-align: center">Guest</th>
+			<th style="text-align: center">CheckIn - CheckOut</th>
 		</tr>
 		</thead>
 		<tbody th:each="li:${list}">
 		<tr th:onclick="|location.href='@{/reservdetail(orderid=${li.orderid})}'|" style="cursor:pointer">
 			<td th:text="${li.orderid}"></td>
-			<td th:text="${li.info}"></td>
-			<td th:text="${li.cnt}"></td>
-			<td th:text="|${#dates.format(li.sdate, 'yyyy-MM-dd')} ~ ${#dates.format(li.edate, 'yyyy-MM-dd')}|"></td>
+			<td th:text="${li.info}" style="text-align: center"></td>
+			<td th:text="${li.cnt}" style="text-align: center"></td>
+			<td th:text="|${#dates.format(li.sdate, 'yyyy-MM-dd')} ~ ${#dates.format(li.edate, 'yyyy-MM-dd')}|" style="text-align: center"></td>
 		</tr>
 		</tbody>
 	</table>
-	</form>
-	
-<div class="row mt-5">
-  <div class="col text-center">
-    <div class="block-27">
-      <ul>
-        <li><a href="#">&lt;</a></li>
-        <li class="active"><span>1</span></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&gt;</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+	</div>
+	</div>
+	<div class="row mt-5">
+	  <div class="col text-center">
+	    <div class="block-27">
+	      <ul>
+	        <th:block th:with="pageMaker = ${pageMaker}">
+			    <th:block th:each="num : *{#numbers.sequence(pageMaker.pageStart, pageMaker.pageEnd)}">
+			        <li class="pageMaker_btn" th:classappend="${pageMaker.cri.pageNum == num} ? 'active' : ''">
+			            <a href="javascript:void(0)"  th:text="${num}" th:onclick="movePage([[${#request.requestURI}]],[[${pageMaker.cri.makeQueryString(num)}]])">1</a>
+			        </li>
+			    </th:block>
+			</th:block>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
 </div>
 </section>	
 

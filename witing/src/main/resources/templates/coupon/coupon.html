@@ -1,54 +1,59 @@
 <meta charset="utf-8">
 <script>
+function movePage(uri, queryString) {
+    console.log(uri);
+    console.log(queryString);
 
+    location.href = uri + queryString;
+}
 </script>
 
 <section class="ftco-section contact-section ftco-no-pt">
   <div class="container">
-  <form action="#" class="bg-light p-5 contact-form">
-	<h2 id="a_title">List</h2>
+  <div class="row block-9">
+   <div class="col-md-12 order-md-last d-flex">
 	<table class="table table-hover">
 		<colgroup>
-			<col style="width:10%">
-			<col style="width:60%">
-			<col style="width:15%">
-			<col style="width:15%">
+			<col style="width:12%">
+			<col style="width:50%">
+			<col style="width:17%">
+			<col style="width:17%">
 		</colgroup>
 		
 		<thead>
 		<tr id="tablehead">
 			<th>No</th>
-			<th>Coupon Name</th>
-			<th>Discountprice</th>
-			<th>Discountpercent</th>
+			<th style="text-align: center">Coupon Name</th>
+			<th style="text-align: center">Discountprice</th>
+			<th style="text-align: center">Discountpercent</th>
 		</tr>
 		</thead>
 		<tbody th:each=li:${list}>
 		<tr>
 			<td th:text="${li.couponid}"></td>
-			<td th:text="${li.kind}"></td>
-			<td th:text="${li.discountprice}"></td>
-			<td th:text="|${li.discountpercent}%|"></td>
+			<td th:text="${li.kind}" style="text-align: center"></td>
+			<td th:text="${li.discountprice}" style="text-align: center"></td>
+			<td th:text="|${li.discountpercent}%|" style="text-align: center"></td>
 		</tr>
 		</tbody>
 	</table>
-	</form>
-	
-<div class="row mt-5">
-  <div class="col text-center">
-    <div class="block-27">
-      <ul>
-        <li><a href="#">&lt;</a></li>
-        <li class="active"><span>1</span></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&gt;</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+	</div>
+	</div>
+	<div class="row mt-5">
+	  <div class="col text-center">
+	    <div class="block-27">
+	      <ul>
+	        <th:block th:with="pageMaker = ${pageMaker}">
+			    <th:block th:each="num : *{#numbers.sequence(pageMaker.pageStart, pageMaker.pageEnd)}">
+			        <li class="pageMaker_btn" th:classappend="${pageMaker.cri.pageNum == num} ? 'active' : ''">
+			            <a href="javascript:void(0)"  th:text="${num}" th:onclick="movePage([[${#request.requestURI}]],[[${pageMaker.cri.makeQueryString(num)}]])">1</a>
+			        </li>
+			    </th:block>
+			</th:block>
+	      </ul>
+	    </div>
+	  </div>
+	</div>
 </div>
 </section>	
 

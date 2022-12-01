@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.multi.dto.CouponDTO;
+import com.multi.dto.Criteria;
 import com.multi.frame.MyService;
 import com.multi.mapper.CouponMapper;
 
@@ -43,6 +44,11 @@ public class CouponService implements MyService<String, CouponDTO>{
 		return mapper.getcustcoupon(custid);
 	}
 	
-	
+	public List<CouponDTO> couponpage(Criteria cri) throws Exception {
+		return mapper.couponpage(cri);
+	}
+	public int couponcnt(Criteria cri) throws Exception {
+		return mapper.couponcnt(cri);
+	}
 
 }

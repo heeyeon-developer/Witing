@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.multi.dto.Criteria;
 import com.multi.dto.CustDTO;
 import com.multi.dto.HotelDTO;
 import com.multi.dto.OrderlistDTO;
+import com.multi.dto.PageDTO;
 import com.multi.dto.PayDTO;
 import com.multi.dto.ReservationDTO;
 import com.multi.dto.RoomDTO;
@@ -68,10 +70,13 @@ public class ReservationController {
 	}
 	
 	@RequestMapping("/reservationlist")
-	public String reservationlist(Model model, String custid) {
+	public String reservationlist(Model model, String custid, Criteria cri) {
 		try {
 			CustDTO cust = custservice.get(custid);
-			List<OrderlistDTO> list = orderlistservice.custorder(custid);
+			List<OrderlistDTO> list = orderlistservice.custorderpage(cri);
+			int total = orderlistservice.custordercnt(cri);
+			PageDTO pageMaker = new PageDTO(total, cri);
+			model.addAttribute("pageMaker", pageMaker);
 			model.addAttribute("cust", cust);
 			model.addAttribute("imgpath", "images/hotel/gyeongju2.jpg");
 			model.addAttribute("pagename","Reservation");

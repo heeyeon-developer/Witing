@@ -1,7 +1,6 @@
 <meta charset="utf-8">
 <script>
 
-
 function del(like_id){
 	var cust_id='[[${session.logincust.custid}]]';
 	var c = confirm('삭제 하시겠습니까?');
@@ -9,6 +8,7 @@ function del(like_id){
 		location.href='[[@{/deletelike?like_id=}]]'+like_id+'&[[@{cust_id=}]]'+cust_id;
 	}
 }
+
 </script>
 
 
@@ -17,111 +17,6 @@ function del(like_id){
 	color: red;
 }
 </style>
-
-
-<!-- <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-2sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div>비밀번호를 입력해주세요 : )</div>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"></h4>
-        </div>
-        <div class="modal-body">
-        <form id="infoenter_form">
-          <div class="form-group">
-            <input id="custpwd" type="password" class="form-control" placeholder="Password" name="custpwd">
-          </div>
-          </form>
-          <p></p>
-        </div>
-        <div class="modal-footer">
-		<a th:href="@{/custdetail(custid=${session.logincust.custid})}">
-		<a href=#>
-          <button id="infoenter_btn" type="button" class="btn btn-default" style="background-color: #f15d30; color: white">Submit</button>
-        </a>
-        </div>
-      </div>
-    </div>
-</div> -->
-<!-- 모달 끝 -->
-
-<!-- <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/hotel/gyeongju2.jpg')">
-  <div class="container">
-    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
-      <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="/">Home <i class="fa fa-chevron-right"></i></a></span> <span><a href="/mypage">My Page <i class="fa fa-chevron-right"></a></i></span> <span><a th:href="@{/like(custid=${session.logincust.custid})}">Like <i class="fa fa-chevron-right"></a></i></span></p>
-       <h1 class="mb-0 bread">My Page</h1>
-     </div>
-   </div>
- </div>
-</section>
-
-<section class="ftco-section ftco-no-pb contact-section mb-4">
-  <div class="container">
-    <div class="row d-flex contact-info">
-      <div data-toggle="modal" data-target="#myModal" class="col-md-2 d-flex" style="cursor:pointer;">
-        <div class="align-self-stretch box p-4 text-center" style="background : white"> 
-        <div class="icon d-flex align-items-center justify-content-center">
-         <span class="fa fa-user"></span>
-       </div>
-       <h3 class="mb-2">Information</h3>
-     </div> 
-   </div>
-   
-   <div class="col-md-2 d-flex" th:onclick="|location.href='@{/coupon(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
-     <div class="align-self-stretch box p-4 text-center" style="background : white">
-      <div class="icon d-flex align-items-center justify-content-center">
-       <span class="fa fa-ticket"></span>
-     </div>
-     <h3 class="mb-2">Coupon</h3>
-   </div>
- </div>
- 
- 
- <div class="col-md-2 d-flex" th:onclick="|location.href='@{/like(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
-   <div class="align-self-stretch box p-4 text-center" style="background : white">
-    <div class="icon d-flex align-items-center justify-content-center">
-     <span class="fa fa-heart"></span>
-   </div>
-   <h3 class="mb-2">Wishlist </h3>
- </div>
-</div>
-
-
-<div class="col-md-2 d-flex" th:onclick="|location.href='@{/reservation(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center" style="background : white">
-  <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-bed"></span>
- </div>
- <h3 class="mb-2">Reservation</h3>
-</div>
-</div>
-
-
-<div class="col-md-2 d-flex" th:onclick="|location.href='@{/review(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center" style="background : white">
-  <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-comment"></span>
- </div>
- <h3 class="mb-2">Review</h3>
-</div>
-</div>
-
-
-<div class="col-md-2 d-flex" th:onclick="|location.href='@{/qna(custid=${session.logincust.custid})}'|" style="cursor:pointer;">
- <div class="align-self-stretch box p-4 text-center" style="background : white">
-  <div class="icon d-flex align-items-center justify-content-center">
-   <span class="fa fa-question"></span>
- </div>
- <h3 class="mb-2">Q&A</h3>
-</div>
-</div>
-
-</div>
-</div>
-</section> -->
-
 
 <section class="ftco-section contact-section ftco-no-pt" style="color: white">
   <div class="container">
