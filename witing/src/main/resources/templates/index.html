@@ -45,10 +45,21 @@
 		$('#mbti').click(function(){
 			if('[[${session.logincust}]]' == ''){
 				alert("로그인 후 MBTI 테스트를 진행해주세요 :)");
-				location.href="/login";
+				location.href='/login';
 			}
-			else
-				location.href="/mbti";
+			else{
+				$.ajax({
+					url:'[[@{/gettype}]]',
+					data:{session:'[[${session.logincust}]]'},
+					success:function(data){
+						if(data[1] != null)
+							location.href='/result?custid='+data[0]+'&type='+data[1];
+						else
+							location.href='/mbti';
+					}
+				})				
+			}
+				
 		});
 		
 	$('#chatEnter').click(function(){

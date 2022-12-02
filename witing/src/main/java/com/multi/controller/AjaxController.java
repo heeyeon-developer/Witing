@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -139,4 +140,18 @@ public class AjaxController {
 			System.out.println(key);
 			return key;
 		}
+	
+	@RequestMapping("/gettype")
+	public Object mbti(Model model, HttpSession session) {
+		ArrayList<String> list = new ArrayList<>();
+		try {
+			CustDTO cust = (CustDTO) session.getAttribute("logincust");
+			list.add(cust.getCustid());
+			list.add(cust.getType());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 }
