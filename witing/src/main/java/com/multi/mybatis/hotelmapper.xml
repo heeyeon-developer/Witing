@@ -36,8 +36,9 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		INNER JOIN city ci ON ho.cityid = ci.cityid
 		INNER JOIN room ro ON ho.hotelid = ro.hotelid
 		INNER JOIN orderlist ol ON ro.roomid = ol.roomid
-		WHERE ho.cityid NOT IN (#{cityid}) AND ho.cateid NOT IN (#{cateid})
-		AND ol.roomid NOT IN (SELECT roomid FROM orderlist WHERE sdate BETWEEN #{sdate} AND #{edate});
+		WHERE (ho.cityid IS NULL OR ho.cityid NOT IN (#{cityid}))
+		AND (ho.cateid IS NULL OR ho.cateid NOT IN (#{cateid}))
+		AND ol.roomid NOT IN (SELECT roomid FROM orderlist WHERE sdate BETWEEN #{sdate} AND #{edate})
 	</select>
 	
 	<select id="cityshotel" parameterType="Integer" resultType="HotelDTO">

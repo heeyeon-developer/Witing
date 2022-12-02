@@ -18,17 +18,27 @@
 #plan{color: black;}
 
 
+#reply_btn{width: 90px; height: 90px; float: right; margin-top: -130px; margin-left: 80%;}
+
+#update_btn,#delete_btn{display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;}
+
+#re_custid{margin-left: 15px; margin-right:2%; font-size: 18px; font-weight: bold; color: #f15d30; display: inline-block;}
+
+
 #linkbtn, #twitbtn, #blogbtn, #instabtn, #kakaobtn,
 #linkbtn:active, #twitbtn:active, #blogbtn:active, #instabtn:active, #kakaobtn:active,
 #linkbtn:focus, #twitbtn:focus, #blogbtn:focus, #instabtn:focus, #kakaobtn:focus,
 #update_btn:active, #update_btn:focus, #delete_btn:active, #delete_btn:focus
 {background-color: transparent; border: none !important; box-shadow: none !important; outline:none;}
 
-@media screen and (max-width: 992px) {#comment{width: 470px;} #select_sc{margin-right: 10%;}} 
+/* @media screen and (min-width: 992px) {#comment{width: 470px;} #select_sc{margin-right: 10%;}} 
 
-@media screen and (max-width: 768px) {#comment{width: 350px;}}
+@media screen and (min-width: 768px) {#comment{width: 350px;}}
 
-@media screen and (max-width: 576px){#comment{width: 300px;}}
+@media screen and (min-width: 576px){#comment{width: 300px;}}
+
+@media screen and (min-width: 414px){#comment{width: 250px;} #reply_btn{width: 70px; height: 93px;}}
+@media screen and (min-width: 375px){#comment{width: 220px;} #reply_btn{width: 60px; height: 93px;}} */
 
 
 </style>
@@ -322,7 +332,7 @@ $(document).ready(function(){
 		           <input type="radio" name="secret" id="secret_n" value="n" checked> 공개
 	           </div>
            </form>
-           <button type="button" class="btn btn-primary" id="reply_btn" style="width: 90px; height: 90px; float: right; margin-top: -130px; margin-left: 80%;">작성하기</button>
+           <button type="button" class="btn btn-primary" id="reply_btn">작성하기</button>
            <br>
            </div>
            <!-- Comment with nested comments-->
@@ -330,12 +340,12 @@ $(document).ready(function(){
                <!-- Parent comment-->
                <div class="flex-shrink-0"><img class="rounded-circle" id="comimg" src="/images/user/bear2.png" style="width: 50px;" alt="..." /></div>
                <div class="col-md-8">
-                   <div class="fw-bold" th:text="${reply.custid}" style="margin-left: 15px; margin-right:2%; font-size: 18px; font-weight: bold; color: #f15d30; display: inline-block;"></div>
+                   <div class="fw-bold" th:text="${reply.custid}" id="re_custid"></div>
                     <span th:if="${reply.secret == 'y'}" class="fa fa-lock" style="display: inline-block;"></span>
                     <div style="font-size: 13px; margin-left:2.5%; margin-top: 3px;">
                     <p th:text="${#dates.format(reply.cdate, 'yyyy-MM-dd HH:mm:ss')}" style="display: inline-block; margin-right: 1%;"></p>
-                    <button type="button" id="update_btn" th:onclick="|update_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}" data-toggle='modal' th:data-target='|#modifyModal${reply.replyid}|' style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">수정</button>
-                    <button type="button" id="delete_btn" th:onclick="|re_delete_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}" style="display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;">삭제</button>
+                    <button type="button" id="update_btn" th:onclick="|update_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}" data-toggle='modal' th:data-target='|#modifyModal${reply.replyid}|'>수정</button>
+                    <button type="button" id="delete_btn" th:onclick="|re_delete_btn([[${reply.replyid}]])|" th:if="${session.logincust.custid} == ${reply.custid}">삭제</button>
                     </div>
                     <div th:if="${reply.secret == 'y'}">
                     	<p th:if="${session.logincust.custid} != ${reply.custid} and ${session.logincust.custid} != ${custid}" style="margin-left: 15px; color: gray;">비밀 댓글입니다.</p>
@@ -372,8 +382,8 @@ $(document).ready(function(){
 					                  <textarea class="form-control" rows="4" th:id="|comment_reply${reply.replyid}|" th:value="${reply.comment}" th:text="${reply.comment}" name="comment"></textarea>
 					              </div>
 					              <div class="select" id="update_sc" style="float: right;">
-							           <input type="radio" name="up_secret" id="update_y" value="y" th:checked="${reply.secret eq 'y'}"> 비밀
-							           <input type="radio" name="up_secret" id="update_n" value="n" th:checked="${reply.secret eq 'n'}"> 공개
+							           <input type="radio" name="up_secret" id="update_y" value="y"> 비밀
+							           <input type="radio" name="up_secret" id="update_n" value="n"> 공개
 						          </div>
 					          </form>
 					          </div>

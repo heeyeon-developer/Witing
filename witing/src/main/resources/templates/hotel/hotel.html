@@ -76,6 +76,12 @@ function addlike(cust_id, hotel_id){
 
 $(document).ready(function(){
 	$('#search_btn').click(function(){
+		var sdate = document.getElementById("sdate");
+		var edate = document.getElementById("edate");
+		if(sdate.value == "" || edate.value == ""){
+			alert('날짜를 선택해주세요.');
+			return false;
+		}
 		alert($('#cityid').val());
 	})
 	var custid = $('#custid').text();
