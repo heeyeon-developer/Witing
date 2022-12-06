@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.multi.dto.CriteriaHotel;
 import com.multi.dto.HotelDTO;
 import com.multi.frame.MyService;
 import com.multi.mapper.HotelMapper;
@@ -51,6 +52,14 @@ public class HotelService implements MyService<Integer, HotelDTO>{
 	
 	public List<HotelDTO> searchhotel(Integer cityid, Integer cateid, Date sdate, Date edate) throws Exception {
 		return mapper.searchhotel(cityid, cateid,sdate,edate);
+	}
+	
+	public List<HotelDTO> hotelpage(CriteriaHotel crihotel) throws Exception {
+		return mapper.hotelpage(crihotel);
+	}
+	
+	public int hotelcnt(CriteriaHotel crihotel) throws Exception {
+		return mapper.hotelcnt(crihotel);
 	}
 	
 }

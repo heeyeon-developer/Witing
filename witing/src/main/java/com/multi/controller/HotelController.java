@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.CateDTO;
 import com.multi.dto.CityDTO;
+import com.multi.dto.CriteriaHotel;
 import com.multi.dto.HotelDTO;
+import com.multi.dto.PageDTO;
+import com.multi.dto.PageHotelDTO;
 import com.multi.dto.PostDTO;
 import com.multi.dto.RoomDTO;
 import com.multi.mapper.CateMapper;
@@ -46,14 +49,19 @@ public class HotelController {
 	
 	
 	@RequestMapping("/hotel")
-	public String main(Model model) {
+	public String main(Model model, CriteriaHotel crihotel) {
 		List<HotelDTO> list = null;
 		List<CateDTO> cate = null;
 		List<CityDTO> city = null;
 		try {
-			list = service.hotelcity();
+			list = service.hotelpage(crihotel);
 			cate = cate_service.getcate();
 			city = city_service.getall();
+			
+			int total = service.hotelcnt(crihotel);
+			PageHotelDTO pageMaker = new PageHotelDTO(total, crihotel);
+			model.addAttribute("pageMaker", pageMaker);
+			
 			model.addAttribute("city", city);
 			model.addAttribute("list", list);
 			model.addAttribute("cate", cate);

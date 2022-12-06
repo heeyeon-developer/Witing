@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 	</delete>
 	<select id="hotelcity" parameterType="Integer" resultType="HotelDTO">
 		SELECT * FROM hotel h
-		INNER JOIN city c ON h.cityid = c.cityid;
+		INNER JOIN city c ON h.cityid = c.cityid
 	</select>
 	<select id="searchhotel" resultType="HotelDTO">
 		<!-- SELECT * FROM hotel ho
@@ -48,4 +48,12 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		 WHERE c.cityid = #{cityid}
 	</select>
 	 
+	<select id="hotelpage" resultType="HotelDTO">
+        SELECT * FROM hotel h
+        INNER JOIN city c ON h.cityid = c.cityid
+        ORDER BY hotelid LIMIT #{skip}, #{amount}
+    </select>
+    <select id="hotelcnt" resultType="Integer">
+        SELECT count(*) FROM hotel
+    </select>
 </mapper>
