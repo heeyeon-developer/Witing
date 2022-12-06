@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM cate WHERE cateid=#{cateid}
 	</delete>
 	<select id="getcate" resultType="CateDTO">
-		SELECT * FROM cate ca
+		SELECT DISTINCT catename FROM cate ca
 		INNER JOIN hotel ho ON ca.cateid = ho.cateid
 		INNER JOIN city ci ON ho.cityid = ci.cityid;
 	</select>

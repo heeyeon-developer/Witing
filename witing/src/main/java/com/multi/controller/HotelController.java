@@ -74,9 +74,14 @@ public class HotelController {
 	}
 	
 	@RequestMapping("/cityshotel")
-	public String cityshotel(Model model, Integer cityid) {
+	public String cityshotel(Model model, Integer cityid, CriteriaHotel crihotel) {
 		try {
 			List<HotelDTO> list = service.cityshotel(cityid);
+			
+			int total = service.hotelcnt(crihotel);
+			PageHotelDTO pageMaker = new PageHotelDTO(total, crihotel);
+			model.addAttribute("pageMaker", pageMaker);
+			
 			model.addAttribute("list", list);
 			model.addAttribute("center", dir+"hotel");
 		} catch (Exception e) {

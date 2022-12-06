@@ -12,8 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.multi.dto.AccompanyDTO;
+import com.multi.dto.CateDTO;
+import com.multi.dto.CityDTO;
 import com.multi.dto.Criteria;
 import com.multi.dto.CustDTO;
+import com.multi.dto.HotelDTO;
 import com.multi.dto.PageDTO;
 import com.multi.dto.PlanDTO;
 import com.multi.dto.ReplyDTO;
@@ -56,6 +59,7 @@ public class AccompanyController {
 		}
 		return "index";
 	}
+	
 	
 	@RequestMapping("/deleteaccom")
 	public String deleteplan(Model model, Integer accomid) {
@@ -167,6 +171,23 @@ public class AccompanyController {
 	
 //	float[] planx = Float.parseFloat(request.getParameterValues("plnax"));
 //	float[] plany = Float.parseFloat(request.getParameterValues("plnay"));
+	
+	@RequestMapping("/searchaccom")
+	public String searchaccom(Model model, Criteria cri, Date sdate, Date edate) {
+		
+		try {
+			List<AccompanyDTO >list = service.searchaccom(cri, sdate, edate);
+			model.addAttribute("list", list);
+			model.addAttribute("center", dir+"accompany");
+			
+			int total = service.searchaccomcnt(cri,sdate,edate);
+			PageDTO pageMaker = new PageDTO(total, cri);
+			model.addAttribute("pageMaker", pageMaker);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "index";
+	}
 	
 
 }

@@ -77,6 +77,9 @@
 				document.getElementById('addAnswer').appendChild(divA);
 			}
 		});
+		
+		var chat = document.querySelector('#chatBasic');
+        chat.scrollTop = chat.scrollHeight;
 	});
 	
 	});
@@ -138,7 +141,7 @@
 	          <h4 class="modal-title"></h4>
 	        </div>
 	        
-	        <div id="chatBasic" class="modal-body" style="height:500px">
+	        <div id="chatBasic" class="modal-body" style="height:500px;overflow:scroll;">
 	        	<div style="display:inline-block;background-color:#708238;color:white; border-radius:10px;max-width:70%;"><div style="margin:5px;">자유롭게 질문해주세요:)</div></div>
 		        <div id="addAnswer"></div>
 	        </div>

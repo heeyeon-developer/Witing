@@ -35,4 +35,15 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
     <select id="accomcnt" resultType="Integer">
         SELECT count(*) FROM accompany
     </select>
+    <select id="searchaccom" resultType="AccompanyDTO">
+    	SELECT * 
+    	  FROM accompany
+    	 WHERE accomid IN (SELECT accomid FROM accompany WHERE traveltime BETWEEN #{sdate} AND #{edate})
+    	 ORDER BY accomid DESC LIMIT #{cri.skip}, #{cri.amount}
+    </select>
+    <select id="searchaccomcnt" resultType="Integer">
+    	SELECT count(*)
+    	  FROM accompany
+    	 WHERE accomid IN (SELECT accomid FROM accompany WHERE traveltime BETWEEN #{sdate} AND #{edate})
+    </select>
 </mapper>

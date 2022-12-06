@@ -1,5 +1,6 @@
 package com.multi.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,13 @@ public class AccompanyService implements MyService<Integer, AccompanyDTO>{
 	
 	public int accomcnt(Criteria cri) throws Exception {
 		return mapper.accomcnt(cri);
+	}
+	
+	public List<AccompanyDTO> searchaccom(Criteria cri, Date sdate, Date edate) throws Exception {
+		return mapper.searchaccom(cri, sdate, edate);
+	}
+	
+	public int searchaccomcnt(Criteria cri, Date sdate, Date edate) throws Exception {
+		return mapper.searchaccomcnt(cri, sdate, edate);
 	}
 }

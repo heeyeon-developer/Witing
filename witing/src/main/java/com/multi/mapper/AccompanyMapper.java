@@ -1,5 +1,6 @@
 package com.multi.mapper;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -16,5 +17,7 @@ public interface AccompanyMapper extends MyMapper<Integer, AccompanyDTO> {
 	
 	public List<AccompanyDTO> accompage(Criteria cri) throws Exception;
 	public int accomcnt(Criteria cri) throws Exception;
+	public List<AccompanyDTO> searchaccom(Criteria cri, Date sdate, Date edate) throws Exception;
+	public int searchaccomcnt(Criteria cri, Date sdate, Date edate) throws Exception;
 
 }

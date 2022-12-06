@@ -69,6 +69,47 @@ function movePage(uri, queryString) {
  </div>
 </section>
 
+<section id="search_s" class="ftco-section ftco-no-pb">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-8">
+				<div class="search-wrap-1 ftco-animate">
+					<form action="/searchaccom" class="search-property-1" id="search_form">
+						<div class="row no-gutters">
+							<div class="col-md d-flex">
+								<div class="form-group p-4 border-0">
+									<label for="#">start date</label>
+									<div class="form-field">
+										<div class="icon"><span class="fa fa-calendar"></span></div>
+										<input type="text" class="form-control checkin_date" id="sdate" placeholder="Start Date" name="sdate">
+									</div>
+								</div>
+							</div>
+							<div class="col-md d-flex">
+								<div class="form-group p-4">
+									<label for="#">end date</label>
+									<div class="form-field">
+										<div class="icon"><span class="fa fa-calendar"></span></div>
+										<input type="text" class="form-control checkout_date" id="edate" placeholder="End Date" name="edate">
+									</div>
+								</div>
+							</div>
+							<div class="col-md d-flex">
+								<div class="form-group d-flex w-100 border-0">
+									<div class="form-field w-100 align-items-center d-flex">
+										<input type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
+										<div id="custid" th:if="${session.logincust != null}" style="display:none;" th:text="${session.logincust.custid}"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+
 <section class="ftco-section">
   <div class="container">
   	<!-- <div id="list_icon" onclick="listicon">

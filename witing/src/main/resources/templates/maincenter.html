@@ -28,14 +28,17 @@
 							<div class="tab-content" id="v-pills-tabContent">
 
 								<div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-									<form action="#" class="search-property-1">
+									<form action="/searchimpl" class="search-property-1" id="search_form">
 										<div class="row no-gutters">
 											<div class="col-md d-flex">
 												<div class="form-group p-4 border-0">
 													<label for="#">Destination</label>
 													<div class="form-field">
 														<div class="icon"><span class="fa fa-search"></span></div>
-														<input type="text" class="form-control" placeholder="Search place">
+														<select name="cityid" id="cityid" class="form-control">
+															<option value="0">CITY</option>
+															<option th:each="ci:${city}" th:text=${ci.name} th:value="${ci.cityid}" th:id="${ci.cityid}"></option>
+														</select>
 													</div>
 												</div>
 											</div>
@@ -44,7 +47,7 @@
 													<label for="#">Check-in date</label>
 													<div class="form-field">
 														<div class="icon"><span class="fa fa-calendar"></span></div>
-														<input type="text" class="form-control checkin_date" placeholder="Check In Date">
+														<input type="text" class="form-control checkin_date" id="sdate" placeholder="Check In Date" name="sdate">
 													</div>
 												</div>
 											</div>
@@ -53,32 +56,20 @@
 													<label for="#">Check-out date</label>
 													<div class="form-field">
 														<div class="icon"><span class="fa fa-calendar"></span></div>
-														<input type="text" class="form-control checkout_date" placeholder="Check Out Date">
+														<input type="text" class="form-control checkout_date" id="edate" placeholder="Check Out Date" name="edate">
 													</div>
 												</div>
 											</div>
 											<div class="col-md d-flex">
 												<div class="form-group p-4">
-													<label for="#">Price Limit</label>
+													<label for="#">CATEGORY</label>
 													<div class="form-field">
 														<div class="select-wrap">
 															<div class="icon"><span class="fa fa-chevron-down"></span></div>
-															<select name="" id="" class="form-control">
-																<option value="">$100</option>
-																<option value="">$10,000</option>
-																<option value="">$50,000</option>
-																<option value="">$100,000</option>
-																<option value="">$200,000</option>
-																<option value="">$300,000</option>
-																<option value="">$400,000</option>
-																<option value="">$500,000</option>
-																<option value="">$600,000</option>
-																<option value="">$700,000</option>
-																<option value="">$800,000</option>
-																<option value="">$900,000</option>
-																<option value="">$1,000,000</option>
-																<option value="">$2,000,000</option>
-															</select>
+															<select name="cateid" id="cateid" class="form-control">
+													        	<option value="0">CATEGORY</option>
+													        	<option th:each="ca:${cate}" th:text=${ca.catename} th:value="${ca.cateid}" id="${ca.cateid}"></option>
+													        </select>
 														</div>
 													</div>
 												</div>
@@ -87,66 +78,31 @@
 												<div class="form-group d-flex w-100 border-0">
 													<div class="form-field w-100 align-items-center d-flex">
 														<input type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
+														<div id="custid" th:if="${session.logincust != null}" style="display:none;" th:text="${session.logincust.custid}"></div>
 													</div>
 												</div>
 											</div>
 										</div>
 									</form>
 								</div>
-
 								<div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-									<form action="#" class="search-property-1">
+									<form action="/searchaccom" class="search-property-1">
 										<div class="row no-gutters">
 											<div class="col-lg d-flex">
 												<div class="form-group p-4 border-0">
-													<label for="#">Destination</label>
-													<div class="form-field">
-														<div class="icon"><span class="fa fa-search"></span></div>
-														<input type="text" class="form-control" placeholder="Search place">
-													</div>
-												</div>
-											</div>
-											<div class="col-lg d-flex">
-												<div class="form-group p-4">
-													<label for="#">Check-in date</label>
+													<label for="#">start date</label>
 													<div class="form-field">
 														<div class="icon"><span class="fa fa-calendar"></span></div>
-														<input type="text" class="form-control checkin_date" placeholder="Check In Date">
+														<input type="text" class="form-control checkin_date" id="sdate" placeholder="Start Date" name="sdate">
 													</div>
 												</div>
 											</div>
 											<div class="col-lg d-flex">
 												<div class="form-group p-4">
-													<label for="#">Check-out date</label>
+													<label for="#">end date</label>
 													<div class="form-field">
 														<div class="icon"><span class="fa fa-calendar"></span></div>
-														<input type="text" class="form-control checkout_date" placeholder="Check Out Date">
-													</div>
-												</div>
-											</div>
-											<div class="col-lg d-flex">
-												<div class="form-group p-4">
-													<label for="#">Price Limit</label>
-													<div class="form-field">
-														<div class="select-wrap">
-															<div class="icon"><span class="fa fa-chevron-down"></span></div>
-															<select name="" id="" class="form-control">
-																<option value="">$100</option>
-																<option value="">$10,000</option>
-																<option value="">$50,000</option>
-																<option value="">$100,000</option>
-																<option value="">$200,000</option>
-																<option value="">$300,000</option>
-																<option value="">$400,000</option>
-																<option value="">$500,000</option>
-																<option value="">$600,000</option>
-																<option value="">$700,000</option>
-																<option value="">$800,000</option>
-																<option value="">$900,000</option>
-																<option value="">$1,000,000</option>
-																<option value="">$2,000,000</option>
-															</select>
-														</div>
+														<input type="text" class="form-control checkout_date" id="edate" placeholder="End Date" name="edate">
 													</div>
 												</div>
 											</div>
@@ -166,6 +122,7 @@
 				</div>
 			</div>
 		</div>
+		</div>
 	</section>
 
 	<section class="ftco-section">
@@ -176,7 +133,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-4 ftco-animate" th:each="city:${citylist}">
+				<div class="col-md-4 ftco-animate" th:each="city:${city}">
 					<div class="project-wrap">
 						<a th:href="@{/cityshotel(cityid=${city.cityid})}" class="img" th:style="|background-image: url(images/${city.img})|">
 							<span class="price" th:text="${city.name}"></span>
