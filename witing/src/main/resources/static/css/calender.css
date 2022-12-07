@@ -1,17 +1,11 @@
 @charset "UTF-8";
 
 .calender-main{
-	margin-top:10%;
+	margin-top:5%;
 	width: 50%;
-	height: 50%;
+	height: 25%;
 }
 
-@media (max-width:390px){
-	.calender-main{
-		margin-top:10%;
-		height: 20%;
-	}
-}
 .calender-wrap{
   width: 110%;
   margin:0 auto;
@@ -61,6 +55,13 @@
 
 tr{
 	text-align: center;
+}
+
+@media (max-width:390px){
+	.calender-main{
+		margin-top:10%;
+		height: 20%;
+	}
 }
 
 @media(min-width: 850px){

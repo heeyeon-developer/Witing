@@ -10,17 +10,14 @@
  </div>
 </section>
 
-<section class="ftco-section contact-section ftco-no-pt">
+<section>
 <div class="container">
-    <div class="row block-9 justify-content-center">
-    	<h2 th:text="|${name}님 가입이 완료되었습니다!|"></h2>
-    	<h2>로그인 후 서비스를 이용해주세요 :)</h2>
-          <a th:href="@{/}" th:if="${session.logincust == null}" class="btn btn-primary">Home</a>
-        </form>
-        
-      </div>
-
-   </div>
- </div>
-
+   	<div class="row no-gutters justify-content-center">
+      	<div class="col-md-9 ftco-animate pb-5 text-center">
+       	<h1 class="breadcrumbs" style="margin-top:5%;" th:text="|${name}님 가입이 완료되었습니다!|"></h1>
+       	<h1 class="mb-0 bread">로그인 후 서비스를 이용해주세요 :)</h1>
+       	<a th:href="@{/}" style="margin-top:5%" th:if="${session.logincust == null}" class="btn btn-primary">Home</a>
+     	</div>
+   	</div>
+</div>
 </section>

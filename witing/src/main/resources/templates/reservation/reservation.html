@@ -57,7 +57,8 @@
 		  </div>
 		</div>
 		<div>
-        <form id="reservform" class="p-5 contact-form">
+		<div class="justify-content-center">
+        <form id="reservform" class="p-5 contact-form justify-content-center">
           <div class="form-group">
             <input id="custname" type="text" class="form-control" th:value="${custname}">
             <input id="custid" th:value="${custid}" style="display:none" name="custid">
@@ -67,8 +68,8 @@
           	<input th:value="${roomid}" style="display:none" name="roomid"><div id="roomid" th:text="${roomid}" style="display:none"></div>
           </div>
           <div class="form-group">
-			<input id="sdate" type="text" class="form-control col-md-5" placeholder="예약 시작일" name="sdate" style="display:inline-block" readonly="readonly">
-			<input id="edate" type="text" class="form-control col-md-5" placeholder="예약 마지막일" name="edate" style="display:inline-block" readonly="readonly">
+			<input id="sdate" type="text" class="form-control col-md-5" placeholder="예약 시작일" name="sdate" style="display:inline-block;" readonly="readonly">
+			<input id="edate" type="text" class="form-control col-md-5" placeholder="예약 마지막일" name="edate" style="display:inline-block;" readonly="readonly">
           </div>
           <div class="form-group">
           <span>인원수</span>
@@ -88,7 +89,8 @@
             <input id="totalprice" type="text" class="form-control" th:value="${totalprice}" name="totalprice">
           </div>
         </form>
-        	<button id="payBtn" onclick="requestPay()" class="btn btn-primary justify-content-center" style="display:inline-block; float:right;">결제하기</button>
+        </div>
+        	<button id="payBtn" onclick="requestPay()" class="btn btn-primary justify-content-center" style="display:inline-block; float:right; margin-right:10%;">결제하기</button>
         </div>
       </div>
 

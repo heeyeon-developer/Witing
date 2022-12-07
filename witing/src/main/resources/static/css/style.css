@@ -744,6 +744,40 @@ pre {
 .offset-11 {
   margin-left: 91.66667%; }
 
+#idcheckbtn {
+	margin-left:3%; 
+	width: 20%; 
+	display: inline-block; 
+	background-color: lightgray;
+}
+
+#zipcode{
+	width: 30%; 
+	display: inline-block;
+}
+
+#zipbtn {
+	margin-left:3%; 
+	width: 25%; 
+	display: inline-block; 
+	background-color: lightgray;
+}
+
+@media (max-width: 390px) {
+	#regist_title {
+		font-size:1em;
+	}
+	#idcheckbtn {
+		width:40%;
+	}
+	#zipcode{
+		width:40%;
+	}
+	#zipbtn{
+		width:50%;
+	}
+}
+
 @media (min-width: 576px) {
   .col-sm {
     -ms-flex-preferred-size: 0;

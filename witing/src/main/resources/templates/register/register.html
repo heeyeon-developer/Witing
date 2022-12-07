@@ -90,7 +90,7 @@ $(document).ready(function(){
 						},
 						action:'/registerimpl'
 					});
-					$('#registerform').submit(); 
+					$('#registerform').submit(); 					
 				}
 			}
 		});
@@ -118,30 +118,30 @@ $(document).ready(function(){
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
-       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Register</span></p>
+       <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="fa fa-chevron-right"></i></a></span> <span>Register </span><i class="fa fa-chevron-right"></i></p>
        <h1 class="mb-0 bread">Register</h1>
      </div>
    </div>
  </div>
 </section>
 
-<section class="ftco-section contact-section ftco-no-pt">
+<section class="contact-section ftco-no-pt">
 
   <div class="container">
     <div class="row block-9 justify-content-center">
-    	<h2><br>가입을 위해 아래 항목들을 입력해주세요 :)</h2>
+    	<h2 id="regist_title"><br>가입을 위해 아래 항목들을 입력해주세요 :)</h2>
       <div class="col-md-7 order-md-last d-flex">
         <form id="registerform" class="p-5 contact-form">
           <div class="form-group">
             <input id="custname" type="text" class="form-control" placeholder="이름" name="custname">
           </div>
           <div class="form-group">
-            <input id="custid" type="text" class="form-control" placeholder="아이디" name="custid" style="width: 60%; display: inline-block">
-            <input id="idcheckbtn" class="btn" value="아이디 확인" style="margin-left:3%; width: 20%; display: inline-block; background-color: lightgray">
+            <input id="custid" type="text" class="form-control" placeholder="아이디" name="custid" style="width: 50%; display: inline-block">
+            <input id="idcheckbtn" class="btn" value="아이디 확인">
             <span id="pwdcheck" style="padding-left: 10%"><img src="images/check.png" style="width: 20px; height: 20px"></span><span id="pwdwrong"  style="padding-left: 10%"><img src="/images/wrong.png" style="width: 20px; height: 20px"></span>
           </div>
           <div class="form-group">
-            <input id="custpwd" type="password" class="form-control" placeholder="비밀번호" name="custpwd" style="margin-left: 0;width: 50%; display: inline-block">
+            <input id="custpwd" type="password" class="form-control" placeholder="비밀번호" name="custpwd" style="margin-left: 0;width: 49%; display: inline-block">
             <input id="custpwd2" type="password" class="form-control" placeholder="비밀번호 확인" name="custpwd2" style="margin-left: 0;width: 49%; display: inline-block">
           	
           </div>
@@ -152,19 +152,19 @@ $(document).ready(function(){
 					<input type="radio" name="gender" id="man" value="man" class="custom-control-input">
 					<label class="custom-control-label" for="man">남</label>
 				</div>
-				<div class="custom-control custom-radio" style="width:10%; display: inline-block">
+				<div class="custom-control custom-radio" style="margin-left:10%; width:10%; display: inline-block">
 					<input type="radio" name="gender" id="woman" value="woman" class="custom-control-input">
 					<label class="custom-control-label" for="woman">여</label>
 				</div>
 		  	</div>
           </div>
           <div class="form-group">
-            <input id="phone" type="text" class="form-control" placeholder="전화번호(-없이 입력해주세요)" name="phone" style="width:50%; display:inline-block;">
+            <input id="phone" type="text" class="form-control" placeholder="전화번호(-없이 입력해주세요)" name="phone" style="width:49%; display:inline-block;">
             <input id="email" type="text" class="form-control" placeholder="이메일" name="email" style="width:49%; display:inline-block;">
           </div>
           <div class="form-group">
-          	<input type="number" id="zipcode" placeholder="우편번호" class="form-control" name="zipcode" style="width: 30%; display: inline-block">
-			<input class="btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="margin-left:3%; width: 25%; display: inline-block; background-color: lightgray">
+          	<input type="number" id="zipcode" placeholder="우편번호" class="form-control" name="zipcode">
+			<input class="btn" id="zipbtn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
 			<input type="text" id="addr" placeholder="주소" class="form-control" name="addr">
 			<input type="text" id="addrdetail" placeholder="상세주소" class="form-control" name="addrdetail">
           </div>  
