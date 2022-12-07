@@ -26,25 +26,35 @@
 
 #addr_btn, #addr_btn2{width:102px;display:inline-block;margin-left: -4px;}
 
-@media screen and (max-width: 992px) {
 
-} 
-
-@media screen and (max-width: 768px) {
-
-}
-
-@media screen and (max-width: 576px) {
-
-}
-
-@media screen and (min-width: 414px) {
+/* @media screen and (min-width: 414px) {
 #sample4_roadAddress{width: 200px;}
 #planname{width: 200px;}
 
 }
-@media screen and (min-width: 375px) {
-
+ */
+ 
+@media screen and (max-width: 390px) {
+#w_title{font-size: 25px;} 
+#accom_form{display: block;}
+.mb-3, .my-3{margin-right: 35px; display: block;}
+#titleform, #titleform2{width: 250px; display: block;}
+.form-field{margin-left: 0px; display: block;}
+.form-field2{margin: 0 0 0 0;}
+#custid{display: block; margin-right:50px; width: 100px; font-size: 15px;}
+#title{display: block;width: 250px; font-size: 15px;}
+#cntform, #cnt{display: block;width: 135px; margin-right: 85px; font-size: 15px;}
+#traveltime{display: block;width: 190px; font-size: 15px; margin-left: -15px;}
+#addbtn{margin-left: 95px;}
+#idxform{margin-right: 0;}
+#idx{display: inline-block; font-size: 15px;} 
+#sample4_roadAddress, #sample4_roadAddress2, #sample4_roadAddress3, #sample4_roadAddress4, #sample4_roadAddress5
+{display:inline-block; width: 230px; margin-top: -68px; margin-left: 39px; font-size: 15px; float: left;}
+#addr_btn{float: right; font-size: 13px; width: 81px; margin-top: -107px;}
+#planname{width: 350px; margin: -20px 0 0 0; font-size: 15px;}
+#todo{display: block;width: 100%; font-size: 15px;}
+#textform{margin-right: 0; width: 370px;}
+#accomtext{width: 370px; font-size: 15px;}
 }
 
 </style>
@@ -213,12 +223,12 @@ var callback = function(result, status) {
                   	<input type="text" class="form-control" id="custid" th:value="${session.logincust.custid}" readonly="readonly" name="custid">
                   	<div class="col-lg d-flex"></div>
                 </div>
-                <div class="col-5 mb-3">
-                	<div class="form-field">
+                <div class="col-5 mb-3" id="titleform2">
+                	<div class="form-field" id="titleform">
                   	<input type="text" class="form-control" id="title" placeholder="제목을 입력해주세요." name="title">
                   	<div class="col-lg d-flex"></div></div>
                 </div>
-                <div class="col-2 mb-3">
+                <div class="col-2 mb-3" id="cntform">
 					<div class="form-field">
 					<input type="number" min="1" class="form-control" id="cnt" placeholder="동행 모집 인원" name="cnt">
                    	<div class="col-lg d-flex"></div>
@@ -230,9 +240,9 @@ var callback = function(result, status) {
 					<input type="text" class="form-control checkin_date" placeholder="Check In Date" id="traveltime" name="traveltime">
 					</div>
 				</div>
-				<a th:href="@{#}"><i class="fa fa-plus-circle" id="add_icon"></i></a>
+				<div id="addbtn"><a th:href="@{#}"><i class="fa fa-plus-circle" id="add_icon"></i></a></div>
 				<div id="basicplan" style="display:inline-block;">
-					<div class="col-2 mb-3" style="display:inline-block;">
+					<div class="col-2 mb-3" style="display:inline-block;" id="idxform">
 						<input type="number" class="form-control hyidx" value="1" id="idx" placeholder="여행 순서" name="idx[]" readonly="readonly">
 						<div class="col-lg d-flex"></div>
 					</div>
@@ -256,9 +266,9 @@ var callback = function(result, status) {
 					</div>
 					
 				</div>
-				<div id="addplan"></div>
+				<div id="addplan" style="display:inline-block;"></div>
 			
-				<div class="col-11 mb-3">
+				<div class="col-11 mb-3" id="textform">
 					<textarea id="accomtext" class="form-control w-100" cols="30" rows="10" placeholder="내용을 입력해주세요." name="accomtext"></textarea>
 	            </div>
 	            

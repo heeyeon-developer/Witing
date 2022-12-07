@@ -62,4 +62,8 @@ public class HotelService implements MyService<Integer, HotelDTO>{
 		return mapper.hotelcnt(crihotel);
 	}
 	
+	public int cityshotelcnt(Integer cityid, CriteriaHotel crihotel) throws Exception {
+		return mapper.cityshotelcnt(cityid, crihotel);
+	}
+	
 }
