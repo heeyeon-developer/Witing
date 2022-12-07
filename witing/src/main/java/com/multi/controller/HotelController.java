@@ -79,7 +79,7 @@ public class HotelController {
 		try {
 			List<HotelDTO> list = service.cityshotel(cityid);
 			
-			int total = service.hotelcnt(crihotel);
+			int total = service.cityshotelcnt(cityid, crihotel);
 			PageHotelDTO pageMaker = new PageHotelDTO(total, crihotel);
 			model.addAttribute("pageMaker", pageMaker);
 			

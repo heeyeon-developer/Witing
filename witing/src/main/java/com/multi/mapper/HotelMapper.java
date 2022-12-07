@@ -20,4 +20,6 @@ public interface HotelMapper extends MyMapper<Integer, HotelDTO> {
 	
 	public List<HotelDTO> hotelpage(CriteriaHotel crihotel) throws Exception;
 	public int hotelcnt(CriteriaHotel crihotel) throws Exception;
+
+	public int cityshotelcnt(Integer cityid, CriteriaHotel crihotel) throws Exception;
 }
