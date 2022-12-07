@@ -31,14 +31,12 @@
 #update_btn:active, #update_btn:focus, #delete_btn:active, #delete_btn:focus
 {background-color: transparent; border: none !important; box-shadow: none !important; outline:none;}
 
-/* @media screen and (min-width: 992px) {#comment{width: 470px;} #select_sc{margin-right: 10%;}} 
-
-@media screen and (min-width: 768px) {#comment{width: 350px;}}
-
-@media screen and (min-width: 576px){#comment{width: 300px;}}
-
-@media screen and (min-width: 414px){#comment{width: 250px;} #reply_btn{width: 70px; height: 93px;}}
-@media screen and (min-width: 375px){#comment{width: 220px;} #reply_btn{width: 60px; height: 93px;}} */
+@media (max-width: 390px){
+#comment{width: 92%; margin-left: -7%; margin-bottom: -3px;}
+#reply_btn{width: 19%; height: 94px; margin-right: -2%;}
+#plan_title{margin-top: 5%; font-size: 22px;}
+#accomlistbtn{width: 55px; height: 35px; font-size: 13px;}
+}
 
 
 </style>
@@ -265,12 +263,12 @@ $(document).ready(function(){
 </section>
 
 <section class="ftco-section ftco-no-pt ftco-no-pb">
-  <div class="container">
+  <div class="container" id="container">
     <div class="row">
       <div class="col-lg-8 ftco-animate py-md-5 mt-md-5">
         <h3 class="mb-3" th:text="${title}" id="plan_title">RoomType</h3>
            <button th:if="${session.logincust.custid} == ${custid}" type="button" class="btn btn-primary" id="del_btn" style="float: right; margin-top: -50px; margin-right: 65px; color:white;">삭제</button>
-           <button type="button" class="btn btn-primary" style="float: right; margin-top: -50px"><a th:href="@{/accompany}" style="color:white">목록</a></button>
+           <button type="button" class="btn btn-primary" style="float: right; margin-top: -50px" id="accomlistbtn"><a th:href="@{/accompany}" style="color:white">목록</a></button>
         <div id="planinfo">
         	<i class="fa fa-calendar" id="dateicon"><p th:text="| ${#dates.format(traveltime, 'yyyy-MM-dd')}|" id="date"></p></i><br>
         	<i class="fa fa-users" id="user"> <p th:text="|모집인원 : ${cnt}명|" id="cnt"></p></i>
@@ -400,6 +398,7 @@ $(document).ready(function(){
     
 </section>
     
+  </div>
   </div>
 </section> <!-- .section -->
 </body>
