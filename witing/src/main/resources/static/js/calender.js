@@ -175,7 +175,7 @@ const changeCnt = (target) => {
 var stompClient = null;
 
 function connect() {
-	var socket = new SockJS('http://127.0.0.1:8080/admin/ws');
+	var socket = new SockJS('http://101.101.219.167/admin/ws');
 	stompClient = Stomp.over(socket);//연결하기
 
 	stompClient.connect({}, function(frame) { 
