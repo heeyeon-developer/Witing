@@ -18,6 +18,7 @@ import com.multi.dto.PostDTO;
 import com.multi.dto.RoomDTO;
 import com.multi.mapper.CateMapper;
 import com.multi.mapper.HotelMapper;
+import com.multi.service.CateService;
 import com.multi.service.CityService;
 import com.multi.service.HotelService;
 import com.multi.service.PostService;
@@ -42,7 +43,7 @@ public class HotelController {
 	HotelMapper mapper;
 	
 	@Autowired
-	CateMapper cate_service;
+	CateService cate_service;
 	
 	@Autowired
 	PostService post_service;
@@ -55,7 +56,7 @@ public class HotelController {
 		List<CityDTO> city = null;
 		try {
 			list = service.hotelpage(crihotel);
-			cate = cate_service.getcate();
+			cate = cate_service.getall();
 			city = city_service.getall();
 			
 			int total = service.hotelcnt(crihotel);
@@ -96,17 +97,9 @@ public class HotelController {
 		List<HotelDTO> search = null;
 		List<CateDTO> cate = null;
 		List<CityDTO> city = null;
-		System.out.println(edate);
-		System.out.println(sdate);
 		try {
-//			if(cityid == null) {
-//				cityid = 0;
-//			}
-//			if(cateid == null) {
-//				cateid = 0;
-//			}
 			search = service.searchhotel(cityid, cateid , Date.valueOf(sdate.toString()), Date.valueOf(edate.toString()));
-			cate = cate_service.getcate();
+			cate = cate_service.getall();
 			city = city_service.getall();
 			model.addAttribute("city", city);
 			model.addAttribute("cate", cate);

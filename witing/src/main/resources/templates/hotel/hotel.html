@@ -180,7 +180,7 @@ $(document).ready(function(){
       <div class="icon"><span class="fa fa-chevron-down"></span></div>
       <select name="cateid" id="cateid" class="form-control">
         <option value="0">CATEGORY</option>
-        <option th:each="ca:${cate}" th:text=${ca.catename} th:value="${ca.cateid}" id="${ca.cateid}"></option>
+        <option th:each="ca:${cate}" th:text=${ca.catename} th:value="${ca.cateid}" id="cateid"></option>
       </select>
     </div>
   </div>

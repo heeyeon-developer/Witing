@@ -35,8 +35,8 @@ public class Criteria {
 	
 	public String makeQueryString(int pageNum) {
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
-				.queryParam("hotelid", hotelid)
-				.queryParam("custid", custid)
+//				.queryParam("hotelid", hotelid)
+//				.queryParam("custid", custid)
 				.queryParam("pageNum", pageNum)
 				.queryParam("amount", amount)
 				.build()

@@ -36,7 +36,8 @@ function movePage(uri, queryString) {
     console.log(uri);
     console.log(queryString);
 
-    location.href = uri + queryString;
+    location.href = uri + queryString+"&sdate="+$('#search_sdate').text()+"&edate="+$('#search_edate').text();
+   
 }
  
 /* $(document).ready(function(){
@@ -51,7 +52,6 @@ function movePage(uri, queryString) {
 		$('#list_table').hide();
 	})
 });*/
-
 </script>
 
 
@@ -61,9 +61,12 @@ function movePage(uri, queryString) {
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_2.jpg');">
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+    
       <div class="col-md-9 ftco-animate pb-5 text-center">
+      
        <p class="breadcrumbs"><span class="mr-2"><a th:href="@{/}">Home <i class="fa fa-chevron-right"></i></a></span> <span><a th:href="@{/accompany}">Accompany <i class="fa fa-chevron-right"></i></a></span></p>
        <h1 class="mb-0 bread">Accompany</h1>
+       
      </div>
    </div>
  </div>
@@ -72,7 +75,7 @@ function movePage(uri, queryString) {
 <section id="search_s" class="ftco-section ftco-no-pb">
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<div class="search-wrap-1 ftco-animate">
 					<form action="/searchaccom" class="search-property-1" id="search_form">
 						<div class="row no-gutters">
@@ -94,7 +97,7 @@ function movePage(uri, queryString) {
 									</div>
 								</div>
 							</div>
-							<div class="col-md d-flex">
+							<div class="col-md-2 d-flex">
 								<div class="form-group d-flex w-100 border-0">
 									<div class="form-field w-100 align-items-center d-flex">
 										<input type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
@@ -116,7 +119,10 @@ function movePage(uri, queryString) {
 	  	<span><a th:href="@{#}" class="fa fa-list" id="tablelist"></a></span>
 	  	<span><a th:href="@{#}" class="fa fa-file-image-o" id="photolist"></a></span>
   	</div> -->
-	<h2 id="a_title">Accompany List</h2>
+	<!-- <h2 id="a_title">Accompany List</h2> -->
+	
+	<div id="search_sdate" th:text="${sdate}" style="display:none;"></div>
+	<div id="search_edate" th:text="${edate}" style="display:none;"></div>
 	<table class="table table-hover" id="list_table">
 		<colgroup>
 			<col style="width:12%">

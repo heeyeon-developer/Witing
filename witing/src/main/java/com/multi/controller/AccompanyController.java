@@ -173,15 +173,18 @@ public class AccompanyController {
 //	float[] plany = Float.parseFloat(request.getParameterValues("plnay"));
 	
 	@RequestMapping("/searchaccom")
-	public String searchaccom(Model model, Criteria cri, Date sdate, Date edate) {
+	public String searchaccom(Model model, Criteria cri, String sdate, String edate) {
 		
 		try {
-			List<AccompanyDTO >list = service.searchaccom(cri, sdate, edate);
+			List<AccompanyDTO >list = service.searchaccom(cri, Date.valueOf(sdate),Date.valueOf(edate));
+			int total = service.searchaccomcnt(cri,Date.valueOf(sdate),Date.valueOf(edate));
+			
+			PageDTO pageMaker = new PageDTO(total, cri);
+
+			model.addAttribute("sdate", sdate);
+			model.addAttribute("edate", edate);
 			model.addAttribute("list", list);
 			model.addAttribute("center", dir+"accompany");
-			
-			int total = service.searchaccomcnt(cri,sdate,edate);
-			PageDTO pageMaker = new PageDTO(total, cri);
 			model.addAttribute("pageMaker", pageMaker);
 		} catch (Exception e) {
 			e.printStackTrace();
