@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.multi.dto.CriteriaHotel;
 import com.multi.dto.HotelDTO;
 import com.multi.service.HotelService;
 
@@ -20,7 +21,8 @@ class GetSearchHotel {
 	void contextLoads() {
 		List<HotelDTO> list = null;
 		try {
-			list = service.searchhotel(1, 101, Date.valueOf("2022-11-24"), Date.valueOf("2022-11-25"));
+			CriteriaHotel crihotel = new CriteriaHotel();
+			list = service.searchhotel(crihotel, 1, 101, Date.valueOf("2022-11-24"), Date.valueOf("2022-11-25"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

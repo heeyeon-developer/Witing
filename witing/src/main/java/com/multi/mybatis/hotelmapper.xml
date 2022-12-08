@@ -34,6 +34,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		WHERE (#{cityid} = 0 OR ho.cityid IN (#{cityid}))
 		AND (#{cateid} = 0 OR ho.cateid IN (#{cateid}))
 		AND ro.roomid NOT IN (SELECT roomid FROM orderlist WHERE sdate BETWEEN #{sdate} AND #{edate})
+		ORDER BY ho.hotelid LIMIT #{crihotel.skip}, #{crihotel.amount}
 	</select>
 	
 	<select id="cityshotel" parameterType="Integer" resultType="HotelDTO">
@@ -49,11 +50,11 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
         ORDER BY hotelid LIMIT #{skip}, #{amount}
     </select>
     <select id="hotelcnt" resultType="Integer">
-        SELECT count(*) FROM hotel
+        SELECT count(DISTINCT hotelid) FROM hotel
     </select>
     
     <select id="searchhotelcnt" resultType="Integer">
-        SELECT DISTINCT count(*) FROM hotel ho
+        SELECT count(DISTINCT ho.hotelid) FROM hotel ho
 		INNER JOIN cate ca ON ho.cateid = ca.cateid
 		INNER JOIN city ci ON ho.cityid = ci.cityid
 		INNER JOIN room ro ON ho.hotelid = ro.hotelid
@@ -63,8 +64,9 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
     </select>
     
     <select id="cityshotelcnt" resultType="Integer">
-        SELECT count(*) FROM hotel h
+        SELECT count(DISTINCT ho.hotelid) FROM hotel h
 		INNER JOIN city c ON h.cityid = c.cityid
-		WHERE c.cityid = #{cityid};
+		WHERE c.cityid = #{cityid}
+		ORDER BY ho.hotelid LIMIT #{crihotel.skip}, #{crihotel.amount}
     </select>
 </mapper>

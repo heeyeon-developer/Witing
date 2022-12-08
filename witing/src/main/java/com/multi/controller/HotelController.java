@@ -98,7 +98,7 @@ public class HotelController {
 		List<CateDTO> cate = null;
 		List<CityDTO> city = null;
 		try {
-			search = service.searchhotel(cityid, cateid , Date.valueOf(sdate), Date.valueOf(edate));
+			search = service.searchhotel(crihotel, cityid, cateid , Date.valueOf(sdate), Date.valueOf(edate));
 			cate = cate_service.getcate();
 			city = city_service.getall();
 			
