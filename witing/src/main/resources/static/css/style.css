@@ -776,6 +776,14 @@ pre {
 	#zipbtn{
 		width:50%;
 	}
+	.mypage_icon {
+		width: 33%;
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	#mypage_icons{
+		padding: 0px;
+	}
 }
 
 @media (min-width: 576px) {
@@ -6969,7 +6977,7 @@ button.bg-dark:focus {
   padding-left: 1rem !important; }
 
 .p-4 {
-  padding: 1.5rem !important; }
+  padding: 1.5rem}
 
 .pt-4,
 .py-4 {
