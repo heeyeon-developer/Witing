@@ -64,9 +64,9 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
     </select>
     
     <select id="cityshotelcnt" resultType="Integer">
-        SELECT count(DISTINCT ho.hotelid) FROM hotel h
+        SELECT count(DISTINCT h.hotelid) FROM hotel h
 		INNER JOIN city c ON h.cityid = c.cityid
 		WHERE c.cityid = #{cityid}
-		ORDER BY ho.hotelid LIMIT #{crihotel.skip}, #{crihotel.amount}
+		ORDER BY h.hotelid LIMIT #{crihotel.skip}, #{crihotel.amount}
     </select>
 </mapper>
