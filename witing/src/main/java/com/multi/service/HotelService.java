@@ -51,7 +51,7 @@ public class HotelService implements MyService<Integer, HotelDTO>{
 	}
 	
 	public List<HotelDTO> searchhotel(Integer cityid, Integer cateid, Date sdate, Date edate) throws Exception {
-		return mapper.searchhotel(cityid, cateid,sdate,edate);
+		return mapper.searchhotel(cityid, cateid, sdate, edate);
 	}
 	
 	public List<HotelDTO> hotelpage(CriteriaHotel crihotel) throws Exception {
@@ -64,6 +64,10 @@ public class HotelService implements MyService<Integer, HotelDTO>{
 	
 	public int cityshotelcnt(Integer cityid, CriteriaHotel crihotel) throws Exception {
 		return mapper.cityshotelcnt(cityid, crihotel);
+	}
+	
+	public int searchhotelcnt(CriteriaHotel crihotel, Integer cityid, Integer cateid, Date sdate, Date edate) throws Exception {
+		return mapper.searchhotelcnt(crihotel, cityid, cateid, sdate, edate);
 	}
 	
 }

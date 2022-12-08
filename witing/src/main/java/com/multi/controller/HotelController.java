@@ -93,14 +93,23 @@ public class HotelController {
 	}
 	 
 	@RequestMapping("/searchimpl")
-	public String searchimpl(Model model, Integer cityid, Integer cateid, Date sdate, Date edate) {
+	public String searchimpl(Model model, CriteriaHotel crihotel, Integer cityid, Integer cateid, String sdate, String edate) {
 		List<HotelDTO> search = null;
 		List<CateDTO> cate = null;
 		List<CityDTO> city = null;
 		try {
-			search = service.searchhotel(cityid, cateid , Date.valueOf(sdate.toString()), Date.valueOf(edate.toString()));
+			search = service.searchhotel(cityid, cateid , Date.valueOf(sdate), Date.valueOf(edate));
 			cate = cate_service.getall();
 			city = city_service.getall();
+			
+			int total = service.searchhotelcnt(crihotel, cityid, cateid, Date.valueOf(sdate), Date.valueOf(edate));
+			PageHotelDTO pageMaker = new PageHotelDTO(total, crihotel);
+			model.addAttribute("pageMaker", pageMaker);
+			
+			model.addAttribute("sdate", sdate);
+			model.addAttribute("edate", edate);
+			model.addAttribute("cityid", cityid);
+			model.addAttribute("cateid", cateid);
 			model.addAttribute("city", city);
 			model.addAttribute("cate", cate);
 			model.addAttribute("search", search);

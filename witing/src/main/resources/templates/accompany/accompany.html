@@ -1,34 +1,9 @@
 
 <style>
-#writebtn{
-	float: right;
-	margin-top: -12px;
-}
+#writebtn{float: right;margin-top: -12px;}
+.two{margin-left: 10px;}
+#a_title{margin-bottom: 30px;}
 
-.two{
-	margin-left: 10px;
-}
-
-#a_title{
-	margin-bottom: 30px;
-}
-#user_icon{
-	color: #f15d30;
-}
-#list_icon{
-	font-size: 25px;
-	float: right;
-	padding-right: 5px;
-	padding-left: 5px;
-	padding-bottom: -20px;
-	margin-bottom: -50px;
-}
-#tablelist, #photolist{
-	color: gray;
-}
-#tablelist:focus, #photolist:focus{
-	color: #f15d30;
-}
 </style>
 
 <script>
@@ -39,22 +14,7 @@ function movePage(uri, queryString) {
     location.href = uri + queryString+"&sdate="+$('#search_sdate').text()+"&edate="+$('#search_edate').text();
    
 }
- 
-/* $(document).ready(function(){
-	$('#photo_list').hide();
-	
-	$('#tablelist').click(function(){
-		$('#list_table').show();
-		$('#photo_list').hide();
-	})
-	$('#photolist').click(function(){
-		$('#photo_list').show();
-		$('#list_table').hide();
-	})
-});*/
 </script>
-
-
 
  <!-- END nav -->
  
@@ -115,10 +75,6 @@ function movePage(uri, queryString) {
 
 <section class="ftco-section">
   <div class="container">
-  	<!-- <div id="list_icon" onclick="listicon">
-	  	<span><a th:href="@{#}" class="fa fa-list" id="tablelist"></a></span>
-	  	<span><a th:href="@{#}" class="fa fa-file-image-o" id="photolist"></a></span>
-  	</div> -->
 	<!-- <h2 id="a_title">Accompany List</h2> -->
 	
 	<div id="search_sdate" th:text="${sdate}" style="display:none;"></div>
@@ -153,45 +109,8 @@ function movePage(uri, queryString) {
 	<a th:href="@{/writeaccom}" th:if="${session.logincust != null}" class="btn btn-primary" id="writebtn">글 작성하기</a><br><br>
 	</table>
 	
-	
-<!-- <form id="photo_list">
-    <div class="row d-flex">
-      <div class="col-md-4 d-flex ftco-animate" th:each=li:${list}>
-       <div class="blog-entry justify-content-end">
-        <a th:href="@{/plan(accomid=${li.accomid})}" class="block-20" id="thum_img" th:style="|background-image: url('/images/image_${li.accomid}.jpg');|">
-        </a>
-        <div class="text">
-         <div class="d-flex align-items-center mb-4 topp">
-          <div class="one">
-           <span class="day" th:text="${#dates.format(li.traveltime, 'dd')}+' '">11</span>
-         </div>
-         <div class="two">
-           <span class="yr" th:text="' '+${#dates.format(li.traveltime, 'yyyy')}">2020</span>
-           <span class="mos" th:text="' '+${#calendars.monthName(li.traveltime)}">September</span>
-         </div>
-       </div>
-       <h3 class="heading"><a class="fa fa-plane" th:href="@{/plan(accomid=${li.accomid})}" th:text="' '+${li.title}" style="font-weight: bold;">Most Popular Place In This World</a></h3>
-       <p class="fa fa-user-circle-o" id="user_icon"><span th:text="' '+${li.custid}" style="color: black;"></span></p>
-       <p style="color: #939393;" th:text="${li.accomtext}+' &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'"></p>
-       <p><a th:href="@{#}" class="btn btn-primary">Read more</a></p>
-     </div>
-   </div>
- </div>
-</div>
-</form> -->
 <div class="row mt-5">
   <div class="col text-center">
-    <!-- <div class="block-27">
-      <ul>
-        <li><a th:href="@{#}">&lt;</a></li>
-        <li class="active"><span>1</span></li>
-        <li><a th:href="@{#}">2</a></li>
-        <li><a th:href="@{#}">3</a></li>
-        <li><a th:href="@{#}">4</a></li>
-        <li><a th:href="@{#}">5</a></li>
-        <li><a th:href="@{#}">&gt;</a></li>
-      </ul>
-    </div> -->
     
     <div class="block-27">
       <ul>

@@ -57,6 +57,17 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
         SELECT count(*) FROM hotel
     </select>
     
+    <select id="searchhotelcnt" resultType="Integer">
+        SELECT DISTINCT count(*) FROM hotel ho
+		INNER JOIN cate ca ON ho.cateid = ca.cateid
+		INNER JOIN city ci ON ho.cityid = ci.cityid
+		INNER JOIN room ro ON ho.hotelid = ro.hotelid
+		INNER JOIN orderlist ol ON ro.roomid = ol.roomid
+		WHERE (ho.cityid IS NULL OR ho.cityid NOT IN (#{cityid}))
+		AND (ho.cateid IS NULL OR ho.cateid NOT IN (#{cateid}))
+		AND ro.roomid NOT IN (SELECT roomid FROM orderlist WHERE sdate BETWEEN #{sdate} AND #{edate})
+    </select>
+    
     <select id="cityshotelcnt" resultType="Integer">
         SELECT count(*) FROM hotel h
 		INNER JOIN city c ON h.cityid = c.cityid

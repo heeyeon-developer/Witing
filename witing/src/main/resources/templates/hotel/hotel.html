@@ -1,10 +1,6 @@
 <meta charset="utf-8">
 <style>
-#pagebtn{
-margin-top: 7%;
-margin-bottom: -7%;
-text-align: center;
-}
+#pagebtn{margin-top: 7%;margin-bottom: -7%;text-align: center;}
 </style>
 <script>
 
@@ -94,7 +90,6 @@ $(document).ready(function(){
 			alert('날짜를 선택해주세요.');
 			return false;
 		}
-		alert($('#cityid').val());
 	})
 	var custid = $('#custid').text();
 	if(custid != ''){
@@ -226,24 +221,7 @@ $(document).ready(function(){
    </div>
  </div>
 </div>
-
-
 </div>
-<!-- <div class="row mt-5">
-  <div class="col text-center">
-    <div class="block-27">
-      <ul>
-        <li><a th:href="@{#}">&lt;</a></li>
-        <li class="active"><span>1</span></li>
-        <li><a th:href="@{#}">2</a></li>
-        <li><a th:href="@{#}">3</a></li>
-        <li><a th:href="@{#}">4</a></li>
-        <li><a th:href="@{#}">5</a></li>
-        <li><a th:href="@{#}">&gt;</a></li>
-      </ul>
-    </div>
-  </div>
-</div> -->
 
 <div class="block-27" id="pagebtn">
       <ul>

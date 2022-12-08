@@ -1,12 +1,18 @@
 <meta charset="utf-8">
 <style>
-#search_title{
-	margin-top: -60px;
-	margin-bottom: 30px;
-}
+#search_title{margin-top: -60px;margin-bottom: 30px;}
+#searchhotelpage{text-align: center;}
 </style>
 
 <script>
+function movePage(uri, queryString) {
+    console.log(uri);
+    console.log(queryString);
+
+    location.href = uri + queryString + "&cityid="+$('#search_cityid').text()+ "&sdate=" + $('#searchhotel_sd').text() + "&edate="+$('#searchhotel_ed').text()+ "&cateid="+$('#search_cateid').text();
+}
+
+
 function getsearch(cityid, cateid){
 	$.ajax({
 		type:'GET',
@@ -75,10 +81,39 @@ function addlike(cust_id, hotel_id){
 	
 };
 
+$(document).ready(function(){
+	$('#search_btn').click(function(){
+		var sdate = document.getElementById("sdate");
+		var edate = document.getElementById("edate");
+		if(sdate.value == "" || edate.value == ""){
+			alert('날짜를 선택해주세요.');
+			return false;
+		}
+		alert($('#cityid').val());
+	})
+	var custid = $('#custid').text();
+	if(custid != ''){
+		$.ajax({
+			url:'[[@{/likehearts}]]',
+			data:{custid:custid},
+			success:function(result){
+				$.each(result,function(i,hodelid){
+					var id = '#heartbtn'+hodelid;
+					$(id).attr('class','fa fa-heart');
+				});
+			}
+		});
+	}
+});
+
 </script>
 
  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/hotel/jeju.jpg');">
   <div class="container">
+    <div id="searchhotel_sd" th:text="${sdate}" style="display:none;"></div>
+	<div id="searchhotel_ed" th:text="${edate}" style="display:none;"></div>
+    <div id="search_cityid" th:text="${cityid}" style="display:none;"></div>
+	<div id="search_cateid" th:text="${cateid}" style="display:none;"></div>
     <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
       <div class="col-md-9 ftco-animate pb-5 text-center">
        <p class="breadcrumbs"><span class="mr-2"><a href="/main">Home <i class="fa fa-chevron-right"></i></a></span> <span><a th:href="@{/hotel}">Hotel <i class="fa fa-chevron-right"></i></a></span></p>
@@ -192,12 +227,10 @@ function addlike(cust_id, hotel_id){
           </a>
       </div>
 	  
-      <h3><a th:href="@{/room(hotelid=${se.hotelid})}" th:text="${se.hotelname}"></a></h3>
+      <h3><a th:href="@{/room(hotelid=${se.hotelid})}" th:text="${se.hotelname}" style="font-size: 20px;"></a></h3>
       <p class="location"><span class="fa fa-map-marker" th:text="' '+${se.detail}"></span></p>
       <ul>
-       <li><span class="flaticon-shower"></span>2</li>
-       <li><span class="flaticon-king-size"></span>3</li>
-       <li><span class="fa fa-check-square-o"><li th:text="${se.feature}"></li></span></li>
+       <li><span class="fa fa-check-square-o"><li th:text="${se.feature}" style="font-size: 13px;"></li></span></li>
        
      </ul>
    </div>
@@ -206,7 +239,7 @@ function addlike(cust_id, hotel_id){
 
 
 </div>
-<div class="row mt-5">
+<!-- <div class="row mt-5">
   <div class="col text-center">
     <div class="block-27">
       <ul>
@@ -220,7 +253,31 @@ function addlike(cust_id, hotel_id){
       </ul>
     </div>
   </div>
-</div>
+</div> -->
+
+<div class="block-27" id="searchhotelpage">
+      <ul>
+		<th:block th:if="${pageMaker.prev}">
+        	<li class="pageMaker_btn prev">
+        		<a href="javascript:void(0)" th:onclick="movePage([[${#request.requestURI}]], [[${pageMaker.crihotel.makeQueryString(pageMaker.pageStart - 1)}]])">&lt;</a>
+        	</li>
+        </th:block>
+        
+        <th:block th:with="pageMaker = ${pageMaker}">
+		    <th:block th:each="num : *{#numbers.sequence(pageMaker.pageStart, pageMaker.pageEnd)}">
+		        <li class="pageMaker_btn" th:classappend="${pageMaker.crihotel.pageNum == num} ? 'active' : ''">
+		            <a href="javascript:void(0)"  th:text="${num}" th:onclick="movePage([[${#request.requestURI}]],[[${pageMaker.crihotel.makeQueryString(num)}]])">1</a>
+		        </li>
+		    </th:block>
+		</th:block>
+		
+		<th:block th:if="${pageMaker.next}">
+		    <li class="pageMaker_btn next">
+		        <a href="javascript:void(0)" th:onclick="movePage([[${#request.requestURI}]], [[${pageMaker.crihotel.makeQueryString(pageMaker.pageEnd + 1)}]])">&gt;</a>
+		    </li>
+		</th:block>
+      </ul>
+    </div>
 </div>
 </section>
 

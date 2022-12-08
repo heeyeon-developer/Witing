@@ -16,10 +16,12 @@ import com.multi.frame.MyMapper;
 public interface HotelMapper extends MyMapper<Integer, HotelDTO> {
 	public List<HotelDTO> hotelcity() throws Exception;
 	public List<HotelDTO> cityshotel(Integer cityid) throws Exception;
+	public int cityshotelcnt(Integer cityid, CriteriaHotel crihotel) throws Exception;
+	
 	public List<HotelDTO> searchhotel(Integer cityid, Integer cateid, Date sdate, Date edate) throws Exception;
+	public int searchhotelcnt(CriteriaHotel crihotel, Integer cityid, Integer cateid, Date sdate, Date edate) throws Exception;
 	
 	public List<HotelDTO> hotelpage(CriteriaHotel crihotel) throws Exception;
 	public int hotelcnt(CriteriaHotel crihotel) throws Exception;
 
-	public int cityshotelcnt(Integer cityid, CriteriaHotel crihotel) throws Exception;
 }
