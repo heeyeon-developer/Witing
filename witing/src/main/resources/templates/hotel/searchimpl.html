@@ -12,7 +12,6 @@ function movePage(uri, queryString) {
     location.href = uri + queryString + "&cityid="+$('#search_cityid').text()+ "&sdate=" + $('#searchhotel_sd').text() + "&edate="+$('#searchhotel_ed').text()+ "&cateid="+$('#search_cateid').text();
 }
 
-
 function getsearch(cityid, cateid){
 	$.ajax({
 		type:'GET',
@@ -27,56 +26,18 @@ function getsearch(cityid, cateid){
 	});
 }
 
-/* $(document).ready(function(){
-
-	$('#search_btn').click(function(){
-	  	 $('#search_form').attr({
-	   	      method:'get',
-	   	      action:'/searchimpl'         
-	   	   });
-	   	   $('#search_form').submit();
-	   });
-
-}); */
-
-
 function addlike(cust_id, hotel_id){
-	
-	/* $('#heartbtn').click(function() {
-	    $('#heartbtn').addClass('fa fa-heart');
-	    $('#heartbtn').removeClass('fa fa-heart-o');
-	    return false;
-	});
-	 */
 	$.ajax({
 		url:'[[@{/addlike}]]',
 		data:{
 			'custid':cust_id,
 			'hotelid':hotel_id,		
 		},
-		success:function(data){
-			
-			/* if(id == null){
-				$(id).attr('class','fa fa-heart-o');
-                $("#likecnt").empty();
-                $("#likecnt").append(jdata.likecnt);
-            }
-            else if (id != null){
-                $("#btn_like").attr('class','fa fa-heart-o');
-                $("#likecnt").empty();
-                $("#likecnt").append(jdata.likecnt);
-            } */
-			
+		success:function(data){			
 			var id = '#heartbtn'+data;
 		    $(id).attr('class','fa fa-heart');
 			alert("likelist에 담겼습니다.");
 		}
-		
-		/* useEffect(() => {
-		    if(wishlistList.wishlistItems.filter(InwishlistItem => InwishlistItem.id === item.id)[0]) {
-		      setColor("#ff0000");
-		    }
-		  }, []); */
 	});
 	
 };
@@ -89,7 +50,6 @@ $(document).ready(function(){
 			alert('날짜를 선택해주세요.');
 			return false;
 		}
-		alert($('#cityid').val());
 	})
 	var custid = $('#custid').text();
 	if(custid != ''){

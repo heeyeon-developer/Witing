@@ -56,7 +56,7 @@ public class HotelController {
 		List<CityDTO> city = null;
 		try {
 			list = service.hotelpage(crihotel);
-			cate = cate_service.getall();
+			cate = cate_service.getcate();
 			city = city_service.getall();
 			
 			int total = service.hotelcnt(crihotel);
@@ -99,7 +99,7 @@ public class HotelController {
 		List<CityDTO> city = null;
 		try {
 			search = service.searchhotel(cityid, cateid , Date.valueOf(sdate), Date.valueOf(edate));
-			cate = cate_service.getall();
+			cate = cate_service.getcate();
 			city = city_service.getall();
 			
 			int total = service.searchhotelcnt(crihotel, cityid, cateid, Date.valueOf(sdate), Date.valueOf(edate));

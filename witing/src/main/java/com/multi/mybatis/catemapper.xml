@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		SELECT * FROM cate WHERE cateid=#{cateid}
 	</select>
 	<select id="selectall" resultType="CateDTO">
-		SELECT * FROM cate
+		SELECT * FROM cate top INNER JOIN cate c ON c.cateid = c.top
 	</select>
 	<insert id="insert" parameterType="CateDTO">
 		INSERT INTO cate VALUES (NULL,#{topid},#{catename})
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
 		DELETE FROM cate WHERE cateid=#{cateid}
 	</delete>
 	<select id="getcate" resultType="CateDTO">
-		SELECT DISTINCT catename FROM cate ca
+		SELECT DISTINCT catename, ca.cateid FROM cate ca
 		INNER JOIN hotel ho ON ca.cateid = ho.cateid
 		INNER JOIN city ci ON ho.cityid = ci.cityid;
 	</select>
