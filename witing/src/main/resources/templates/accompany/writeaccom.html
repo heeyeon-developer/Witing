@@ -25,7 +25,7 @@
 #planname{margin-left: -4px;width: 450px;display:inline-block}
 
 #addr_btn, #addr_btn2{width:102px;display:inline-block;margin-left: -4px;}
-
+#idxform{padding-right:0.9%;}
 
 /* @media screen and (min-width: 414px) {
 #sample4_roadAddress{width: 200px;}
@@ -53,9 +53,11 @@
 #addr_btn{float: right; font-size: 13px; width: 81px; margin-top: -107px;}
 #planname{width: 350px; margin: -20px 0 0 0; font-size: 15px;}
 #todo{display: block;width: 100%; font-size: 15px;}
-#textform{margin-right: 0; width: 370px;}
+#textform{margin-right: 0; width: 370px;padding:0px;padding-left:5%;}
 #accomtext{width: 370px; font-size: 15px;}
 #writeaccom_btn{width: 100px; float: right;}
+#plan-detail{padding-right:0px;}
+#idxform{padding-right:3%;}
 }
 
 </style>
@@ -242,7 +244,7 @@ var callback = function(result, status) {
 					</div>
 				</div>
 				<div id="addbtn"><a th:href="@{#}"><i class="fa fa-plus-circle" id="add_icon"></i></a></div>
-				<div id="basicplan" style="display:inline-block;">
+				<div id="basicplan" style="display:inline-block; width:100%;">
 					<div class="col-2 mb-3" style="display:inline-block;" id="idxform">
 						<input type="number" class="form-control hyidx" value="1" id="idx" placeholder="여행 순서" name="idx[]" readonly="readonly">
 						<div class="col-lg d-flex"></div>
@@ -255,7 +257,7 @@ var callback = function(result, status) {
 	                    </div>
 						<div class="col-lg d-flex"></div>
 					</div>
-					<div class="col-11 mb-3" style="display:inline-block;">
+					<div class="col-11 mb-3" style="display:inline-block;" id="plan-detail">
 						<div class="form-field3">
 							<input type="text" class="form-control" id="todo" placeholder="상세 일정" name="todo[]">
 						</div>
@@ -267,7 +269,7 @@ var callback = function(result, status) {
 					</div>
 					
 				</div>
-				<div id="addplan" style="display:inline-block;"></div>
+				<div id="addplan" style="display:inline-block; width:100%;"></div>
 			
 				<div class="col-11 mb-3" id="textform">
 					<textarea id="accomtext" class="form-control w-100" cols="30" rows="10" placeholder="내용을 입력해주세요." name="accomtext"></textarea>
