@@ -41,6 +41,29 @@
 	<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
 	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
 	<script>
+	
+	function chatbot(){
+		var divQ = document.createElement('div');
+		divQ.innerHTML = '<div style="display:inline-block;margin:2px;float:right;background-color:#FF8F00;color:white; border-radius:10px;"><div style="margin:5px;">'+$('#quest').val()+'</div></div><br>';
+		document.getElementById('addAnswer').appendChild(divQ);
+		$.ajax({
+			url:'[[@{/chatbot}]]',
+			data:{
+				quest:$('#quest').val()
+			},
+			success:function(data){
+				var divA = document.createElement('div');
+				divA.innerHTML = '<div style="display:inline-block;background-color:#708238;color:white; border-radius:10px;max-width:70%;"><div style="margin:5px;">'+data+'</div></div>';
+				document.getElementById('addAnswer').appendChild(divA);
+				var chat = document.querySelector('#chatBasic');
+		        chat.scrollTop = chat.scrollHeight;
+			}
+		});
+		
+		var chat = document.querySelector('#chatBasic');
+        chat.scrollTop = chat.scrollHeight;
+	};
+	
 	$(document).ready(function(){
 		$('#mbti').click(function(){
 			if('[[${session.logincust}]]' == ''){
@@ -63,23 +86,21 @@
 		});
 		
 	$('#chatEnter').click(function(){
-		var divQ = document.createElement('div');
-		divQ.innerHTML = '<div style="display:inline-block;margin:2px;float:right;background-color:#FF8F00;color:white; border-radius:10px;"><div style="margin:5px;">'+$('#quest').val()+'</div></div><br>';
-		document.getElementById('addAnswer').appendChild(divQ);
-		$.ajax({
-			url:'[[@{/chatbot}]]',
-			data:{
-				quest:$('#quest').val()
-			},
-			success:function(data){
-				var divA = document.createElement('div');
-				divA.innerHTML = '<div style="display:inline-block;background-color:#708238;color:white; border-radius:10px;max-width:70%;"><div style="margin:5px;">'+data+'</div></div>';
-				document.getElementById('addAnswer').appendChild(divA);
-			}
-		});
-		
-		var chat = document.querySelector('#chatBasic');
-        chat.scrollTop = chat.scrollHeight;
+		if(document.getElementById('quest').value == '')
+			return;
+		chatbot();
+		document.getElementById('quest').value = null;
+	});
+	$('#chatform').keypress(function(e){
+		if(document.getElementById('quest').value == '')
+			return;
+		if(e.keyCode == 13){
+			chatbot();
+			document.getElementById('quest').value = null;
+		}
+	});
+	$('.close').click(function(){
+		document.getElementById('addAnswer').remove();
 	});
 	
 	});
@@ -120,35 +141,23 @@
 	<!--ChatBot Modal -->
 	<a id="chatbot" href="#" data-toggle="modal" data-target="#modal_chatbot" class="img" style="position: fixed; top:90%; right: 3%; width:100px; background-image: url(images/chatbot.png); width:70px; height:70px; z-index:10;"></a>
 	
-	<div class="modal fade" id="modal_chatbot" role="dialog">
+	<div class="modal fade" id="modal_chatbot" role="dialog" data-backdrop="static" data-keyboard="false">
 	    <div class="modal-dialog modal-2sm">
-	      <div class="modal-content" style="width:110%;">
+	      <div class="modal-content" style="width:100%;">
 	        <div class="modal-header">
 	          <div>Witing에 대한 문의에 대해 답변드리겠습니다 :)</div>
-	          <!-- <div class="form-group p-4">
-				<label for="#">질문 예시</label>
-				<div class="form-field">
-					<div class="select-wrap">
-						<div class="icon"><span class="fa fa-chevron-down"></span></div>
-						<select name="" id="" class="form-control">
-							<option value="">mbti는?</option>
-							<option value="">예약 확인은 어디서 하나요?</option>
-						</select>
-					</div>
-				</div>
-			  </div> -->
 	          <button type="button" class="close" data-dismiss="modal">&times;</button>
 	          <h4 class="modal-title"></h4>
 	        </div>
 	        
 	        <div id="chatBasic" class="modal-body" style="height:500px;overflow:scroll;">
-	        	<div style="display:inline-block;background-color:#708238;color:white; border-radius:10px;max-width:70%;"><div style="margin:5px;">자유롭게 질문해주세요:)</div></div>
+	        	<div style="display:inline-block;background-color:#708238;color:white; border-radius:10px;max-width:70%;"><div style="margin:5px;">자유롭게 질문해주세요:)<br>'질문 리스트' 라고 입력하시면 예시 질문을 확인하실 수 있습니다.</div></div>
 		        <div id="addAnswer"></div>
 	        </div>
 	        <div class="modal-footer" style="justify-content: flex-start;">
-				<form class="col-md-10" style="float:left;">
+				<div class="col-md-10" style="float:left;" id="chatform">
 					<input id="quest" type="text" style="width:100%;">
-				</form>
+				</div>
 				<button type="button" class="btn btn-primary" id="chatEnter" style="float: right;">Enter</button>
 	        </div>
 	      </div>

@@ -93,19 +93,15 @@ public class LoginController {
 	public String kakaologin(Model model, String code, HttpSession session) {
 		String access_Token = kakao.getAccessToken(code);
 		HashMap<String, String> userInfo = kakao.getUserInfo(access_Token);
-//		System.out.println("kakaologin controller? : "+userInfo);
 		try {
 			CustDTO existcust = custservice.get("k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")));
-//			System.out.println("exist"+existcust);
-//			System.out.println("??!?");
+
 			if(existcust == null) {//최초 카카오 로그인시 DBd에 데이터 저장
 				CustDTO cust = new CustDTO("k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), "k_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")), userInfo.get("name"), Date.valueOf("2022-"+userInfo.get("birthday")), "010-1234-1234", userInfo.get("email"), "", "", 12345, null, userInfo.get("gender"), 1000, "Korea", null,null);
 				custservice.register(cust);
-//				System.out.println("??"+cust);
 				session.setAttribute("logincust", cust);
 			}else {//최초 카카오 로그인이 아닐경우 기존 데이터 조회하여 session에 추
 				session.setAttribute("logincust", existcust);
-//				System.out.println("who?");
 			}
 			model.addAttribute("citylist",cityservice.getall());
 			session.setAttribute("access_Token", access_Token);
@@ -120,7 +116,7 @@ public class LoginController {
 	public String naverlogin(Model model, String code, HttpSession session) {
 		String access_Token = naver.getAccessToken(code);
 		HashMap<String, String> userInfo = naver.getUserInfo(access_Token);
-//		System.out.println("userinfo : "+userInfo);
+
 		try {
 			CustDTO existcust = custservice.get("n_"+userInfo.get("email").substring(0,userInfo.get("email").indexOf("@")));
 			if(existcust == null) {//최초 네이버 로그인시 DB에 데이터 저장

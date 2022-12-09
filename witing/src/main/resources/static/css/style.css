@@ -763,6 +763,22 @@ pre {
 	background-color: lightgray;
 }
 
+.qnatext{
+	width: 600px;
+}
+
+.reserv_imgwidth {
+	max-width: 60%;
+}
+.reserv_width {
+	max-width: 50%;
+}
+#chatform {
+	width: 75%;
+	margin: 0px;
+	padding: 0px;
+}
+
 @media (max-width: 390px) {
 	#regist_title {
 		font-size:1em;
@@ -783,6 +799,21 @@ pre {
 	}
 	#mypage_icons{
 		padding: 0px;
+	}
+	#chatform {
+		margin-right: 3%;
+	}
+	.qnatext{
+		width: 100%;
+	}
+	.reserv_padding{
+		padding: 0px;
+	}
+	.reserv_imgwidth {
+		max-width: 100%;
+	}
+	.reserv_width {
+		max-width: 100%;
 	}
 }
 

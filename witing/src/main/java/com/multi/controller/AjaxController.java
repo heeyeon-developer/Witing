@@ -137,7 +137,6 @@ public class AjaxController {
 			message.setSubject("Witing 본인인증을 위한 인증번호 메일");
 			message.setText("인증 번호 : "+key);
 			sender.send(message);
-			System.out.println(key);
 			return key;
 		}
 	

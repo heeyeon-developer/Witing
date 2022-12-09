@@ -68,12 +68,12 @@ $(document).ready(function(){
 <section class="ftco-section contact-section ftco-no-pt">
 <div class="container">
     <div class="row block-9 justify-content-center">
-    	<ul>
-    		<ul id="reservdetail" class="reservmargin">
+    	<ul class="reserv_padding">
+    		<ul id="reservdetail" class="reservmargin reserv_padding">
     			<li>
-	    			<img style="width:auto;height:auto;max-width:60%;max-height:40%;overfolw:hidden;object-fit:cover;" th:src="@{|images/hotel/${order.roomimg}|}">
+	    			<img class="reserv_imgwidth" style="width:auto;height:auto;max-height:40%;overfolw:hidden;object-fit:cover;" th:src="@{|images/hotel/${order.roomimg}|}">
     			</li>
-    			<li style="width:50%" class="justify-content-center">
+    			<li class="justify-content-center reserv_width">
     			<table id="reservdetail" class="table" style="margin-bottom:5%; border:2px solid lightgray;" >
     				<tr>
 						<td>주문번호</td>

@@ -49,8 +49,6 @@ public class MypageController {
 				model.addAttribute("cust", cust);
 				model.addAttribute("mpcenter", dir+"custdetail");
 				model.addAttribute("center", dir+"mypageindex");
-				
-			
 			}else {
 				model.addAttribute("cust", cust);
 				model.addAttribute("status", "0");

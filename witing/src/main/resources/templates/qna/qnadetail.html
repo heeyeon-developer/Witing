@@ -34,17 +34,18 @@ function del(postid){
 <!-- 질문 -->
       <div class="col-md-12 order-md-last"  style="background-color: #F6F6F6; padding: 40px; margin-bottom:10px">
        <div class=" p-6">
-       	<table class="container">
-       		<thead>
-       			<tr class="row">
-       				<th colspan="2" style="width:600px; padding-left:15px">
-       					<h3 style="width: 100%; padding-bottom: 15px">
+       <h3 style="width: 100%; padding-bottom: 15px">
        						<span>Q.</span>
        						<strong th:text="${qnadetail.title}" style="width: 100%"></strong>
        					</h3>
+       	<table class="container">
+       		<thead>
+       			<!-- <tr class="row">
+       				<th colspan="2" style="padding-left:15px" class="qnatext">
+       					
        				</th>
        				
-       			</tr>
+       			</tr> -->
        			
        			<tr>
        				<th th:text="'작성자 : '+${qnadetail.custid}"></th>
@@ -73,11 +74,8 @@ function del(postid){
        	<table class="container">
        		<thead>
        			<tr class="row">
-       				<th colspan="2" style="width:600px; padding-left:15px">
-       					<h3 style="width: 100%; padding-bottom: 15px">
-       						<span>A.</span>
-       						<strong th:text="${answer.title}" style="width: 100%"></strong>
-       					</h3>
+       				<th colspan="2" style="padding-left:15px" class="qnatext">
+       					
        				</th>
        				
        			</tr>
