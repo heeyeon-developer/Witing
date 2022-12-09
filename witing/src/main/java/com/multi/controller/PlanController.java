@@ -67,14 +67,6 @@ public class PlanController {
 			model.addAttribute("accomid",accomid);
 			model.addAttribute("replyid",replyid);
 			
-			/*
-			model.addAttribute("planname", list.get(0).getPlanname());
-			model.addAttribute("planname1", list.get(1).getPlanname());
-			model.addAttribute("planname2", list.get(2).getPlanname());
-			model.addAttribute("todo", list.get(0).getTodo());
-			model.addAttribute("todo1", list.get(1).getTodo());*/
-//			for(PlanDTO i : list)
-//				System.out.println(i);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,7 +89,6 @@ public class PlanController {
 			e.printStackTrace();
 		}
 		model.addAttribute("mbtiType", type);
-		System.out.println(type);
 		model.addAttribute("center", dir+"result");
 		return "index";
 	}

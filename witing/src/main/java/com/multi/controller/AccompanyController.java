@@ -106,9 +106,6 @@ public class AccompanyController {
 	public String updatereply(Model model, Integer replyid, Integer accomid, String comment, String custid, String secret) {
 		ReplyDTO reply = new ReplyDTO(replyid, accomid, custid, comment, null, 0, secret);
 		try {
-			System.out.println(replyid);
-			System.out.println(accomid);
-			System.out.println(comment);
 			reply_service.modify(reply);
 			model.addAttribute("reply", reply);
 		} catch (Exception e) {
@@ -121,8 +118,6 @@ public class AccompanyController {
 	public String delreply(Model model, int replyid, int accomid) {
 		ReplyDTO reply = new ReplyDTO();
 		try {
-			System.out.println(replyid);
-			System.out.println(accomid);
 			reply_service.remove(replyid);
 			model.addAttribute("reply", reply);
 		} catch (Exception e) {
@@ -141,7 +136,6 @@ public class AccompanyController {
 			AccompanyDTO ac = new AccompanyDTO(0, custid, title, accomtext, Date.valueOf(traveltime), cnt, 0.0f, 0.0f);
 			service.register(ac);
 			accomid = ac.getAccomid();
-			System.out.println(accomid);
 			for(int i=0; i<idx.length; i++) {
 				PlanDTO pl = new PlanDTO(0, ac.getAccomid(), planname[i], planx[i], plany[i], idx[i], todo[i],
 						"", "", "", Date.valueOf(traveltime), 0, 0.0f, 0.0f, "", "",Date.valueOf(traveltime), "","");

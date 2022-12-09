@@ -177,11 +177,10 @@ public class ReviewController {
 			model.addAttribute("list", list);
 			Util.saveFile(obj.getImgname(), admindir, custdir);		// 이미지 덩어리를 관리자 디렉, 사용자 디렉에 저장 (상단에 경로를 @Value 써줌)
 			String result = OCRUtil.getText(img);	// 결과받기
-			System.out.println("RESULT: "+result);
 			
 			JSONParser jsonparser = new JSONParser();
 			JSONObject jo = (JSONObject)jsonparser.parse(result.toString());
-			// System.out.println(jo.toString());
+
 			JSONArray ja1 = (JSONArray) jo.get("images");	// images라는 배열을 가져온다.
 			JSONObject jo1 = (JSONObject) ja1.get(0); // 배열에서 첫번째 object를 꺼냄
 			JSONArray ja2 = (JSONArray) jo1.get("fields"); // jo1에서 fields라는 배열을 꺼냄
@@ -216,24 +215,11 @@ public class ReviewController {
 			int intTotalprice = Integer.parseInt(totalprice);	// ocr totalprice 형변환
 			int intCnt = Integer.parseInt(cnt);					// ocr cnt 형변환
 			
-			// ocr로 추출한 데이터
-			System.out.println("-------------------ocr 데이터-------------");
-			System.out.println(custname);
-			System.out.println(hotelname);
-			System.out.println(roomtype);
-			System.out.println(totalprice);
-			System.out.println(cnt);
-			System.out.println(date);
-			System.out.println(replacedate);
-			System.out.println(sdate);
-			System.out.println(edate);
-			
 			Date currenttime = new Date();
 			String today = format.format(currenttime);
-			System.out.println("today : " +today);
-			System.out.println("checkin : " +sdate);
+
 			int compare = edate.compareTo(today);
-			System.out.println("비교 : "+compare);
+
 			if(compare <= 0) {
 				
 			}else {
@@ -241,9 +227,7 @@ public class ReviewController {
 			}
 			
 			CustDTO cust = (CustDTO) session.getAttribute("logincust");
-			System.out.println("cust : "+cust);
 			String name = cust.getCustname();	// session의 custname
-			System.out.println("session의 custname : "+ name);
 			
 			PostDTO orderdetail = postservice.reviewocr(intOrderid);	// orderlist 데이터 조회
 			
@@ -255,16 +239,6 @@ public class ReviewController {
 			String od_sdate = (String)format.format(orderdetail.getSdate());
 			String od_edate = (String)format.format(orderdetail.getEdate());
 			int od_hotelid = orderdetail.getOcrhotelid();
-			System.out.println("넘어온 것"+hotelid);
-			System.out.println("첨부한 것"+od_hotelid);
-			System.out.println("--------------------------조회한 데이터--------------------");
-			System.out.println(od_custname);
-			System.out.println(od_hotelname);
-			System.out.println(od_roomtype);
-			System.out.println(od_totalprice);
-			System.out.println(od_cnt);
-			System.out.println(od_sdate);
-			System.out.println(od_edate);
 
 //			model.addAttribute("orderid", intOrderid);	
 //			model.addAttribute("custname", custname);
@@ -275,25 +249,25 @@ public class ReviewController {
 			
 			
 			if(name.equals(od_custname)) {
-				System.out.println("이름 일치");
+				
 			}
 			if(hotelname.equals(od_hotelname)) {
-				System.out.println("호텔이름 일치");
+				
 			}
 			if(roomtype.equals(od_roomtype)) {
-				System.out.println("룸타입 일치");
+				
 			}
 			if(intTotalprice == od_totalprice) {
-				System.out.println("가격일치");
+				
 			}
 			if(intCnt == od_cnt) {
-				System.out.println("인원일치");
+				
 			}
 			if(sdate.equals(od_sdate)) {
-				System.out.println("체크인일치");
+				
 			}
 			if(edate.equals(od_edate)) {
-				System.out.println("체크아웃일치");
+				
 			}
 			
 			String dir = "review/";
@@ -302,7 +276,6 @@ public class ReviewController {
 				if(name.equals(od_custname) && hotelname.equals(od_hotelname) && roomtype.equals(od_roomtype) 
 						&& intTotalprice == od_totalprice && intCnt == od_cnt && sdate.equals(od_sdate) && edate.equals(od_edate)) {
 					if(compare <= 0) {	// 
-						System.out.println("일치합니다.");
 						model.addAttribute("status", "1");
 						model.addAttribute("center", dir+"reviewocr");
 	//					 "redirect:writereview?hotelid="+hotelid;
@@ -311,13 +284,11 @@ public class ReviewController {
 						model.addAttribute("center", dir+"reviewocr");
 					}
 				}else {	// 호텔은 일치하지만 다른 세부사항이 일치하지 않는 경우
-					System.out.println("일치하지않습니다.");
 					model.addAttribute("status", "0");
 					model.addAttribute("center", dir+"reviewocr");
 //					return "redirect:reviewmore?hotelid="+hotelid; 
 				}
 			}else {	// 호텔 자체가 다른 호텔 일 경우
-				System.out.println("일치하지않습니다.");
 				model.addAttribute("status", "0");
 				model.addAttribute("center", dir+"reviewocr");
 //				return "redirect:reviewmore?hotelid="+hotelid;
