@@ -177,7 +177,6 @@ public class QnAController {
 		try {
 			post = postservice.get(postid);
 			answer = postservice.selectanswer(toppostid);
-			System.out.println(post);
 			model.addAttribute("qnadetail",post);
 			model.addAttribute("answer", answer);
 			model.addAttribute("center", qnadir+"qnamoredetail");

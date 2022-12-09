@@ -30,6 +30,19 @@ function del(postid){
 	color : #f15d30
 	}
 	
+	#review_writer{padding-left: 15px;}
+	#review_date{margin-left: 900px; margin-top:-10px; margin-bottom: -50px;}
+	#review_img{padding-left: 15px;}
+	#review_tr{margin-left: 2px;}
+
+
+@media screen and (max-width: 390px){
+#review_row, #review_tbody, #review_cust{width: 335px;}
+#review_date{margin-left: 70px; margin-top:0px;}
+#review_writer{padding-left: 15px;}
+#review_tr{margin-left:0px; width: 95%;}
+}
+	
 </style>
 
 <section class="ftco-section contact-section ftco-no-pt">
@@ -41,7 +54,7 @@ function del(postid){
        <div class=" p-6">
        	<table class="container">
        		<thead>
-       			<tr class="row">
+       			<tr class="row" id="review_row">
        				<th colspan="2" style="width:600px; padding-left:15px">
        					<h2 id="review_hotelname" th:text="${reviewdetail.hotelname}" th:onclick="|location.href='@{/room(hotelid=${reviewdetail.hotelid})}'|" style="cursor: pointer"></h2>
        				</th>
@@ -50,24 +63,24 @@ function del(postid){
        			<tr class="row">
        				<th th:text="${reviewdetail.title}" style="padding-left:15px"></th>
        				<th>&nbsp&nbsp&nbsp&nbsp</th>
-       				<th class="fa fa-star " style="padding-top: 7px" th:text="' '+${reviewdetail.star}+' / 5'"></th>
+       				<th class="fa fa-star " style="padding-top: 7px" th:text="' '+${reviewdetail.star}+' / 5'" id="review_star"></th>
        			</tr>
-       			<tr>
-       				<th th:text="'작성자 : '+${reviewdetail.custid}"></th>
-       				<th th:text="${#dates.format(reviewdetail.rdate,'yyyy-MM-dd HH:mm')}" style="text-align : right; padding-right:20px"></th>
+       			<tr class="row" id="review_cust">
+       				<th th:text="'작성자 : '+${reviewdetail.custid}" id="review_writer"></th>
+       				<th th:text="${#dates.format(reviewdetail.rdate,'yyyy-MM-dd HH:mm')}" style="text-align : right; padding-right:20px" id="review_date"></th>
        			</tr>
        			<tr colspan="2">
        				<th>&nbsp</th>
        			</tr>
        		</thead>
        	
-       		<tbody>
-       			<tr>
+       		<tbody id="review_tbody">
+       			<tr class="row">
        				<td>
-        				<img th:src="'/images/' + ${reviewdetail.img}" style="width: 200px; height: 150px" th:if="${reviewdetail.img !=''}">
+        				<img th:src="'/images/' + ${reviewdetail.img}" style="width: 200px; height: 150px" th:if="${reviewdetail.img !=''}" id="review_img">
         			</td>
        			</tr>
-       			<tr style="background-color: #EAEAEA ; height: 100px">
+       			<tr class="row" style="background-color: #EAEAEA ; height: 100px" id="review_tr">
        				<td id="td_text" colspan="2" th:text="'&nbsp&nbsp&nbsp&nbsp'+${reviewdetail.text}" style="color: black"></td>
        			</tr>
        		</tbody>
