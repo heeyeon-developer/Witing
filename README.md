@@ -4,6 +4,7 @@ Final Project by Team1 FJ
 ## 1. 프로젝트 주제
 - 네이버 AI 플랫폼과 숙박, API(지도,결제,숙박 데이터, 본인인증, SNS 로그인), 웹소켓 활용하여 여행 관련 숙박, 동행 서비스를 제공하는 웹사이트 ‘ Witing : With + -ing ’
 
+![main_page](witing/src/main/resources/static/images/readme/main_page.png)
 
 
 ## 2. 프로젝트 목적
@@ -34,10 +35,12 @@ Final Project by Team1 FJ
 
 
 ## 5. 프로젝트 기능 구현
-> USER PAGE
+> USER PAGE <br>
+
 ![plan](witing/src/main/resources/static/images/readme/user_page.png)
 
-> ADMIN PAGE
+> ADMIN PAGE <br>
+
 ![plan](witing/src/main/resources/static/images/readme/admin_page.png)
 
 ## 6. 프로젝트 구성원 및 역할
@@ -52,6 +55,7 @@ Final Project by Team1 FJ
 
 ## 7. 프로젝트 수행 기간
 > 2022.10.24 ~ 2022.12.16(8주)
+
 ![plan](witing/src/main/resources/static/images/readme/plan.png)
 
 
