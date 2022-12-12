@@ -23,7 +23,9 @@ Final Project by Team1 FJ
 
 
 
-## 3. 개발 사용 도구
+## 3. 개발 사용 도구 / 시스템 구성도
+![system_structure](witing/src/main/resources/static/images/readme/system_structure.png)
+
 |                            언어                            |                 개발도구                  |    Database    |                           협업도구                           |          Framework          |         Server          |
 |:--------------------------------------------------------:|:-------------------------------------:|:--------------:|:--------------------------------------------------------:|:---------------------------:|:-----------------------:|
 | Java<br/>HTML5<br/>CSS3<br/>JavaScript<br/>XML<br/>AJAX  | Eclipse 2020-12<br/>SpringBoot 2.7.4  |  MySQL 8.0.17  | Github<br/>Zoom<br/>Google Docs<br/>Notion<br/>ERD Cloud | Thymeleaf<br/>Mybatis 3.2.2 | NCP(Naver Cloud Platform)<br/>Apache Tomcat |
