@@ -1,6 +1,6 @@
 # Witing
 Final Project by Team1 FJ
-<p align="center"><img src="witing/src/main/resources/static/images/readme/logo_readme.png" width="100" height="100"/></p>
+<p align="center"><img src="witing/src/main/resources/static/images/readme/logo_readme.png" width="300" height="300"/></p>
 
 ## 1. 프로젝트 주제
 - 네이버 AI 플랫폼과 숙박, API(지도,결제,숙박 데이터, 본인인증, SNS 로그인), 웹소켓 활용하여 여행 관련 숙박, 동행 서비스를 제공하는 웹사이트 ‘ Witing : With + -ing ’
