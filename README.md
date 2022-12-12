@@ -21,10 +21,15 @@ Final Project by Team1 FJ
 |:--------------------------------------------------------:|:-------------------------------------:|:--------------:|:--------------------------------------------------------:|:---------------------------:|:-----------------------:|
 | Java<br/>HTML5<br/>CSS3<br/>JavaScript<br/>XML<br/>AJAX  | Eclipse 2020-12<br/>SpringBoot 2.7.4  |  MySQL 8.0.17  | Github<br/>Zoom<br/>Google Docs<br/>Notion<br/>ERD Cloud | Thymeleaf<br/>Mybatis 3.2.2 | NCP(Naver Cloud Platform)<br/>Apache Tomcat |
 
-![](../../../final_project/tool.jpg)
+<br>
+
+![tool](witing/src/main/resources/static/images/readme/tool.jpg)
+
 
 ## 4. 데이터베이스 설계
-![](../../../final_project/erd.jpg)
+![erd](witing/src/main/resources/static/images/readme/erd.jpg)
+
+
 
 ## 5. 프로젝트 기능 구현
 
