@@ -23,7 +23,7 @@ Final Project by Team1 FJ
 
 
 
-## 3. 개발 사용 도구 / 시스템 구성도
+## 3. 시스템 구성도 / 개발 사용 도구
 ![system_structure](witing/src/main/resources/static/images/readme/system_structure.png)
 
 |                            언어                            |                 개발도구                  |    Database    |                           협업도구                           |          Framework          |         Server          |
