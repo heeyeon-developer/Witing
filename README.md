@@ -47,7 +47,7 @@ Final Project by Team1 FJ
 ## 5. 프로젝트 기능 구현
 > USER PAGE <br>
 
-![plan](witing/src/main/resources/static/images/readme/user_page.png)
+![plan](witing/src/main/resources/static/images/readme/user_page.jpg)
 
 > ADMIN PAGE <br>
 
