@@ -17,7 +17,6 @@ Final Project by Team1 FJ
 - MySQL을 이용하여 데이터 베이스를 구축하고 Spring Container와 연결
 - 자바 개발도구와 통합개발환경(IDE : Intergarated Development Environment) 사용
 - ERD Cloud와 Notion, Github을 사용한 협업 경험
-<br>
 > 차별점 <br>
 - 동행 게시물을 작성시 다른 사이트와 차별점을 두기 위하여 동행 일정을 동적으로 작성 가능하며, 작성한 일정이 지도에 표시될 수 있도록 구현
 - 동행시 성향이 맞는 분과 매칭될 수 있도록 '동행 MBTI' 라는 아이디어를 추가하여 구현
