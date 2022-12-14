@@ -103,7 +103,7 @@ public class LoginController {
 			}else {//최초 카카오 로그인이 아닐경우 기존 데이터 조회하여 session에 추
 				session.setAttribute("logincust", existcust);
 			}
-			model.addAttribute("citylist",cityservice.getall());
+			model.addAttribute("city",cityservice.getall());
 			session.setAttribute("access_Token", access_Token);
 		}catch(Exception e) {
 			System.out.println(e);
@@ -126,7 +126,7 @@ public class LoginController {
 			}else {//최초 네이버 로그인이 아닐경우 기존 데이터 조회하여 session에 추
 				session.setAttribute("logincust", existcust);
 			}
-			model.addAttribute("citylist",cityservice.getall());
+			model.addAttribute("city",cityservice.getall());
 			session.setAttribute("access_Token", access_Token);
 		}catch(Exception e) {
 			
