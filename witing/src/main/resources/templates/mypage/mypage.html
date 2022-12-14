@@ -25,8 +25,9 @@ $(document).ready(function(){
 			data : {
 				mail : mail
 				},
-			dataType :'json',
+			/* dataType :'json', */
 		 	success : function(key){
+		 	alert(key);
 		 		$('#ok_btn').click(function(){
 			 			if ($("#compare").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
 			 				alert("본인인증이 정상적으로 되었습니다.")
@@ -118,10 +119,10 @@ $(document).ready(function(){
 		</form>
         </div>
         <div class="modal-footer">
-		<a th:href="@{/custdetail(custid=${session.logincust.custid})}">
-		<a href=#>
-          <button id="ok_btn" type="button" class="btn btn-default" style="background-color: #f15d30; color: white">확인</button>
-        </a>
+			<a th:href="@{/custdetail(custid=${session.logincust.custid})}">
+			<a href=#>
+	          <button id="ok_btn" type="button" class="btn btn-default" style="background-color: #f15d30; color: white">확인</button>
+	        </a>
         </div>
       </div>
     </div>
