@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+#td_text{
+		/* border-top: solid #BDBDBD 1px;
+		border-bottom: solid #BDBDBD 1px; */
+		padding-top: 20px;
+		padding-bottom: 20px;
+		
+	}
+	
+	#review_hotelname:hover {
+	color : #f15d30
+	}
+	
+	#review_writer{padding-left: 15px;}
+	#review_date{margin-left: 900px; margin-top:-10px; margin-bottom: -50px;}
+	#review_img{padding-left: 15px;}
+	#review_tr{margin-left: 2px;}
+
+
+@media screen and (max-width: 390px){
+	#review_row, #review_tbody, #review_cust{
+		width: 335px;
+	}
+	#review_date{
+		margin-left: 70px; margin-top:0px;
+	}
+	#review_writer{
+		padding-left: 15px;
+	}
+	#review_tr{
+		margin-left:0px; width: 95%;
+	}
+}
+
+#a_title{
+	margin-bottom: 30px;
+}

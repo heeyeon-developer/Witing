@@ -1,34 +1,6 @@
-<meta charset="utf-8">
-<style>
-#pagebtn{margin-top: 7%;margin-bottom: -7%;text-align: center;}
-</style>
+<link rel="stylesheet" th:href="@{/css/hotel.css}">
+
 <script>
-
-/* function getsearch(cityid, cateid){
-	$.ajax({
-		type:'GET',
-		url:'/searchimpl',
-		data:{
-			'cityid':cityid,
-			'cateid':cateid
-		},
-		success:function(data){
-			
-		}
-	});
-} */
-
-/* $(document).ready(function(){
-
-	$('#search_btn').click(function(){
-	  	 $('#search_form').attr({
-	   	      method:'get',
-	   	      action:'/searchimpl'         
-	   	   });
-	   	   $('#search_form').submit();
-	   });
-
-});  */
 
 function movePage(uri, queryString) {
     console.log(uri);
@@ -38,13 +10,7 @@ function movePage(uri, queryString) {
 }
 
 function addlike(cust_id, hotel_id){
-	
-	/* $('#heartbtn').click(function() {
-	    $('#heartbtn').addClass('fa fa-heart');
-	    $('#heartbtn').removeClass('fa fa-heart-o');
-	    return false;
-	});
-	 */
+
 	$.ajax({
 		url:'[[@{/addlike}]]',
 		data:{
@@ -52,17 +18,7 @@ function addlike(cust_id, hotel_id){
 			'hotelid':hotel_id,		
 		},
 		success:function(data){
-			
-			/* if(id == null){
-				$(id).attr('class','fa fa-heart-o');
-                $("#likecnt").empty();
-                $("#likecnt").append(jdata.likecnt);
-            }
-            else if (id != null){
-                $("#btn_like").attr('class','fa fa-heart-o');
-                $("#likecnt").empty();
-                $("#likecnt").append(jdata.likecnt);
-            } */
+
             var id = '#heartbtn'+data[0];
 			if(data[1] == -1){
 				$(id).attr('class','fa fa-heart-o');
@@ -73,11 +29,6 @@ function addlike(cust_id, hotel_id){
 			}
 		}
 		
-		/* useEffect(() => {
-		    if(wishlistList.wishlistItems.filter(InwishlistItem => InwishlistItem.id === item.id)[0]) {
-		      setColor("#ff0000");
-		    }
-		  }, []); */
 	});
 	
 };

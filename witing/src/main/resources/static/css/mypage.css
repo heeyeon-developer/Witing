@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#custupdate_form > div > input{
+	width: 100%;
+}
+
+@media (max-width: 1200px){
+	#custupdate_btn_a {padding-right: 40px}
+}
+	
+
+#mypage_info > h2 {
+	font-family: 'Quicksand', sans-serif;
+}
+#mypage_info > h4 {
+	font-family: 'Quicksand', sans-serif;
+}
