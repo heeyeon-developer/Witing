@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#pagebtn{
+	margin-top: 7%;
+	margin-bottom: -7%;
+	text-align: center;
+}
+
+#search_title{
+	margin-top: -60px;
+	margin-bottom: 30px;
+}
+#searchhotelpage{
+	text-align: center;
+}

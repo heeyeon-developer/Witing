@@ -1,48 +1,4 @@
-<style>
-.mb-3{font-weight: bold;}
-
-#dateicon, #user{color: #f15d30; padding-left: 30px;}
-
-#dateicon{padding-top: 25px;}
-
-#user{padding-top: -10px;margin-bottom: -5%;}
-
-#date, #cnt{float: right;color: black;padding-left: 10px;}
-
-#planinfo{border: 1px solid #d3d3d3;margin-bottom: 30px;}
-
-#accom_btn{margin-left: 30%;}
-
-#check{color: #f15d30;}
-
-#plan{color: black;}
-
-
-#reply_btn{width: 90px; height: 90px; float: right; margin-top: -130px; margin-left: 80%;}
-
-#update_btn,#delete_btn{display: inline-block; border: none; background-color: transparent; width: 40px; height: 20px;}
-
-#re_custid{margin-left: 15px; margin-right:2%; font-size: 18px; font-weight: bold; color: #f15d30; display: inline-block;}
-
-
-#linkbtn, #twitbtn, #blogbtn, #instabtn, #kakaobtn,
-#linkbtn:active, #twitbtn:active, #blogbtn:active, #instabtn:active, #kakaobtn:active,
-#linkbtn:focus, #twitbtn:focus, #blogbtn:focus, #instabtn:focus, #kakaobtn:focus,
-#update_btn:active, #update_btn:focus, #delete_btn:active, #delete_btn:focus
-{background-color: transparent; border: none !important; box-shadow: none !important; outline:none;}
-
-@media (max-width: 390px){
-#comment{margin-left: -7%; margin-bottom: -3px;}
-#reply_btn{width: 19%; height: 94px; margin-right: -2%;}
-#plan_title{margin-top: 5%; font-size: 22px;}
-#accomlistbtn{width: 55px; height: 35px; font-size: 13px;}
-#del_btn{width: 55px; height: 35px; font-size: 13px;}
-#map{width:100%; height: 200px;}
-.text-margin{width:90%;}
-}
-
-
-</style>
+<link rel="stylesheet" th:href="@{/css/plan.css}">
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
@@ -149,10 +105,8 @@ function mapmarker(){
 }
 
 function re_delete_btn(replyid){
-	/* alert(replyid) */
 	var c = confirm('삭제하시겠습니까?');
 	if(c == true){
-		/* alert(replyid); */
 		var replyid = replyid;
 		var accomid = $('#accomid').text();
 		location.href="[[@{/delreply?replyid=}]]"+replyid+'&'+"[[@{accomid=}]]"+accomid;
@@ -167,7 +121,7 @@ function update_btn(data){
 }
 
 function re_update_btn(data){
-	/* alert(data); */
+
 	var c = confirm('수정하시겠습니까?');
 	if(c == true){
 		var replyid = data;
@@ -177,9 +131,6 @@ function re_update_btn(data){
 		var secret = $('input[name=up_secret]:checked').val(); 
 		alert(secret);
 		location.href="[[@{/updatereply?replyid=}]]"+replyid+"&[[@{accomid=}]]"+accomid+"&[[@{comment=}]]"+comment+"&[[@{secret=}]]"+secret;
-		/* alert(commentid)
-		alert(replyid);
-		alert(comment); */
 		alert('수정되었습니다.');
 	}else{
 		alert('취소되었습니다.');
@@ -220,7 +171,6 @@ $(document).ready(function(){
 			var comment = $('#comment').val();
 			var secret = $('input[name=secret]:checked').val();
 			location.href="[[@{/replyimpl?custid=}]]"+custid+"&[[@{accomid=}]]"+accomid+"&[[@{comment=}]]"+comment+"&[[@{secret=}]]"+secret;
-			/* alert(comment) */
 			alert("정상적으로 등록되었습니다");
 			connect();
 		}else{
@@ -305,10 +255,9 @@ $(document).ready(function(){
             </div>
           </div>
           <div id="snslist" style="text-align: center;">
-	          <button type="button" onclick="clip(); return false;" id="linkbtn" style="margin-top: 15px;"><img src="/images/hotel/link.png" style="height: 35px;"></button>
+	          <button type="button" onclick="clip(); return false;" id="linkbtn"><img src="/images/hotel/link.png" style="height: 35px;"></button>
 	          <button type="button" onclick="shareTwitter();" id="twitbtn"><img src="/images/hotel/twit.png" style="height: 40px; margin-left: -5%;"></button>
 	          <button type="button" onclick="shareNaverBlog();" id="blogbtn"><img src="/images/hotel/nblog.png" style="height: 40px; margin-left: -5%;"></button>
-	          <!-- <button type="button" id="instabtn"><img src="/images/hotel/insta.png" style="height: 40px; margin-left: -5%;"></button> -->
 	          <button type="button" onclick="kakaotemp()" id="kakaobtn"><img src="/images/hotel/katalk.png" style="height: 40px; margin-left: -5%;"></button>
           </div>
           <br>
@@ -357,16 +306,6 @@ $(document).ready(function(){
                     <div th:if="${reply.secret == 'n'} or ${reply.secret == null}">
 	                   <p th:text="${reply.comment}" style="margin-left: 15px; color: black"></p><div id="replylid" style="display: none;" th:text="${replylid}"></div>
                     </div>
-                   
-                   
-                   <!-- Child comment 1-->
-                   <!-- <div class="d-flex mt-4">
-                       <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                       <div class="ms-3">
-                           <div class="fw-bold">Commenter Name</div>
-                           And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                       </div>
-                  </div> -->
                </div>
                
                <div class="modal fade" th:id="|modifyModal${reply.replyid}|" role="dialog">

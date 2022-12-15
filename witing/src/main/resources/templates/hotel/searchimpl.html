@@ -1,8 +1,4 @@
-<meta charset="utf-8">
-<style>
-#search_title{margin-top: -60px;margin-bottom: 30px;}
-#searchhotelpage{text-align: center;}
-</style>
+<link rel="stylesheet" th:href="@{/css/hotel.css}">
 
 <script>
 function movePage(uri, queryString) {
@@ -99,15 +95,6 @@ $(document).ready(function(){
 		      <select name="cityid" id="cityid" class="form-control">
 		        <option value="0">CITY</option>
 		        <option th:each="ci:${city}" th:text=${ci.name} th:value="${ci.cityid}" th:id="${ci.cityid}">city</option>
-		        <!-- <option value="1">서울</option>
-		        <option value="2">경기</option>
-		        <option value="3">인천</option>
-		        <option value="4">대전/충청</option>
-		        <option value="5">강원</option>
-		        <option value="6">광주/전라</option>
-		        <option value="7">대구/경상</option>
-		        <option value="8">부산</option>
-		        <option value="9">제주</option> -->
 		      </select>
 		    </div>
 		  </div>
@@ -178,9 +165,7 @@ $(document).ready(function(){
         <span class="fa fa-star"></span>
         <span class="fa fa-star"></span>
       </p>
-		
-      <!-- <span class="days">8 Days Tour</span> -->
-      
+
 	  <div class="like" th:if="${session.logincust != null}">
           <a th:onclick="addlike([[${session.logincust.custid}]],[[${se.hotelid}]]);" data-toggle="tooltip" data-placement="left" title="Like" id="like">
           <i class="fa fa-heart-o" th:id="|heartbtn${se.hotelid}|" style="color:red" alt=""></i>
@@ -196,24 +181,7 @@ $(document).ready(function(){
    </div>
  </div>
 </div>
-
-
 </div>
-<!-- <div class="row mt-5">
-  <div class="col text-center">
-    <div class="block-27">
-      <ul>
-        <li><a href="#">&lt;</a></li>
-        <li class="active"><span>1</span></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&gt;</a></li>
-      </ul>
-    </div>
-  </div>
-</div> -->
 
 <div class="block-27" id="searchhotelpage">
       <ul>

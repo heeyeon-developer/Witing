@@ -1,13 +1,5 @@
-<!-- <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet"> -->
-  
-  
+<link rel="stylesheet" th:href="@{/css/mypage.css}">
+
 <script>
 $(document).ready(function(){
 
@@ -27,7 +19,6 @@ $(document).ready(function(){
 				},
 			/* dataType :'json', */
 		 	success : function(key){
-		 	alert(key);
 		 		$('#ok_btn').click(function(){
 			 			if ($("#compare").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
 			 				alert("본인인증이 정상적으로 되었습니다.")
@@ -77,15 +68,6 @@ $(document).ready(function(){
 })
 
 </script>
-<style>
-	#mypage_info > h2 {
-		font-family: 'Quicksand', sans-serif;
-	}
-	#mypage_info > h4 {
-		font-family: 'Quicksand', sans-serif;
-	}
-</style>
-
 
 <div class="modal fade" id="emailModal" role="dialog">
     <div class="modal-dialog modal-2sm">

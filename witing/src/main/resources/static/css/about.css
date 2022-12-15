@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+@media (max-width: 390px) {
+#hotelbtn, #mbtibtn{width: 17%; text-align:center; margin-bottom: 20px;}
+#regisbtn{width: 26%; margin-bottom: 20px;}
+#accombtn{width: 35%; margin-bottom: 20px;}
+.pr-4, .px-4{padding-left: 0px !important; padding-right: 0px !important;}
+}
+
+#heartbtn, #heartbtn2, #likedel{
+	color: red;
+}

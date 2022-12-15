@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#a_title{
+	margin-bottom: 30px;
+}
+
+
+#td_text{
+		/* border-top: solid #BDBDBD 1px;
+		border-bottom: solid #BDBDBD 1px; */
+		padding-top: 20px;
+		padding-bottom: 20px;
+}
+
+#roomdetail{
+	margin-top: -50px;
+}
