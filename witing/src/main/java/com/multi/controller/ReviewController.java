@@ -297,7 +297,7 @@ public class ReviewController {
 			e.printStackTrace();
 		}
 		return "index";
-	}
+	} 
 	
 	@RequestMapping("/writereview")
 	public String writereview(Model model,Integer hotelid,Integer roomid,String hotelname,
