@@ -10,12 +10,12 @@ $(document).ready(function(){
 			'action':'/ocrimpl'
 		});
 		$('#register_form').submit()
-		alert(status)
+		
 	});
 	/* ocr */ 
 	
 	
-	
+	alert(status)
 	if(status=="1"){
 		alert("예약인증 성공");
 		location.href='/writereview?hotelid='+$('#hotelid').val();

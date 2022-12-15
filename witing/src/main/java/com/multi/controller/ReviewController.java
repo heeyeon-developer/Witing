@@ -220,12 +220,6 @@ public class ReviewController {
 
 			int compare = edate.compareTo(today);
 
-			if(compare <= 0) {
-				
-			}else {
-				
-			}
-			
 			CustDTO cust = (CustDTO) session.getAttribute("logincust");
 			String name = cust.getCustname();	// session의 custname
 			
@@ -239,36 +233,6 @@ public class ReviewController {
 			String od_sdate = (String)format.format(orderdetail.getSdate());
 			String od_edate = (String)format.format(orderdetail.getEdate());
 			int od_hotelid = orderdetail.getOcrhotelid();
-
-//			model.addAttribute("orderid", intOrderid);	
-//			model.addAttribute("custname", custname);
-//			model.addAttribute("hotelname", hotelname);
-//			model.addAttribute("totalprice", intTotalprice);
-//			model.addAttribute("cnt", cnt);
-//			model.addAttribute("date", date);
-			
-			
-			if(name.equals(od_custname)) {
-				
-			}
-			if(hotelname.equals(od_hotelname)) {
-				
-			}
-			if(roomtype.equals(od_roomtype)) {
-				
-			}
-			if(intTotalprice == od_totalprice) {
-				
-			}
-			if(intCnt == od_cnt) {
-				
-			}
-			if(sdate.equals(od_sdate)) {
-				
-			}
-			if(edate.equals(od_edate)) {
-				
-			}
 			
 			String dir = "review/";
 			
