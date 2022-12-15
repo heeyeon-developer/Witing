@@ -20,10 +20,12 @@ public class OCRUtil {
 	
 	static String apiURL = "https://rhnocxb1f1.apigw.ntruss.com/custom/v1/19288/b3551cf2cb3a0e3da66aa7d0bf910f2b001c114fdb265720b908cd83c00f5c6f/infer";
 	static String secretKey = "bkthSWZMeGdMTm5qb29RbklDZUtzRXprQ1hTZVlCYUY=";
-	static String imgpath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static","images").toString();
+	static String imgpath = "/root/tomcat/webapps/ROOT/WEB-INF/classes/static/images";	// NCP 서버용
+//	static String imgpath = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "static","images").toString();	// 로컬용
     
 	public static String getText(String imgname) {	// 이미지 이름을 넣어주면 서버로 전송해서 결과를 받아옴 
-		String imageFile = imgpath +"\\"+ imgname;
+		String imageFile = imgpath +"/"+ imgname;	// NCP 서버용
+//		String imageFile = imgpath +"\\"+ imgname;	// 로컬용
 		StringBuffer response = null;
 		
 		try {

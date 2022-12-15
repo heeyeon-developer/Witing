@@ -12,10 +12,7 @@ $(document).ready(function(){
 		$('#register_form').submit()
 		
 	});
-	/* ocr */ 
-	
-	
-	alert(status)
+
 	if(status=="1"){
 		alert("예약인증 성공");
 		location.href='/writereview?hotelid='+$('#hotelid').val();
@@ -28,9 +25,6 @@ $(document).ready(function(){
 		alert("체크아웃 하지않은 예약 건 입니다.");
 		location.href='/reviewmore?hotelid='+$('#hotelid').val();
 	}	
-	
-
-	
 	
 });
 
