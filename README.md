@@ -71,22 +71,38 @@ Final Project by Team1 FJ
 
 ## 8. 웹 구성화면
 
-<img src="witing/src/main/resources/static/images/readme/IMG_3593.GIF" width="370"/>
-<br>
-
 - 모바일 메인페이지
 
-<br>
-<img src="witing/src/main/resources/static/images/readme/IMG_3598.GIF" width="370"/>
-<br>
+<img src="witing/src/main/resources/static/images/readme/IMG_3593.GIF" width="350"/>
+<br><br>
+
+- 모바일 챗봇 페이지
+
+<img src="witing/src/main/resources/static/images/readme/chatbot.gif" width="350"/>
+<br><br>
 
 - 모바일 호텔페이지
 
-<br>
-<img src="witing/src/main/resources/static/images/readme/accomgif.gif" width="370"/>
-<br>
+<img src="witing/src/main/resources/static/images/readme/IMG_3598.GIF" width="350"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="witing/src/main/resources/static/images/readme/likenhotel.gif" width="350"/>
+<br><br>
+
 
 - 모바일 동행글 작성 페이지
+
+<img src="witing/src/main/resources/static/images/readme/wrtieaplus.gif" width="350"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="witing/src/main/resources/static/images/readme/accomgif.gif" width="350"/>
+<br><br>
+
+
+- MBTI 검사 & 결과페이지
+
+<img src="witing/src/main/resources/static/images/readme/mbti.gif" width="350"/>
+<br>
+
+
 
 ## 9. 트러블 슈팅
 | 이름 | <center>Trouble                                                                                                                                                                                                                                                                                                                             | <center>Solution                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
