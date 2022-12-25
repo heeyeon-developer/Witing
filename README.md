@@ -1,5 +1,6 @@
 # Witing
 Final Project by Team1 FJ
+> [Witing 시연 영상](https://www.youtube.com/watch?v=NSLSuna8mqU)
 <p align="center"><img src="witing/src/main/resources/static/images/readme/logo_readme.png" width="300" height="300"/></p>
 
 
